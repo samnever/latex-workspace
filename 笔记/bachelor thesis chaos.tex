@@ -1,0 +1,1610 @@
+\documentclass{article}
+\usepackage{amsmath, amsthm, amssymb, appendix, bm, graphicx, hyperref, mathrsfs, tikz-cd, enumerate,natbib}
+%\usepackage[nocap]{ctex}
+%\usepackage{ctex}
+\usepackage[english]{babel}
+
+\title{\textbf{Deformations of Calabi-Yau varieties}}
+\author{hwn}
+\date{\today}
+\linespread{1.5}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+\renewcommand{\abstractname}{\Large\textbf{Abstract}}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm}
+\setcounter{secnumdepth}{5}
+
+\begin{document}
+
+\pagenumbering{arabic}
+\maketitle
+\begin{abstract}
+    This article gives a systematic introduction to the deformation theory of Calabi–Yau varieties through two complementary approaches: complex geometry and algebra.
+    In the complex‑geometric part, we start from the Maurer–Cartan equation, establish the Kodaira–Spencer map,
+    and discuss in detail the role of the Tian–Todorov lemma in solving the equation, deriving the unobstructedness theorem for smooth Calabi‑Yau manifolds.
+    In the algebraic part, we construct the Lichtenbaum–Schlessinger \(T^i\) functors and the cotangent complex,
+    present the obstruction theory for deformations of schemes, prove Schlessinger’s criterion and pro‑representability of the deformation functor,
+    and then introduce the Ran–Kawamata \(T^1\) lifting principle together with its application to smooth Calabi‑Yau varieties.
+    At the intersection of the two theories, the final part is devoted to threefold Calabi–Yau varieties with ordinary double points.
+    We describe Friedman’s smoothability criterion and the subsequent generalization due independently to Kawamata, Ran and Tian:
+    as long as a Kähler resolution exists, deformations are unobstructed, so Friedman’s first condition can be dropped.
+\end{abstract}
+\tableofcontents
+\newpage
+
+\section{Deformation theory with approaches of complex geometry}
+
+\subsection{The Maurer-Cartan equation}
+
+A complex manifold is by definition a differentiable manifold $ M $ endowed with an atlas whose transition functions are holomorphic. As is known to all, a complex structure defined by such an atlas can also be encoded by an integrable almost complex structure $ I $, which is just an endomorphism of the tangent bundle satisfying a certain non-linear integrability condition. In this section, we will work with the latter description of complex structures. We will explain how to view the various complex structures $ I $ on $ M $ or, more precisely, the (small) deformations of a given one.
+
+We start out with the set\[
+    \mathcal{A}_{ac}(M):=\{I\mid I^2=-\mathrm{id}\}\subset \mathrm{End}(TM)
+\]of all almost complex structures on $ M $. First consider an arbitrary $ I\in \mathcal{A}_{ac}(M) $. Recall that an almost complex structure $ I $ is uniquely determined by a decomposition of the tangent bundle $ T_{\mathbb{C} }M=T^{1,0}\oplus T^{0,1} $ with $ I=i\cdot \mathrm{id} $ on $ T^{1,0} $ and $ I=-i\cdot\mathrm{id} $ on $ T^{0,1} $. In fact, giving $ T^{0,1}\subset T_{\mathbb{C} }M $ is enough, for $ T^{1,0}=\overline{T^{0,1}} $.
+
+If $ I(t) $ is a continuous family of almost complex structures with $ I(0)=I $, one has a continuous family of such decompositions $ T_{\mathbb{C} }M=T^{1,0}_t\oplus T^{0,1}_t $ or, equivalently, of subspaces $ T^{0,1}_t\subset T_{\mathbb{C} }M $.
+
+Thus, for small $ t $ the deformation $ I(t) $ of $ I $ can be encoded by a map\[
+    \phi(t):T^{0,1}\rightarrow T^{1,0}\ \text{with}\ v+\phi(t)(v)\in T^{0,1}_t.
+\]We write $ T^{1,0} $ and $ T^{0,1} $ for the subbundles defined by $ I $.
+% Explicitly, one has\[
+%     \phi(t)=-\mathrm{pr}_{T^{1,0}_t}\circ j,
+% \]where $ j:T^{0,1}\subset T_{\mathbb{C} } $ and $ \mathrm{pr}_{T^{1,0}_t}:T_{\mathbb{C} }\rightarrow T^{1,0}_t $ are the natural inclusion respectively projection.
+
+Conversely, if $ \phi(t) $ is given, then one defines for small $ t $\[
+    T^{0,1}_t:=(\mathrm{id}+\phi(t))(T^{0,1}).
+\]The condition $ t $ be `small' has to be imposed in order to ensure that with this definition $ T^{0,1}_t $ has the right dimension. More precisely, $ t $ small means that $ T^{0,1}_t\subset T_{\mathbb{C} }\rightarrow T^{0,1} $ is an isomorphism, which is certainly an open condition, at least on a compact manifold. To avoid problems caused by non-compactness we will henceforth assume that $ M $ is compact.
+
+Let us now consider the power series expansion\[
+    \phi(t)=\phi_0+\phi_1 t+\phi_2 t^2+\cdots
+\]of a given $ \phi $. Then $ \phi_0=0 $ and the higher order coefficients $ \phi_{i>0} $ will be regarded as sections of $ \bigwedge^{0,1}\otimes T^{1,0} $.
+
+Next, we shall study the integrability of the deformed almost complex structures $ I(t) $. From now on we will assume that $ I $ is integrable and we will denote the complex manifold $ (M,I) $ by $ X $. In particular, the higher order coefficients $ \phi_i $ correspond to elements in $ \mathcal{A}^{0,1}(\mathcal{T}_X) $.
+
+The integrability condition for $ I(t) $ can be expressed as\[
+    [T^{0,1}_t,T^{0,1}_t]\subset T^{0,1}_t.
+\]
+
+Let us rephrase this in terms of $ \phi(t) $. First note that there exists the $ \bar{\partial} $-operator on the holomorphic tangent bundle $ \mathcal{T}_X $ of $ X=(M,I) $, which can in particular be applied to $ \phi(t)\in \mathcal{A}^{0,1}(\mathcal{T}_X) $. Secondly, one defines a `Lie bracket'\[
+    [\ ,\ ]:\mathcal{A}^{0,p}(\mathcal{T}_X)\times \mathcal{A}^{0,q}(\mathcal{T}_X)\longrightarrow \mathcal{A}^{0,p+q}(\mathcal{T}_X)
+\]by taking the Lie bracket in $ \mathcal{T}_X $ and the exterior product in the form part $ \mathcal{A}^{0,*} $. Spelled out in local coordinates this gives for $ \alpha=\sum d\bar{z}_I\otimes v_I $ and $ \beta=\sum d\bar{z}_J\otimes w_J $ with $ v_I=\sum \alpha_{Ij}\frac{\partial}{\partial z_j} $ and $ w_J=\sum \beta_{Jl}\frac{\partial}{\partial z_l} $ the following formula\[
+    [\alpha,\beta]=\sum (d\bar{z}_I \wedge d\bar{z}_J)[v_I , w_J]=\sum_{I,j,J,l}(d\bar{z}_I \wedge d\bar{z}_J)\big[\alpha_{Ij}\frac{\partial}{\partial z_j},\beta_{Jl}\frac{\partial}{\partial z_{l}}\big].
+\]This is indeed well-defined, as any holomorphic coordinate change would change the tangent vector fields $ v_I,w_I $ by antiholomorphic factors $ \bar{f} $ and $ \frac{\partial\bar{f}}{\partial z_m}=0 $.
+
+\begin{remark}\label{cvb}
+    Using the local description, one easily checks that $ \bar{\partial}[\alpha,\beta]=[\bar{\partial}\alpha,\beta]\pm[\alpha,\bar{\partial}\beta] $. In particular, the Lie bracket of two $ \bar{\partial} $-closed sections in $ \mathcal{A}^{0,*}(\mathcal{T}_X) $ is again closed and the bracket of a closed one and an exact one is exact. Thus, the bracket induces a map\[
+        H^p(X,\mathcal{T}_X)\times H^q(X,\mathcal{T}_X)\longrightarrow H^{p+q}(X,\mathcal{T}_X).
+    \]
+\end{remark}
+
+\begin{lemma}
+    The integrability equation $ [T^{0,1}_t,T^{0,1}_t]\subset T^{0,1}_t $ is equivalent to the \textbf{Maurer-Cartan equation}\begin{equation}\label{wer}
+        \bar{\partial}\phi(t)+[\phi(t),\phi(t)]=0.
+    \end{equation}
+\end{lemma}
+
+\begin{proof}
+    The assertion can be proved locally. We will omit the parameter $ t $ in the notation and shall write\[
+        \phi=\sum_{i,j}\phi_{ij}d\bar{z}_i\otimes \frac{\partial}{\partial z_j}.
+    \]If the integrability condition holds true, then we have in particular\[
+        \bigg[\frac{\partial}{\partial \bar{z}_i}+\phi\bigg(\frac{\partial}{\partial \bar{z}_i}\bigg),\frac{\partial}{\partial \bar{z}_k}+\phi\bigg(\frac{\partial}{\partial\bar{z}_k}\bigg)\bigg]\in T^{0,1}_t.
+    \]Since $ [\frac{\partial}{\partial \bar{z}_i},\frac{\partial}{\partial \bar{z}_k}]=0 $, this is equivalent to\[
+        \biggl(\sum_l \bigg[\frac{\partial}{\partial \bar{z}_i},\phi_{kl}\frac{\partial}{\partial z_l}\bigg]+\sum_j\bigg[\phi_{ij}\frac{\partial}{\partial z_j},\frac{\partial}{\partial\bar{z}_k}\bigg]+\sum_{j,l}\bigg[\phi_{ij}\frac{\partial}{\partial z_j},\phi_{kl}\frac{\partial}{\partial z_l}\bigg] \biggr)\in T^{0,1}_t.
+    \]Now,\[
+        \bigg[\frac{\partial}{\partial\bar{z}_i},\phi_{kl}\frac{\partial}{\partial z_l}\bigg]=\frac{\partial \phi_{kl}}{\partial\bar{z}_i}\frac{\partial}{\partial z_l}\ \text{and}\ \bigg[\phi_{ij}\frac{\partial}{\partial z_j},\frac{\partial}{\partial\bar{z}_k}\bigg]=-\frac{\partial\phi_{ij}}{\partial \bar{z}_k}\frac{\partial}{\partial z_j}
+    \]and, hence,\begin{align*}
+        &\sum_l\bigg[\frac{\partial}{\partial\bar{z}_i},\phi_{kl}\frac{\partial}{\partial z_l}\bigg]+\sum_j\bigg[\phi_{ij}\frac{\partial}{\partial z_j},\frac{\partial}{\partial \bar{z}_k}\bigg]\\
+        =&\sum_{j}\bigg(\frac{\partial\phi_{kj}}{\partial \bar{z}_i}-\frac{\partial\phi_{ij}}{\partial\bar{z}_k}\bigg)\frac{\partial}{\partial z_j}\\
+        =&(\bar{\partial}\phi)\bigg(\frac{\partial}{\partial\bar{z}_i},\frac{\partial}{\partial\bar{z}_k}\bigg).
+    \end{align*}On the other hand,\[
+        \sum_{j,l}\bigg[\phi_{ij}\frac{\partial}{\partial z_j},\phi\frac{\partial}{\partial z_l}\bigg]=[\phi,\phi]=\bigg(\frac{\partial}{\partial \bar{z}_i},\frac{\partial}{\partial\bar{z}_k}\bigg).
+    \]Therefore, the integrability condition implies that $ \bar{\partial}\phi+[\phi,\phi]\in\mathcal{A}^{0,2}(\mathcal{T}^{1,0}X) $ satisfies\[
+        (\bar{\partial}\phi+[\phi,\phi])\bigg(\frac{\partial}{\partial\bar{z}_i},\frac{\partial}{\partial\bar{z}_k}\bigg)\in T^{0,1}_t.
+    \]Hence, $ \bar{\partial}+[\phi,\phi]\in\mathcal{A}^{0,2}(T^{1,0}X\cap T^{0,1}_t) $. But for small $ t $ one has $ T^{1,0}X\cap T^{0,1}_t =0 $ and, therefore, $ \bar{\partial}\phi+[\phi,\phi]=0 $.
+
+    Coversely, if the Maurer-Cartan equation holds true, then integrability condition is satisfied for a local frame of $ T^{0,1}_t $. This immediately shows that it is true for all sections of $ T^{0,1}_t $.
+\end{proof}
+
+Let us now consider the power series expansion of the Maurer-Cartan equation, i.e.\ we replace $ \phi $ in (\ref{wer}) by $ \phi=\sum_{i=1}^{\infty}\phi_i t^i $:\[
+    \bar{\partial}\bigg(\sum_{i=1}^{\infty}\phi_i t^i\bigg)+\sum_{i,j=1}^{\infty}[\phi_i,\phi_j]t^{i+j}=0.
+\]This yields a recursive system of equations:\begin{align*}
+    0&=\bar{\partial}\phi_1\\
+    0&=\bar{\partial}\phi_2+[\phi_1,\phi_1]\\
+    \vdots& \\
+    0&=\bar{\partial}\phi_k +\sum_{0<i<k}[\phi_i,\phi_{k-i}].
+\end{align*}
+
+We shall first study the first-order equation $ \bar{\partial}\phi_1=0 $ in detail. The Maurer-Cartan equation is, in particular, saying that the first-order deformation of the complex structure $ I $ is described by a $ \bar{\partial} $-closed $ (0,1) $-form $ \phi_1 $ with values in the holomorphic tangent bundle $ \mathcal{T}_X $. Thus, it defines an element $ [\phi_1]\in H^1(X,\mathcal{T}_X) $.
+
+\begin{definition}
+    The \textbf{Kodaira-Spencer class} of a one-parameter deformation $ I_t $ of the complex structure $ I $ is the induced cohomology class $ [\phi_1]\in H^1(X,\mathcal{T}_X) $.
+\end{definition}
+
+In order to identify isomorphic (first order) deformations, the (infinitesimal) action of the diffeomorphism group $ \mathrm{Diff}(M) $ has to be taken into account. Let $ F_t $ be a one-parameter family of diffeomorphisms of the manifold $ M $. With respect to local coordinate functions $ x_i $ this can be expanded into a power series $ \tilde{x_i}=x_i+tF_i (x)+t^2\dots $. The first order term $ \sum_i F_i \frac{\partial}{\partial x_i} $ defines a global vector field\[
+    \frac{dF_t}{dt}|_{t=0}\in \mathcal{A}^0(TM).
+\]
+
+We can rewrite this identification on the complex manifold $ X=(M,I) $ withh respect to holomorphic coordinates $ z_i $ as $ \tilde{z_i}=z_i+tf_i(z,\bar{z})+t^2\dots $. For the antiholomorphic coordinates $ \bar{z_i} $ we then have $ \bar{\tilde{z_i}}=\bar{z_i}+t\bar{f_i}(z,\bar{z})+t^2\dots $. Thus, $ \frac{dF_t}{dt}|_{t=0}\in\mathcal{A}^0(TX) $ in local coordinates (up to the factor 2) is given as\[
+    \sum f_i\frac{\partial}{\partial z_i}+\sum \bar{f}_i\frac{\partial}{\partial\bar{z}_i}.
+\]
+
+Any diffeomorphism can be used to construct new complex structures out of the given one $ I $ by pushing-forward $ I $ via the differential of the diffeomorphism. More explicitly, for the diffeomorphism $ F_t $ the new complex structure is given by $ dF_t\circ I\circ {(dF_{t})}^{-1} $. The antiholomorphic tangent bundle of this complex structure is thus\[
+    T^{0,1}_t=dF_t(T^{0,1}X).
+\]
+
+In local coordinates the first order deformation of $ T^{0,1}X $ is described as the image of $ T^{0,1}X $ under\[
+    \mathrm{id}+\sum_{i,j}\frac{\partial f_i}{\partial z_j}\otimes\frac{\partial}{\partial z_j}+\frac{\partial f_i}{\partial\bar{z_j}}d\bar{z_j}\otimes\frac{\partial}{\partial z_i}+\frac{\partial \bar{f_i}}{\partial z_j}dz_j\otimes\frac{\partial}{\partial \bar{z_i}}+\frac{\partial\bar{f_i}}{\partial\bar{z_j}}d\bar{z_j}\otimes\frac{\partial}{\partial \bar{z_i}}.
+\]In this sum, only the third and fifth terms are non-trivial on $ T^{0,1}X $. Moreover, the fifth term is an endomorphism of $ T^{0,1}X $.
+
+Thus, the first order deformation of $ T^{0,1}X $ induced by a one-parameter family of diffeomorphisms $ F_t $ of $ M $ is described by the homomorphism\[
+    T^{0,1}X\longrightarrow T^{1,0}X,\ \frac{\partial}{\partial\bar{z_j}}\longmapsto \sum_i \frac{\partial f_i}{\partial \bar{z_j}}\frac{\partial}{\partial z_i}.
+\]This yields
+
+\begin{lemma}
+    The first-order deformation of the complex structure $ I $ on the manifold $ M $ (defining the complex manifold $ X=(M,I) $) induced by a one-parameter family $ F_t $ of diffeomorphisms of $ M $ is determined by the map\[
+        \phi_1=\bar{\partial}\bigg({\big(\frac{dF_t}{dt}|_{t=0}\big)}^{1,0}\bigg):T^{0,1}X\longrightarrow T^{1,0}X.
+    \]
+\end{lemma}
+
+As a consequence of this, we derive a description of all first-order deformations of isomorphism classes of complex structures of $ X=(M,I) $.
+
+\begin{proposition}
+    Let $ X $ be a complex manifold. There is a natural bijection between all first-order deformations of $ X $ and elements of $ H^1(X,\mathcal{T}_X) $.
+\end{proposition}
+
+\begin{proof}
+    Write $ X=(M,I) $. Then the first order deformations of $ I $ correspond to $ \bar{\partial} $-closed elements in $ \mathcal{A}^{0,1}(\mathcal{X}) $ and by the previous lemma those that define isomorphic ones differ by elements of the image of $ \bar{\partial}:\mathcal{A}^{0}(\mathcal{T}_X)\rightarrow\mathcal{A}^{0,1}(\mathcal{T}_X) $, i.e. $ \bar{\partial} $-exact ones. As the Dolbeault cohomology just computes the sheaf cohomology of $ \mathcal{T}_X $, this proves the assertion.
+\end{proof}
+
+In other words, the Kodaira-Spencer class determines the first-order deformations of $ X $ and any class in $ H^1(X,\mathcal{T}_X) $ occurs as a Kodaira-Spencer class.
+
+The principal task in deformation theory is to integrate given first-order deformations $ v\in H^1(X,\mathcal{T}_X) $, i.e.\ to find a one-parameter family $ I_t $ such that its Kodaira-Spencer class is $ v $. In general this is not possible. Obstructions may occur at any order.
+
+Moreover, since we have to divide by the action of the diffeomorphism group at any step, we have to study all possible $ \phi_i $ carefully. This is needed in order to ensure the convergence of the power series and to solve the recursive equations.
+
+That there in general exist obstructions can already be guessed at order two: Once a lift $ \phi_1 $ of $ v\in H^1(X,\mathcal{T_X}) $ is chosen, we have to find $ \phi_2 $ such that $ \bar{\partial}\phi_2=-[\phi_1,\phi_1] $. But it may very well happen that the form $ [\phi_1,\phi_1] $ is never $ \bar{\partial} $-exact, no matter how $ \phi_1 $ is chosen.
+
+Using~\ref{cvb} we can associate to any first order deformation $ v\in H^1(X,\mathcal{T}_X) $ a class $ [v,v]\in H^2(X,\mathcal{T}_X) $.
+
+\begin{corollary}
+    A first-order deformation $ v\in H^1(X,\mathcal{T}_X) $ cannot be integrated if $ [v,v]\in H^2(X,\mathcal{T}_X) $ does not vanish.
+\end{corollary}
+
+\subsection{Deformations of Calabi-Yau manifolds}
+
+Next, we will describe how the recursive system of equations given by the Maurer-Cartan equation can be sovled when the underlying manifold $ X $ admits a holomorphic volume form, i.e.\ when $ X $ is a \textbf{Calabi-Yau manifold}. More precisely, by a Calabi-Yau manifold we mean here a compact K\"{a}hler manifold $ X $ of dimension $ n $ with trivial canonical bundle $ \bigwedge^n\varOmega_X=K_X \cong \mathcal{O}_X $. Moreover, we fix a holomorphic volume form, i.e.\ a trivializing section $ \varOmega\in H^0(X,K_X) $.
+
+The form $ \varOmega $ can be used to define a natural isomorphism\[
+    \eta:\bigwedge\nolimits^p\mathcal{T}_X\cong \bigwedge\nolimits^{n-p}\varOmega_X.
+\]
+
+One defines\[
+    \eta(v_1\wedge\dots\wedge v_p)=i_{v_1}\dots i_{v_p}(\varOmega),
+\]where $ i_v $ is the contraction defined by $ i_v(\alpha)(w_1,\dots,w_i)=\alpha(v,w_1,\dots,w_i) $. If $ \varOmega $ is locally written in the form $ fdz_1\wedge\dots\wedge dz_n $, then\[
+    \eta(\frac{\partial}{\partial z_{i_1}}\wedge\dots\wedge\frac{\partial}{\partial z_{i_p}})={(-1)}^{(\sum i_j)-p}fdz_1\wedge\dots\wedge\widehat{dz_{i_1}}\wedge\dots\wedge\widehat{dz_{i_p}}\wedge\dots dz_n,
+\]for $ i_1 < \cdots <i_p $.
+
+Moreover, the isomorphism $ \eta $ induces canonical isomorphisms\[
+    \eta:\mathcal{A}^{0,q}(\bigwedge\nolimits^p\mathcal{T}_X)\cong\mathcal{A}^{n-p,q}(X).
+\]
+
+\begin{definition}
+    The operator $ \varDelta:\mathcal{A}^{0,q}(\bigwedge^p\mathcal{T}_X)\rightarrow \mathcal{A}^{0,q}(\bigwedge^{p-1}\mathcal{T}_X) $ is defined as\[
+        \varDelta:\mathcal{A}^{0,q}(\bigwedge\nolimits^p\mathcal{T}_X)\stackrel{\eta}{\longrightarrow}\mathcal{A}^{n-p,q}(X)\stackrel{\partial}{\longrightarrow}\mathcal{A}^{n-p+1,q}(X)\stackrel{\eta^{-1}}{\longrightarrow}\mathcal{A}^{0,q}(\bigwedge\nolimits^{p-1}\mathcal{T}_X).
+    \]
+\end{definition}
+
+Note that $ \partial $ itself is not well-defined on $ \mathcal{A}^{0,q}(\bigwedge^p\mathcal{T}_X) $.
+
+\begin{lemma}
+    The operator $ \varDelta $ anti-commutes with $ \bar{\partial} $, i.e.\ $ \varDelta\circ\bar{\partial}=-\bar{\partial}\circ\varDelta $.
+\end{lemma}
+
+\begin{proof}
+    We use the fact that $ \varOmega\in\mathcal{A}^{n,0}(X) $ is holomorphic, i.e.\ $ \bar{\partial} $-closed. If we write in local coordinates $ \varOmega=fdz_1\wedge\dots\wedge dz_n $, then $ f $ is a holomorphic function. Then\[
+        \eta(g\cdot d\bar{z}_{I}\otimes\frac{\partial}{\partial z_J})=\pm(fg)\cdot d\bar{z}_{I}\otimes dz_{\{1,\dots,n\}\backslash J}.
+    \]Hence, $ \bar{\partial}\circ\eta=\eta\circ\bar{\partial} $ and, therefore,\begin{align*}
+        \bar{\partial}(\varDelta(\alpha))&=\eta^{-1}(\bar{\partial}\partial\eta(\alpha))=-\eta^{-1}(\partial\bar{\partial}\eta(\alpha))\\
+        &=-\eta^{-1}(\partial\eta(\bar{\partial}\alpha))=-\varDelta(\bar{\partial}(\alpha)).
+    \end{align*}
+\end{proof}
+
+Also note that $ \varDelta^2=0 $. Thus, $ \varDelta $ can be used as a differential, but it is not well-behaved with respect to the exterior product $ \mathcal{A}^{0,p}(\bigwedge^r \mathcal{T}_X)\times\mathcal{A}^{0,q}(\bigwedge^s \mathcal{T}_X)\rightarrow\mathcal{A}^{0,p+q}(\bigwedge^{r+s}\mathcal{T}_X) $. This is made more precise by the following key result due to Tian and Todorov~\cite{Tian87,TT89}.
+
+\begin{lemma}[Tian-Todorov lemma]
+    If $ \alpha\in\mathcal{A}^{0,p}(\mathcal{T}_X) $ and $ \beta\in\mathcal{A}^{0,q}(\mathcal{T}_X) $, then\[
+        {(-1)}^p [\alpha,\beta]=\varDelta(\alpha\wedge\beta)-\varDelta(\alpha)\wedge\beta-{(-1)}^{p+1} \alpha\wedge\varDelta(\beta).
+    \]
+\end{lemma}
+
+\begin{proof}
+    As the claim is local and additive in $ \alpha $ and $ \beta $, it suffices to prove it for $ \alpha=ad\bar{z}_I\otimes\frac{\partial}{\partial z_i} $ and $ \beta=bd\bar{z}_J\otimes\frac{\partial}{\partial z_j} $.
+
+    Then, by definition, $ [\alpha,\beta]=d\bar{z}_I \wedge d\bar{z}_J [a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j}] $.
+    
+    In a first step we shall reduce the assertion to the case $ p=q=0 $. Using the short hand \[
+        G(\alpha,\beta):=\varDelta(\alpha\wedge\beta)-\varDelta(\alpha)\wedge\beta-{(-1)}^{p+1}\alpha\wedge\varDelta(\beta),
+    \]one does this by proving\[
+        G(\alpha,\beta)=(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes G(a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j}).
+    \]Using the standard sign rules, one indeed computes\begin{align*}
+        \varDelta(\alpha\beta)&=\eta^{-1}\partial\eta(\alpha\wedge\beta)=(-1)^q \eta^{-1}\partial\eta\bigg((d\bar{z}_I \wedge d\bar{z}_J)\otimes(a\frac{\partial}{\partial z_i}\wedge b\frac{\partial}{\partial z_j})\bigg)\\
+        &=(-1)^q \eta^{-1}\partial\bigg((d\bar{z}_I \wedge d\bar{z}_J)\otimes \eta\bigg(a\frac{\partial}{\partial}\wedge b\frac{\partial}{\partial z_j}\bigg)\bigg)\\
+        &=(-1)^q \cdot (-1)^{p+q} \eta^{-1}\bigg((d\bar{z}_I \wedge d\bar{z}_J)\otimes\partial\eta\bigg(a\frac{\partial}{\partial z_i}\wedge b\frac{\partial}{\partial z_j}\bigg)\bigg).\\
+        &=(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes\varDelta\bigg(a\frac{\partial}{\partial z_i}\wedge b\frac{\partial}{\partial z_j}\bigg).
+    \end{align*}
+    Similarly,\begin{align*}
+        \varDelta(\alpha)\wedge\beta&=\eta^{-1}\partial\eta\bigg(d\bar{z}_I \otimes a\frac{\partial}{\partial z_i}\bigg)\wedge\beta=(-1)^p \bigg(d\bar{z}_I \otimes \varDelta\bigg( a\frac{\partial}{\partial z_i}\bigg)\bigg)\wedge\beta\\
+        &=(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes \bigg(\varDelta \bigg(a\frac{\partial}{\partial z_i}\bigg)\wedge b\frac{\partial}{\partial z_j}\bigg)
+    \end{align*}and\begin{align*}
+        (-1)^{p+1}\alpha\wedge\varDelta(\beta)&=(-1)^{p+1}\alpha\wedge\bigg((-1)^q d\bar{z}_J \otimes \varDelta\bigg(b\frac{\partial}{\partial z_j}\bigg)\bigg)\\
+        &=(-1)^p (-1)(d\bar{z}_I \wedge d\bar{z}_J)\otimes \bigg(a\frac{\partial}{\partial  z_i}\wedge\varDelta(b\frac{\partial}{\partial z_j})\bigg).
+    \end{align*}Thus,\begin{align*}
+        G(\alpha,\beta)=&(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes \bigg(\varDelta\bigg(a\frac{\partial}{\partial z_i}\wedge b\frac{\partial}{\partial z_j}\bigg)\\ &-\varDelta\bigg(a\frac{\partial}{\partial z_i}\bigg)\wedge b\frac{\partial}{\partial z_j}-(-1)a\frac{\partial}{\partial z_i}\wedge\varDelta\bigg(b\frac{\partial}{\partial z_j}\bigg)\bigg)\\
+        =&(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes G\bigg(a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j}\bigg).
+    \end{align*}
+
+    In order to treat the case $ p=q=0 $, let us first mention explicitly\[
+        \eta(\frac{\partial}{\partial z_i})=(-1)^{i-1} fdz_1\wedge\dots\wedge\widehat{dz_i}\wedge\dots\wedge dz_n
+    \]and\[
+        \eta\bigg(\frac{\partial}{\partial z_i}\wedge\frac{\partial}{\partial z_j}\bigg)=(-1)^{i+j-2} fdz_1 \wedge \dots\wedge\widehat{dz_i}\wedge\dots\wedge\widehat{dz_j}\wedge\dots\wedge dz_n.
+    \]This also shows $ \eta^{-1}(dz_1\wedge\dots\wedge\widehat{dz_i}\wedge\dots dz_n)=f^{-1}\frac{\partial}{\partial z_i} $ and $ \eta(dz_1\wedge\dots\wedge dz_n)=f^{-1} $.
+
+    Hence,\begin{align*}
+        \varDelta(a\frac{\partial}{\partial z_i})&=\eta^{-1}\partial\Big((-1)^{i-1}(af)dz_1\wedge\dots\wedge\widehat{dz_i}\wedge\dots\wedge dz_n\Big)\\
+        &=\eta^{-1}\frac{\partial(af)}{\partial z_i}dz_1 \wedge \dots\wedge dz_n=\frac{\partial(af)}{\partial z_i}f^{-1}
+    \end{align*}and similarly\[
+        \varDelta\bigg(b\frac{\partial}{\partial z_j}\bigg)=\frac{\partial(bf)}{\partial z_j}f^{-1}.
+    \]Furthermore,\begin{align*}
+        \varDelta\bigg(a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j}\bigg)=&\eta^{-1}\partial\Big((-1)^{i+j}(abf)dz_1 \wedge\dots\wedge\widehat{dz_i}\wedge\dots\wedge\widehat{dz_j}\wedge\dots\wedge dz_n\Big)\\
+        =&\eta^{-1}\bigg((-1)^{j-1}\frac{\partial(abf)}{\partial z_i}dz_1 \wedge\dots\wedge\widehat{dz_j}\wedge\dots\wedge dz_n\\
+        &+(-1)^i \frac{\partial(abf)}{\partial z_j}dz_1\wedge\dots\wedge\widehat{dz_i}\wedge\dots\wedge dz_n\bigg)\\
+        =&\frac{\partial(abf)}{\partial z_i}f^{-1}\frac{\partial}{\partial z_j}-\frac{\partial(abf)}{\partial z_j}f^{-1}\frac{\partial}{\partial z_i}\\
+        =&\bigg[a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j}\bigg]+\varDelta\bigg(a \frac{\partial}{\partial z_i}\bigg)b\frac{\partial}{\partial z_j}-a\frac{\partial}{\partial z_i}\varDelta\bigg(b\frac{\partial}{\partial z_j}\bigg).
+    \end{align*}This proves the assertion for $ p=q=0 $.
+\end{proof}
+
+\begin{corollary}
+    Let $ \alpha $ and $ \beta $ be $ \varDelta $-closed elements of $ \mathcal{A}^{0,*}(\mathcal{T}_X) $. Then the bracket $ [\alpha,\beta] $ is $ \varDelta $-exact.
+\end{corollary}
+
+The Tian-Todorov lemma will be applied to the coefficients $ \phi_i\in \mathcal{A}^{0,1}(\mathcal{T}_X) $ of the power series expansion of a deformation of the complex structure. Before proving the general result, we shall spell out the first two steps.
+
+Let $ v\in H^1(X,\mathcal{T}_X) $ be given. We first look for a good representative $ \phi_1\in\mathcal{A}^{0,1}(\mathcal{T}_X) $. In order to solve the Maurer-Cartan equation $ \bar{\partial}\phi_2=-[\phi_1,\phi_1] $, we have to ensure that\begin{itemize}
+    \item $ [\phi_1,\phi_1] $ is $ \bar{\partial} $-closed
+    \item $ [\phi_1,\phi_1] $ has no harmonic part.
+\end{itemize}
+
+Here we use the Hodge decomposition $ \mathcal{A}^{0,1}(\mathcal{T}_X)=\bar{\partial}\mathcal{A}^{0}(\mathcal{T}_X)\oplus\mathcal{H}^{0,1}(\mathcal{T}_X)\oplus\bar{\partial}^*\mathcal{A}^{0,2}(\mathcal{T}_X) $ with respect to an hermitian metric on $ X $ and thus on $ \mathcal{T}_X $.
+
+The first condition is always satisfied: If $ \alpha_i\in\mathcal{A}^{0,q_i}(\mathcal{T}_X),\, i=1,2 $, are $ \bar{\partial} $-closed, then so is $ [\alpha_1,\alpha_2] $. This follows from (\ref{cvb}).
+
+The Tian-Todorov lemma yields: If $ \alpha_i\in\mathcal{A}^{0,q_i}(\mathcal{T}_X),\, i=1,2 $ are chosen such that $ \eta(\alpha_i)\in\mathcal{A}^{n-1,q_i}(X) $ are $ \partial $-closed, then $ \eta[\alpha_1,\alpha_2] $ is $ \partial $-exact. More explicitly, $ \eta[\alpha_1,\alpha_2]=(-1)^{q_1}\cdot \partial\eta(\alpha_1 \wedge\alpha_2) $.
+
+Eventually, we find: If $ \phi_1\in \mathcal{A}^{0,1}(\mathcal{T}_X) $ is chosen such that $ \eta(\phi_1)\in\mathcal{A}^{n-1,1}(X) $ is harmonic with respect to a K\"{a}hler metric on $ X $, then $ \bar{\partial}\phi_2=-[\phi_1,\phi_1] $ admits a solution $ \phi_2\in\mathcal{A}^{0,1}(\mathcal{T}_X) $ which can, moreover, be chosen such that $ \eta(\phi_2) $ is $ \partial $-exact.
+
+Indeed, by the above arguments $ \eta[\phi_1,\phi_1] $ is $ \partial $-exact and $ \bar{\partial} $-closed. Since by Hodge theory on a compact K\"{a}hler manifold a $ \partial $-exact form cannot have a non-trivial harmonic part, this proves that $ \eta[\phi_1,\phi_1] $ is $ \bar{\partial} $-exact. But using the $\partial\bar{\partial} $-lemma, we can, moreover, say that there exists a form $ \gamma\in\mathcal{A}^{n-2,1}(X) $ with $ \bar{\partial}\partial\gamma=-\eta[\phi_1,\phi_1] $. Then set $ \phi_2:=\eta^{-1}(\partial\gamma) $. Since $ \eta $ commutes with $ \bar{\partial} $, this proves the claim.
+
+All these arguments can now easily be generalized to prove the general result, which is also due to Tian and Todorov.
+
+\begin{proposition}
+    Let $ X $ be a Calabi-Yau manifold and let $ v\in H^1(X,\mathcal{T}_X) $. Then there exists a formal power series $ \phi_1 t+\phi_2 t^2+\cdots $ with $ \phi_i\in\mathcal{A}^{0,1}(\mathcal{T}_X) $ satisfying the Maurer-Cartan equations\[
+        \bar{\partial}\phi_1=0\ \text{and}\ \bar{\partial}\phi_k=-\sum_{0<i<k}[\phi_i,\phi_{k-i}],
+    \]with $ [\phi_1]=v $ and such that $ \eta(\phi_i)\in\mathcal{A}^{n-1,1}(X) $ is $ \partial $-exact for all $ i>1 $.
+\end{proposition}
+
+\begin{proof}
+    We begin with $ \phi_1\in\mathcal{A}^{0,1}(\mathcal{T}_X) $ representing $ v $ such that $ \eta(\phi_1)\in\mathcal{A}^{n-1,1}(X) $ is harmonic. Then one finds $ \phi_2 $ as above. Let us suppose that we have found $ \phi_2,\dots,\phi_{k-1} $ as claimed by the proposition. Then $ \eta[\phi_i,\phi_{k-i}] $ is $ \partial $-exact for $ 0<i<k $ by the Tian-Todorov lemma. Thus, in order to find $ \phi_k $ satisfying the assertion, we have to ensure that the sum $ \sum_{0<i<k}[\phi_i,\phi_{k-i}] $ is $ \bar{\partial} $-closed. As we have used implicitly before, one has\[
+        \bar{\partial}\bigg(\sum_{0<i<k}[\phi_i,\phi_{k-i}]\bigg)=\sum_{0<i<k}([\bar{\partial}\phi_i,\phi_{k-i}]-[\phi_{i},\bar{\partial}\phi_{k-i}])
+    \]and by induction hypothesis this equals\begin{align*}
+        & -\sum_{0<i<k}\bigg(\sum_{0<j<i}[[\phi_j,\phi_{i-j}],\phi_{k-i}]-\sum_{0<l<k-i}[\phi_i,[\phi_l,\phi_{k-i-l}]]\bigg)\\
+        =&-\sum_{0<i<k}\sum_{0<j<i}[[\phi_j,\phi_{i-j}],\phi_{k-i}]+\sum_{0<i<k}\sum_{0<l<i}[\phi_{k-i},[\phi_l,\phi_{i-l}]]\\
+        =&2\sum_{0<i<k}\sum_{0<l<i}[\phi_{k-i},[\phi_l,\phi_{i-l}]]=0
+    \end{align*}where we use $ [\alpha,\beta]=-[\beta,\alpha] $ for $ \alpha\in\mathcal{A}^{0,2}(\mathcal{T}_X) $ and arbitrary $ \beta $ and by Jacobi identity we deduce that the final result is 0.
+
+    The $ \partial\bar{\partial} $-lemma eventually ensures that we can choose $ \phi_k $ of the form $ \eta^{-1}(\partial\gamma) $, i.e.\ $ \eta(\phi_k) $ is $ \partial $-exact.
+\end{proof}
+
+\begin{remark}
+    There might be very well other solutions of the Maurer-Cartan equation which do not satisfy the extra condition that $ \eta(\phi_i) $ is $ \partial $-exact for $ i>1 $. In fact, the $ \eta(\phi_i) $ need not even be $ \partial $-closed.
+\end{remark}
+
+\begin{remark}
+    So far, we have not said anything about the existence of a convergent solution. In fact, there is a standard procedure to turn any formal solution into a convergent one. At this point, a good deal of analysis arises. For the details we refer to~\cite[Sect. 5.3]{Kodaira}.
+
+    The principal idea is to consider the operator $ \bar{\partial} $ on $ \mathcal{A}^{0,q}(\mathcal{T}_X) $ and its adjoint operator with respect to a chosen K\"{a}hler (or just hermitian) metric. For clarity, let us write $ \bar{\partial}_{\mathcal{T}_X} $ respectively $ \bar{\partial}^*_{\mathcal{T}_X} $ for these two operators. Then one shows that a formal solution converges if the coefficients $ \phi_k $ are $ \bar{\partial}^*_{\mathcal{T}_X} $-exact. It is then not too difficult to transform any formal solution into one that satisfies this additional condition, as the mere existence of a formal solution ensures that all possible obstructions are trivial.
+\end{remark}
+
+\section{Deformation theory with algebraic approaches}
+
+\subsection{The $ T^i $ functors}
+
+We first present the construction and main properties of the $ T^i $ functors introduced by Lichtenbaum and Schlessinger~\cite{LichtenbaumSchlessinger}.
+
+Let $ A\rightarrow B $ be a homomorphism of rings and let $ M $ be a $ B $-module. Here we construct groups $ T^i(B/A,M) $ for $ i=0,1,2 $. The rings are assumed to be commutative with identity, but we do not impose any finiteness conditions yet.
+
+First choose a polynomial ring $ R=A[x] $ in a set of variables $ x=\{x_i\} $ (possibly infinite) such that $ B $ can be written as a quotient of $ R $ as an $ A $-algebra. Let $ I $ be the ideal defining $ B $, so that there is an exact sequence\[
+    0\longrightarrow I\longrightarrow R\longrightarrow B\longrightarrow 0.
+\]Second choose a free $ R $-module $ F $ and a surjection $ j:F\rightarrow I\rightarrow 0 $ and let $ Q $ be the kernel:\[
+    0\longrightarrow Q\longrightarrow F\stackrel{j}{\longrightarrow}I\longrightarrow 0.
+\]Let\[
+    F_0=(j(a)b-j(b)a)_{a,b\in F}\subseteq F.
+\]Define a complex of $ B $-modules, called the \textbf{cotangent complex}\[
+    L_2\stackrel{d_2}{\longrightarrow}L_1\stackrel{d_1}{\longrightarrow}L_0
+\]as follows.\begin{itemize}
+    \item Take $ L_2=Q/F_0 $, which is a $ B $-module. Indeed, if $ x\in I $ and $ a\in Q $. Write $ x=j(x') $ for some $ x'\in F $, then\[
+        xa=j(x')a\equiv j(a)x'=0\pmod{F_0}.
+    \]
+    \item Take $ L_1=F\otimes_R B=F/IF $, and let $ d_2:L_2\rightarrow L_1 $ be the map induced from the inclusion $ Q\rightarrow F $.
+    \item Take $ L_0=\varOmega_{R/A}\times_R B $, where $ \varOmega_{R/A} $ is the module of relative K\"{a}hler differential. Let $ d_1 $ be the composition of\begin{align*}
+        L_1\twoheadrightarrow I/I^2 &\rightarrow \varOmega_{R/A}\otimes_R B\\
+        x &\rightarrow d_{R/A}(x)\otimes 1
+    \end{align*}It is clear that $ d_1 d_2=0 $, so we defined a complex of $ B $-modules. Notice that $ L_0 $, $ L_1 $ are free $ B $-modules, since $ R $ is a polynomial ring over $ A $.
+    \item Indeed, the second fundamental exact sequence of K\"{a}hler differential\[
+        I/I^2\stackrel{d}{\longrightarrow}\varOmega_{R/A}\otimes_R B\longrightarrow \varOmega_{B/A}\longrightarrow 0
+    \]give the exact sequence\begin{equation}\label{eq10}
+        L_2\stackrel{d_2}{\longrightarrow}L_1\stackrel{d_1}{\longrightarrow}L_0\longrightarrow\varOmega_{B/A}\longrightarrow 0.
+    \end{equation}
+\end{itemize}
+
+\begin{lemma}\label{A1}
+    For any $ B $-module $ M $, define\[
+        T^i(B/A,M):=H^i(\mathrm{Hom}_B(L_{\bullet},M)),
+    \]which is independent of the choice of $ F $ and $ R $.
+\end{lemma}
+
+\begin{proof}
+    First, we fixed the polynomial $ R $. If $ F $ and $ F'
+     $ are two choices of free $ R $-modules mapping onto $ I $, then $ F\oplus F' $ gives the third choice. Since $ F' $ is free, the map $ j':F'\rightarrow I $ factors through $ F $, i.e., $ j'=jp $ for some map $ p:F'\rightarrow F $. Replacing each generator $ e' $ of $ F'\subseteq F\oplus F' $ by $ e'-p(e') $, we may assume that the map $ F\oplus F'\rightarrow I $ is just $ (j,0) $. Then $ \ker(j,0)=Q\oplus F' $ and thus $ (F \oplus F')_0=F_0+IF' $. Let \(L_{\bullet}^{\prime}\) be the complex obtained from \((F\oplus F^{\prime},R)\), then\[
+        L_{2}^{\prime} = L_{2}\oplus F^{\prime} / I F^{\prime},\ L_{1}^{\prime} = L_{1}\oplus (F^{\prime}\otimes_{R}B),\ L_{0}^{\prime} = L_{0}.
+    \]
+    Hence, \(L_{\bullet}^{\prime}\) is obtained by the direct sum of \(L_{\bullet}\) with the free acyclic complex \(F^{\prime}\otimes_{R}B\to F^{\prime}\otimes_{R}B\to 0\), which induces same cohomology after taking $ \mathrm{Hom} $ functor.
+
+    Second, it suffices to compare \(R = A[x]\) with \(R^{\prime} = A[x,y]\). Again, the map \(A[y]\to B\) can be factored through \(A[x]\) by a homomorphism \(p:A[y]\to A[x]\). Replacing each \(y_{i}\in A[x,y]\) by \(y_{i} - p(y_{i})\), we may assume the ring homomorphism \(A[x,y]\to B\) maps \(y_{i}\) to 0, then it has kernel \(I R^{\prime} + y R^{\prime}\). Since \(T^{i}\) is independent of the choice of \(F\), we may take \(F^{\prime} = F\otimes_{R}R^{\prime}\) and \(G\) be a free \(R^{\prime}\)-module on the index set of the \(y\) variables. Then we have the following diagram% https://quiver.taskfirst.cn/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIlEnIl0sWzIsMCwiRidcXG9wbHVzIEcnIl0sWzMsMCwiSVInXFxvcGx1cyB5UiciXSxbNCwwLCIwIl0sWzQsMSwiMCJdLFszLDEsIkkiXSxbMiwxLCJGIl0sWzEsMSwiUSJdLFswLDEsIjAiXSxbMCwxXSxbMSwyXSxbOSw4XSxbOCwxXSxbOCw3XSxbNywyXSxbNyw2XSxbNiwzXSxbNiw1XSxbMyw0XSxbMiwzXV0=
+    \[\begin{tikzcd}
+        0 & {Q'} & {F'\oplus G'} & {IR'\oplus yR'} & 0 \\
+        0 & Q & F & I & 0
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=1-4, to=1-5]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=1-2]
+        \arrow[from=2-2, to=2-3]
+        \arrow[from=2-3, to=1-3]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=2-4, to=1-4]
+        \arrow[from=2-4, to=2-5]
+    \end{tikzcd}\]and it is clear that\[
+        Q^{\prime} = Q R^{\prime} + \langle y_{i}a - j(a)e_{i}\mid a\in F\rangle_{R^{\prime}} + \langle y_{i}e_{j} - y_{j}e_{i}\rangle_{R^{\prime}}.
+    \]
+    Since \(\langle y_{i}a - j(a)e_{i}\mid a\in F\rangle_{R^{\prime}} + \langle y_{i}e_{j} - y_{j}e_{i}\rangle_{R^{\prime}}\subseteq (F^{\prime}\oplus G^{\prime})_{0}\), we have \(L_{2}^{\prime} = L_{2}\).
+
+    On the other hand, \(L_{1}^{\prime} = L_{1}\oplus (G^{\prime}\otimes_{R^{\prime}}B)\) and \(L_{0}^{\prime} = L_{0}\oplus (\varOmega_{A[y] / A}\otimes B)\). Then \(L_{\bullet}^{\prime}\) is obtained by the direct sum of \(L_{\bullet}\) with the free acyclic complex\begin{align*}
+        G^{\prime}\otimes_{R^{\prime}}B&\longrightarrow \varOmega_{A[y] / A}\otimes B\longrightarrow 0\\
+        e_{i}&\longrightarrow dy_{i},
+    \end{align*}
+    and thus induces same cohomology after taking $ \mathrm{Hom} $ functor.
+\end{proof}
+
+\begin{theorem}
+Let \(A \to B\) be a homomorphism of rings. Then \(T^{i}(B / A, - )\) is a covariant, additive functor from \(\mathsf{Mod}_{B}\) to itself. If
+\[
+0\longrightarrow M^{\prime}\longrightarrow M\longrightarrow M^{\prime \prime}\longrightarrow 0
+\]
+is a short exact sequence of \(B\)-modules, then there is a long exact sequence
+\[
+\begin{aligned}
+0 &\longrightarrow T^{0}(B / A,M^{\prime})\longrightarrow T^{0}(B / A,M)\longrightarrow T^{0}(B / A,M^{\prime \prime}) \\
+&\longrightarrow T^{1}(B / A,M^{\prime})\longrightarrow T^{1}(B / A,M)\longrightarrow T^{1}(B / A,M^{\prime \prime}) \\
+&\longrightarrow T^{2}(B / A,M^{\prime})\longrightarrow T^{2}(B / A,M)\longrightarrow T^{2}(B / A,M^{\prime \prime}).
+\end{aligned}
+\]
+\end{theorem}
+
+\begin{proof}
+By construction, \(T^{i}(B / A, - )\) is a covariant additive functor. Since the terms \(L_{1}\) and \(L_{0}\) of the complex \(L_{\bullet}\) are free, we get a sequence of complexes
+\[
+0\longrightarrow \mathrm{Hom}_{B}(L_{\bullet},M^{\prime})\longrightarrow \mathrm{Hom}_{B}(L_{\bullet},M)\longrightarrow \mathrm{Hom}_{B}(L_{\bullet},M^{\prime \prime})\longrightarrow 0
+\]
+that is exact except possibly for the map
+\[
+\mathrm{Hom}_{B}(L_{2},M)\to \mathrm{Hom}_{B}(L_{2},M^{\prime \prime})
+\]
+may not be surjective. This sequence of complexes gives the long exact sequence of cohomology above.
+\end{proof}
+
+\begin{theorem}
+    Let \(A \to B \to C\) be homomorphisms of rings, and let \(M\) be a \(C\)-module. Then there is a long exact sequence\[
+        \begin{aligned}
+            0 &\longrightarrow T^{0}(C / B,M)\longrightarrow T^{0}(C / A,M)\longrightarrow T^{0}(B / A,M) \\
+            &\longrightarrow T^{1}(C / B,M)\longrightarrow T^{1}(C / A,M)\longrightarrow T^{1}(B / A,M) \\
+            &\longrightarrow T^{2}(C / B,M)\longrightarrow T^{2}(C / A,M)\longrightarrow T^{2}(B / A,M).
+        \end{aligned}
+    \]
+\end{theorem}
+
+\begin{proof}
+    Choose\[
+        0\longrightarrow I\longrightarrow A[x]\longrightarrow B\longrightarrow 0,\quad 
+        0\longrightarrow Q\longrightarrow F\stackrel{j}{\longrightarrow} I\longrightarrow 0
+    \]\[
+        0\longrightarrow J\longrightarrow B[y]\longrightarrow C\longrightarrow 0,\quad 
+        0\longrightarrow P\longrightarrow G\longrightarrow J\longrightarrow 0
+    \]to calculate \(T^{i}(B / A, M)\) and \(T^{i}(C / B, M)\). Then \(A[x, y] \to B[y] \to C\) is surjective, and denote its kernel by \(K\). It induces an exact sequence\[
+        0\longrightarrow I[y]\longrightarrow K\longrightarrow J\longrightarrow 0
+    \]of \(A\)-modules. Let \(F^{\prime}\) and \(G^{\prime}\) be free \(A[x,y]\)-modules on the same index sets as \(F\) and \(G\) respectively. Choose a lifting of the map \(G\to J\) to a map \(G^{\prime}\to K\). From the map \(F\to I\) we get the natural map \(F^{\prime}\to I[y]\). Hence, we get the surjection \(F^{\prime}\oplus G^{\prime}\to K\), and let \(S\) be its kernel. Now, we can calculate \(T^{i}(C/A, M)\) by\[
+        0 \longrightarrow K \longrightarrow A[x,y] \longrightarrow C \longrightarrow 0,\quad 0 \longrightarrow S \longrightarrow F^{\prime}\oplus G^{\prime} \stackrel{j}{\longrightarrow} K \longrightarrow 0.
+    \]Now, we have the following diagram% https://quiver.taskfirst.cn/#q=WzAsMTUsWzAsMCwiMCJdLFswLDEsIjAiXSxbMCwyLCIwIl0sWzEsMCwiUVt5XSJdLFsyLDAsIkYnIl0sWzMsMCwiSVt5XSJdLFs0LDAsIjAiXSxbNCwxLCIwIl0sWzQsMiwiMCJdLFsxLDIsIlAiXSxbMiwyLCJHIl0sWzMsMiwiSiJdLFszLDEsIksiXSxbMiwxLCJGJ1xcb3BsdXMgRyciXSxbMSwxLCJTIl0sWzAsM10sWzMsNF0sWzQsNV0sWzUsNl0sWzEyLDddLFsxLDE0XSxbMTQsMTNdLFsxMywxMl0sWzMsMTRdLFs0LDEzXSxbNSwxMl0sWzE0LDldLFsxMywxMF0sWzEyLDExXSxbMiw5XSxbOSwxMF0sWzEwLDExXSxbMTEsOF1d
+    \[\begin{tikzcd}
+        0 & {Q[y]} & {F'} & {I[y]} & 0 \\
+        0 & S & {F'\oplus G'} & K & 0 \\
+        0 & P & G & J & 0
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-4, to=1-5]
+        \arrow[from=1-4, to=2-4]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+        \arrow[from=2-2, to=3-2]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=2-3, to=3-3]
+        \arrow[from=2-4, to=2-5]
+        \arrow[from=2-4, to=3-4]
+        \arrow[from=3-1, to=3-2]
+        \arrow[from=3-2, to=3-3]
+        \arrow[from=3-3, to=3-4]
+        \arrow[from=3-4, to=3-5]
+    \end{tikzcd}\]which is exact for each horizontal sequence, but not exact for vertical sequence. It induces the maps of complexes\[
+        L_{\bullet}(B/A) \otimes_B C \to L_{\bullet}(C/A) \to L_{\bullet}(C/B).
+    \]Indeed, on the degree 0 level we have split exact sequence.% https://quiver.taskfirst.cn/#q=WzAsNyxbMCwwLCJcXE9tZWdhX3tBW3hdL0F9XFxvdGltZXNfe0FbeF19IEMiXSxbMSwwLCJcXE9tZWdhX3tBW3gseV0vQX1cXG90aW1lc197QVt4LHldfSBDIl0sWzIsMCwiXFxPbWVnYV97Qlt5XS9CfVxcb3RpbWVzX3tCW3ldfSBDIl0sWzAsMSwiZHhfaSJdLFsxLDEsImR4X2kiXSxbMSwyLCJkeF9pLFxcIGR5X2oiXSxbMiwyLCIwLFxcIGR5X2oiXSxbMCwxXSxbMSwyXSxbMyw0LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzUsNiwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dXQ==
+    \[\begin{tikzcd}
+        {\varOmega_{A[x]/A}\otimes_{A[x]} C} & {\varOmega_{A[x,y]/A}\otimes_{A[x,y]} C} & {\varOmega_{B[y]/B}\otimes_{B[y]} C} \\
+        {dx_i} & {dx_i} \\
+        & {dx_i,\ dy_j} & {0,\ dy_j}
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[maps to, from=2-1, to=2-2]
+        \arrow[maps to, from=3-2, to=3-3]
+    \end{tikzcd}\]On the degree 1 level we have split exact sequence\[
+        F \otimes_{A[x]} C \longrightarrow (F^{\prime}\oplus G^{\prime})\otimes_{A[x,y]} C \longrightarrow G \otimes_{B[y]} C
+    \]of free \(C\)-modules. On the degree 2 level we have\begin{equation}\label{xbm}
+        (Q/F_0)\otimes_B C \longrightarrow S/(F^{\prime}\oplus G^{\prime})_0 \longrightarrow P/G_0.
+    \end{equation}We claim that \(S\to P\) is surjective. Indeed, if \(p\in P\). Take \((f^{\prime}, g^{\prime})\in F^{\prime}\oplus G^{\prime}\) mapping to \(p\). Then the image of \((f^{\prime}, g^{\prime})\) in \(K\) is contained in \(I[y]\). Since \(F^{\prime}\to I[y]\) is surjective, there exists \(\tilde f\in F^{\prime}\) having the same image in \(K\) as \((f^{\prime}, g^{\prime})\). Hence, \((f^{\prime}-\tilde f, g^{\prime})\in S\) maps to \(p\).
+
+    To complete the proof, we remain to show the exactness of (\ref{xbm}) in the middle. Let \(s = f + g\) be an element of \(S\subseteq F^{\prime}\oplus G^{\prime}\) such that its image in \(P\) is contained in \(G_0\). Then the image \(g\) of \(g^{\prime}\) in \(G\) belongs to \(G_0\), write \(g = j(a)b - j(b)a\) for some \(a,b\in G\). Lift \(a,b\) to elements \(a^{\prime},b^{\prime}\) in \(G^{\prime}\), then \(j(a^{\prime})b^{\prime} - j(b^{\prime})a^{\prime}\in S\). Let \(g^{\prime\prime} = g - j(a^{\prime})b^{\prime} + j(b^{\prime})a^{\prime}\), then \(g^{\prime\prime}\in \ker(G^{\prime}\to G) = IG^{\prime}\). Say \(g^{\prime\prime} = xh\) and \(x = j(x^{\prime})\) for some \(x\in I\), \(h\in G^{\prime}\), and \(x^{\prime}\in F\). Then
+    \[
+    xh = j(x^{\prime})h \equiv j(h)x^{\prime} \pmod{(F^{\prime}+G^{\prime})_0}.
+    \]
+    Therefore,
+    \[
+    s \equiv f^{\prime} + g^{\prime\prime} \equiv f^{\prime} + j(h)x^{\prime} \pmod{(F^{\prime}+G^{\prime})_0}
+    \]
+    and \(f^{\prime} + j(h)x^{\prime}\in F^{\prime}\cap S = Q[y]\).
+\end{proof}
+
+\begin{proposition}\label{A5}
+    For any morphism \(A \to B\) and \(M \in \mathsf{Mod}_{B}\),\[
+        T^{0}(B / A,M) = \mathrm{Hom}_{B}(\varOmega_{B / A},M) = \mathrm{Der}_{A}(B,M).
+    \]In particular,\[
+        T^{0}(B / A,B) = \mathrm{Hom}_{B}(\varOmega_{B / A},B) = T_{B / A}
+    \]is the tangent module of \(B\) over \(A\).
+\end{proposition}
+
+\begin{proof}
+    Taking \(\mathrm{Hom}(-, M)\) to the exact sequence (\ref{eq10}), we have the exact sequence\[
+        0\to \mathrm{Hom}(\varOmega_{B / A},M)\to \mathrm{Hom}(L_{0},M)\to \mathrm{Hom}(L_{1},M).
+    \]
+\end{proof}
+
+\begin{proposition}\label{A6}
+    If \(B\) is a polynomial ring over \(A\), then \(T^{i}(B / A, M) = 0\) for \(i = 1, 2\) and for all \(M\).
+\end{proposition}
+
+\begin{proof}
+    We may take \(R = B\) and \(F = 0\) in our construction. Hence, the cotangent complex only has \(L_{0}\) term.
+\end{proof}
+
+\begin{proposition}\label{A7}
+    If \(A \to B\) is a surjective ring homomorphism with kernel \(I\), then\[
+        T^{0}(B / A,M) = 0,\ T^{1}(B / A,M) = \mathrm{Hom}_{B}(I / I^{2},M)
+    \]for any \(M \in \mathsf{Mod}_{B}\). In particular, \(T^{1}(B / A, B) = \mathrm{Hom}_{B}(I / I^{2}, B)\) is the normal module \(N_{B / A}\) of \(\mathrm{Spec}\, B\) in \(\mathrm{Spec}\, A\).
+\end{proposition}
+
+\begin{proof}
+    In this case, we can take \(R = A\), and thus \(L_{0} = 0\). Hence, \(T^{0} = 0\) for any module \(M\). Furthermore, the exact sequence\[
+        0\longrightarrow Q\longrightarrow F\stackrel{j}{\longrightarrow}I\longrightarrow 0
+    \]tensored with \(B\) gives% https://quiver.taskfirst.cn/#q=WzAsNixbMCwwLCJRXFxvdGltZXNfe0F9QiJdLFsxLDAsIkZcXG90aW1lc197QX1CIl0sWzIsMCwiSSAvIEleezJ9Il0sWzMsMCwiMCJdLFswLDEsIlEvRl8wIl0sWzEsMSwiRi9JRiJdLFswLDFdLFsxLDIsImoiXSxbMiwzXSxbNCw1XSxbMCw0LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMSw1LCJcXHNpbSJdXQ==
+    \[\begin{tikzcd}
+        {Q\otimes_{A}B} & {F\otimes_{A}B} & {I / I^{2}} & 0 \\
+        {Q/F_0} & {F/IF}
+        \arrow[from=1-1, to=1-2]
+        \arrow[two heads, from=1-1, to=2-1]
+        \arrow["j", from=1-2, to=1-3]
+        \arrow["\sim", from=1-2, to=2-2]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=2-1, to=2-2]
+    \end{tikzcd}\]Hence, we have an exact sequence\[
+        L_{2}\longrightarrow L_{1}\longrightarrow I / I^{2}\longrightarrow 0,
+    \]and thus \(T^{1}(B / A, M) = \mathrm{Hom}_{B}(I / I^{2}, M)\).
+\end{proof}
+
+\begin{corollary}\label{A8}
+    Suppose that \(A\) is a local ring and \(B = A / I\), where \(I\) is generated by a regular sequence \(a_{1},\ldots ,a_{r}\). Then \(T^{2}(B / A,M) = 0\) for all \(M\).
+\end{corollary}
+
+\begin{proof}
+    Since the Koszul complex of a regular sequence is exact, we conclude that \(Q = F_{0}\). Hence, \(L_{2} = 0\) and \(T^{2}(B / A,M) = 0\) for all \(M\).
+\end{proof}
+
+\begin{proposition}\label{A9}
+    Suppose that \(A = k[x_{1},\ldots ,x_{n}]\) and \(B = A / I\). Then for any \(M\), there is an exact sequence\[
+        0\longrightarrow T^{0}(B / k,M)\longrightarrow \mathrm{Hom}_{A}(\varOmega_{A / k},M)\longrightarrow \mathrm{Hom}_{B}(I / I^{2},M)\longrightarrow T^{1}(B / k,M)\longrightarrow 0
+    \]and an isomorphism\[
+        T^{2}(B / A,M)\stackrel{\sim}{\longrightarrow} T^{2}(B / k,M).
+    \]
+\end{proposition}
+
+\begin{proof}
+    It follows from the long exact sequence of \(T^{i}\)-functors for \(k\to A\to B\) and (\ref{A5},~\ref{A6},~\ref{A7}).
+\end{proof}
+
+\begin{remark}\label{A10}
+    We have not made any finiteness assumption on the rings and modules. It is clear that if $ A $ is a noetherian ring, $ B $ is a finitely generated $ A $-algebra, and $ M $ is a finitely generated $ B $-module, then $ T^i(B/A,M) $ are finitely generated $ B $-modules.
+\end{remark}
+
+\begin{lemma}\label{A11}
+    The construction of the \(T^{i}\) functors is compatible with localization, and thus we may define sheaves \(\mathcal{T}^{i}(X / Y,\mathcal{F})\) for any morphism of schemes \(f:X\to Y\) and any sheaf \(\mathcal{F}\) of \(\mathcal{O}_{X}\)-modules, such that for any open affine \(\mathrm{Spec}\, A\subseteq Y\) and any open affine \(\mathrm{Spec}\, B\subseteq f^{-1}(\mathrm{Spec}\, A)\), where \(\mathcal{F}|_{\mathrm{Spec}\, B} = \widetilde{M}\), the section \(\mathcal{T}^{i}(X / Y,\mathcal{F})(\mathrm{Spec}\, B) = T^{i}(B / A,M)\).
+\end{lemma}
+
+For convenience, denote the modules \(T^{i}(B / A,B)\) and \(T^{i}(B / k,B)\) by \(T_{B / A}^{i}\) and \(T_{B / k}^{i}\) (or \(T_{B}^{i}\)) if no confusion arises. Furthermore, \(T_{B / A}^{0}\) will be written as the tangent module \(T_{B / A}\) of \(B\) over \(A\). Similarly for the sheaves \(\mathcal{T}^{i}(X / Y,\mathcal{O}_{X})\) and \(\mathcal{T}^{i}(X / k,\mathcal{O}_{X})\) we write \(\mathcal{T}_{X / Y}^{i}\) and \(\mathcal{T}_{X / k}^{i}\) (or \(\mathcal{T}_{X}^{i}\)). The sheaf \(\mathcal{T}_{X}^{0}\) will be written as the tangent sheaf \(\mathcal{T}_{X}\) of \(X\).
+
+\begin{proposition}[Base change]\label{A12}
+    Assume that \(A\) is Noetherian and \(B\) is a finitely generated \(A\)-algebra.\begin{enumerate}[(1)]
+        \item Let \(M\in \mathsf{Mod}_{B}\) and \(A\to A^{\prime}\) be a flat morphism. Let \(B^{\prime} = B\otimes_{A}A^{\prime}\) and \(M^{\prime} = M\otimes_{B}B^{\prime}\). Then \(T^{i}(B / A,M)\otimes_{A}A^{\prime}\simeq T^{i}(B^{\prime} / A^{\prime},M^{\prime})\) for each \(i\).
+        \item Let \(A \to A^{\prime}\) be an arbitrary ring homomorphism and \(B\) is flat over \(A\). Let \(B^{\prime} = B\otimes_{A}A^{\prime}\) and \(M^{\prime}\in \mathsf{Mod}_{B^{\prime}}\). Then \(T^{i}(B / A, M^{\prime}) = T^{i}(B^{\prime} / A^{\prime}, M^{\prime})\) for each \(i\).
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \cite[Ex. 3.7, 3.8]{Har10}
+\end{proof}
+
+An \textbf{infinitesimal thickening} $ Y\subseteq Y' $ means that $ Y $ is a closed subscheme of another scheme $ Y' $, and that the ideal $ \mathcal{I} $ defining $ Y $ inside $ Y' $ is nilpotent.
+
+\begin{proposition}[Infinitesimal Lifting Property]\label{A13}
+    Let \(X\) be a nonsingular affine scheme of finite type over \(k\), let \(f: Y \to X\) be a morphism from an affine scheme \(Y\) over \(k\), and let \(Y \subseteq Y'\) be an infinitesimal thickening of \(Y\). Then the morphism \(f\) lifts to a morphism \(g: Y' \to X\) such that \(g|_{Y} = f\).
+\end{proposition}
+
+\begin{proof}
+    First we note that $ Y' $ is also affine~\cite[\uppercase\expandafter{\romannumeral3}, Ex. 3.1]{Har77}, so we may transfer the problem to algebraic setting. Let \(f:A\to B\) be the ring homomorphism over \(k\) corresponding to \(f:Y\to X\) where \(B = B^{\prime} / I\) with \(I^{n} = 0\) for some \(n\). We want to find a homomorphism \(g:A\to B^{\prime}\) lifting \(f\).
+
+    Consider the sequence \(B^{\prime} = B^{\prime} / I^{n}\to B^{\prime} / I^{n-1}\to \dots \to B^{\prime} / I^{2}\to B^{\prime} / I\), it will suffice to lift one step at a time. So we may assume that \(I^{2} = 0\).
+
+    Since \(X\) is of finite type over \(k\), we may write \(A = k[x_{1},\ldots ,x_{n}] / J\). Consider any lifting \(h:k[x_{1},\ldots ,x_{n}]\to B^{\prime}\) of \(k[x_{1},\ldots ,x_{n}]\to A\to B\). Then \(h\) induces a map \(J\to I\), and thus induces \(\overline{h}:J / J^{2}\to I\) since \(I^{2} = 0\).
+
+    Embed \(X\hookrightarrow \mathbb{A}_{k}^{n}\) by \(P = k[x_{1},\ldots ,x_{n}]\to A\). Since \(X\) is smooth, we obtain an exact sequence\[
+        0\longrightarrow J / J^{2}\longrightarrow \varOmega_{P / k}^{1}\otimes_{P}A\longrightarrow \varOmega_{A / k}^{1}\longrightarrow 0.
+    \]Notice that those modules correspond to locally free sheaves on \(X\), and thus are projective \(A\)-modules. Via the maps \(h\), \(f\), we get a \(P\)-module structure on \(B'\), and \(A\)-module structures on \(B\), \(I\). Applying \(\mathrm{Hom}_{A}(-, I)\) will get another exact sequence\[
+        0\longrightarrow \mathrm{Hom}_{A}(\varOmega_{A / k}^{1},I)\longrightarrow \mathrm{Hom}_{P}(\varOmega_{P / k}^{1},I)\longrightarrow \mathrm{Hom}_{A}(J / J^{2},I)\longrightarrow 0.
+    \]Let \(\theta \in \mathrm{Hom}_{P}(\varOmega_{P / k}^{1},I) = \mathrm{Der}_{k}(P,I)\) be an element whose image is \(\overline{h}\in \mathrm{Hom}_{A}(J / J^{2},I)\). We claim that \(h^{\prime}:= h - \theta :P\to B^{\prime}\) is a ring homomorphism lifting \(f\) with \(h^{\prime}(J) = 0\). The first assertion follows by the following lemma.
+
+\begin{lemma}\label{A14}
+    Let \(B^{\prime}\to B\) be a surjective homomorphism of \(k\)-algebras with kernel \(I\) of square zero. Let \(R\to B\) be a homomorphism of \(k\)-algebras.
+    \begin{enumerate}[(1)]
+        \item If \(f,g: R \to B'\) are two liftings of the map \(R \to B\) to \(B'\), then \(\theta = g - f\) is a \(k\)-derivation of \(R\) to \(I\).
+        \item Conversely, if \(f: R \to B'\) is one lifting, and \(\theta: R \to I\) is a derivation, then \(g = f + \theta\) is another homomorphism of \(R\) to \(B'\) lifting the given map \(R \to B\).
+    \end{enumerate}
+    In other words, if it is nonempty, the set of liftings \(R \to B\) to \(k\)-algebra homomorphisms of \(R \to B^{\prime}\) is a principal homogeneous space under the action of \(\mathrm{Der}_{k}(R,I) = \mathrm{Hom}_{R}(\varOmega_{R / k},I)\).
+\end{lemma}
+
+\begin{proof}
+    \textit{(1)} Let $ f,g:R\rightarrow B' $ and let $ \theta=g-f $. As a $ k $-linear map, $ \theta $ followed by the projection $ B'\rightarrow B $ is zero, so $ \theta $ sends $ R $ to $ I $. Let $ x,y\in R $. Then\begin{align*}
+        \theta(xy)&=g(xy)-f(xy)\\
+        &=g(x)g(y)-f(x)f(y)\\
+        &=g(x)(g(y)-f(y))+f(y)(g(x)-f(x))\\
+        &=g(x)\theta(y)+f(y)\theta(x)\\
+        &=x\theta(y)+y\theta(x),
+    \end{align*}the last step being because $ g(x) $ and $ f(y) $ act in $ I $ just like $ x,y $. Thus $ \theta $ is a $ k $-derivation of $ R $ to $ I $.
+
+    \textit{(2)} Conversely, given $ f $ and $ \theta $ as above, let $ g=f+\theta $. Then\begin{align*}
+        g(xy)&=f(xy)+\theta(xy)\\
+        &=f(x)f(y)+x\theta(y)+y\theta(x)\\
+        &=(f(x)+\theta(x))(f(y)+\theta(y))\\
+        &=g(x)g(y),
+    \end{align*}where we note that $ \theta(x)\theta(y)=0 $, since $ I^2=0 $. Thus $ g $ is a homomorphism of $ R\rightarrow B' $ lifting $ R $ to $ B $.
+\end{proof}
+
+    Since \(h^{\prime}(J)\subseteq I\), we have \(h^{\prime}(J^{2})\subseteq I^{2} = 0\). Then \(h^{\prime}\) descends to \(P / J^{2}\to B^{\prime}\), and thus \(h^{\prime}|_{J / J^{2}} = h - h = 0\) by the choice of \(\theta\). Hence, \(h^{\prime}\) descends to the desired homomorphism \(g:A\to B^{\prime}\) lifting \(f\).
+\end{proof}
+
+Next, we investigate the relation between nonsingularity and the \(T^{i}\) functors.
+
+\begin{theorem}\label{A17}
+    Let \(X = \mathrm{Spec}\,  B\) be an affine scheme over an algebraically closed field \(k\). Then \(X\) is nonsingular if and only if \(T^{1}(B / k,M) = 0\) for all \(M\in \mathsf{Mod}_{B}\). Furthermore, if \(X\) is nonsingular, then \(T^{2}(B / k,M) = 0\) for all \(M\).
+\end{theorem}
+
+\begin{proof}
+    Write \(B\) as a quotient of a polynomial ring \(A = k[x_{1},\ldots ,x_{n}]\) over \(k\). Then \(X\) is nonsingular if and only if the conormal sequence\begin{equation}\label{eq12}
+        0\longrightarrow I / I^{2}\longrightarrow \varOmega_{A / k}\otimes_{A}B\longrightarrow \varOmega_{B / k}\longrightarrow 0
+    \end{equation}is exact and \(\varOmega_{B / k}\) is locally free, i.e., a projective \(B\)-module. Since \(\varOmega_{A / k}\) is a free \(A\)-module, we conclude that \(X\) is nonsingular if and only if (\ref{eq12}) is split exact. From the four-term exact sequence in (\ref{A9})\[
+        0\longrightarrow T^{0}(B / k,M)\longrightarrow \mathrm{Hom}(\varOmega_{A / k},M)\longrightarrow \mathrm{Hom}(I / I^{2},M)\longrightarrow T^{1}(B / k,M)\longrightarrow 0,
+    \]\(T^{1}(B / k,M) = 0\) for all \(M\in \mathsf{Mod}_{B}\) if and only if the map\[
+        \mathrm{Hom}(\varOmega_{A / k},M)\longrightarrow \mathrm{Hom}(I / I^{2},M)
+    \]is surjective for all \(M\), which is equivalent to split exactness by considering \(M = I / I^{2}\).
+
+    Again, by (\ref{A9}) we have \(T^{2}(B / k,M) = T^{2}(B / A,M)\). Since \(X\) is smooth, the localizing ideal \(I_{x}\) at \(x\in X\) is generated by a regular sequence in the regular local ring \(A_{x}\). By (\ref{A8}), \(T^{2}(B_{x} / A_{x},M) = 0\) for all \(M\in \mathsf{Mod}_{B_{x}}\). By (\ref{A11}), we conclude that \(T^{2}(B / A,M) = 0\) for all \(M\in \mathsf{Mod}_{B}\).
+\end{proof}
+
+\begin{theorem}\label{A18}
+    A morphism of finite type \(f:X\to Y\) of Noetherian schemes is smooth if and only if it is flat, and \(\mathcal{T}^{1}(X / Y,\mathcal{F}) = 0\) for all coherent sheaves \(\mathcal{F}\in \mathsf{Coh}(X)\). Furthermore, if \(f\) is smooth, then \(\mathcal{T}^{2}(X / Y,\mathcal{F}) = 0\) for all \(\mathcal{F}\).
+\end{theorem}
+
+\begin{proof}
+    The problem is local, so we may assume that \(X = \mathrm{Spec}\,  B\) and \(Y = \mathrm{Spec}\,  A\) are affine and \(f\) is given by a ring homomorphism \(A\to B\).
+
+    First suppose \(B\) is flat over \(A\) and \(T^{1}(B / A,M) = 0\) for all \(M\in \mathsf{Mod}_{B}\). Let \(y\in Y\) correspond to \(\mathfrak{p}\in \mathrm{Spec}\,  A\) and let \(k = k(y)\) be its residue field. Let \(A^{\prime} = A / \mathfrak{p}\) and \(B^{\prime} = B\otimes_{A}A^{\prime} = B / \mathfrak{p}B\); then for any \(M\in \mathsf{Mod}_{B^{\prime}}\) we obtain \(T^{1}(B^{\prime} / A^{\prime},M) = T^{1}(B / A,M) = 0\) by (\ref{A12}). Write \(B^{\prime} = A^{\prime}[x_{1},\ldots ,x_{n}] / I\); then \(T^{1}(B^{\prime} / A^{\prime},I / I^{2}) = 0\).
+
+    Now consider the flat base extension from \(A^{\prime}\) to \(\overline{k} = \overline{\mathrm{Frac}(A^{\prime})}\). By (\ref{A12}), we have\[
+        T^{1}(B^{\prime}\otimes_{A^{\prime}}\overline{k} /\overline{k},(I / I^{2})\otimes \overline{k}) = 0.
+    \]Since \(\overline{k}\) is flat over \(A^{\prime}\), we have \(B^{\prime}\otimes \overline{k} = \overline{k}[x_{1},\ldots ,x_{n}] / \overline{I}\) and \((I / I^{2})\otimes \overline{k} = \overline{I} / \overline{I}^{2}\), where \(\overline{I} = I\otimes \overline{k}\). Then the proof of (\ref{A17}) shows that \(\mathrm{Spec}\,  B^{\prime}\otimes \overline{k}\) is nonsingular over \(\overline{k}\). Hence, the geometric fibers of \(f\) are nonsingular, and thus \(f\) is smooth.
+
+    Conversely, suppose that \(B\) is smooth over \(A\). We claim that \(T^{1}(B / A,B / \mathfrak{m}) = 0\) for all maximal ideals \(\mathfrak{m}\) of \(B\). Indeed, let \(\mathfrak{m}\) correspond to the point \(x\in \mathrm{Spec}\,  B\), let \(f(x) = y\), and let \(k = k(y)\). Apply base change on \(B / \mathfrak{m}\in \mathsf{Mod}_{B\otimes_{A}k}\), we obtain\[
+        T^{1}(B / A,B / \mathfrak{m})\otimes_{k}\overline{k} = T^{1}(B\otimes_{A}k / k,B / \mathfrak{m})\otimes_{k}\overline{k} = T^{1}(B \otimes_{A}\overline{k} /\overline{k},(B / \mathfrak{m})\otimes_{k}\overline{k}) = 0
+    \]since the geometric fibers are nonsingular. Since \(k\to \overline{k}\) is faithfully flat, we conclude that \(T^{1}(B / A,B / \mathfrak{m}) = 0\).
+\end{proof}
+
+\subsection{Deformations of schemes and obstruction theory}
+
+Let $ k $ be a fixed algebraically closed ground field, and let $ \mathsf{C} $ be the category of local artinian $ k $-algebras with residue field $ k $. Let $ X_0 $ be a scheme over $ k $ and take a $ C\in\mathsf{C} $. 
+
+A \textbf{deformation} of $ X_0 $ over $ C $ is a pair $ (X,i) $, where $ X $ is a scheme flat over $ C $, and $ i:X_0\rightarrow X $ is a closed immersion such that the induced map $ i\otimes k:X_0\rightarrow X\otimes_C k $ is an isomorphism.
+
+Let $ X_0\hookrightarrow X $ be a deformation of $ X_0 $ over $ C\in \mathsf{C} $. Suppose $ C' $ is another artinian $ k $-algebra with residue field $ k $, equipped with a surjective map $ C'\rightarrow C $ with the kernel $ J $ annihilated by $ \mathfrak{m}_{C'} $.
+
+An \textbf{extension} of $ X $ over $ C' $ is a deformation $ X' $ of $ X_0 $ over $ C' $, together with a closed immersion $ X\hookrightarrow X' $ inducing an isomorphism $ X\stackrel{\sim}{\longrightarrow}X'\times_{C'}C $. Two such extension $ X' $ and $ X'' $ are \textbf{equivalent} if there is an isomorphism of deformations $ X'\stackrel{\sim}{\longrightarrow}X'' $ compatible with the respective closed immersion of $ X $ into $ X' $ and $ X'' $. Let $ \mathrm{Def}(X/C,C') $ be the set of equivalence classes of such extensions of $ X' $ over $ C' $. In particular, define two deformations of $ X_0 $ over $ C $ are equivalent if they are in the same class in $ \mathrm{Def}(X_0/k,C) $.
+
+% \begin{remark}
+%     There is a surjective map\[
+%         \mathrm{Def}(X/C,C')\longrightarrow \mathrm{Def}(C'\rightarrow C)^{-1}(X),
+%     \]which is not injective in general, since there may exist an automorphism of $ X' $ that restricts to the identity on $ X_0 $ but does not extend to an automorphism of $ X $.
+% \end{remark}
+
+\begin{theorem}\label{B2}
+    In the situation described as above, with the additional structure as follows: let $ Y_0\subseteq X_0 $ and $ Y\subseteq X $ be closed subschemes such that $ Y_0=Y\times_C k $ under the identification $ X_0\stackrel{\sim}{\longrightarrow}X\times_C k $. Fixed an extension $ X' $ of $ X $ over $ C' $. An \textbf{(embedding) extension} of $ Y $ over $ C' $ in $ X' $ is a closed subscheme $ Y'\subseteq X' $, flat over $ C' $, such that $ Y'\times_{C'}C=Y $. Then the set of such extension of $ Y $ over $ C' $ in $ X' $ form a $ H^0(Y_0,\mathcal{N}_{Y_0/X_0}\otimes_k J) $-pseudotorsor.
+\end{theorem}
+
+\begin{proof}
+    First we consider the affine case $ X=\mathrm{Spec}\, B $, $ X'=\mathrm{Spec}\, B' $, $ Y=\mathrm{Spec}\, A $, and $ A=B/I $. Suppose that $ Y'=\mathrm{Spec}\, A' $ is given by $ A'=B'/I' $. Tensoring the short exact sequence\[
+        0\longrightarrow I'\longrightarrow B'\longrightarrow A'\longrightarrow 0
+    \]with the sequence $ 0\rightarrow J\rightarrow C'\rightarrow C\rightarrow 0 $, we will get a diagram% https://quiver.taskfirst.cn/#q=WzAsMjEsWzEsMCwiMCJdLFsyLDAsIjAiXSxbMywwLCIwIl0sWzQsMSwiMCJdLFs0LDIsIjAiXSxbNCwzLCIwIl0sWzEsNCwiMCJdLFsyLDQsIjAiXSxbMyw0LCIwIl0sWzAsMSwiMCJdLFswLDIsIjAiXSxbMCwzLCIwIl0sWzEsMSwiSlxcb3RpbWVzX0NJIl0sWzIsMSwiSSciXSxbMywxLCJJIl0sWzEsMiwiSlxcb3RpbWVzX0NCIl0sWzIsMiwiQiciXSxbMywyLCJCIl0sWzEsMywiSlxcb3RpbWVzX0NBIl0sWzIsMywiQSciXSxbMywzLCJBIl0sWzksMTJdLFsxMiwxM10sWzEzLDE0XSxbMTQsM10sWzEwLDE1XSxbMTUsMTZdLFsxNiwxN10sWzE3LDRdLFswLDEyXSxbMSwxM10sWzIsMTRdLFsxMiwxNV0sWzEzLDE2XSxbMTQsMTddLFsxMSwxOF0sWzE4LDE5XSxbMTksMjBdLFsyMCw1XSxbMTUsMThdLFsxOCw2XSxbMTksN10sWzE2LDE5XSxbMTcsMjBdLFsyMCw4XV0=
+    \[\begin{tikzcd}
+        & 0 & 0 & 0 & \\
+        0 & {J\otimes_CI} & {I'} & I & 0 \\
+        0 & {J\otimes_CB} & {B'} & B & 0 \\
+        0 & {J\otimes_CA} & {A'} & A & 0 \\
+        & 0 & 0 & 0
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-4, to=2-4]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+        \arrow[from=2-2, to=3-2]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=2-3, to=3-3]
+        \arrow[from=2-4, to=2-5]
+        \arrow[from=2-4, to=3-4]
+        \arrow[from=3-1, to=3-2]
+        \arrow[from=3-2, to=3-3]
+        \arrow[from=3-2, to=4-2]
+        \arrow[from=3-3, to=3-4]
+        \arrow[from=3-3, to=4-3]
+        \arrow[from=3-4, to=3-5]
+        \arrow[from=3-4, to=4-4]
+        \arrow[from=4-1, to=4-2]
+        \arrow[from=4-2, to=4-3]
+        \arrow[from=4-2, to=5-2]
+        \arrow[from=4-3, to=4-4]
+        \arrow[from=4-3, to=5-3]
+        \arrow[from=4-4, to=4-5]
+        \arrow[from=4-4, to=5-4]
+    \end{tikzcd}\]By (\ref{wto}), the exactness of the bottom two rows is equivalent to the flatness of $ B' $ and $ A' $ over $ C $, respectively. The exactness of the first column follows from the flatness of $ A $ over $ C $. Now we seek to classify the possible $ A' $ (resp. $ I' $) full in the diagram.
+
+    Suppose that $ I' $ and $ I'' $ are two choices of $ I' $ to fill in the diagram. Given $ x\in I $, lift it to $ x'\in I' $ and $ x''\in I'' $. Then $ x''-x'\in B' $ maps to $ 0 $ in $ B $, and thus $ x''-x'\in J\otimes_C B $. Denote its image in $ J\otimes_C A $ by $ \varphi(x) $. Notice that the choice of $ x' $ and $ x'' $ may differ by elements in $ J\otimes_C I $, which maps to $ 0 $ in $ J\otimes_C A $. So $ \varphi $ is well-defined additive map. In fact, it is an $ B $-linear homomorphism $ \varphi\in \mathrm{Hom}_B(I,J\otimes_C A) $.
+    
+    Conversely, given $ I' $ and $ \varphi\in \mathrm{Hom}_B(I,J\otimes_C A) $, we can define another ideal $ I'' $ solving the extension problem as follows. $ I'' $ is the set of $ x''\in B' $ whose image in $ B $ is $ x\in I $, and such that for any lifting $ x'\in I' $ of $ x $, the image $ x''-x $ in $ J\otimes_C A $ is equal to $ \varphi(x) $.
+
+    If $ I' $, $ I'' $, $ I''' $ are three choice of solution, and if $ \varphi_1 $ is defined by $ I' $, $ I'' $ as above, $ \varphi_2 $ defined by $ I'' $, $ I''' $, and $ \varphi_3 $ defined by $ I' $, $ I''' $, then $ \varphi_3=\varphi_1+\varphi_2 $. So we conclude that\begin{align*}
+        \mathrm{Hom}_B(I,J\otimes_C A)\times\{\text{deformation of}\ Y\ \text{over}\ C'\ \text{in}\ X'\}& \longrightarrow\{\text{deformation of}\ Y\ \text{over}\ C'\ \text{in}\ X'\}\\
+        (I',\varphi)& \longmapsto I''
+    \end{align*}is an proper transitive group action. Since we can't guarantee the existence, it only a pseudotorsor. In this case,\[
+        \mathrm{Hom}_B(I,J\otimes_C A)=\mathrm{Hom}_B(I,J\otimes_k A_0).
+    \]Since $ J $ is a $ k $-vector space, this term becomes to\[
+        \mathrm{Hom}_{B_0}(I_0,J\otimes_k A_0)=\mathrm{Hom}_{A_0}(I_0\otimes_{B_0}A_0,A_0\otimes_k J)=H^0(Y_0,\mathcal{N}_{Y_0/X_0}\otimes_k J).
+    \]In general case, the group action $ H^0(Y_0,\mathcal{N}_{Y_0/X_0}\otimes_k J) $ on the set of $ Y' $ can be defined locally and functorial. So we may glue it to the global action.
+\end{proof}
+
+Now back to deformations of schemes (rather than closed subschemes). Consider the affine scheme case first. Given a finite generated $ k $-algebra $ B_0 $, and a deformation $ B $ of $ B_0 $ over $ C $. We want to describe the set $ \mathrm{Def}(B/C,C'):=\mathrm{Def}(\mathrm{Spec}\, B/C,C') $.
+
+\begin{theorem}\label{B3}
+    In the situation as beginning:\begin{enumerate}[(1)]
+        \item There is an element $ \delta\in T^2(B_0/k,B_0\otimes J) $, called the \textbf{obstruction}, with the property that $ \delta=0 $ iff an extension $ B' $ of $ B $ exists.
+        \item If extension exists, then $ \mathrm{Def}(B/C,C') $ form a $ T^1(B_0/k,B_0\otimes J) $-torsor.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Take a presentation $ R=C[x_1,\dots,x_n]\rightarrow B $ with kernel $ I=(f_1,\dots,f_r) $. Define a morphism $ F:=R^r\rightarrow I $ by $ e_i\mapsto f_i $ and denoted the kernel by $ Q $. Lift each $ f_i $ to an element $ f'_i\in R':=C'[x_1,\dots,x_n] $, and define $ I'=(f'_1,\dots,f'_r) $, $ B'=R'/I' $, $ F'=R'^r $. Now consider\begin{align*}
+        0\longrightarrow I'\longrightarrow R'\longrightarrow B'\longrightarrow 0 \qquad 0\longrightarrow Q'\longrightarrow & F'\longrightarrow I'\longrightarrow 0.\\
+        & e'_i\longmapsto f'_i
+    \end{align*}Tensoring $ C $ over $ C' $, we have\[
+        B'\otimes_{C'}C\cong\mathrm{coker}(I'\otimes_{C'}C\rightarrow R'\otimes_{C'}C)=B.
+    \]Tensoring with $ 0\rightarrow J\rightarrow C'\rightarrow C\rightarrow 0 $ over $ C' $, we get a diagram% https://quiver.taskfirst.cn/#q=WzAsMjEsWzAsMiwiMCJdLFsxLDIsIkZcXG90aW1lc19DIEoiXSxbMiwwLCIwIl0sWzMsMCwiMCJdLFsyLDEsIlEnIl0sWzMsMSwiUSJdLFsyLDIsIkYnIl0sWzMsMiwiRiJdLFs0LDIsIjAiXSxbNCwzLCIwIl0sWzQsNCwiMCJdLFszLDUsIjAiXSxbMiw1LCIwIl0sWzEsNSwiMCJdLFswLDMsIjAiXSxbMSwzLCJSXzBcXG90aW1lc19rIEoiXSxbMSw0LCJCXzBcXG90aW1lc19rIEoiXSxbMiw0LCJCJyJdLFszLDQsIkIiXSxbMywzLCJSIl0sWzIsMywiUiciXSxbMiw0XSxbMyw1XSxbNCw2XSxbNSw3XSxbNyw4XSxbNiw3XSxbMSw2XSxbMCwxXSxbMTQsMTVdLFsxNSwyMF0sWzE2LDE3XSxbMTcsMThdLFsxOCwxMF0sWzE5LDldLFsyMCwxOV0sWzYsMjAsImYnIl0sWzcsMTksImYiXSxbMSwxNV0sWzE1LDE2XSxbMTYsMTNdLFsyMCwxN10sWzE3LDEyXSxbMTksMThdLFsxOCwxMV1d
+    \[\begin{tikzcd}
+        && 0 & 0 & \\
+        && {Q'} & Q \\
+        0 & {F\otimes_C J} & {F'} & F & 0 \\
+        0 & {R_0\otimes_k J} & {R'} & R & 0 \\
+        & {B_0\otimes_k J} & {B'} & B & 0 \\
+        & 0 & 0 & 0
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=1-4, to=2-4]
+        \arrow[from=2-3, to=3-3]
+        \arrow[from=2-4, to=3-4]
+        \arrow[from=3-1, to=3-2]
+        \arrow[from=3-2, to=3-3]
+        \arrow[from=3-2, to=4-2]
+        \arrow[from=3-3, to=3-4]
+        \arrow["{f'}", from=3-3, to=4-3]
+        \arrow[from=3-4, to=3-5]
+        \arrow["f", from=3-4, to=4-4]
+        \arrow[from=4-1, to=4-2]
+        \arrow[from=4-2, to=4-3]
+        \arrow[from=4-2, to=5-2]
+        \arrow[from=4-3, to=4-4]
+        \arrow[from=4-3, to=5-3]
+        \arrow[from=4-4, to=4-5]
+        \arrow[from=4-4, to=5-4]
+        \arrow[from=5-2, to=5-3]
+        \arrow[from=5-2, to=6-2]
+        \arrow[from=5-3, to=5-4]
+        \arrow[from=5-3, to=6-3]
+        \arrow[from=5-4, to=5-5]
+        \arrow[from=5-4, to=6-4]
+    \end{tikzcd}\]where we use $ -\otimes_{C'}J=-\otimes_{C'}k\otimes_{k}J $ and $ R_0=k[x_1,\dots,x_n] $. By snake lemma, there is a map $ \delta_0:Q\rightarrow B_0\otimes_k J $ depending on the lifting $ f' $ of $ f $. By (\ref{wto}), $ B' $ is flat over $ C' $ iff $ \delta_0=0 $.
+
+    Recall that in the definition of cotangent complex, any element in $ F_0 $ is of the form $ f_j e_i-f_i e_j\in F $, and lifts to $ f_j' e_i'-f_i'e_j'\in Q' $. So the map $ \delta_0 $ factors through $ \delta_1:Q/F_0\rightarrow B_0\otimes_k J $. By definition of $ T^i $ functor and base change (\ref{A12}), we get\begin{align*}
+        \mathrm{coker}(\mathrm{Hom}(F/IF,B_0\otimes_k J)&\longrightarrow \mathrm{Hom}(Q/F_0,B_0\times_k J))=T^2(B/C,B_0\otimes_k J)=T^2(B_0/k,B_0\otimes_k J)\\
+        \bar{\delta}_1 &\longmapsto\delta.
+    \end{align*}Here $ \delta\in T^2(B_0/k,B_0\otimes_k J) $.
+
+    We claim that $ \delta $ is independent of all choices made. If we make a different choice of lifting $ f_i'' $ of the $ f_i' $, then $ f_i'-f_i'' $ define a map from $ F' $ to $ R_0\otimes_k J $, and hence from $ F/IF\rightarrow B_0\otimes_k J $, and these go to zero in $ T^2 $. Suppose we choose a different polynomial ring $ R^*\rightarrow B $. As in the proof of (\ref{A1}), we may reduce to the case $ R^*=R[y_1,\dots,y_s] $, and $ y_i\mapsto 0\in B $. Then the $ \delta_0^*(y_i)=0 $ implies $ \delta=\delta^* $ in $ T^2(B_0/k,B_0\otimes_k J) $.
+
+    If the extension $ B'/C' $ exists, take a polynomial ring $ R' $ over $ C' $ maps surjectively to $ B' $. Consider\begin{equation}\label{sgh}
+        0\longrightarrow I'\longrightarrow R'\longrightarrow B'\longrightarrow 0 \qquad 0\longrightarrow Q'\longrightarrow F'\longrightarrow I'\longrightarrow 0.
+    \end{equation}Since $ B' $ and $ R' $ are flat over $ C' $, we also have $ I' $ is flat over $ C' $. Let $ R=R'\otimes_{C'}C $, $ I=I'\otimes_{C'}C $, and $ Q=Q'\otimes_{C'}C $. Then (\ref{sgh})$ \otimes_{C'}C $ will give a presentation to calculate cotangent complex of $ B $ over $ C $. Since $ Q'\rightarrow Q $ is surjective, it follows that $ \delta_0=0 $, and thus $ \delta=0 $.
+
+    Conversely, suppose that $ \delta=0 $. We claim that for a suitable choose of lifting $ f_i' $, the induced map $ \delta_0:Q\rightarrow B_0\otimes_k J $ is zero. By assumption, the map $ \delta_1\in\mathrm{Hom}(Q/F_0,B_0\otimes_k J) $ lifts to a map $ \gamma:F/IF\rightarrow B_0\otimes_k J $, and defines a map $ F\rightarrow B_0\otimes_k J $. Since $ F $ is free, it lifts to a map $ F\rightarrow R_0\otimes_k J $. Denote the image of $ e_i $ by $ g_i\in R_0\otimes_k J $. Now take $ f_i''=f'_i-g_i $, then the new $ \delta_0 $ is zero, and thus the new $ B' $ is flat over $ C' $. This complete the proof of \textit{(1)}.
+
+    Suppose one such extension $ B_1' $ exists. Take a presentation $ 0\rightarrow I_0\rightarrow R_0\rightarrow B_0\rightarrow 0 $ as usual. Lift the surjection $ R_0\rightarrow B_0 $ to a map $ R\rightarrow B $, and to a map $ R'\rightarrow B_1' $, which is compatible with $ B_1'\rightarrow B\rightarrow B_0 $. By Nakayama's lemma, $ R\rightarrow B $ and $ R'\rightarrow B_1' $ are surjective.
+
+    For any other extension $ B_2' $ of $ B $, the map $ R\rightarrow B $ lifts to a map $ R'\rightarrow B_2' $. Thus, every abstract deformation is also an embedded deformation $ X\hookrightarrow\mathbb{A}^n_k $. By (\ref{B2}), the embedded deformation is a $ \mathrm{Hom}_B(I/I^2,B\otimes_C J) $-torsor. Suppose that we have two embedding deformations $ B_2' $ and $ B_3' $ are equivalent as abstract extensions of $ B $. Choose an isomorphism $ B_2'\cong B_3' $ as extension of $ B $ over $ C' $. Then we obtain two maps $ R'\rightarrow B_2' $, which can be regarded as the lifting of $ R'\rightarrow R\rightarrow B $. By (\ref{A14}), the differ of this two map is a $ C' $-derivation of $ R' $ to $ B_2'\otimes_{C'}J\cong B\otimes_C J $, which can be regarded as an element of\[
+        \mathrm{Hom}_{R'}(\varOmega_{R'/C'},B\otimes_C J)=\mathrm{Hom}_R(\varOmega_{R'/C'}\otimes_{C'}C,B\otimes_C J)=\mathrm{Hom}_R(\varOmega_{R/C},B\otimes_C J).
+    \]Using the exact sequence (\ref{A9})\[
+        \mathrm{Hom}_R(\varOmega_{R/C},B\otimes_C J)\longrightarrow \mathrm{Hom}(I/I^2,B\otimes_C J)\longrightarrow T^1(B/C,B\otimes_C J)\longrightarrow 0,
+    \]we observe that the ambiguity of embedding is exactly resolved by the image of the derivations. We conclude that $ \mathrm{Def}(X/C,C') $ is a torsor under $ T^1(B/C,B_0\otimes_k J)=T^1(B_0/k,B_0\otimes_k J) $ by (\ref{A12}).
+\end{proof}
+
+\begin{remark}\label{B4}
+    Given an extension $ B' $ of $ B $ over $ C' $, the automorphism group of $ B' $ as an extension of $ B $ over $ C $ is naturally isomorphic to the group $ T^0(B_0/k,J\otimes_k B_0) $. Indeed, take $ k=C' $ and $ R=B' $ in (\ref{A14}), we have isomorphism\begin{align*}
+        \mathrm{Der}_{C'}(B',J\otimes_{C'}B')&\stackrel{\sim}{\longrightarrow}\mathrm{Aut}(B'/B)=\mathrm{Der}_{C'}(B',B)\\
+        \theta&\longmapsto \mathrm{id}_{B'}+\theta
+    \end{align*}where $ \theta_1+\theta_2\mapsto (\mathrm{id}_{B'}+\theta_1)(\mathrm{id}_{B'}+\theta_2)=\mathrm{id}_{B'}+\theta_1+\theta_2 $ since $ J\otimes_{C'}B' $ is square zero ideal. Moreover, we have\begin{align*}
+        \mathrm{Der}_{C'}(B',J\otimes_{C'}B')&=\mathrm{Hom}_{B'}(\varOmega_{B'/C'},J\otimes_{C'}B')=\mathrm{Hom}_{B_0}(\varOmega_{B'/C'}\otimes_{B'}B_0,J\otimes_k B_0)\\
+        &=\mathrm{Hom}_{B_0}(\varOmega_{B_0/k},J\otimes_k B_0)=T^0(B_0/k,B_0\otimes_k J).
+    \end{align*}
+\end{remark}
+
+For general case, we recall the notation $ \mathcal{T}^i_{X_0}=\mathcal{T}^i(X_0/k,\mathcal{O}_{X_0}) $.
+
+\begin{lemma}[local criterion of flatness]\label{wto}
+    Let $ A'\rightarrow A $ be a surjective homomorphism of noetherian rings whose kernel $ J $ is square zero. Then an $ A' $-module $ M' $ is flat over $ A' $ iff\begin{enumerate}[(1)]
+        \item $ M=M'\otimes_{A'}A $ is flat over $ A $
+        \item the natural map $ M\otimes_A J\rightarrow M' $ is injective.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Since $ J^2=0 $, we may regard $ J $ as $ A $-module and identify $ M'\otimes_{A'}J $ with $ M\otimes_A J $.
+
+    If $ M' $ is flat over $ A' $, then \textit{(1)} follows by base extension and \textit{(2)} follows by tensoring $ M' $ with the exact sequence\[
+        0\longrightarrow J\longrightarrow A'\longrightarrow A\longrightarrow 0.
+    \]
+
+    Conversely, suppose that $ M' $ satisfies \textit{(1)} and \textit{(2)}. It suffices to prove $ \mathrm{Tor}^{A'}_1(M',A'/\mathfrak{p}')=0 $ for every $ \mathfrak{p}'\subseteq A' $. Since $ J $ is nilpotent, it is contained in $ \mathfrak{p}' $. Let $ \mathfrak{p}=\mathfrak{p}'/J\in \mathrm{Spec}\, A $, then we have the following diagram% https://quiver.taskfirst.cn/#q=WzAsMTYsWzAsMSwiMCJdLFswLDIsIjAiXSxbNCwxLCIwIl0sWzQsMiwiMCJdLFsyLDQsIjAiXSxbMyw0LCIwIl0sWzIsMCwiMCJdLFszLDAsIjAiXSxbMSwxLCJKIl0sWzEsMiwiSiJdLFsyLDEsIlxcbWF0aGZyYWt7cH0nIl0sWzMsMSwiXFxtYXRoZnJha3twfSJdLFsyLDIsIkEnIl0sWzMsMiwiQSJdLFsyLDMsIkEnL1xcbWF0aGZyYWt7cH0nIl0sWzMsMywiQS9cXG1hdGhmcmFre3B9Il0sWzAsOF0sWzgsOSwiIiwxLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSw5XSxbOSwxMl0sWzEyLDEzXSxbMTMsM10sWzEyLDE0XSxbMTMsMTVdLFsxMCwxMl0sWzYsMTBdLFs3LDExXSxbMTEsMTNdLFsxNSw1XSxbMTQsNF0sWzgsMTBdLFsxMCwxMV0sWzExLDJdXQ==
+    \[\begin{tikzcd}
+        && 0 & 0 & \\
+        0 & J & {\mathfrak{p}'} & {\mathfrak{p}} & 0 \\
+        0 & J & {A'} & A & 0 \\
+        && {A'/\mathfrak{p}'} & {A/\mathfrak{p}} \\
+        && 0 & 0
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-4, to=2-4]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+        \arrow[equals, from=2-2, to=3-2]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=2-3, to=3-3]
+        \arrow[from=2-4, to=2-5]
+        \arrow[from=2-4, to=3-4]
+        \arrow[from=3-1, to=3-2]
+        \arrow[from=3-2, to=3-3]
+        \arrow[from=3-3, to=3-4]
+        \arrow[from=3-3, to=4-3]
+        \arrow[from=3-4, to=3-5]
+        \arrow[from=3-4, to=4-4]
+        \arrow[from=4-3, to=5-3]
+        \arrow[from=4-4, to=5-4]
+    \end{tikzcd}\]Tensoring with $ M' $, we obtain% https://quiver.taskfirst.cn/#q=WzAsMTYsWzEsMSwiMCJdLFsyLDEsIjAiXSxbMywyLCIwIl0sWzMsMywiMCJdLFsxLDUsIjAiXSxbMiw1LCIwIl0sWzEsMiwiXFxidWxsZXQiXSxbMiwyLCJcXGJ1bGxldCJdLFsyLDMsIk0iXSxbMiw0LCJNIl0sWzEsNCwiTSciXSxbMSwzLCJNJyJdLFswLDMsIk1cXG90aW1lc19BIEoiXSxbMCwyLCJNXFxvdGltZXNfQSBKIl0sWzEsMCwiMCJdLFsyLDAsIjAiXSxbMTMsMTIsIiIsMSx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEyLDExXSxbMTEsOF0sWzgsM10sWzgsOV0sWzksNV0sWzExLDEwXSxbMTAsNF0sWzE0LDBdLFsxNSwxXSxbMCw2XSxbMSw3XSxbMCwxXSxbNiw3XSxbNywyXSxbMTMsNl0sWzYsMTFdLFs3LDhdXQ==
+    \[\begin{tikzcd}
+        & 0 & 0 & \\
+        & \mathrm{Tor}^{A'}_1(M',A'/\mathfrak{p}') & \mathrm{Tor}^{A}_1(M,A/\mathfrak{p}) \\
+        {M\otimes_A J} & M'\otimes_{A'}\mathfrak{p}' & M\otimes_A\mathfrak{p} & 0 \\
+        {M\otimes_A J} & {M'} & M & 0 \\
+        & {M'\otimes_{A'}A'/\mathfrak{p}'} & M\otimes_{A}A/\mathfrak{p} \\
+        & 0 & 0
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=2-2, to=2-3]
+        \arrow[from=2-2, to=3-2]
+        \arrow[from=2-3, to=3-3]
+        \arrow[from=3-1, to=3-2]
+        \arrow[equals, from=3-1, to=4-1]
+        \arrow[from=3-2, to=3-3]
+        \arrow[from=3-2, to=4-2]
+        \arrow[from=3-3, to=3-4]
+        \arrow[from=3-3, to=4-3]
+        \arrow[from=4-1, to=4-2]
+        \arrow[from=4-2, to=4-3]
+        \arrow[from=4-2, to=5-2]
+        \arrow[from=4-3, to=4-4]
+        \arrow[from=4-3, to=5-3]
+        \arrow[from=5-2, to=6-2]
+        \arrow[from=5-3, to=6-3]
+    \end{tikzcd}\]By \textit{(2)}, the second (and thus also the first) horizontal sequence is exact on the left. By snake lemma, $ \mathrm{Tor}^{A'}_1(M',A'/\mathfrak{p}') \cong \mathrm{Tor}^{A}_1(M,A/\mathfrak{p})=0 $ by \textit{(1)}.
+\end{proof}
+
+\begin{theorem}\label{B5}
+    In the situation as beginning:\begin{enumerate}[(1)]
+        \item There are three successive obstructions for the existence of an extension $ X' $ of $ X $ over $ C' $:\begin{itemize}
+            \item $ \delta_1\in H^0(X_0,\mathcal{T}^2_{X_0}\otimes J) $ for the existence of local extension.
+            \item $ \delta_2\in H^1(X_0,\mathcal{T}^1_{X_0}\otimes J) $ for the compatible isomorphism type of local extensions.
+            \item $ \delta_3\in H^2(X_0,\mathcal{T}^0_{X_0}\otimes J) $ for the obstruction of gluing.
+        \end{itemize}
+        \item Fixed an extension $ X'_1 $ of $ X $ over $ C' $, there is an exact sequence\[
+            0\longrightarrow H^1(X_0,\mathcal{T}^0_{X_0}\otimes J)\longrightarrow \mathrm{Def}(X/C,C')\longrightarrow H^0(X_0,\mathcal{T}^1_{X_0}\otimes J)\longrightarrow H^2(X_0,\mathcal{T}^0_{X_0}\otimes J).
+        \]
+        \item The automorphism group of $ X'_1 $ as an extension of $ X $ over $ C' $ is naturally isomorphic to the group $ H^0(X_0,\mathcal{T}_{X_0}\otimes J) $.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    For each open affine subscheme $ U_i\subseteq X $, by (\ref{B3}\textit{(1)}), there is an obstruction lying in $ H^0(U_i,\mathcal{T}^2_{U_i}\otimes J) $ for the existence of an extension $ U'_i $ of $ U_i $ over $ C' $. Since the definition of obstruction in (\ref{B3}\textit{(1)}) is compatible with localization, we may glue the data to a global obstruction $ \delta_1\in H^0(X_0,\mathcal{T}^2_{X_0}\otimes J) $.
+
+    If $ \delta_1=0 $, then for each $ U_i $, there exists an extension $ U'_i $ of $ U_i $ over $ C' $. For each $ U_{ij}=U_i\cap U_j $, we have two deformations $ U'_i|_{U_{ij}} $ and $ U'_j|_{U_{ij}} $. By (\ref{B3}\textit{(2)}), their difference gives an element in $ H^0(U_{ij},\mathcal{T}^1\otimes J) $. The difference of three of these is zero on $ U_{ijk} $, so we get the second obstruction $ \delta_2\in H^1(X_0,\mathcal{T}_{X_0}^1\otimes J) $.
+
+    If $ \delta_2=0 $, then there exists isomorphism $ \varphi_{ij}:U'_i|_{U_{ij}}\stackrel{\sim}{\longrightarrow}U'_j|_{U_{ij}} $ as the extension of $ U_{ij} $ over $ C' $ for each $ i,j $. Then $ \varphi_{ij}\circ\varphi_{jk}\circ\varphi_{ki}|_{U_{ijk}} $ gives an automorphism of $ U'_i|_{U_{ijk}} $. By (\ref{B4}), this gives an element in $ H^0(U_{ijk},\mathcal{T}^0\otimes J) $, and hence glue to the third obstruction $ \delta_3\in H^2(X_0,\mathcal{T}^0_{X_0}\otimes J) $.
+
+    If $ \delta_3=0 $, then we can glue the extensions $ U'_i $ to get a global extension $ X' $ by gluing lemma.
+
+    For \textit{(2)}, fixed an extension $ X'_1 $ of $ X $ over $ C' $. If $ X'_2 $ is another extension, by (\ref{B3}), their difference on each open affine subscheme $ U_i $ gives an element of $ H^0(U_i,\mathcal{T}^1_{X_0}\otimes J) $. These glue to a global element of $ H^0(X_0,\mathcal{T}^1_{X_0}\otimes J) $. Conversely, a global element of $ H^0(X_0,\mathcal{T}^1_{X_0}\otimes J) $ will give extensions of $ U_i $ that are isomorphic on the intersection $ U_{ij} $, and will there is an obstruction in $ H^2(X_0,\mathcal{T}^0_{X_0}\otimes J) $ to glue these to a global extension.
+
+    Suppose that two extensions $ X'_2 $ and $ X'_3 $ give the same element in $ H^0(X_0,\mathcal{T}^1_{X_0}\otimes J) $. Then there is an isomorphism $ \phi_i:X'_2|_{U_i}\stackrel{\sim}{\longrightarrow}X'_3|_{U_i} $ as extension of $ U_i $. Then $ \psi_{ij}:=\varphi_j^{-1}\circ\varphi_i $ is an automorphism of $ X'_2|_{U_{ij}} $, which defines a element in $ H^0(U_{ij},\mathcal{T}^0_{X_0}\otimes J) $. These elements agree on $ U_{ijk} $, so we get an element of $ H^1(X_0,\mathcal{T}^0_{X_0}\otimes J) $. The vanishing of this element is equivalent to the existence of automorphism $ \theta_i:X'_2|_{U_i}\rightarrow X'_2|_{U_i} $ as the extension of $ U_i $ such that $ \psi_{ij}=\theta_j^{-1}\circ\theta_i $. Then $ \varphi_i\circ\theta_i $ glue to an isomorphism between $ X_2' $ and $ X_3' $ as the extension of $ X $. Hence we get the desired exact sequence for $ \mathrm{Def}(X/C,C') $.
+
+    For \textit{(3)}, the automorphism group of $ X'_1|_{\mathrm{Spec}\, B} $ is naturally isomorphic to\[
+        T^0(B_0/k,B_0\otimes J)=\mathrm{Hom}_k(\varOmega_{B_0/k},B_0\otimes J)=T_{B_0/k}\otimes J=(\mathcal{T}^0_{X_0}\otimes J)(\mathrm{Spec}\, B).
+    \]Hence, the automorphism group of $ X'_1 $ is naturally isomorphic to $ H^0(X_0,\mathcal{T}^0_{X_0}\otimes J) $ by gluing.
+\end{proof}
+
+\begin{remark}\label{B6}
+    The assumption $ \mathfrak{m}_{C'}J=0 $ is too strong for the discussion in the future. In fact, in most situations we only assume that $ J^2=0 $. The statements of the theorems above can be modified accordingly as follows:\begin{enumerate}[(1)]
+        \item In the proof of (\ref{B2}), we show that the embedding extension of $ Y $ over $ C' $ in $ X' $ form a\[
+            \mathrm{Hom}_B(I,J\otimes_C A)=\mathrm{Hom}_A(I/I^2,J\otimes_C A)=H^0(\mathrm{Spec}\, A,\mathcal{N}_{Y/X}\otimes f^*\tilde{J})
+        \]pseudotorsor, where $ f:Y\rightarrow \mathrm{Spec}\, C $ is the structure map.
+        \item In the proof of (\ref{B3}), the obstruction live in\[
+            T^2(B/C,B_0\otimes_k J)=T^2(B/C,B\otimes_C J)=H^0(\mathrm{Spec}\, B,\mathcal{T}^2(\mathrm{Spec}\, B/\mathrm{Spec}\, C,f^*\tilde{J}))
+        \]and we show that $ \mathrm{Def}(B/C,C') $ form a\[
+            T^1(B/C,B\otimes_C J)=H^0(\mathrm{Spec}\, B,\mathcal{T}^1(\mathrm{Spec}\, B/\mathrm{Spec}\, C,f^*\tilde{J}))
+        \]pseudotorsor, where $ f:\mathrm{Spec}\, B\rightarrow \mathrm{Spec}\, C $ is the structure map.
+        \item Finally, (\ref{B5}) may be reformulated by replacing each cohomology group of the form $ H^q(X_0,\mathcal{T}^p_{X_0}\otimes J) $ with\[
+            H^q(X,\mathcal{T}^p(X/\mathrm{Spec}\, C,f^*\tilde{J})),
+        \]where $ f:X\rightarrow \mathrm{Spec}\, C $ is the structure map. Or more concisely, we may deonte it by $ H^q(X,\mathcal{T}^p(X/C,f^*\tilde{J})) $.
+    \end{enumerate}
+\end{remark}
+
+\begin{corollary}\label{B7}
+    If $ X_0 $ is nonsingular, then\begin{itemize}
+        \item There is just one obstruction in $ H^2(X_0,\mathcal{T}_{X_0}\otimes J) $ for the existence of an extension $ X' $ of $ X $ over $ C' $.
+        \item If such extension exist, their equivalence classes form a $ H^1(X_0,\mathcal{T}_{X_0}\otimes J) $-torsor.
+    \end{itemize}
+\end{corollary}
+
+\begin{proof}
+    By (\ref{A17}), the sheaves $ \mathcal{T}^1_{X_0} $ and $ \mathcal{T}^2_{X_0} $ are zero. Then the assertion follows from (\ref{B5}).
+\end{proof}
+
+\subsection{Functors of Artin rings}
+
+Now we begin to formalize the idea of studying local deformations of a fixed object.
+
+Still let $ k $ be a fixed algebraically closed ground field, and let $ \mathsf{C} $ be the category of local artinian $ k $-algebras with residue field $ k $. Let $ R $ be a complete $ k $-algebra, and for each $ A\in \mathsf{C} $, let $ h_{R}(A) $ be the set of $ k $-algebra homomorphisms $ \mathrm{Hom}(R,A) $. For any morphism $ A\rightarrow B $ in $ \mathsf{C} $ we get a map of sets $ h_R (A)\rightarrow h_R (B) $, so $ h_R $ is a covariant functor from $ \mathsf{C} $ to $ \mathsf{Set} $.
+
+\begin{definition}
+    A covariant functor $ F:\mathsf{C}\rightarrow \mathsf{Set} $ that is (naturally) isomorphic to a functor of the form $ h_R $ for some complete local $ k $-algebra $ R $ is called \textbf{pro-presentable}.
+\end{definition}
+
+To explain the nature of an isomorphism between $ h_R $ and $ F $, let us consider more generally any homomorphism of functors $ \varphi:h_R \rightarrow F $ for a complete local $ k $-algebra $ R $ with maximal ideal $ \mathfrak{m} $. In particular, for each $ n $ this will give a map $ \varphi_n:\mathrm{Hom}(R,R/\mathfrak{m}^n)\rightarrow F(R/\mathfrak{m}^n) $, and the image of the quotient map of $ R $ to $ R/\mathfrak{m}^n $ gives an element $ \xi_n\in F(R/\mathfrak{m}^n) $. These elements $ \xi_n $ are compatible, in the sense that the natural map $ R/\mathfrak{m}^{n+1}\rightarrow R/\mathfrak{m}^{n} $ induces a map of sets $ F(R/\mathfrak{m}^{n+1})\rightarrow F(R/\mathfrak{m}^{n}) $ that sends $ \xi_{n+1} $ to $ \xi_n $. Thus the collection $ \{\xi_n\} $ defines an element $ \xi\in \underleftarrow{\lim}\ F(R/\mathfrak{m}^n) $. We will call such a collection $ \xi=\{\xi_n\} $ a \textbf{formal family} of $ F $ over the ring $ R $.
+
+Here it is useful to introduce the category $ \hat{\mathsf{C}} $ of complete local $ k $-algebras with residue field $ k $. The category $ \hat{\mathsf{C}} $ contains the category $ \mathsf{C} $, and we can extend any functor F on $ \mathsf{C} $ to a fucntor $ \hat{F} $ from $ \hat{\mathsf{C}} $ to $ \mathsf{Set} $ by defining $ \hat{F}(R)=\underleftarrow{\lim}\ F(R/\mathfrak{m}^n) $ for any $ R\in \hat{\mathsf{C}} $. In this notation, $ \hat{F}(R) $ is the set of formal families of $ F $ over $ R $.
+
+Coversely, a formal family $ \xi=\{\xi_n\} $ of $ \hat{F}(R) $ defines a homomorphism of functors $ \varphi:h_R\rightarrow F $ as follows. For any $ A\in \mathsf{C} $ and any homomorphism $ f:R\rightarrow A $, since $ A $ is artinian, it factors through $ R/\mathfrak{m}^n $ for some $ n $, say $ f=g\pi $, where $ \pi: R\rightarrow R/\mathfrak{m}^n $ and $ g:R/\mathfrak{m}^n\rightarrow A $. Then let $ \varphi(f) $ be the image of $ \xi_n $ under the map $ F(g):F(R/\mathfrak{m}^n)\rightarrow F(A) $. It is easy to check that these constructions are well-defined and inverse to each other, so we have the following:
+
+\begin{proposition}
+    If $ F $ is a functor from $ \mathsf{C} $ to $ \mathsf{Set} $ and $ R $ is a complete local $ k $-algebra with residue field $ k $, then there is a natural bijection between the set $ \hat{F}(R) $ of formal families $ \{\xi_n\mid \xi_n \in F(R/\mathfrak{m}^n)\} $ and the set of homomorphisms of functors $ h_R $ to $ F $.
+\end{proposition}
+
+Thus, if $ F $ is pro-representable, there is an isomorphism $ \xi:h_R \rightarrow F $ for some $ R $, and we can think of $ \xi $ as an element of $ \hat{F}(R) $. We say that the pair $ (R,\xi) $ \textbf{pro-repsents} the functor $ F $. One can verify easily that if F is pro-representable, the pair $ (R,\xi) $ is unique up to isomorphism.
+
+In many cases of interest, the functors we consider will not be pro-representable, so we define the weaker notions of having a versal family or a miniversal family.
+
+\begin{definition}
+    Let $ F:\mathsf{C}\rightarrow \mathsf{Set} $ be a functor. A pair $ (R,\xi) $ with $ R\in \hat{\mathsf{C}} $ and $ \xi\in \hat{F}(R) $ is a \textbf{versal family} for $ F $ if the associated map $ h_R \rightarrow F $ is strongly surjective. Here we say that a morphism of functors $ G\rightarrow F $ is \textbf{strongly surjective} if for every $ A\in\mathsf{C} $, the map $ G(A)\rightarrow F(A) $ is surjective, and furthermore, for every surjection $ B\rightarrow A $ in $ \mathsf{C} $, the map $ G(B)\rightarrow G(A)\times_{F(A)}F(B) $ is also surjective. In our case this means that given a map $ R\rightarrow A $ inducing an element $ \eta\in F(A) $, and given $ \theta\in F(B) $ mapping to $ \eta $, one can lift the map $ R\rightarrow A $ to a map $ R\rightarrow B $ inducing $ \theta $.
+
+    If in addition the map $ h_R(D) \rightarrow F(D) $ is bijective, where $ D=k[t]/t^2 $ is the ring of dual numbers, we say that $ (R,\xi) $ is a \textbf{miniversal family}, or that the functor has a \textbf{pro-representable hull} $ (R,\xi) $. We say that $ (R,\xi) $ is a \textbf{universal family} if it pro-represents the functor $ F $.
+\end{definition}
+
+The following proposition explains the significance of this terminology.
+
+\begin{proposition}
+    Let $ (R,\xi) $ be a formal family of the functor $ F $.
+    \begin{enumerate}[(1)]
+        \item If $ (R,\xi) $ is a versal family, then for any other formal family $ (S,\eta) $, there is a ring homomorphism $ f:R\rightarrow S $ such that the induced map $ \hat{F}(R)\rightarrow\hat{F}(S) $ sends $ \xi $ to $ \eta $.
+        \item If $ (R,\xi) $ is miniversal, then for any $ (S,\eta) $ the map $ f:R\rightarrow S $ of (a) induces a unique homomorphism $ R/\mathfrak{m}_R^2\rightarrow S/\mathfrak{m}_S^2 $.
+        \item If $ (R,\xi) $ is a universal family, then for any $ (S,\eta) $ as in (a), the corresponding map $ f:R\rightarrow S $ is unique.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \textit{(1)} Let $ (R,\xi) $ be a versal family, and $ (S,\eta) $ be any formal family. Then by definition we have a strongly surjective morphism of functor $ \varphi:h_R \rightarrow F $, determined by $ \xi $. For each $ n $, we have an element $ \eta_n\in F(S/\mathfrak{m}^n_S) $. Since $ \varphi $ is surjective, we can lift it to an element $ \theta_n\in h_R (S/\mathfrak{m}_S^n) $, i.e., a homomorphism $ \theta_n:R\rightarrow S/\mathfrak{m}^n_S $ such that the induced map $ F(R/\mathfrak{m}^n_R)\rightarrow F(S/\mathfrak{m}^n_S) $ sends $ \xi_n $ to $ \eta_n $. Furthermore, because of the strong surjectivity of $ \varphi $, starting from $ \theta_1 $, we can lift successively and obtain a compatible family $ \{\theta_n\} $, that is, so that each $ \theta_n $ is obtained by $ \theta_{n+1} $ followed by the natural map $ S/\mathfrak{m}^{n+1}_S\rightarrow S/\mathfrak{m}^n_S $. Thus the maps $ \theta_n $ determine a homomorphism $ R\rightarrow \underleftarrow{\lim}S/\mathfrak{m}^n_S $, which is equal to $ S $, since $ S $ is a complete local ring. This map $ f:R\rightarrow S $ then induces the map $ \hat{F}(R)\rightarrow \hat{F}(S) $ that sends $ \xi $ to $ \eta $ by construction.
+
+    \textit{(2)} If $ (R,\xi) $ is miniversal, to show that the induced map $ \bar{f}:R/\mathfrak{m}^2_R\rightarrow S/\mathfrak{m}^2_S $ is unique, it is sufficient to show that for every map $ S/\mathfrak{m}^2_S\rightarrow D=k[t]/t^2 $, the induced map $ R/\mathfrak{m}^2_R\rightarrow D $ is unique. But since $ h_R(D)\rightarrow F(D) $ is bijective, by definition, this follows immediately.
+
+    \textit{(3)} If $ (R,\xi) $ is a universal family, then $ h_R\rightarrow F $ is an isomorphism, so $ \eta $ determines a unique map $ h_S\rightarrow h_R $, and hence a unique $ f:R\rightarrow S $.
+\end{proof}
+
+\subsection{Schlessinger's criterion}
+
+In this section we will prove Schlessinger's theorem, which gives criteria for a functor of Artin rings to have a versal family, a miniversal family, or to be pro-representable.
+
+We keep the notation of the previous subsection: $ k $ is a fixed algebraically closed field, $ \mathsf{C} $ is the category of local artinian $ k $-algebras, and $ F $ is a covariant functor form $ \mathsf{C} $ to $ \mathsf{Set} $. Note that the category $ \mathsf{C} $ has fibered direct products. If $ A'\rightarrow A $ and $ A''\rightarrow A $ are morphisms in $ \mathsf{C} $, we take $ A'\times_A A'' $ to be the set-theoretic fibered product $ \{(a',a'')\mid a'\ \text{and}\ a''\ \text{have the same image in}\ A\} $. The ring operations extend naturally, giving another object of $ \mathsf{C} $.
+
+It is convenient to introduce the notation $ t_F $ for $ F(D) $, where $ D $ is the ring of dual numbers. We call this the \textbf{tangent space} of $ F $. Similarly $ t_R $ denotes the tangent space of the functor $ h_R $, which is just $ \mathrm{Hom}_k (R,D) $, and is equal to the dual vector space of $ \mathfrak{m}_R/\mathfrak{m}_R^2 $.
+
+A \textbf{small extension} in $ \mathsf{C} $ is a surjective map $ A'\rightarrow A $ whose kernel $ I $ is a one-dimensional $ k $-vector space.
+
+\begin{proposition}\label{schne}
+    If $ F $ has a versal family, then:
+    \begin{enumerate}[(1)]
+        \item $ F(k) $ has just one element.
+        \item For any morphisms $ A'\rightarrow A $ and $ A''\rightarrow A $ in $ \mathsf{C} $, the natural map\[
+            F(A'\times_A A'')\rightarrow F(A')\times_{F(A)}F(A'')
+        \]is surjective.
+        
+        If furthermore $ F $ has a miniversal family, then:
+        \item For any $ A\in \mathsf{C} $, considering the maps $ A\rightarrow k $ and $ D\rightarrow k $, the map of \textit{(b)} above,\[
+            F(A\times_k D)\rightarrow F(A)\times_{F(k)}F(D)
+        \]is bijective.\label{hhh}
+        \item $ F(D)=t_F $ has a natural structure of a finite-dimensional $ k $-vector space.
+        \item For any small extension $ p:A'\rightarrow A $ and any element $ \eta\in F(A) $, there is a transitive group action of the vector space $ t_F $ on the set $ p^{-1}(\eta) $ (provided it is nonempty).\label{ovo}
+        
+        Finally, if $ F $ is pro-representable, then:
+        \item The maps of \textit{(b)} are all bijective and the action of \textit{(e)} is bijective whenever $ p^{-1}(\eta) $ is nonempty.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \textit{(1)} Since $ \mathrm{Hom}(R,k)\rightarrow F(k) $ is surjective, and $ \mathrm{Hom}(R,k) $ has just one element, so does $ F(k) $.
+
+    \textit{(2)} Given elements $ \eta'\in F(A') $ and $ \eta''\in F(A'') $ mapping to the same element $ \eta\in F(A) $, by the strong surjective property of a versal family, there are compatible homomorphisms of $ R $ to $ A' $, $ A $, and $ A'' $ inducing these elements. Then there is a unique map of $ R $ to the product $ A'\times_{A}A'' $ inducing the given maps of $ R $ to $ A' $ and $ A'' $. This in turn defines an element of $ F(A'\times_{A}A'') $ that restricts to $ \eta' $ and $ \eta'' $ as required.
+
+    \textit{(3)} Suppose we are given $ \eta\in F(A) $ and $ \xi\in F(D) $. We know from \textit{(2)} that there are elements of $ F(A\times_k D) $ lying over the pair $ (\eta,\xi) $. Suppose $ \theta_1 $ and $ \theta_2 $ are two such. Choose a homomorphism $ u:R\rightarrow A $ inducing $ \eta $. By the strong surjectivity we can lift $ u $ to $ v_1 $ and $ v_2:R\rightarrow A[t]/t^2 $, inducing $ \theta_1 $ and $ \theta_2 $. Since $ \theta_1 $ and $ \theta_2 $ both lie over $ \xi $, the projections of $ v_1 $ and $ v_2 $ to $ D $ both induce $ \xi $. By the hypothesis of miniversality, $ t_R\rightarrow t_F $ is bijective, so these restrictions are equal. Since $ v_1 $ and $ v_2 $ also induce the same map $ u:R\rightarrow A $, we obtain $ v_1=v_2 $, and hence $ \theta_1=\theta_2 $.
+
+    \textit{(4)} By miniversality, $ t_R\rightarrow t_F $ is bijective, so we can just carry over the vector space structure on $ t_R $ to $ t_F $. But this structure can also be recovered intrinsically, using only the functorial properties of $ F $ and \textit{(3)} above (\ref{vcst}).
+
+    \textit{(5)} Let $ A'\rightarrow A $ be a small extension with kernel $ I\cong k $. Note that $ A'\times_A A'\cong A'\times_k k[I] $ by sending $ (x,y)\mapsto (x,x_0 +y-x) $,where $ x_0\in k $ is the residue of $ x $ mod $ \mathfrak{m} $. Consider the surjective map\[
+        F(A'\times_A A')\rightarrow F(A')\times_{F(A)}F(A')
+    \]of \textit{(2)}. Using the isomorphism above and \textit{(3)}, we can reinterpret the left-hand side as $ F(A'\times_k k[I])\cong F(A')\times t_F $, and we get a surjective map\[
+        F(A')\times t_F \rightarrow F(A')\times_{F(A)}F(A')
+    \]that is an isomorphism on the first factor. If we take $ \eta\in F(A) $ and fix $ \eta'\in p^{-1}(\eta) $ then we get a surjective map\[
+        \{\eta'\}\times t_F\rightarrow \{\eta'\}\times p^{-1}(\eta),
+    \]and this gives a transitive group action of $ t_F $ on $ p^{-1}(\eta) $.
+
+    \textit{(6)} If $ F $ is pro-representable the proof of \textit{(2)} shows that these maps are all bijective. It follows that the action of \textit{(5)} is also bijective.
+\end{proof}
+
+\begin{example}\label{vcst}
+    Let $ F:\mathsf{C}\rightarrow\mathsf{Set} $ be a functor having properties \textit{(1)} and \textit{(3)} of (\ref{schne}). Then $ t_F=F(D) $ has a natural structure of a $ k $-vector space as follows. For each $ \lambda\in k $, the ring homomorphism $ \lambda:D\rightarrow D,\ t\mapsto\lambda t $ induces a map $ \lambda_*:t_F\rightarrow t_F $. Taking two copies of $ D $, say $ D_1=k[t_1]/t_1^2 $ and $ D_2=k[t_2]/t_2^2 $, consider the ring homomorphism $ D_1 \times_k D_2\rightarrow D,\ t_i\mapsto t,\ i=1,2 $. This induces a map $ F(D_1\times_k D_2)\rightarrow F(D) $. Using \textit{(1)} and \textit{(3)} this gives a map $ \mu:t_F\times t_F\rightarrow t_F $. Then taking $ \lambda_* $ and $ \mu $ as scalar multiplication and addition makes $ t_F $ into a $ k $-vector space.
+\end{example}
+
+\begin{lemma}[Chevalley's theorem]\label{cheth}
+    Let $ (A,\mathfrak{m}) $ be a complete local ring. Let $ \{\mathfrak{a}_n\} $ be a descending sequence of ideals, with $ \cap\mathfrak{a}_n=(0) $. Then for each $ s $, there is an $ n(s) $ such that for $ n\geq n(s) $, $ \mathfrak{a}_n\subseteq \mathfrak{m}^s $.
+\end{lemma}
+
+\begin{proof}
+    \cite[Vol. \uppercase\expandafter{\romannumeral2}, \uppercase\expandafter{\romannumeral5}\uppercase\expandafter{\romannumeral3}, Thm. 13, p.270]{Zariski}.
+\end{proof}
+
+\begin{theorem}[Schlessinger's criterion]\label{jkl}
+    The functor $ F:\mathsf{C}\rightarrow\mathsf{Set} $ has a miniversal family if and only if:
+    \begin{enumerate}[]
+        \item $ (H_0) $ $ F(k) $ has just one element.
+        \item $ (H_1) $ $ F(A'\times_A A'')\rightarrow F(A')\times_{F(A)}F(A'') $ is surjective for every small extension $ A''\rightarrow A $.
+        \item $ (H_2) $ The map of $ H_1 $ is bijective when $ A''=D $ and $ A=k $.
+        \item $ (H_3) $ $ t_F $ is a finite-dimensional $ k $-vector space.
+        
+        Furthermore, $ F $ is pro-representable if and only if in addition:
+        \item $ (H_4) $ For every small extension $ p:A''\rightarrow A $ and every $ \eta\in F(A) $ for which $ p^{-1}(\eta) $ is nonempty, the group action of $ t_F $ on $ p^{-1}(\eta) $ is bijective.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    The necessity has been proved.
+    So now let $ F $ be a functor satisfying conditions $ H_0,H_1,H_2,H_3 $. First we will construct a ring $ R $ and a morphism $ h_R\rightarrow F $. Then we will show that it has the miniversal family property.
+
+    We will define $ R $ and the map $ h_R\rightarrow F $ as an inverse limit of rings $ R_q $ and elements $ \xi_q\in F(R_q) $ that we construct inductively for $ q \geq 0 $. We take $ R_0=k $. Note that the vector space structure on $ t_F $ is already determined by conditions $ H_0,H_1,H_2 $ (\ref{vcst}), so that it makes sense to say in $ H_3 $ that it is finite-dimensional. Let $ x_1,\dots,x_r $ be a basis of the dual vector space $ t_F^* $, let $ S $ be the formal power series ring $ k[[x_1,\dots,x_r]] $, with maximal ideal $ \mathfrak{m} $, and take $ R_1=S/\mathfrak{m}^2 $. Then $ t_{R_1}\cong t_F $ by construction. Furthermore, by iterating the condition $ H_2 $, we obtain $ F(R_1)=F(k[x_1]\times\cdots\times k[x_r])\cong t_F\otimes_k t_F^* $. The natural element here gives $ \xi_1\in F(R_1) $, inducing the isomorphism $ t_{R_1}\cong t_F $.
+
+    Now suppose we have constructed a compatible sequence $ (R_i,\xi_i) $ for $ i=1,\dots,q $, with $ \xi_i\in F(R_i) $, where $ R_i=S/J_i $, and $ \mathfrak{m}^{i+1}\subseteq J_i \subseteq J_{i-1} $, and for each $ i $ the natural map $ R_i\rightarrow R_{i-1} $ sends $ \xi_i $ to $ \xi_{i-1} $. Then, to construct $ R_{q+1} $, we look at ideals $ J $ in $ S $, with $ \mathfrak{m}J_q \subseteq J\subseteq J_q $, and take $ J_{q+1} $ to be the minimal such ideal $ J $ with the property that $ \xi_q\in F(R_q) $ lifts to an element $ \xi'\in F(S/J) $. To show that there is a minimal such $ J $, it will be sufficient to show that if $ J $ and $ K $ are two such, then their intersection $ J\cap K $ is another one. By enlarging $ J $ or $ K $ we may assume without loss of generality that $ J+K=J_q $. In that case $ S/(J\cap K)=(S/J)\times_{(S/J_q)}(S/K) $. Now the existence of liftings of $ \xi_q $ over $ S/J $ and $ S/K $ implies by condition $ H_1 $ the existence of a lifting over $ S/J\cap K $. Then we take $ R_{q+1}=S/J_{q+1} $, and $ \xi_{q+1} $ any lifting of $ \xi_q $, which exists by construction.
+
+    Thus we obtain a surjective system of rings $ R_q $ and compatible elements $ \xi_q\in F(R_q) $. Let $ J=\cap J_q $ and take $ R $ to be $ S/J $. Then $ R $ is a complete local ring and $ R_q=R/\bar{J_q} $, where $ \bar{J_q}=J_q/J $. Since $ J_q\supseteq \mathfrak{m}^{q+1} $ for each $ q $, and conversely, for each $ s $, some $ \bar{J}_q\subseteq \mathfrak{m}_R^s $ (\ref{cheth}), it follows that the ideals $ \bar{J}_q $ form a base for the $ \mathfrak{m}_R $-adic topology of $ R $. Therefore $ R=\underleftarrow{\lim}\, R_q $, and we define $ \xi=\underleftarrow{\lim}\, \xi_q\in \hat{F}(R) $. This gives the desired map $ h_R\rightarrow F $.
+
+    I claim that $ (R,\xi) $ is a miniversal family for $ F $. Since $ t_R \cong t_F $ by construction, we have only to show for any surjective map $ A'\rightarrow A $ and any $ \eta'\in F(A') $ restricting to $ \eta\in F(A) $, and any map $ R\rightarrow A $ inducing $ \eta $, that there exists a lifting to a map $ R\rightarrow A' $ inducing $ \eta' $. Since any surjective map factors into a sequence of small extensions, it suffices to treat the case of a small extension $ A'\rightarrow A $.
+
+    Let $ u:R\rightarrow A $ induce $ \eta $. It will be sufficient to show that $ u $ lifts to some map $ v: R\rightarrow A' $. For then $ v $ will induce an element $ \eta''\in F(A') $ lying over $ \eta $. Because of~\ref{ovo}, whose proof used only~\ref{hhh}, which is our $ H_2 $, there is an element of $ t_F $ sending $ \eta'' $ to $ \eta' $ by the group action. This same $ t_F=t_R $ acts on the set of $ v:R\rightarrow A' $ restricting to $ u $, so then we can adjust $ v $ to a homomorphism $ v':R\rightarrow A' $ inducing $ \eta' $.
+
+    Thus it remains to show that for a small extension $ A'\rightarrow A $, the given map $ u:R\rightarrow A $ lifts to a map $ v:R\rightarrow A' $. Since $ A $ is an Artin ring, $ u $ factors through $ R_q $ for some $ q $. On the other hand, $ R $ is a quotient of the power series ring $ S $, and the map $ u $ will lift to a map of $ S $ into $ A' $. Thus we get a commutative diagram
+    % https://quiver.taskfirst.cn/#q=WzAsNixbMCwwLCJTIl0sWzEsMCwiUl9xXFx0aW1lc19BIEEnIl0sWzIsMCwiQSciXSxbMCwxLCJSIl0sWzEsMSwiUl9xIl0sWzIsMSwiQSJdLFswLDEsInciXSxbMSwyXSxbMiw1LCJwIl0sWzQsNV0sWzAsM10sWzMsNF0sWzEsNCwicCciXV0=
+    \[\begin{tikzcd}
+        S & {R_q\times_A A'} & {A'} \\
+        R & {R_q} & A
+        \arrow["w", from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow[from=1-2, to=1-3]
+        \arrow["{p'}", from=1-2, to=2-2]
+        \arrow["p", from=1-3, to=2-3]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+    \end{tikzcd}\]
+    Note that $ p':R_q\times_A A'\rightarrow R_q $ is also a small extension. If this map has a section $ s:R_q\rightarrow R_q\times_A A' $, then using $ s $ and the second projection we get a map $ R_q\rightarrow A' $ lifting $ u $, and we are done.
+
+    If $ p' $ does not have a section, then I claim that the map $ w $ is surjective. Indeed, if $ w $ is not surjective, then $ \mathrm{Im}\, w $ is a subring mapping surjectively to $ R_q $. The kernel of $ \mathrm{Im}\, w\rightarrow R_q $ must be strictly contained in $ I=\ker p' $, which is a one-dimensional vector space, so this kernel is zero, the map $ \mathrm{Im}\, w\rightarrow R_q $ is an isomorphism, and this gives a section. Contradiction!
+
+    Thus knowing that $ w $ is surjective, let $ J=\ker w $. Then $ J\subseteq J_q $, since $ S $ maps to $ R_q $ via $ w $. On the other hand, $ J\supseteq \mathfrak{m}J_q $, since $ p' $ is a small extension. But also $ \xi_q\in F(R_q) $ and there is an $ \eta'\in F(A') $ lying over $ \eta\in F(A) $, so by $ H_1 $, there is a $ \xi'\in F(R_q\times_A A') $ lying over both of these. Since $ R_q\times_A A'=S/J $, this ideal $ J $ satisfies the condition imposed in the construction. Therefore $ J\supseteq J_{q+1} $ and $ w $ factors through $ R_{q+1} $. This gives the required lifting of $ R $ to $ A' $, and completes the proof that $ (R,\xi) $ is a miniversal family for $ F $.
+
+    Finally, suppose in addition that $ F $ satisfies $ H_4 $. To show that $ h_R(A)\rightarrow F(A) $ is bijective for all $ A $, it will be sufficient to show inductively, strating $ A=k $, that for any small extension $ p:A'\rightarrow A $ we have that $ \mathrm{Hom}(R,A')\rightarrow \mathrm{Hom}(R,A)\times_{F(A)}F(A') $ is bijective. So fix $ u\in \mathrm{Hom}(R,A) $ and the corresponding $ \eta\in F(A) $. If there is no map of $ R $ to $ A' $ lying over $ u $, then there is also no $ \eta'\in F(A') $ lying over $ \eta $, and there is nothing to prove. On the other hand, if $ p^{-1}(\eta) $ is nonempty, then the action of $ t_F $ on $ p^{-1}(\eta) $ is bijective by $ H_4 $, and the action of $ t_R $ on the set of homomorphism $ R\rightarrow A' $ lying over $ u $ is bijective, since $ h_R $ is pro-representable, and $ t_R\cong t_F $ by miniversality, so our map is bijective as required.
+\end{proof}
+
+\subsection{Deformation functor}
+
+We now discuss the question of pro-representability or existence of a miniversal family of the deformation functor of a scheme.
+
+Let $ X_0 $ be a scheme over $ k $ and $ A $ be a Artin ring with residue field $ k $. Define the following \textbf{deformation fucntor}:
+% \[
+%     F_1 (A)=\{\text{isomorphism classes of flat families}\ X/A\ \text{such that}\ X\otimes_A k\ \text{is isomorphic to}\ X_0\},
+% \]and
+\[
+    F(A):=\mathrm{Def}(X_0/k,A)
+\]
+
+% Comparing with $ F_1 $, $ F $ will leave possible automorphisms of $ X_0 $ out of the picture and thus simplify the discussion. We first investigate $ F $ and consider the relation between these two functors later.
+
+\begin{theorem}\label{yui}
+    Let $ X_0 $ be a scheme over $ k $. Then the functor $ F $ has a miniversal family under either of the two folloing hypotheses:
+    \begin{enumerate}[(1)]
+        \item $ X_0 $ is affine with isolated singularities and of finite type.
+        \item $ X_0 $ is projective.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We verify the conditions of Schlessinger's criterion (\ref{jkl}).
+
+    ($ H_0 $) $ F(k) $ consists of the single object $ (X_0,\mathrm{id}) $. If $ \sigma $ is an automorphism of $ X_0 $, the object $ (X_0,\sigma) $ is isomorphic to $ (X_0,\mathrm{id}) $ by the map $ \sigma: X_0\rightarrow X_0 $.
+
+    ($ H_1 $) Suppose we are given a small extension $ A''\rightarrow A $ and any map $ A'\rightarrow A $, and suppose we are given objects $ X'\in F(A') $, $ X''\in F(A'') $ restricting to $ X\in F(A) $. Then $ X'\otimes_{A'}A\cong X $, the isomorphism being compatible wtih the maps from $ X_0 $, so we can choose a closed immersion $ X\hookrightarrow X' $ inducing this isomorphism. Similarly choose $ X\hookrightarrow X'' $. Then we define $ X^* $ by the fibered product of sheaves of rings $ \mathcal{O}_{X^*}\mathcal{O}_{X'}\times_{\mathcal{O}_X}\mathcal{O}_{X''} $, and $ X^* $ will be an object of $ F(A^*) $ reducing to $ X' $ and $ X'' $, where $ A^* =A'\times_A A'' $.
+
+    $ (H_2) $ Suppose $ A=k $ in the situation of $ (H_1) $ (which effectively means $ A''\cong k[t] $) and let $ X^* $ be constructed as in $ (H_1) $. If $ W $ is any other object of $ F(A^*) $ restricting to $ X' $ and $ X'' $ respectively, then we can choose immersions $ X'\hookleftarrow W $ and $ X''\hookrightarrow W $ inducing these isomorphisms. Since these maps are all compatible with the immersion from $ X_0 $, they agree with the chosen maps $ X\hookrightarrow X' $ and $ X\hookrightarrow X'' $, since in this case $ X=X_0 $. Now by the universal property of fibered product of rings, there is a map $ X^*\rightarrow W $ compatible with the above maps. Since $ X^* $ and $ W $ are both flat over $ A^* $, and the map becomes an isomorphism when restricted to $ X_0 $, we find that $ X^* $ is isomorphic to $ W $, and hence they are equal as elements of $ F(A^*) $.
+
+    $ (H_3) $ Here is the only place in the proof that we need the hypothesis \textit{(1)} or \textit{(2)}.
+    
+    \quad \textit{(1)} Let $ X_0=\mathrm{Spec}\, B $. Then $ t_F = T_{B/k}^1 $ by (\ref{B3}). This module is supported at the finite number of singular points of $ X_0 $ (\ref{A17}), so has finite length (\ref{A10}), i.e., $ t_F $ is a finite-dimensional vector space.
+
+    \quad \textit{(2)} For arbitrary $ X_0 $, the tangent space $ t_F $ corresponds to deformations over the ring of dual numbers $ D $. Because of the exact sequence (\ref{B5}\textit{(2)})\[
+        0\longrightarrow H^1(X_0,\mathcal{T}_{X_0})\longrightarrow \mathrm{Def}(X_0/k,D)\longrightarrow H^0(X_0,\mathcal{T}_{X_0}^1)\longrightarrow\cdots,
+    \]we see that if $ X_0 $ is projective, the two outside groups are finite-dimensional vector spaces, and so $ \mathrm{Def}(X_0/k,D) $ is also.
+
+    Thus conditions $ (H_0)$--$ (H_3) $ are satisfied, and $ F $ has a miniversal family.
+\end{proof}
+
+Next, we consider conditions under which the functor $ F $ is actually pro-representable.
+
+\begin{theorem}\label{ert}
+    Let $ X_0/k $ be given and assume the hypotheses of (\ref{yui}) satisfied. Then the functor $ F $ of deformations of $ X_0 $ is pro-representable if and only if for each small extension $ A'\rightarrow A $, and for each deformation $ X' $ over $ A' $ restricting to a deformation $ X $ over $ A $, the natural map $ \mathrm{Aut}(X'/X_0)\rightarrow \mathrm{Aut}(X/X_0) $ of automorphisms of $ X' $ (and $ X $) restricting the identity automorphism of $ X_0 $ is surjective.
+\end{theorem}
+
+\begin{proof}
+    Suppose that $ \mathrm{Aut}(X'/X_0)\rightarrow \mathrm{Aut}(X/X_0) $ is surjective for every $ X' $ lying over $ X $. We need to verify condition $ (H_4) $ of (\ref{jkl}). Let $ X'_1 ,X'_2 $ be elements of $ F(A') $ inducing the same element $ X $ of $ F(A) $. If $ X\hookrightarrow X'_1 $ and $ X\hookrightarrow X'_2 $ are maps inducing the isomorphisms $ X'_1\otimes_{A'}A\cong X $ and $ X'_2\otimes_{A'}A\cong X $, and if $ X'_1 $ and $ X'_2 $ are isomorphic as deformations of $ X_0 $, then I claim that the inclusions $ X\hookrightarrow X'_1 $ and $ X\hookrightarrow X'_2 $ are isomorphic as extensions of $ X $ over $ A' $.
+
+    Indeed, let $ u':X'_1\rightarrow X'_2 $ be an isomorphism over $ X_0 $. Then $ u=u'\otimes_{A'}A $ is an automorphism of $ X $ over $ X_0 $. By hypothesis this lifts to an automorphism $ \sigma $ of $ X'_1 $. Then $ v=u\circ \sigma^{-1}:X'_1\rightarrow X'_2 $ is an isomorphism inducing the identity on $ X $, so $ X'_1 $ and $ X'_2 $ are equivalent as extensions of $ X $ over $ A' $.
+
+    Now by (\ref{B5}\textit{(2)}), $ \mathrm{Def}(X/A,A') $ is a principal homogeneous space under the action of $ t_F $ ($ D\rightarrow k $ is also a small extension), so condition $ (H_4) $ of Schlessinger's criterion is satisfied, and $ F $ is pro-representable.
+
+    Conversely, suppose that $ F $ is pro-representable, let $ X'\in F(A') $ restrict to $ X\in F(A) $, and choose a map $ u:X\hookrightarrow X' $ inducing the isomorphism $ X\stackrel{\sim}{\longrightarrow}X'\otimes_{A'}A $. Let $ \sigma\in \mathrm{Aut}(X/X_0) $. Then $ u'=u\circ \sigma:X\hookrightarrow X' $ gives another element of $ \mathrm{Def}(X/A,A') $, and so $ u $ and $ u' $ differ by an element of $ t_F $, by (\ref{B5}\textit{(2)}). But $ u $ and $ u' $ define the same element $ X'\in F(A') $, lying over $ X $, so by condition $ (H_4) $, this element of $ t_F $ must be zero. Hence $ u $ and $ u' $ are equal as elements of $ \mathrm{Def}(X/A,A') $; in other words there exists an isomorphism $ \tau:X'\rightarrow X' $ over $ X_0 $ such that $ u'=\tau\circ u $. Restricting to $ X $ we obtain $ \sigma=\tau|_X $. Thus $ \tau\in \mathrm{Aut}(X'/X_0) $ lifts $ \sigma $, and tha map is surjective.
+\end{proof}
+
+\begin{corollary}\label{rty}
+    Let $ X_0/k $ be a projective scheme with $ H^0(X_0,\mathcal{T}_{X_0})=0 $. Then the functor of deformations of $ X_0/k $ is pro-representable.
+\end{corollary}
+
+\begin{proof}
+    We will show, by induction on the length of $ A $, that for any deformation $ X $ of $ X_0 $ over $ A $, $ \mathrm{Aut}(X/X_0)=\{\mathrm{id}\} $. Then obviously the condition of (\ref{ert}) will be satisfied.
+
+    We start the induction by noting that $ \mathrm{Aut}(X_0/X_0)=\{\mathrm{id}\} $. Inductively, assume that $ \mathrm{Aut}(X/X_0)=\{\mathrm{id}\} $, where $ X $ is a deformation over $ A $. Consider a small extension $ A'\rightarrow A $ and any $ X'\in F(A') $ restricting to $ X $. Choose a map $ X\hookrightarrow X' $ inducing the isomorphism $ X\stackrel{\sim}{\rightarrow}X'\otimes_{A'}A $. Any automorphism of $ X' $ restricts to the identity on $ X $, by the induction hypothesis, so it is an automorphism of the deformation $ X\hookrightarrow X' $. Since these are classfied by $ H^0(X_0,\mathcal{T}_{X_0})=0 $ (\ref{B5}\textit{(3)}), this automorphism is the identity.
+\end{proof}
+
+\begin{example}
+    Let $ X_0 $ be a nonsingular projective curve over the algebraically closed field $ k $. If the genus is zero, $ X_0=\mathbb{P}^1_k $. In this case $ H^0(X_0,\mathcal{T}_{X_0}) $ has dimension 3, but still, it can be proved that the functor of deformation of $ X_0/k $ is pro-representable. Thus the condition of (\ref{rty}) is not necessary for the functor to be pro-representable.
+\end{example}
+
+\subsection{Ran-Kawamata $ T^1 $ lifting}
+
+\begin{definition}\label{ccc}
+    An \textbf{obstruction theory} for a functor $ F:\mathsf{C}\rightarrow\mathsf{Set} $ is a $ k $-vector space $ V $, together with, for every exact sequence $ 0\rightarrow J\rightarrow C'\rightarrow C\rightarrow 0 $ such that $ \mathfrak{m}_{C'}J=0 $, and for every $ u\in F(C) $, an element $ \varphi(u,C')\in V\otimes_k J $ such that\begin{itemize}
+        \item $ \varphi(u,C')=0 $ if and only if $ u\in\mathrm{Im}\, F(C'\rightarrow C) $.
+        \item $ \varphi $ is functorial in the sense that if% https://quiver.taskfirst.cn/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIkpfMSJdLFsyLDAsIkMnXzEiXSxbMywwLCJDXzEiXSxbNCwwLCIwIl0sWzAsMSwiMCJdLFsxLDEsIkpfMiJdLFsyLDEsIkNfMiciXSxbMywxLCJDXzIiXSxbNCwxLCIwIl0sWzAsMV0sWzEsMl0sWzIsM10sWzMsNF0sWzUsNl0sWzYsN10sWzcsOF0sWzgsOV0sWzEsNl0sWzIsN10sWzMsOF1d
+    \[\begin{tikzcd}
+        0 & {J_1} & {C'_1} & {C_1} & 0 \\
+        0 & {J_2} & {C_2'} & {C_2} & 0
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-4, to=1-5]
+        \arrow[from=1-4, to=2-4]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=2-4, to=2-5]
+    \end{tikzcd}\]is a commutative diagram such that $ \mathfrak{m}_{C'_i}J_i=0 $, then we have the following commutative diagram% https://quiver.taskfirst.cn/#q=WzAsNixbMCwwLCJGKEMnXzEpIl0sWzEsMCwiRihDXzEpIl0sWzIsMCwiVlxcb3RpbWVzX2tKXzEiXSxbMCwxLCJGKEMnXzIpIl0sWzEsMSwiRihDXzIpIl0sWzIsMSwiVlxcb3RpbWVzX2tKXzIiXSxbMCwzXSxbMCwxXSxbMSwyXSxbMiw1XSxbMSw0XSxbNCw1XSxbMyw0XV0=
+    \[\begin{tikzcd}
+        {F(C'_1)} & {F(C_1)} & {V\otimes_kJ_1} \\
+        {F(C'_2)} & {F(C_2)} & {V\otimes_kJ_2}.
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+    \end{tikzcd}\]
+    \end{itemize}
+\end{definition}
+
+\begin{corollary}\label{B8}
+    The deformation functor of smooth scheme $ X $ over $ k $ has obstruction theory.
+\end{corollary}
+
+\begin{proof}
+    It follows from (\ref{B7}) and take $ V=H^2(X,\mathcal{T}_X) $.
+\end{proof}
+
+Now let $ k $ be a algebraically closed field with $ \mathrm{char}\, k=0 $ and $ F:\mathsf{C}\rightarrow\mathsf{Set} $ still be a deformation functor. We also assume that the obstruction can be calculated by a $ k $-vector space $ T^2 $ (\ref{ccc}).
+
+For $ n\in \mathbb{Z}_{\geq 0} $, let\[
+    A_n=k[t]/(t^{n+1}),\ B_n=A_n\otimes A_1=k[x,y]/(x^{n+1},y^2),\ C_n=k[x,y]/(x^{n+1},x^n y,y^2).
+\]We have natural homomorphism $ \alpha_n:A_{n+1}\rightarrow A_n $, $ \beta_n:B_n\rightarrow A_n $, and $ \gamma_n:B_n\rightarrow C_n $.
+
+For $ X_n\in F(A_n) $, let\[
+    T^1(X_n/A_n)=\{Y_n\in F(B_n)\mid F(\beta_n)(Y_n)=X_n\}.
+\]
+
+\begin{theorem}[\cite{Kawamata92}]
+    Assume that $ F $ is pro-representable by $ (R,\xi) $, and that the following $ T^1 $ lifting property holds: for any positive integer $ n $ and any $ X_{n+1}\in F(A_{n+1}) $, the natural homomorphism\[
+        T^1(\alpha_n):T^1(X_{n+1}/A_{n+1})\rightarrow T^1(X_n/A_n)
+    \]is surjective for $ X_n=F(\alpha_n)(X_{n+1}) $. Then $ F $ is unobstructed.
+\end{theorem}
+
+\begin{proof}
+    It suffices to show that $ F(\alpha_n) $ is surjective for all $ n $. Indeed, according to the proof of Schlessinger's criterion, we have $ R=k[[x_1,\dots,x_r]]/J $, where $ J\subseteq\mathfrak{m}^2_R $ and $ r=\dim t_F $. Since $ J\subseteq\mathfrak{m}^2_R $, we can define the morphism $ g_2:R\rightarrow A_1 $ by $ x_i\mapsto a_i t $ for any $ a_i\in k $. Since $ F(\alpha_n) $ is surjective for all $ n $, there is a lifting $ g_n:R\rightarrow A_n $ of $ g_{n-1} $ by induction for all $ n\geq 3 $. This define a morphism $ g:R\rightarrow k[[t]] $ by $ x_i\mapsto a_i t $. Suppose that $ J $ contains a nonzero power series $ f=f_d+f_{d+1}+\cdots $, where $ f_n $ is the homogeneous polynomial of degree $ n $, $ f_d\neq 0 $ and $ d\neq 0 $. Take $ a_i $ such that $ f_d(a_1,\dots,a_r)\neq 0 $, then\[
+        g(f)=t^d f_d(a_1,\dots,a_r)+t^{d+1}f_{d+1}(a_1,\dots,a_r)+\cdots\neq 0
+    \]leading a contradiction. Hence, $ R=k[[x_1,\dots,x_r]] $ is a power-series ring over $ k $, $ F=h_R $ is clearly unobstructed for lifting of any map in $ \mathsf{C} $.
+
+    Consider the following commutative diagram% https://quiver.taskfirst.cn/#q=WzAsNixbMCwwLCJEKEFfe24rMX0pIl0sWzAsMSwiRChCX24pIl0sWzEsMSwiRChDX24pIl0sWzEsMCwiRChBX24pIl0sWzIsMCwiVF4yXFxvdGltZXModF57bisxfSkiXSxbMiwxLCJUXjJcXG90aW1lcyh4Xm55KSJdLFswLDMsIkQoXFxhbHBoYV9uKSJdLFszLDQsIlxcZGVsdGFfMSJdLFsyLDUsIlxcZGVsdGFfMiJdLFswLDEsIkQoXFx2YXJlcHNpbG9uX24pIl0sWzEsMiwiRChcXGdhbW1hX24pIl0sWzMsMiwiRChcXHZhcmVwc2lsb24nX24pIl0sWzQsNSwiXFx2YXJwaGkiXV0=
+    \[\begin{tikzcd}
+        {F(A_{n+1})} & {F(A_n)} & {T^2\otimes(t^{n+1})} \\
+        {F(B_n)} & {F(C_n)} & {T^2\otimes(x^ny)}
+        \arrow["{F(\alpha_n)}", from=1-1, to=1-2]
+        \arrow["{F(\varepsilon_n)}", from=1-1, to=2-1]
+        \arrow["{\delta_1}", from=1-2, to=1-3]
+        \arrow["{F(\varepsilon'_n)}", from=1-2, to=2-2]
+        \arrow["\varphi", from=1-3, to=2-3]
+        \arrow["{F(\gamma_n)}", from=2-1, to=2-2]
+        \arrow["{\delta_2}", from=2-2, to=2-3]
+    \end{tikzcd}\]where $ \varepsilon_n(t)=x+y $ and $ \varepsilon'_n(t)=x+y $. By the definition of $ T^2 $, we have \[ \mathrm{Im}\, F(\alpha_n)=\{X_n\in F(A_n)\mid\delta_1(X_n)=0\},\ \mathrm{Im}\, F(\gamma_n)=\{Y_n\in F(C_n)\mid\delta_2(Y_n)=0\}. \]Notice that $ \varphi $ is an isomorphism, since $ \varphi:t^{n+1}\mapsto(n+1)x^n y $ and $ \mathrm{char}\, k=0 $. Hence, to show that $ F(\alpha_n) $ is surjective, it suffices to show that $ F(\gamma_n) $ is surjective.
+
+    From the following diagram% https://quiver.taskfirst.cn/#q=WzAsNSxbMSwwLCJCX24iXSxbMCwxLCJCX3tuLTF9XFx0aW1lc197QV97bi0xfX1BX249Q19uIl0sWzIsMSwiQV9uIl0sWzAsMywiQl97bi0xfSJdLFsyLDMsIkFfe24tMX0iXSxbMCwxLCJcXGdhbW1hX24iLDJdLFswLDIsIlxcYmV0YV9uIl0sWzAsM10sWzEsM10sWzMsNCwiXFxiZXRhX3tuLTF9IiwyXSxbMiw0LCJcXGFscGhhX3tuLTF9Il1d
+    \[\begin{tikzcd}
+        & {B_n} & \\
+        {B_{n-1}\times_{A_{n-1}}A_n=C_n} && {A_n} \\
+        \\
+        {B_{n-1}} && {A_{n-1}}
+        \arrow["{\gamma_n}"', from=1-2, to=2-1]
+        \arrow["{\beta_n}", from=1-2, to=2-3]
+        \arrow[from=1-2, to=4-1]
+        \arrow[from=2-1, to=4-1]
+        \arrow["{\alpha_{n-1}}", from=2-3, to=4-3]
+        \arrow["{\beta_{n-1}}"', from=4-1, to=4-3]
+    \end{tikzcd}\]and the pro-representability of $ F $, we have\[
+        F(B_n)\stackrel{F(\gamma_n)}{\longrightarrow}F(C_n)\cong F(B_{n-1})\times_{F(A_{n-1})}F(A_n).
+    \]By the $ T^1 $ lifting property, for any $ Z_n\in F(C_n) $, there exists $ Y_n\in F(B_n) $ whose image in $ F(B_{n-1}) $ and $ F(A_n) $ coincide with image of $ Z_n $, respectively. Hence, $ F(\gamma_n)(Y_n)=Z_n $.
+\end{proof}
+
+\begin{remark}\label{qqq}
+    In~\cite{Kawamata97}, Kawamata replaced the definition of $ T^1 $ space by $ T^1(X_n/A_n):=\mathrm{Def}(X_n/A_n,B_n) $. With this new definition, the above theorem holds without the assumption that $ F $ is pro-representable.
+
+    As in the argument above, it suffices to show that the map $ F(\gamma_n):F(B_n)\rightarrow F(C_n) $ is surjective. For $ Z_n\in F(C_n) $, let\[
+        Y_{n-1}=Z_n\times_{C_n}B_{n-1},\ X_n=Z_n\times_{C_n}A_n,\ X_{n-1}=Z_n\times_{C_n}A_{n-1}.
+    \]By the $ T^1 $ lifting property, let $ [Y_n] $ be the equivalent classes in $ \mathrm{Def}(X_n/A_n,B_n) $ maps to $ [Y_{n-1}]\in\mathrm{Def}(X_{n-1}/A_{n-1},B_{n-1}) $. Then there exists an isomorphism $ \sigma:Y_{n-1}\rightarrow Y_{n}\times_{B_{n}}B_{n-1} $ compatible with the closed immersion of $ X_{n-1} $, and we get a diagram% https://quiver.taskfirst.cn/#q=WzAsNyxbMCwxLCJYX3tuLTF9Il0sWzEsMCwiWV97bi0xfSJdLFsxLDEsIlpfbiJdLFsxLDIsIlhfbiJdLFsyLDAsIllfblxcdGltZXNfe0Jfbn1CX3tuLTF9Il0sWzIsMSwiWV9uXFx0aW1lc197Ql9ufUNfbiJdLFszLDEsIllfbiJdLFswLDFdLFsxLDQsIlxcc2lnbWEiXSxbMSwyXSxbMCwzXSxbMCw0XSxbMywyXSxbMyw1XSxbMyw2XSxbNSw2XSxbNCw1XSxbNCw2XSxbNSwyLCI/IiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+    \[\begin{tikzcd}
+        & {Y_{n-1}} & {Y_n\times_{B_n}B_{n-1}} & \\
+        {X_{n-1}} & {Z_n} & {Y_n\times_{B_n}C_n} & {Y_n} \\
+        & {X_n}
+        \arrow["\sigma", from=1-2, to=1-3]
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-3, to=2-4]
+        \arrow[from=2-1, to=1-2]
+        \arrow[from=2-1, to=1-3]
+        \arrow[from=2-1, to=3-2]
+        \arrow[dashed, from=2-3, to=2-2]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=3-2, to=2-2]
+        \arrow[from=3-2, to=2-3]
+        \arrow[from=3-2, to=2-4]
+    \end{tikzcd}\]By (\ref{tuo}), there exists an isomorphism $ Y_n\times_{B_n}C_n\stackrel{\sim}{\longrightarrow}Z_n $ compatible with the closed immersion of $ X_{n} $. This show that $ F(\gamma_n)(Y_n)=Z_n $.
+\end{remark}
+
+\begin{example}\label{iop}
+    Suppose $ X_n $ is a smooth deformation of $ X $ over $ A_n $. By (\ref{B6}), the deformation space can be computed via the following exact sequence\[
+        0\longrightarrow H^1(X_n,\mathcal{T}^0(X_n/A_n,f^*\tilde{J}))\longrightarrow\mathrm{Def}(X_n/A_n,B_n)\longrightarrow H^0(X_n,\mathcal{T}^1(X_n/A_n,f^*\tilde{J})),
+    \]where $ f:X_n\rightarrow A_n $ is the structure morphism and $ J=\ker\beta_n $. Since $ \ker\beta_n $ is a free $ A_n $-module and $ X_n $ is smooth over $ A_n $, it follows from (\ref{A18}) that\[
+        \mathcal{T}^i(X_n/A_n,f^*\tilde{J})=\mathcal{T}^i_{X_n/A_n}=\begin{cases}
+            \mathcal{T}_{X_n/A_n}&\quad i=0,\\
+            0&\quad i=1.
+        \end{cases}
+    \]So we conclude that $ \mathrm{Def}(X_n/A_n,B_n)=H^1(X_n,\mathcal{T}_{X_n/A_n}) $.
+\end{example}
+
+\begin{lemma}\label{ghu}
+    Let $ A $ be a ring, $ J $ be a nilpotent ideal in $ A $, and $ u:M\rightarrow N $ be a homomorphism of $ A $-modules, with $ N $ falt over $ A $. If $ \bar{u}:M/JM\rightarrow N/JN $ is an isomorphism, then $ u $ is an isomorphism.
+\end{lemma}
+
+\begin{proof}
+    Let $ K=\mathrm{coker}\, u $. Tensor the exact sequence\[
+        M\rightarrow N\rightarrow K\rightarrow 0
+    \]with $ A/J $, we have $ K/JK=0 $. Since $ J $ is nilpotent, we have $ K=0 $. If $ K'=\ker u $, then we get an exact sequence\[
+        0\rightarrow K'/JK'\rightarrow M/JM\rightarrow N/JN\rightarrow 0
+    \]by the flatness of $ N $. Hence, $ K'=0 $.
+\end{proof}
+
+\begin{lemma}\label{fff}
+    Consider a commutative diagram% https://quiver.taskfirst.cn/#q=WzAsOCxbNCwxLCJNIl0sWzQsMywiQSJdLFszLDIsIkFfMiJdLFszLDAsIk1fMiJdLFswLDAsIk4iXSxbMCwyLCJCIl0sWzEsMywiQV8xIl0sWzEsMSwiTV8xIl0sWzMsMCwidV8yIl0sWzAsMSwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDIsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNCw3LCJwXzEiLDJdLFs3LDAsInVfMSJdLFs0LDMsInBfMiJdLFs0LDUsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNyw2LCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsMl0sWzIsMV0sWzYsMV0sWzUsNl1d
+    \[\begin{tikzcd}
+        N &&& {M_2} & \\
+        & {M_1} &&& M \\
+        B &&& {A_2} \\
+        & {A_1} &&& A
+        \arrow["{p_2}", from=1-1, to=1-4]
+        \arrow["{p_1}"', from=1-1, to=2-2]
+        \arrow[no head, from=1-1, to=3-1]
+        \arrow["{u_2}", from=1-4, to=2-5]
+        \arrow[no head, from=1-4, to=3-4]
+        \arrow["{u_1}", from=2-2, to=2-5]
+        \arrow[no head, from=2-2, to=4-2]
+        \arrow[no head, from=2-5, to=4-5]
+        \arrow[from=3-1, to=3-4]
+        \arrow[from=3-1, to=4-2]
+        \arrow[from=3-4, to=4-5]
+        \arrow[from=4-2, to=4-5]
+    \end{tikzcd}\]of compatible ring and module homomorphisms, where $ B=A_1\times_A A_2 $, $ N=M_1\times_M M_2 $, and $ M_i $ is a flat $ A_i $-module for $ i=1,2 $. Suppose that $ A_1 $ is an artinian ring and\begin{enumerate}[(1)]
+        \item $ A_2/J\stackrel{\sim}{\longrightarrow}A $, where $ J $ is an nilpotent ideal in $ A_2 $.
+        \item $ u_i $ induces $ M_i\otimes_{A_i}A\stackrel{\sim}{\longrightarrow}M $.
+    \end{enumerate}
+    Then $ N $ is flat over $ B $, and $ p_i $ induces $ N\otimes_B A_i\stackrel{\sim}{\longrightarrow}M_i $.
+\end{lemma}
+
+\begin{proof}
+    Let $ \{x_{1,i}\}_{i\in I}\subseteq M_1 $ such that $ \{\bar{x}_{1,i}\}_{i\in I} $ form a basis of $ M_1/\mathfrak{m}_{A_1}M_1 $. Then $ \bigoplus_{i\in I}A_1 \rightarrow M_1 $ defined by $ e_i\mapsto x_{1,i} $ is an isomorphism by (\ref{ghu}). Hence $ M_1 $ is a free $ A_1 $-module with basis $ \{x_{1,i}\}_{i\in I} $. By \textit{(2)}, $ M $ is the free module with basis $ \{u_1(x_{1,i})\}_{i\in I} $. Choosing $ x_{2,i}\in M_2 $ such that $ u_2(x_{2,i})=u_1(x_{1,i}) $. Then $ A_2 $-module homomorphism $ \sum A_2 x_{2,i}\rightarrow M_2 $ is isomorphism after modulo the ideal $ J $. Again, by (\ref{ghu}), $ M_2 $ is free module with basis $ \{x_{2,i}\}_{i\in I} $, and it is clear that $ N $ is free $ B $-module with basis $ \{x_{1,i}\times x_{2,i}\}_{i\in I} $. Then the projection $ p_i $ induces the isomorphism $ N\otimes_{B}A_i\stackrel{\sim}{\longrightarrow}M_i $.
+\end{proof}
+
+\begin{lemma}\label{tuo}
+    With the notations in (\ref{fff}). Let $ L $ be a $ B $-module satisfies the commutative diagram% https://quiver.taskfirst.cn/#q=WzAsNCxbMCwwLCJMIl0sWzEsMCwiTV8yIl0sWzAsMSwiTV8xIl0sWzEsMSwiTSJdLFswLDEsInFfMiJdLFswLDIsInFfMSIsMl0sWzIsMywidV8xIiwyXSxbMSwzLCJ1XzIiXV0=
+    \[\begin{tikzcd}
+        L & {M_2} \\
+        {M_1} & M
+        \arrow["{q_2}", from=1-1, to=1-2]
+        \arrow["{q_1}"', from=1-1, to=2-1]
+        \arrow["{u_2}", from=1-2, to=2-2]
+        \arrow["{u_1}", from=2-1, to=2-2]
+    \end{tikzcd}\]where $ q_1 $ induces $ L\otimes_B A_1\stackrel{\sim}{\longrightarrow}M_1 $. Then the canonical morphism $ q_1\times q_2:L\rightarrow N=M_1\times_M M_2 $ is an isomorphism.
+\end{lemma}
+
+\begin{proof}
+    Apply (\ref{ghu}) to the morphism $ u=q_1\times q_2 $. Note that $ B/(0\times J)\stackrel{\sim}{\longrightarrow}A_1 $.
+\end{proof}
+
+\subsection{Deformations of smooth Calabi-Yau varieties}
+
+Before proving the unobstructedness of deformations of Calabi-Yau varieties, we need the following essential technique.
+
+\begin{theorem}\label{kkk}
+    Let $ f:X\rightarrow S=\mathrm{Spec}\, A_n $ be a projective and smooth morphism, where $ A_n=\mathbb{C} [t]/(t^{n+1}) $. Then $ H^q(X,\varOmega^p_{X/S}) $ is a free $ A_n $-module.
+\end{theorem}
+
+\begin{proof}
+    Let $ A=A_n $. Consider the $ \mathfrak{m}_A $-adic filtration\[
+        \varOmega^{\bullet,\mathrm{an}}_{X/S}\supseteq\mathfrak{m}_A\varOmega^{\bullet,\mathrm{an}}_{X/S}\supseteq\mathfrak{m}_A^2\varOmega^{\bullet,\mathrm{an}}_{X/S}\supseteq\cdots\supseteq\mathfrak{m}_A^N\varOmega^{\bullet,\mathrm{an}}_{X/S}=0
+    \]of $ \varOmega^{\bullet,\mathrm{an}}_{X/S} $, which is biregular, and denote the associated graded object by\[
+        \mathrm{gr}\, \varOmega^{\bullet,\mathrm{an}}_{X/S}=\bigoplus \mathrm{gr}_i\varOmega^{\bullet,\mathrm{an}}_{X/S},
+    \]where $ \mathrm{gr}_i\varOmega^{\bullet,\mathrm{an}}_{X/S}:=\mathfrak{m}_A^i\varOmega^{\bullet,\mathrm{an}}_{X/S}\Big/\mathfrak{m}_A^{i+1}\varOmega^{\bullet,\mathrm{an}}_{X/S} $. Notice that\[
+        \mathrm{gr}_0\varOmega^{\bullet,\mathrm{an}}_{X/S}=\varOmega^{\bullet,\mathrm{an}}_{X/S}\Big/\mathfrak{m}_A\varOmega^{\bullet,\mathrm{an}}_{X/S}=\varOmega^{\bullet,\mathrm{an}}_{X_0/\mathbb{C} }
+    \]gives a acylic resolution of the constant sheaf $ \mathbb{C}  $, where $ X_0 $ is the smooth fiber of $ \mathrm{Spec}\, \mathbb{C} \hookrightarrow \mathrm{Spec}\, A $. Then\[
+        \mathrm{gr}_{\mathfrak{m}_A}A\otimes_{\mathbb{C} }\mathrm{gr}_0\varOmega^{\bullet,\mathrm{an}}_{X/S}=\bigoplus_{n\geq 0}\mathfrak{m}^n_A/\mathfrak{m}^{n+1}_A\otimes_{A/\mathfrak{m}_A}\varOmega^{\bullet,\mathrm{an}}_{X/S}\Big/\mathfrak{m}_A \varOmega^{\bullet,\mathrm{an}}_{X/S}=\bigoplus_{n\geq 0}\mathfrak{m}_A^n\varOmega^{\bullet,\mathrm{an}}_{X/S}\Big/\mathfrak{m}_A^{n+1}\varOmega^{\bullet,\mathrm{an}}_{X/S}=\mathrm{gr}_{\mathfrak{m}_A}\varOmega^{\bullet,\mathrm{an}}_{X/S}
+    \]resolves $ \mathrm{gr}_{\mathfrak{m}_A}A $, and hence $ \varOmega^{\bullet,\mathrm{an}}_{X/S} $ gives a acylic resolution of the constant sheaf $ A $. Since $ X $ is proper, by the GAGA principle we have\[
+        \mathsf{R}^n\Gamma(X,\varOmega^{\bullet}_{X/S})\cong \mathsf{R}^n\Gamma(X^{\mathrm{an}},\varOmega^{\bullet,\mathrm{an}}_{X/S})=H^n(X^{\mathrm{an}},A)=H^n(X^{\mathrm{an}},\mathbb{C} )\otimes_{\mathbb{C} }A,
+    \]and thus\begin{equation}\label{gio}
+        \mathrm{length}_{A}\mathsf{R}^n\Gamma(X,\varOmega^{\bullet}_{X/S})=\mathrm{length}_A(A)\cdot\dim_{\mathbb{C} }H^n(X^{\mathrm{an}},\mathbb{C} ).
+    \end{equation}
+    \begin{lemma}\label{vvv}
+        Let $ Y=\mathrm{Spec}\, A $ be a noetherian affine scheme, and let $ f:X\rightarrow Y $ be a proper morphism. For any complex $ \mathscr{F}^{\bullet}\in \mathsf{D}^{+}(\mathrm{Coh}(X)) $ that is flat over $ Y $, there exists a complex $ \mathscr{L}^{\bullet}\in\mathsf{D}^{+}(\mathrm{Coh}(Y)) $, whose terms $ \mathscr{L}^i $ has the form $ \mathcal{O}^{m_i}_Y $, and a functorial quasi-isomorphism\[
+            f_*(\mathscr{F}^{\bullet}\otimes_{\mathcal{O}_X} f^*\mathscr{G})\longrightarrow\mathscr{L}^{\bullet}\otimes_{\mathcal{O}_Y}\mathscr{G}
+        \]for any $ \mathscr{G}\in\mathrm{Qcoh}(Y) $. Moreover, for arbitrary base change diagram% https://quiver.taskfirst.cn/#q=WzAsNCxbMCwwLCJYJyJdLFsxLDAsIlgiXSxbMCwxLCJZJyJdLFsxLDEsIlkiXSxbMCwxLCJ1JyJdLFswLDIsImYnIl0sWzEsMywiZiJdLFsyLDMsInUiXV0=
+        \[\begin{tikzcd}
+            {X'} & X \\
+            {Y'} & Y
+            \arrow["{u'}", from=1-1, to=1-2]
+            \arrow["{f'}", from=1-1, to=2-1]
+            \arrow["f", from=1-2, to=2-2]
+            \arrow["u", from=2-1, to=2-2]
+        \end{tikzcd}\]there is a natural quasi-isomorphism\[
+            f'_*(u'^*\mathscr{F}^{\bullet}\otimes_{\mathcal{O}_{X'}}f'^*\mathscr{G}')\longrightarrow u^*\mathscr{L}^{\bullet}\otimes_{\mathcal{O}_{Y'}}\mathscr{G}'
+        \]for any $ \mathscr{G}'\in \mathrm{Qcoh}(Y') $.
+    \end{lemma}
+    
+    \begin{proof}
+        \cite[Prop 6.10.5]{EGA3_2}
+    \end{proof}
+    
+    Since $ f $ is smooth, the sheaf $ \varOmega_{X/S} $ is locally free on $ X $. Applying (\ref{vvv}) to the pair $ (\mathscr{F}^{\bullet},\mathscr{G})=(\varOmega^{p}_{X/S},\mathcal{O}_Y) $ (Here we consider $ \varOmega^p_{X/S} $ as a complex concentrated in degree 0) and the base change morphism $ u:\mathrm{Spec}\, \mathbb{C} \rightarrow\mathrm{Spec}\, A $, we obtain\[
+        \mathsf{R}f_*\varOmega^{p}_{X/S}\cong \mathscr{L}^{\bullet},\ \mathsf{R}f'_*\varOmega^{p}_{X_0/\mathrm{Spec}\, \mathbb{C} }\cong\mathsf{R}f_*'(u'^*\varOmega^{p}_{X/S})\cong u^*\mathscr{L}^{\bullet}.
+    \]Therefore\[
+        H^q(X,\varOmega^p_{X/S})=H^0(\mathrm{Spec}\, A,\mathsf{R}^q f_*\varOmega^p_{X/S})=\Gamma(\mathrm{Spec}\, A,H^q(\mathscr{L}^{\bullet}))
+    \]is finite generated $ A $-module, and the natural isomorphism of base change\[
+        H^q(X,\varOmega^p_{X/S})\otimes_A \mathbb{C} \cong\Gamma(\mathrm{Spec}\, \mathbb{C} ,H^q(u^*\mathscr{L}^{\bullet}))=H^q(X_0,\varOmega^p_{X_0}).
+    \]
+    
+    \begin{lemma}
+        Let $ (A,\mathfrak{m}_A) $ be the noetherian local ring with residue field $ k $. For any finite generated $ A $-module $ M $, we have the inequality\[
+            \mathrm{length}_A(M)\leq\mathrm{length}_A(A)\cdot\dim_k(M\otimes_A k).
+        \]Equality holds if and only if $ M $ is free $ A $-module.
+    \end{lemma}
+
+    \begin{proof}
+        Let $ d=\dim_k(M\otimes_A k) $. By Nakayama's lemma, there exists a surjection $ f:A^d\twoheadrightarrow M $. Then\[
+            \mathrm{length}_A(M)=d\cdot\mathrm{length}_A(A)+\mathrm{length}_A(\ker f)
+        \]and $ \mathrm{length}_A(\ker f)=0 $ if and only if $ \ker f=0 $.
+    \end{proof}
+
+    By the above lemma, we have\begin{equation}\label{giu}
+        \mathrm{length}_A H^q(X,\varOmega^p_{X/S})\leq\mathrm{length}_A(A)\cdot\dim H^q(X_0,\varOmega^p_{X_0})
+    \end{equation}
+    and equality holds if and only if $ H^q(X,\varOmega^p_{X/S}) $ is free $ A $-module. Consider Hodge to de Rham spectral sequence\[
+        E^{p,q}_1=H^q(X,\varOmega^p_{X/S})\Longrightarrow \mathsf{R}^{p+q}\Gamma(\varOmega^{\bullet}_{X/S}).
+    \]Since $ E^{p,q}_{\infty} $ is the subquotient of $ E^{p,q}_1 $, we deduce that\begin{equation}\label{giy}
+        \mathrm{length}_A\mathsf{R}^n\Gamma(\varOmega^{\bullet}_{X/S})=\sum_{p+q=n}\mathrm{length}_A E^{p,q}_{\infty}\leq \sum_{p+q=n}\mathrm{length}_A H^q(X,\varOmega^p_{X/S}).
+    \end{equation}
+    Finally, combining (\ref{gio}), (\ref{giu}), and (\ref{giy}), we obtain that\begin{equation}
+        \begin{aligned}\label{rrr}
+            \mathrm{length}_A(A)\cdot\dim_{\mathbb{C} }H^n(X^{\mathrm{an}},\mathbb{C} )&=\mathrm{length}_A\mathsf{R}^n\Gamma(\varOmega^{\bullet}_{X/S})\\ &\leq\sum_{p+q=n}\mathrm{length}_A H^q(X,\varOmega^{p}_{X/S})\\ &\leq\mathrm{length}_A(A)\sum_{p+q=}\dim H^q(X_0,\varOmega^p_{X_0}).
+        \end{aligned}
+    \end{equation}
+    By Hodge decomposition in analytic setting ($ X_0 $ is projective so $ X_0^{\mathrm{an}} $ is K\"{a}hler) and the GAGA principle, we have\[
+        H^n(X^{\mathrm{an}},\mathbb{C} )=H^n(X_0^{\mathrm{an}},\mathbb{C} )\cong\bigoplus_{p+q=n}H^q(X_0^{\mathrm{an}},\varOmega^{p,\mathrm{an}}_{X_0})\cong\bigoplus_{p+q=n}H^q(X_0,\varOmega^{p}_{X_0}),
+    \]and hence equality holds throughout in (\ref{rrr}). It follows that each\[
+        H^q(X,\varOmega^p_{X/S})
+    \]is a free $ A $-module.
+\end{proof}
+
+\begin{theorem}
+    Let $ X $ be a smooth projective variety over $ \mathbb{C}  $. If $ \omega_X\cong\mathcal{O}_X $, then the flat deformations of $ X $ (cf. \ref{B8}) are unobstructed.
+\end{theorem}
+
+\begin{proof}
+    By (\ref{qqq}), it suffices to show that\[
+        \mathrm{Def}(X_{n+1}/A_{n+1},B_{n+1})\longrightarrow\mathrm{Def}(X_n/A_n,B_n)
+    \]is surjective for all positive integer $ n $ and $ X_n=F(\alpha_n)(X_{n+1}) $. By (\ref{iop}), the problem becomes to show that\begin{equation}\label{afg}
+        H^1(X_{n+1},\mathcal{T}_{X_{n+1}/A_{n+1}})\longrightarrow H^1(X_n,\mathcal{T}_{X_n/A_n})
+    \end{equation}is surjective.
+
+    Let $ f:X_n\rightarrow \mathrm{Spec}\, A_n $ be the deformation of $ X $ over $ A_n $, which is projective. By (\ref{kkk}), it follows that\[
+        H^q(X_n,\varOmega^p_{X_n/A_n})
+    \]is a free $ A_n $-module of rank $ h^{p,q}_n $. By cohomology and base change, we have the isomorphisms\[
+        H^q(X_n,\varOmega^p_{X_n/A_n})\otimes_{A_n}k\stackrel{\sim}{\longrightarrow}H^q(X_0,\varOmega^p_X),
+    \]and thus $ h^{p,q}_n=h^{p,q}(X) $ is independent on $ n $. In particular,\[
+        H^0(X,\omega_X)=k\Longrightarrow H^0(X_n,\omega_{X_n/A_n})=A_n
+    \]Take a non-trivial section $ s:\mathcal{O}_{X_n}\rightarrow\omega_{X_n/A_n} $, then $ s\otimes_{X_n}X $ is an isomorphism on $ X $. Since $ \omega_{X_n/A_n} $ is flat over $ \mathrm{Spec}\, A_n $, by (\ref{ghu}), $ s $ is an isomorphism. From the perfect pairing\[
+        \varOmega^1_{X_n/A_n}\otimes\varOmega^{d-1}_{X_n/A_n}\longrightarrow\omega_{X_n/A_n}\cong\mathcal{O}_{X_n},
+    \]we have $ \mathcal{T}_{X_n/A_n}\cong\varOmega^{d-1}_{X_n/A_n} $. Now we may rewrite (\ref{afg}) to\[
+        A^{h^{d-1,1}}_{n+1}\longrightarrow A^{h^{d-1,1}}_n,
+    \]which is a surjection as desired.
+\end{proof}
+
+\section{Threefold Calabi-Yau varieties with ordinary double points}
+
+We summarize classical results concerning the deformation theory of threefold Calabi-Yau varieties with ordinary double points (ODP).
+In particular, we state Friedman's criterion for smoothability and the later generalization by Kawamata, Ran and Tian, which shows that deformations are unobstructed once a K\"ahler resolution exists.
+
+\subsection{Setup}
+Let $X_0$ be a three-dimensional projective variety with $\omega_{X_0}\cong\mathcal{O}_{X_0}$ and only ordinary double points as singularities.
+A \emph{small resolution} is a proper birational morphism $f\colon X\to X_0$ such that $X$ is smooth and the exceptional set is a union of rational curves $C_1,\dots,C_r\cong\mathbb{P}^1$ with normal bundle $\mathcal{O}_{C_i}(-1)\oplus\mathcal{O}_{C_i}(-1)$.
+We denote by $[C_i]$ the homology class in $H_2(X,\mathbb{C})$ or its dual in $H^4(X,\mathbb{C})$.
+The variety $X_0$ is called \emph{smoothable} if it occurs as the central fiber of a flat family $X\to\Delta$ with smooth total space and smooth nearby fibers $X_t$ (here $\Delta$ is a small disc).
+
+\subsection{Friedman's theorem}
+The first precise criterion for smoothability was given by Friedman~\cite{Friedman1986}.
+
+\begin{theorem}[Friedman, 1986]
+Let $X_0$ be as above and let $f\colon X\to X_0$ be a small resolution.
+Then $X_0$ is smoothable (and in fact the small resolution can be deformed to an isomorphism) if the following two conditions hold:
+\begin{enumerate}
+    \item The classes $[C_1],\dots,[C_r]$ generate the cohomology group $H^2(X,\Omega_X^2)$.
+    \item There exists a relation $\sum_{i=1}^r a_i[C_i]=0$ in $H^4(X,\mathbb{C})$ with all coefficients $a_i\neq 0$.
+\end{enumerate}
+\end{theorem}
+
+\subsection{Unobstructedness and the theorem of Kawamata-Ran-Tian}
+Subsequently it was shown independently by Y.\ Kawamata, Z.\ Ran and G.\ Tian~\cite{Kawamata,Ran,Tian} that the first generating condition is superfluous provided that a K\"ahler resolution exists.
+The crucial point is a generalization of the Bogomolov-Tian-Todorov unobstructedness theorem to singular Calabi-Yau varieties.
+
+\begin{theorem}[Kawamata, Ran, Tian]
+Let $X_0$ be a threefold with $\omega_{X_0}\cong\mathcal{O}_{X_0}$ and only ordinary double points.
+Assume there exists a resolution $p\colon X'\to X_0$ such that $X'$ is a compact K\"ahler manifold.
+Then the versal deformation space $\operatorname{Def}(X_0)$ is smooth, i.e.\ deformations of $X_0$ are unobstructed.
+In particular, the condition that the exceptional curves generate $H^2(\Omega_X^2)$ in Friedman's theorem can be dropped.
+\end{theorem}
+
+\subsection{Sketch of proofs}
+
+\subsubsection{Friedman's smoothing criterion}
+
+\begin{enumerate}
+    \item \textbf{Deformations of a small resolution.}
+    Let $f\colon X\to X_0$ be a small resolution with exceptional curves $C_i$.
+    A deformation of $X$ simultaneously blows down the $C_i$ if the associated infinitesimal deformation maps the normal bundle sequence so that the curves are obstructed from deforming.
+    More precisely, the local-to-global exact sequence for $\operatorname{Ext}^1$ and $\operatorname{Ext}^2$ relates the first-order deformations of $X$ and of the formal completion along each $C_i$.
+    Condition~\emph{(a)} (generating $H^2(\Omega_X^2)$) guarantees that the natural map $\operatorname{Ext}^1(\Omega_X^1,\mathcal{O}_X)\to \bigoplus_i \operatorname{Ext}^1(\mathcal{O}_{C_i},\mathcal{O}_{C_i}(-1)^{\oplus 2})$ is surjective, so one can lift local smoothings of the double points to a global deformation.
+    
+    \item \textbf{Simultaneous contraction and the relation among $[C_i]$.}
+    In order to contract all $C_i$ simultaneously in a family, the exceptional set must become trivial in homology.
+    The obstruction to contracting a curve in a deformation is its fundamental class; a family of threefolds containing $X$ as a fiber and for which the curves disappear corresponds to a first-order deformation $\nu\in H^1(X,\Theta_X)$ for which the restriction to each $C_i$ vanishes.
+    This translates precisely to the existence of a relation $\sum a_i[C_i]=0$ in $H^4(X,\mathbb{C})$ with every $a_i\neq 0$.
+    The coefficients $a_i$ determine the ``speed'' at which each singularity is smoothed.
+    
+    \item \textbf{Conclusion.}
+    Once one has such a first-order deformation, the unobstructedness (proved in~\ref{wri}) ensures that it can be lifted to an actual smoothing of $X_0$.
+    The work of Kawamata-Ran-Tian shows that the extra generating condition is automatically satisfied when a K\"ahler resolution exists, completing the picture.
+\end{enumerate}
+
+\subsubsection{Unobstructedness for ODP Calabi-Yau threefolds}\label{wri}
+
+\begin{enumerate}
+    \item \textbf{Deformation functor and tangent-obstruction theory.}
+    Since $X_0$ is a local complete intersection (ODP), its deformation theory is controlled by the cotangent complex $\mathbb{L}_{X_0}$.
+    The tangent space is $\operatorname{Ext}^1(\Omega_{X_0}^1,\mathcal{O}_{X_0})$ and obstructions lie in $\operatorname{Ext}^2(\Omega_{X_0}^1,\mathcal{O}_{X_0})$.
+    Smoothness of $\operatorname{Def}(X_0)$ follows if $\operatorname{Ext}^2(\Omega_{X_0}^1,\mathcal{O}_{X_0})=0$.
+    
+    \item \textbf{Comparison with a K\"ahler resolution.}
+    Let $p\colon X'\to X_0$ be a K\"ahler resolution (not necessarily small).
+    The sheaf of differentials $\Omega_{X_0}^1$ sits in an exact triangle relating it to $p_*\Omega_{X'}^1$ and a sheaf supported on the singular points.
+    Using local calculations one shows the connectedness of the deformation functors, namely $\operatorname{Def}(X_0)\cong \operatorname{Def}(X')$ near the central fiber.
+    Hence it is enough to prove $\operatorname{Ext}^2(\Omega_{X'}^1,\mathcal{O}_{X'}) =0$ for the smooth K\"ahler threefold $X'$.
+
+    \item \textbf{Hodge theory and the Bogomolov--Tian--Todorov argument.}
+    On the smooth compact K\"ahler manifold $X'$ we have the Hodge decomposition and Serre duality.
+    Because $p$ contracts only rational curves, one still has $\omega_{X'}\cong\mathcal{O}_{X'}$.
+    The classical unobstructedness proof for Calabi--Yau manifolds (due to Bogomolov, Tian, Todorov) uses the contraction map
+    \[
+        H^2(X',\Theta_{X'})\times H^1(X',\Theta_{X'})\to H^3(X',\Theta_{X'})
+    \]
+    given by the cup product with the trace map $\Theta_{X'}\otimes\Omega_{X'}^p\to \Omega_{X'}^{p-1}$.
+    Under the Calabi--Yau condition $\omega_{X'}\cong\mathcal{O}_{X'}$, Serre duality identifies the obstruction space $\operatorname{Ext}^2(\Omega_{X'}^1,\mathcal{O}_{X'})\cong H^2(X',\Theta_{X'})$ with the dual of $H^1(X',\Omega_{X'}^2)$.
+    By a clever use of the local Torelli theorem for the period map, one shows that the multiplication map vanishes, hence obstructions vanish.
+    This argument adapts to the present situation and yields $\operatorname{Ext}^2(\Omega_{X_0}^1,\mathcal{O}_{X_0})=0$.
+\end{enumerate}
+
+
+% Now let us comparing the functors $ F $ and $ F_1 $ mentioned at the beginning. Recall that given a scheme $ X_0/k $, $ F $ is the fucntor of deformations of $ X_0 $ over $ A $, that is, pairs $ (X,i) $ where $ X $ is flat over $ A $, and $ i:X_0\hookrightarrow X $ is a morphism such that $ i\otimes k:X_0 \rightarrow X\otimes k $ is an isomorphism, while $ F_1 $ is the functor of flat families $ X/A $ such that there exists an isomorphism $ X\otimes k\cong X_0 $. There is a natural `forgetful' fucntor from $ F $ to $ F_1 $.
+
+% The following result is proved using the same kind of arguments as in the earlier part of this subsection.
+
+% \begin{theorem}
+%     Suppose the hypothesis of (\ref{yui}) satisfied. Then:
+%     \begin{enumerate}[(1)]
+%         \item 
+%     \end{enumerate}
+% \end{theorem}
+
+% \begin{lemma}\label{ghu}
+%     Let $ A $ be a ring, $ J $ be a nilpotent ideal in $ A $, and $ u:M\rightarrow N $ be a homomorphism of $ A $-modules, with $ N $ falt over $ A $. If $ \bar{u}:M/JM\rightarrow N/JN $ is an isomorphism, then $ u $ is an isomorphism.
+% \end{lemma}
+
+% \begin{proof}
+%     Let $ K=\mathrm{coker}\, u $. Tensor the exact sequence\[
+%         M\rightarrow N\rightarrow K\rightarrow 0
+%     \]with $ A/J $, we have $ K/JK=0 $. Since $ J $ is nilpotent, we have $ K=0 $. If $ K'=\ker u $, then we get an exact sequence\[
+%         0\rightarrow K'/JK'\rightarrow M/JM\rightarrow N/JN\rightarrow 0
+%     \]by the flatness of $ N $. Hence, $ K'=0 $.
+% \end{proof}
+
+% Fix a scheme $ X $ over $ k $.
+
+% \begin{definition}
+%     An \textbf{(infinitesimal) deformation} of $ X $ over $ A\in\mathsf{C} $ is a flat scheme $ Y $ over Spec$ A $ with an immersion $ i:X\hookrightarrow Y $ inducing an isomorphism $ X\stackrel{\sim}{\longrightarrow}Y\times_A k $
+%     % https://quiver.taskfirst.cn/#q=WzAsNSxbMCwwLCJYIl0sWzAsMSwiXFxtYXRocm17U3BlY31cXCwgayJdLFsxLDAsIlkiXSxbMSwxLCJcXG1hdGhybXtTcGVjfVxcLCBBIl0sWzIsMCwiXFxidWxsZXQiXSxbMCwxXSxbMCwyLCJpIl0sWzEsMywiIiwyLHsibGFiZWxfcG9zaXRpb24iOjB9XSxbMiwzXV0=
+%     \[\begin{tikzcd}
+%         X & Y \\
+%         {\mathrm{Spec}\, k} & {\mathrm{Spec}\, A.}
+%         \arrow["i", from=1-1, to=1-2]
+%         \arrow[from=1-1, to=2-1]
+%         \arrow[from=1-2, to=2-2]
+%         \arrow[from=2-1, to=2-2]
+%     \end{tikzcd}\]
+%     If $ Y' $ is another deformation to $ A $, then $ Y $ and $ Y' $ are \textbf{isomorphic} if there exists a morphism $ f:Y\rightarrow Y' $ over $ A $ which induces the identity on the closed fiber $ X $. By~\ref{ghu} $ f $ must be an isomorphism of schemes.
+% \end{definition}
+
+% Define the deformation functor $ \mathcal{D}=\mathrm{Def}_X $ by\[
+%     \mathcal{D}(A)=\{\text{isomorphism classes of deformations of}\ X/k\ \text{to}\ A\}.
+% \]
+% Unfortunately, $ \mathcal{D} $ is not pro-representable. But in some finiteness restrictions on $ X $, $ \mathcal{D} $ will have a hull.
+
+% Suppose that $ (A',\eta')\rightarrow (A,\eta) $ and $ (A'',\eta'')\rightarrow (A,\eta) $ are morphisms of couples, where $ A''\rightarrow A $ is a surjection. Let $ Y',Y,Y'' $ denote deformations in the class of $ \eta',\eta,\eta'' $, respectively. The sheaf $ \mathcal{O}_{Y'}\times_{\mathcal{O}_Y}\mathcal{O}_{Y''} $ of $ A'\times_A A'' $-algebras defined a scheme $ Z $ on $ X $, which is flat over $ B:=A'\times_A A'' $. Moreover, $ Z\in \mathcal{D}(B) $ maps to $ (\eta',\eta'')\in \mathcal{D}(A')\times_{\mathcal{D}(A)}\mathcal{D}(A'') $. Hence $ \mathcal{D} $ satisfies the condition $ H_1 $.
+
+% Suppose that $ W $ is another deformation over $ B $ with morphism of deformation
+
+\newpage
+
+\bibliographystyle{unsrt}
+\bibliography{reference}
+
+\end{document}

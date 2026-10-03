@@ -1,0 +1,102 @@
+\chapter{具有普通双重点的三维 Calabi-Yau 簇}
+
+我们总结关于具有普通双重点 (ODP) 的三维 Calabi-Yau 簇形变理论的经典结果。
+特别地，我们陈述 Friedman 的光滑化判据以及后来由 Kawamata、Ran 和 Tian 给出的推广，后者表明一旦存在 Kähler 解消，形变就是无障碍的。
+
+\section{约定}
+设 \(X_0\) 是三维射影簇，满足 \(\omega_{X_0}\cong\mathcal{O}_{X_0}\) 且仅有普通双重点作为奇点。
+一个 \emph{小解消} 是一个紧双有理态射 \(f\colon X\to X_0\)，使得 \(X\) 光滑，且例外集为有限多条有理曲线 \(C_1,\dots,C_r\cong\mathbb{P}^1\)，其法丛为 \(\mathcal{O}_{C_i}(-1)\oplus\mathcal{O}_{C_i}(-1)\)。
+我们用 \([C_i]\) 记 \(C_i\) 在 \(H_2(X,\mathbb{C})\) 中的同调类，或其对偶在 \(H^4(X,\mathbb{C})\) 中的类。
+称簇 \(X_0\) 是 \emph{可光滑化的}，如果它可以作为一个平坦族 \(X\to\Delta\) 的中心纤维出现，且总空间光滑，附近纤维 \(X_t\) 光滑（此处 \(\Delta\) 是一个小圆盘）。
+
+\section{Friedman 定理}
+第一个关于光滑化的精确判据由 Friedman~\cite{Friedman1986} 给出。
+
+\begin{theorem}[Friedman, 1986]
+设 \(X_0\) 如上，且 \(f\colon X\to X_0\) 是一个小解消。
+那么 \(X_0\) 是可光滑化的（并且事实上小解消可以形变为同构），如果以下两个条件成立：
+\begin{enumerate}
+    \item 类 \([C_1],\dots,[C_r]\) 生成上同调群 \(H^2(X,\Omega_X^2)\)。
+    \item 在 \(H^4(X,\mathbb{C})\) 中存在关系 \(\sum_{i=1}^r a_i[C_i]=0\)，且所有系数 \(a_i\neq 0\)。
+\end{enumerate}
+\end{theorem}
+
+\section{无障碍性及 Kawamata-Ran-Tian 定理}
+随后，Y.\ Kawamata、Z.\ Ran 和 G.\ Tian~\cite{Kawamata,Ran,Tian} 独立地证明了，只要存在一个 Kähler 解消，第一个生成性条件就是多余的。
+关键点在于将光滑 Calabi-Yau 流形的 Bogomolov-Tian-Todorov 无障碍性定理推广到奇异 Calabi-Yau 簇上。
+
+\begin{theorem}[Kawamata, Ran, Tian]
+设 \(X_0\) 是三维簇，满足 \(\omega_{X_0}\cong\mathcal{O}_{X_0}\) 且仅有普通双重点。
+假设存在一个解消 \(p\colon X'\to X_0\) 使得 \(X'\) 是紧 Kähler 流形。
+则通用形变空间 \(\operatorname{Def}(X_0)\) 是光滑的，即 \(X_0\) 的形变是无障碍的。
+特别地，Friedman 定理中要求例外曲线生成 \(H^2(\Omega_X^2)\) 的条件可以去掉。
+\end{theorem}
+
+\section{证明概要}
+
+\subsubsection{Friedman 的光滑化判据}
+
+\begin{enumerate}
+    \item \textbf{小解消的形变。}
+    设 \(f\colon X\to X_0\) 是以 \(C_i\) 为例外曲线的小解消。
+    如果与之相伴的无穷小形变使得法丛序列的映射导致这些曲线被阻碍形变，那么 \(X\) 的一个形变就能同时吹缩掉所有 \(C_i\)。
+    更确切地说，\(\operatorname{Ext}^1\) 和 \(\operatorname{Ext}^2\) 的局部到整体正合列联系了 \(X\) 的一阶形变与沿每个 \(C_i\) 的形式完备化的一阶形变。
+    条件~\emph{(a)}（生成 \(H^2(\Omega_X^2)\)）保证了自然映射 \(\operatorname{Ext}^1(\Omega_X^1,\mathcal{O}_X)\to \bigoplus_i \operatorname{Ext}^1(\mathcal{O}_{C_i},\mathcal{O}_{C_i}(-1)^{\oplus 2})\) 是满射，因此我们可以将双重点的局部光滑化提升为一个整体形变。
+    
+    \item \textbf{同时收缩与 \([C_i]\) 间的关系。}
+    为了在一个族中同时收缩所有 \(C_i\)，例外集必须在同调中变为平凡。
+    在一个形变中收缩一条曲线的障碍正是它的基本类；包含 \(X\) 作为纤维并且使这些曲线消失的一个三维簇族，对应于一阶形变 \(\nu\in H^1(X,\Theta_X)\)，使得它在每个 \(C_i\) 上的限制为零。
+    这正好等价于在 \(H^4(X,\mathbb{C})\) 中存在关系 \(\sum a_i[C_i]=0\)，且每个 \(a_i\neq 0\)。
+    系数 \(a_i\) 决定了每个奇点的光滑化“速度”。
+    
+    \item \textbf{结论。}
+    一旦有了这样一个一阶形变，由无障碍性（在~\ref{wri} 中证明）可以保证它能够被提升为 \(X_0\) 的一个真正的光滑化。
+    Kawamata-Ran-Tian 的工作表明，当存在 Kähler 解消时，那个额外的生成性条件是自动满足的，从而完善了整个图景。
+\end{enumerate}
+
+\subsubsection{ODP Calabi-Yau 三维簇的无障碍性}\label{wri}
+
+\begin{enumerate}
+    \item \textbf{形变函子与切-障碍理论。}
+    由于 \(X_0\) 是局部完全交（ODP），其形变理论由余切复形 \(\mathbb{L}_{X_0}\) 控制。
+    切空间为 \(\operatorname{Ext}^1(\Omega_{X_0}^1,\mathcal{O}_{X_0})\)，障碍位于 \(\operatorname{Ext}^2(\Omega_{X_0}^1,\mathcal{O}_{X_0})\) 中。
+    \(\operatorname{Def}(X_0)\) 的光滑性一旦 \(\operatorname{Ext}^2(\Omega_{X_0}^1,\mathcal{O}_{X_0})=0\) 便成立。
+    
+    \item \textbf{与 Kähler 解消的比较。}
+    设 \(p\colon X'\to X_0\) 是一个 Kähler 解消（不必是小解消）。
+    微分层 \(\Omega_{X_0}^1\) 处于一个正合三角形中，该三角形将它和 \(p_*\Omega_{X'}^1\) 以及一个支撑在奇点上的层联系起来。
+    通过局部计算可以证明形变函子之间的连通性，即靠近中心纤维处有 \(\operatorname{Def}(X_0)\cong \operatorname{Def}(X')\)。
+    因此只需对光滑 Kähler 三维簇 \(X'\) 证明 \(\operatorname{Ext}^2(\Omega_{X'}^1,\mathcal{O}_{X'}) =0\) 即可。
+
+    \item \textbf{Hodge 理论与 Bogomolov--Tian--Todorov 论证。}
+    在光滑紧 Kähler 流形 \(X'\) 上，我们拥有 Hodge 分解和 Serre 对偶。
+    因为 \(p\) 只收缩有理曲线，所以仍有 \(\omega_{X'}\cong\mathcal{O}_{X'}\)。
+    Calabi-Yau 流形的经典无障碍性证明（归功于 Bogomolov、Tian、Todorov）利用了收缩映射
+    \[
+        H^2(X',\Theta_{X'})\times H^1(X',\Theta_{X'})\to H^3(X',\Theta_{X'})
+    \]
+    该映射由杯积与迹映射 \(\Theta_{X'}\otimes\Omega_{X'}^p\to \Omega_{X'}^{p-1}\) 的复合给出。
+    在 Calabi-Yau 条件 \(\omega_{X'}\cong\mathcal{O}_{X'}\) 下，Serre 对偶将障碍空间 \(\operatorname{Ext}^2(\Omega_{X'}^1,\mathcal{O}_{X'})\cong H^2(X',\Theta_{X'})\) 等同于 \(H^1(X',\Omega_{X'}^2)\) 的对偶。
+    通过对周期映射的局部 Torelli 定理的巧妙运用，可以证明前述乘法映射为零，因而障碍消失。
+    这一论证适用于此时的情形，并给出 \(\operatorname{Ext}^2(\Omega_{X_0}^1,\mathcal{O}_{X_0})=0\)。
+\end{enumerate}
+
+\chapter{结论}
+
+本文从复几何与代数两个视角梳理了 Calabi–Yau 簇的形变理论。
+在光滑的紧 Kähler Calabi–Yau 流形上，利用全纯体积形式诱导的同构 \(\eta\) 和 Tian–Todorov 引理，
+可以将 Maurer–Cartan 方程转化为递推的 \(\bar\partial\)‑方程，并通过 \(\partial\bar\partial\)‑引理消除所有高阶障碍，
+从而证明形变空间是光滑的，即著名的 Bogomolov–Tian–Todorov 无障碍定理。
+
+在代数方面，通过引入余切复形和 \(T^i\) 函子，我们建立了任意概形的形变障碍理论。
+Schlessinger 判别法则明确了形变函子何时具有极小通用族或 pro‑可表示性。
+对光滑代数簇，障碍仅由 \(H^2(\mathcal T_X)\) 给出，这与复几何的结果一致。
+Ran–Kawamata 的 \(T^1\) 提升技巧进一步揭示，只要一阶形变在幂级数环的厚化下总可提升，
+则整个形变空间就是形式光滑的；对于典范丛平凡的光滑射影簇，这一技巧给出了纯代数的无障碍性证明。
+
+当簇存在奇点时，情形更为复杂。本文聚焦于只有普通双重点的三维 Calabi‑Yau 簇。
+Friedman 较早地给出了用小解消的例外曲线类给出的光滑化判据：例外曲线类在 \(H^4(X,\mathbb C)\) 中的某种正线性关系是光滑化存在的充要条件，而额外要求它们生成 \(H^2(\Omega_X^2)\) 则是为了压制障碍。
+后来的工作表明，上述生成条件并不必要：一旦存在一个 Kähler 解消，奇点形变就是无障碍的，
+于是仅凭例外曲线类的正线性关系即可保证光滑化。这一结果深刻揭示了奇点解消的几何与形变理论的相互作用。
+
+整体上，Calabi–Yau 簇的无障碍性是形变理论中最优美的现象之一，它与 Hodge 理论、镜像对称以及模空间的构造紧密相连。对于更一般的奇点或更高维数，形变障碍的消没机制仍然是活跃的研究课题。

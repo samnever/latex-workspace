@@ -1,0 +1,77 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{科研课堂课程作业}}
+\author{黄伟宁}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\\\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\\\par}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+求KdV方程:$ u_{t} +6uu_{x} +u_{xxx} =0 $  的双孤子解.
+\end{problem}
+
+\begin{solution}
+    KdV方程的Lax对为
+    $$
+        \begin{cases}
+            \varphi_{xx} +u\varphi=\lambda\varphi \\
+            \varphi_{t} =-4\varphi_{xxx} -6u\varphi_{x} -3u_{x} \varphi
+        \end{cases}
+    $$
+    KdV方程的Darboux变换为
+    $$
+        \begin{cases}
+            \bar{u}=u+2(\ln f)_{xx} \\
+            \bar{\varphi}=\varphi_{x} -\frac{f_{x} }{f}\varphi
+        \end{cases}
+    $$
+    取KdV方程的平凡解
+    $$
+        u\equiv 0
+    $$
+    令$ \lambda=k_{1} ^{2}  $ ,特解$ f $ 满足的方程为
+    $$
+        \begin{cases}
+            f_{xx} =\lambda f \\
+            f_{t} =-4\lambda f_{x}
+        \end{cases}
+    $$
+    解得
+    $$
+        f=\cosh[k_{1} (x-4k_{1} ^{2} t)]
+    $$
+    一个新解为
+    $$
+        u_{(1)} =u+2(\ln f)_{xx} =2k_{1} ^{2} \text{sech}^{2} [k_{1} (x-4k_{1} ^{2} t)]
+    $$
+    把变换一次的解作为第二次变换的"种子"
+    \begin{align*}
+        u_{(2)} & =u_{(1)} +2[\ln\varphi_{1} (x,\lambda_{2} )]_{xx}                                                                                                               \\
+                & =u+2[\ln\varphi(x,\lambda_{1} )]_{xx} +2{\ln[\varphi_{x} (x,\lambda_{2} )-\frac{\varphi_{x} (x,\lambda_{1} )}{\varphi(x,\lambda_{1} )}\varphi(x,\lambda_{2} )]} \\
+                & =u+2{\ln[W(\varphi(x,\lambda_{1} ),\varphi(x,\lambda_{2} ))]}
+    \end{align*}
+    取
+    $$
+        \varphi(x,\lambda_{1} )=\cosh(\xi_{1} ),\varphi(x,\lambda_{2} )=\sinh(\xi_{2} )
+    $$
+    $$
+        \xi_{i} =k_{i} (x-4k_{i} ^{2} t),i=1,2
+    $$
+    考虑到$ u=0 $ ,代入之后得到
+    $$
+        u_{(2)} =\frac{2(k_{2} ^{2} -k_{1} ^{2} )(k_{2} ^{2} \cosh^{2} \xi_{1} +k_{1} ^{2} \sinh^{2} \xi_{2} )}{(k_{2} \cosh\xi_{1} \cosh\xi_{2} -k_{1} \sinh\xi_{1} \sinh\xi_{2} )^{2} }
+    $$
+    此即KdV方程的双孤子解.
+\end{solution}
+
+\end{document}

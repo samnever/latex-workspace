@@ -1,0 +1,104 @@
+\documentclass[12pt,a4paper,oneside]{ctexart}
+\usepackage{amsmath,amsthm,amssymb,bm,graphicx,hyperref,mathrsfs}
+
+\title{\textbf{例题}}
+% \author{黄伟宁}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\\\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\\\par}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+
+\maketitle
+% \begin{problem}
+% 这里是题目.
+% \end{problem}
+
+% \begin{solution}
+%     这里是解答.
+% \end{solution}
+
+% \begin{note}
+%     这里是注记.
+% \end{note}
+
+% \begin{problem}
+% \end{problem}
+\begin{problem}
+    定义在$ \mathbb{R} $上的偶函数$ f(x) $ 满足:对任意的$ x_1,x_2\in(-\infty ,0 ](x_1\neq x_2) $,有$ (x_2-x_1)[f(x_2)-f(x_1)]>0 $,则当$ n\in \mathbb{N}^* $时,有（$ \quad $ ）
+    % \begin{align*}
+
+        A. $ f(-n)<f(n-1)<f(n+1) $ \qquad  B. $ f(n-1)<f(-n)<f(n+1) $ 
+
+        C. $ f(n+1)<f(-n)<f(n-1) $ \qquad  D. $ f(n+1)<f(n-1)<f(-n) $ 
+    % \end{align*}
+\end{problem}
+
+\begin{problem}
+    已知函数$ f(x) $ 在定义域$ (-\infty,\infty) $ 上严格单调递增.
+
+    (1)证明:函数$ f(x) $ 至多存在一个零点.
+
+    (2)若函数$ f(x) $ 存在零点$ x_0 $ ,证明:存在$ a\in \mathbb{R} $ ,使得$ f(x+a)<f(x)+f(a) $ 对于任意$ x\in (-\infty,\infty) $ 恒成立的充要条件是$ x_0<0 $ .
+\end{problem}
+
+\begin{problem}
+    函数$ y=-\log_3(x^2-ax-a) $在区间$ (-\infty,1-\sqrt{3}) $ 上单调递增,则实数$ a $ 的取值范围是$ \underline{\qquad\qquad} $  
+\end{problem}
+
+\begin{problem}
+    已知函数$ f(x) $ 在区间$ (0,+\infty) $ 上单调递增,当$ n\in \mathbb{N}^* $ ,且$ f(f(n))=3n $,则$ f(1) $ 的值为（$ \quad $ ）
+
+    A. 1$ \qquad $ B. 2$ \qquad $ C. 3$ \qquad $ D. 4
+\end{problem}
+
+\begin{problem}
+    已知$ a,b,c $ 是三角形的三边长,满足$ a^k+b^k=c^k $ ,则$ k $ 的取值范围是$ \underline{\qquad\qquad} $ .
+\end{problem}
+
+\begin{problem}
+    已知二次函数$ f(x)=x^2-16x+p+3 $ .
+
+    (1)若函数在区间$ [-1,1] $ 上存在零点,求实数$ p $ 的取值范围；
+
+    (2)问:是否存在常数$ q(q\geqslant 0) $ ,使得当$ x\in[q,10] $ 时, $ f(x) $ 的值域为区间$ D $ ,且$ D $ 的长度为$ 12-q $ ?(注:区间$ [a,b](a<b) $的长度为$ b-a $.)
+\end{problem}
+
+\begin{problem}
+    已知定义在$ \mathbb{R} $ 上的奇函数$ f(x) $ 和偶函数$ g(x) $ 满足$ f(x)+g(x)=a^x-a^{-x}+2 $($ a>0 $ 且$ a\neq 1 $ ),若$ g(2)=a $,则$ f(2)= $  ($ \qquad $)
+
+    A. $ 2 $ $ \qquad $ B. $ \frac{15}{4} $ $ \qquad $ C. $ \frac{17}{4} $ $ \qquad $ D. $ a^2 $ 
+\end{problem}
+
+\begin{problem}
+    设$ f(x) $是定义在$ \mathbb{R} $上的函数,对任意的$ x,y\in \mathbb{R} $,均有$ f(x+3)\leqslant f(x)+3,f(x+2)\geqslant f(x)+2 $.设$ g(x)=f(x)-x $ ,证明: $ g(x) $ 为周期函数.
+\end{problem}
+
+\begin{problem}
+    设函数$ f(x)(x\in \mathbb{R}) $ 满足$ f(-x)=f(x),f(x)=f(2-x) $ ,且当$ x\in [0,1] $ 时，$ f(x)=x^3$.又函数$ g(x)=|x\cos\pi x| $,则函数$ h(x)=g(x)-f(x) $在区间$ [-\frac{1}{2},\frac{3}{2}] $ 上的零点个数为$ (\qquad) $ 
+
+    A. 5$ \qquad $ B. 6$ \qquad $ C. 7$ \qquad $ D. 8
+\end{problem}
+
+\begin{problem}
+    设$ f(x) $是定义在实数集$ \mathbb{R} $ 上的函数,并且满足$ f(10+x)=f(10-x),f(20-x)=-f(20+x),$ 则$ f(x) $ 是$ (\qquad) $ 
+
+    A. 偶函数,且是周期函数 $ \qquad $ B. 偶函数,但不是周期函数
+
+    C. 奇函数,且是周期函数 $ \qquad $ D. 奇函数,但不是周期函数
+\end{problem}
+
+\begin{problem}
+    已知$ f(x)=\frac{1+\sqrt{3}x}{\sqrt{3}-x},$ 定义$ f_1(x)=f(x),f_{k+1}=f(f_{k} (x)),k\geqslant 1,$ 则$ f_{2017} (2017) $ 的值为$ \underline{\qquad\qquad} $ .
+\end{problem}
+
+\begin{problem}
+    已知定义在$ \mathbb{R} $ 上的奇函数$ f(x) $ ,满足$ f(x-4)=-f(x) $ ,且在区间$ [0,2] $ 上是增函数,若方程$ f(x)=m(m>0) $ 在区间$ [-8,8] $ 上有四个不同的根$ x_1,x_2,x_3,x_4,$ 则$ x_1+x_2+x_3+x_4=\underline{\qquad\qquad} $ .
+\end{problem}
+
+\end{document}

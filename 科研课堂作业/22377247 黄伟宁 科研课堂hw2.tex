@@ -1,0 +1,52 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{科研课堂课程作业}}
+\author{黄伟宁}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\\\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\\\par}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+\maketitle
+
+\begin{problem}
+完善行波冲击波解的推导过程.
+\end{problem}
+
+\begin{solution}
+    有$ \phi(x,t)=1+e^{Ax+Bt+\delta} =1+e^{Ax+A^{2} t+\delta} $,于是
+    \begin{align*}
+        u & =-2\frac{\partial \ln \phi}{\partial x}+u_{1}                    \\
+          & =\frac{-2Ae^{Ax+A^{2} t+\delta} }{1+e^{Ax+A^{2} t+\delta} }      \\
+          & =-A(1+\frac{e^{Ax+A^{2} t+\delta} -1}{e^{Ax+A^{2} t+\delta} +1}) \\
+          & =-A(1+\tanh(\frac{Ax+A^{2}t +\delta}{2}))
+    \end{align*}
+\end{solution}
+
+\begin{problem}
+完善递推关系 (13)的推导过程
+\end{problem}
+
+\begin{solution}
+    考察级数中$ \phi^{j-3}  $ 的系数,若要该系数为0,那么有
+    \begin{align*}
+        u_{j-2,t} +(j-2)u_{j-1}\phi_{t} -(j-1)(j-2)u_{j}\phi_{x} ^{2} & \\-2(j-2)u_{j-1,x} \phi_{x} -(j-2)u_{j-1} \phi_{xx} -u_{j-2,xx}&\\ + \sum_{k=0}^{j}((u_{k-1,x} +(k-1)u_{k} \phi_{x} )u_{j-k} )=0&\qquad (*)
+    \end{align*}
+    $ u_{j}  $ 的系数为
+    $$
+        -(j-1)(j-2)\phi_{x} ^{2} +(j-1)\phi_{x}  u_{0} -\phi_{x} u_{0} =-(j+1)(j-2)\phi_{x} ^{2}
+    $$
+    将$ (*) $ 式移项得
+    \begin{align*}
+        (j+1)(j-2)\phi_{x} ^{2} u_{j} = & u_{j-2,t} +(j-2)u_{j-1} \phi_{t}-(j-2)(2u_{j-1,x} \phi_{x}+u_{j-1} \phi_{xx} )-u_{j-2,xx} \\&+\sum_{k=1}^{j-1}(u_{k-1,x}+(k-1)u_{k} \phi_{x} )u_{j-k}
+    \end{align*}
+    由上式不难得到(13)所给递推关系.
+\end{solution}
+
+\end{document}

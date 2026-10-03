@@ -1,0 +1,87 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{科研课堂课程作业}}
+\author{黄伟宁}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\\\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\\\par}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+证明微分方程$ M\mathrm{d}x+N\mathrm{d}y=0 $ 关于积分因子的结论:
+
+若$ \frac{1}{N}(\frac{\partial M}{\partial y}-\frac{\partial N}{\partial x})=f(x) $,则有积分因子$ e^{\int f(x)\mathrm{d}x}  $,
+
+若$ \frac{1}{M}(\frac{\partial N}{\partial x}-\frac{\partial M}{\partial y})=f(y) $ ,则有积分因子$ e^{\int f(y)\mathrm{d}y}  $ .
+\end{problem}
+
+\begin{solution}
+    对第一个结论,有
+    \begin{align*}
+          & \frac{Me^{\int f(x)\mathrm{d}x} }{\partial y}                                                                       \\
+        = & \frac{\partial M}{\partial y}e^{\int f(x)\mathrm{d}x}+Mf(x)e^{\int f(x)\mathrm{d}x}\frac{\partial f(x)}{\partial y} \\
+        = & \frac{\partial M}{\partial y}e^{\int f(x)\mathrm{d}x}
+    \end{align*}
+    \begin{align*}
+          & \frac{\partial Ne^{\int f(x)\mathrm{d}x} }{\partial x}                               \\
+        = & \frac{\partial N}{\partial x}e^{\int f(x)\mathrm{d}x} +Nf(x)e^{\int f(x)\mathrm{d}x}
+    \end{align*}
+    若要以上两式相等,只需要$ f(x)=\frac{1}{N}(\frac{\partial M}{\partial y}-\frac{\partial N}{\partial x}) $ ,此即题中所给条件，得证.而对于第二个结论,同理可证.
+\end{solution}
+
+\begin{problem}
+验证KdV方程在材料所给三个生成子对应的变换下形式保持不变.
+\end{problem}
+
+\begin{solution}
+    生成子$ V_{1}  $ 所对应的单参数变换群为为$ x^{\prime} =x+\varepsilon,t^{\prime}=t,u^{\prime}=u $ ,生成子$ V_{2}  $ 所对应的单参数变换群为$ x^{\prime}=x,t^{\prime}=t+\varepsilon,u^{\prime}=u $,这两个变换群作用下KdV方程形式保持不变的验证是平凡的.
+
+    生成子$ V_{3}  $ 所对应的单参数变换群为$ x^{\prime} =x+\varepsilon t,t^{\prime} =t,u^{\prime} =\varepsilon $ ,我们有
+    \begin{align*}
+         & u=u^{\prime} -\varepsilon                                                                                                                                                                                                                                                                                                                \\
+         & \frac{\partial u}{\partial t}=\frac{\partial u^{\prime} }{\partial t^{\prime} }\cdot\frac{\partial t^{\prime} }{\partial t}+\frac{\partial u^{\prime} }{\partial x^{\prime} }\cdot\frac{\partial x^{\prime} }{\partial t}=\frac{\partial u^{\prime} }{\partial t^{\prime} }+\varepsilon\frac{\partial u^{\prime} }{\partial x^{\prime} } \\
+         & \frac{\partial u}{\partial x}=\frac{\partial u^{\prime} }{\partial x^{\prime} }\cdot\frac{\partial x^{\prime} }{\partial x}=\frac{\partial u^{\prime} }{\partial x^{\prime} },\frac{\partial ^{3} u}{\partial x^{3} }=\frac{\partial ^{3} u^{\prime} }{\partial x^{\prime 3} }
+    \end{align*}
+    从而有
+    $$
+        u_{t} +uu_{x} +u_{xxx} =\frac{\partial u^{\prime} }{\partial t^{\prime} }+\varepsilon\frac{\partial u^{\prime} }{\partial x^{\prime} }+(u^{\prime} -\varepsilon)\frac{\partial u^{\prime} }{\partial x^{\prime} }+\frac{\partial ^{3} u^{\prime} }{\partial x^{\prime 3} }=u^{\prime} _{t^{\prime} } +u^{\prime} u^{\prime} _{x^{\prime} } +u^{\prime} _{x^{\prime} x^{\prime} x^{\prime} }
+    $$
+    即KdV方程在$ V_{3}  $ 对应的单参数变换群下保持形式不变.
+\end{solution}
+
+\begin{problem}
+验证KdV方程的Lie代数表.
+\end{problem}
+
+\begin{solution}
+    以$ [V_{1} ,V_{4} ] $和$ [V_{4} ,V_{3} ] $ 为例.
+    \begin{align*}
+          & V_{1}V_{4}-V_{4} V_{1}                                                                                                                                                                                                                                                                                                                                        \\
+        = & \frac{\partial }{\partial x}+x\frac{\partial ^{2} }{\partial x^{2} }+3t\frac{\partial ^{2} }{\partial x\partial t}-2u\frac{\partial ^{2} }{\partial x\partial u}-x\frac{\partial ^{2} }{\partial x^{2} }-3t\frac{\partial ^{2} }{\partial t\partial x}+2u\frac{\partial ^{2} }{\partial u\partial x}                                                          \\
+        = & \frac{\partial }{\partial x}=V_{1}                                                                                                                                                                                                                                                                                                                            \\
+          & V_{4}V_{3} =xt\frac{\partial ^{2} }{\partial x\partial t}+x\frac{\partial ^{2} }{\partial u\partial x}+3t\frac{\partial }{\partial x}+3t^{2} \frac{\partial ^{2} }{\partial x\partial t}+3t\frac{\partial ^{2} }{\partial u\partial t}-2ut\frac{\partial ^{2} }{\partial u\partial x}-2u\frac{\partial ^{2} }{\partial u^{2} }                                \\
+          & V_{3} V_{4} =t\frac{\partial }{\partial x}+xt\frac{\partial ^{2} }{\partial x\partial t}+x\frac{\partial ^{2} }{\partial u\partial x} +3t^{2} \frac{\partial ^{2} }{\partial x\partial t}+3t\frac{\partial ^{2} }{\partial u\partial t}-2ut\frac{\partial ^{2} }{\partial u\partial x}-2\frac{\partial }{\partial u}-2u\frac{\partial ^{2} }{\partial u^{2} } \\
+          & V_{4} V_{3} -V_{3} V_{4}                                                                                                                                                                                                                                                                                                                                      \\
+        = & 2t\frac{\partial }{\partial x}+2\frac{\partial }{\partial u}=2V_{3}
+    \end{align*}
+    Lie代数表其他部分的验证也是平凡的,略.
+\end{solution}
+
+\begin{problem}
+复述Case 4中当$ c_{1} =c_{2} =c_{3} =0,c_{4} =1 $ 时的相似方程的求解过程.
+\end{problem}
+
+\begin{solution}
+    略.
+\end{solution}
+
+\end{document}

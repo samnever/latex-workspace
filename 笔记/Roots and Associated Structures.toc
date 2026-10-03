@@ -1,0 +1,13 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Lie Algebras}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Basic Definitions}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Lie Algebras for the Compact Classical Lie Groups}{2}{subsection.1.2}%
+\contentsline {paragraph}{\numberline {1.2.0.1}$ SL(n) $}{2}{paragraph.1.2.0.1}%
+\contentsline {paragraph}{\numberline {1.2.0.2}$ U(n)\ \&\ SU(n) $}{2}{paragraph.1.2.0.2}%
+\contentsline {paragraph}{\numberline {1.2.0.3}$ Sp(n) $}{2}{paragraph.1.2.0.3}%
+\contentsline {paragraph}{\numberline {1.2.0.4}$ SO(n) $}{3}{paragraph.1.2.0.4}%
+\contentsline {section}{\numberline {2}Root Theory}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Representations of Lie Algebras}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Weights and Roots}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Cartan Involution and Killing Form}{3}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}The Standard $ \mathfrak {sl}(2,\mathbb {C} ) $ and $ \mathfrak {su}(2) $ Triples}{4}{subsection.2.4}%

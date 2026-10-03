@@ -1,0 +1,828 @@
+\documentclass{article}
+\usepackage{amsmath, amsthm, amssymb, appendix, bm, graphicx, hyperref, mathrsfs}
+\usepackage{enumerate}
+%\usepackage[nocap]{ctex}
+% \usepackage{ctex}
+\usepackage[english]{babel}
+
+\title{\textbf{Hodge Decomposition}}
+\author{hwn}
+\date{\today}
+\linespread{1.5}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+\renewcommand{\abstractname}{\Large\textbf{Abstract}}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+
+\maketitle
+\pagenumbering{arabic}
+\tableofcontents
+
+% \setcounter{page}{0}
+% \maketitle
+% \thispagestyle{empty}
+
+% \begin{abstract}
+%     这里是摘要. 
+%     \par\textbf{关键词：}这里是关键词; 这里是关键词. 
+% \end{abstract}
+
+% \newpage
+% \pagenumbering{Roman}
+% \setcounter{page}{1}
+% \newpage
+% \setcounter{page}{1}
+
+\section{Complex and Hermitian Structures on Vector Spaces}
+
+% \subsection{二级标题}
+
+% \setcounter{subsection}{1}
+\subsection{Complex Structures}
+
+In the following, $ V $ shall denote a finite-dimensional real vector space.
+
+\begin{definition}
+    An endomorphism $ I:V\rightarrow V $ with $ I^2=-\mathrm{id} $ is called an \textbf{almost complex structure} on $ V $.
+\end{definition}
+
+\begin{lemma}\label{hh}
+    If $ I $ is an almost complex structure on a real vector space $ V $, then $ V $ admits in a natural way the structure of a complex vector space. 
+\end{lemma}
+
+\begin{proof}
+    The $ \mathbb{C} $-module structure on V is defined by $ (a+ib)\cdot v=a\cdot v+b\cdot I(v) $.
+\end{proof}
+
+For a real vector space $ V $ the complex vector space $ V\otimes_{\mathbb{R}}\mathbb{C} $ is denoted by $ V_{\mathbb{C}} $.
+
+\begin{definition}
+    Let $ I $ be an almost complex structure on a real vector space $ V $ and let $ I:V_{\mathbb{C}} \rightarrow V_{\mathbb{C}} $ be its $ \mathbb{C} $-linear extension. Then the $ \pm i $ eigenspaces are denoted $ V^{1,0} $ and $ V^{0,1}  $, respectively, i.e.
+    \[
+        V^{1,0} =\{v\in V_{\mathbb{C}}\mid I(v)=i\cdot v\}\ and\ V^{0,1} =\{ v\in V_{\mathbb{C}}\mid I(v)=-i\cdot v\}.
+    \]
+\end{definition}
+
+\begin{lemma}
+    Let $ V $ be a real vector space endowed with an almost complex structure $ I $. Then 
+    \[
+        V_{\mathbb{C}} =V^{1,0} \oplus V^{0,1}.
+    \] 
+    Complex conjugation on $ V_{\mathbb{C}}  $ induces an $ \mathbb{R} $-linear isomorphism $ V^{1,0} \cong V^{0,1}  $.
+\end{lemma}
+
+\begin{proof}
+    The first assertion follows from the map\[
+        v\rightarrow \frac{1}{2}(v-iI(v))\oplus\frac{1}{2}(v+iI(v)).
+    \] 
+    For the second assertion we write $ v\in V_{\mathbb{C}}  $ as $ v=x+iy $ with $ x,y\in V $. Then $ \overline{(v-iI(v))}=(x-iy+iI(x)+I(y))=(\bar{v}+iI(\bar{v})) $.Hence the complex conjugation interchange the two facotrs.
+\end{proof}
+
+One should be aware of the existence of two almost complex structures on $ V_{\mathbb{C}} $. One is given by $ I $ and the other one by $ i $. They coincide on the subspace $ V^{1,0}  $ but differ by a sign on $ V^{0,1}  $.Obviously, $ V^{1,0}  $ and $ V^{0,1} $ are complex subspaces of $ V_{\mathbb{C}} $ respect to both almost complex structures. In the sequel, we will always regard $ V_{\mathbb{C}} $ as the complex space with respect to $ i $.
+
+If $ V^{1,0} $ and $ V^{0,1} $ are considered with the complex structure $ i $, then the compositions $ V\subset V_{\mathbb{C}}\rightarrow V^{1,0} $ and $ V\subset V_{\mathbb{C}} \rightarrow V^{0,1} $ are complex linear respectively complex antilinear. Here, $ V $ is endowed with the almost complex structure $ I $.
+
+\begin{lemma}
+    Let $ V $ be a real vector space endowed with an almost complex structure $ I $. Then the dual space $ V^{*}=\mathrm{Hom}_{\mathbb{R}}(V,\mathbb{R}) $ has a natural almost complex structure given by $ I(f)(v)=f(I(v)) $. The induced decomposition on $ V^{*}_{\mathbb{C}}=\mathrm{Hom}_{\mathbb{R}}(V,\mathbb{C})=(V_{\mathbb{C}})^{*} $ is given by \begin{align*}
+        &(V^{*})^{1,0}\ =\{f\in (V_{\mathbb{C}})^{*}\mid f(I(v))=if(v)\}\ =(V^{1,0})^{*}\\
+        &(V^{*})^{0,1}=\{f\in (V_{\mathbb{C}})^{*}\mid f(I(v))=-if(v)\}=(V^{0,1})^{*}.
+    \end{align*}
+    Also note that $ (V^{*})^{1,0}=\mathrm{Hom}_{\mathbb{C}}((V,I),\mathbb{C}) $.\footnote{Here we indentify $ (V,I) $ with $ (V^{1,0},i) $.}
+\end{lemma}
+
+If $ V $ is a real vector space of dimension $ d $, the natural decomposition of its exterior algebra is of the form\[
+    \bigwedge\nolimits^k V=\bigoplus_{k=0}^{d}\bigwedge\nolimits^k V.
+\] 
+
+Analogously, $ \bigwedge^{*}V_{\mathbb{C}} $ denotes the exterior algebra of the complex vector space $ V_{\mathbb{C}} $, which decomposes as\begin{equation}
+    \bigwedge\nolimits^k V_{\mathbb{C}}=\bigoplus_{k=0}^{d}\bigwedge\nolimits^k V_{\mathbb{C}}.\label{hhh}
+\end{equation}Moreover, $ \bigwedge^{*}V_{\mathbb{C}}=(\bigwedge^{*}V)\otimes_{\mathbb{R}}\mathbb{C} $ and $ \bigwedge^{*}V $ is the real vector subspace of $ \bigwedge^{*}V_{\mathbb{C}} $ that is left invariant under complex conjugation.
+
+\begin{definition}
+    \[
+        \bigwedge\nolimits^{p,q}V:=\bigwedge\nolimits^p V^{1,0}\otimes_{\mathbb{C}}\bigwedge\nolimits^q V^{0,1},
+    \]where the exterior products of $ V^{1,0} $ and $ V^{0,1} $ are taken as exterior products of complex vector spaces. An element $ \alpha \in \bigwedge^{p,q}V $ is of bidegree $ (p,q) $.
+\end{definition}
+
+\begin{proposition}
+    For a real vector space $ V $ endowed with an almost complex structure $ I $ one has:\begin{enumerate}[(i)]
+        \item $ \bigwedge^{p,q}V $ is in a canonical way a subspace of $ \bigwedge^{p+q}V_{\mathbb{C}} $.
+        \item $ \bigwedge^{k}V_{\mathbb{C}}=\bigoplus\limits_{p+q=k}\bigwedge^{p,q}V $.
+        \item Complex conjugation on $ \bigwedge^{*}V_{\mathbb{C}} $ defines a ($ \mathbb{C} $-antilinear) isomorphism $ \bigwedge^{p,q}V\cong\bigwedge^{q,p}V $, i.e. $ \overline{\bigwedge^{p,q}V}=\bigwedge^{q,p}V $.
+        \item The exterior product is of bidegree $ (0,0) $, i.e. $ (\alpha,\beta)\mapsto\alpha\wedge\beta $ maps $ \bigwedge^{p,q}V\times \bigwedge^{r,s}V $ to the subspace $ \bigwedge^{p+r,q+s}V $.
+    \end{enumerate}
+\end{proposition}
+
+Any vector $ v\in V_{\mathbb{C}} $ can be written as $ v=x+iy $ with $ x,y\in V $. Assume that $ z_i=\frac{1}{2}(x_i-iy_i)\in V^{1,0} $ is a $ \mathbb{C} $-basis of $ V^{1,0} $ with $ x_i,y_i\in V $. Since $ I(z_i)=iz_i $, one finds $ y_i=I(x_i) $ and $ x_i=-I(y_i) $. Moreover, $ x_i,y_i\in V $ form a real basis of $ V $ and, therefore, a basis of the complex vector spaces $ V_{\mathbb{C}} $. A natural basis of the complex vector spaces $ V^{0,1} $ is then provided by $ \bar{z}_i=\frac{1}{2}(x_i+iy_i) $.\footnote{Recall that in Complex Analysis, we have $ \frac{\partial}{\partial z_i}=\frac{1}{2}(\frac{\partial}{\partial x_i}-i\frac{\partial}{\partial y_i}) $ and $ \frac{\partial}{\partial \bar{z}_i}=\frac{1}{2}(\frac{\partial}{\partial x_i}+i\frac{\partial}{\partial y_i}) $. I think this may help to understand the decomposition.}
+
+Let $ \langle x^i,y^i\rangle $be the basis of $ V^{*} $ dual to $ \langle x_i,y_i\rangle $. Then, $ z^i=x^i+iy^i $ and $ \bar{z}^i=x^i-iy^i $ are the basis of $ V^{1,0^*} $ and $ V^{0,1^*} $ dual to $ \langle z_i\rangle $ respectively $ \langle \bar{z}_i \rangle $.
+
+Note that $ I(x^i)=-y^i $ and $ I(y^i)=x^i $. We tacitly use the natural isomorphism $ \bigwedge^{k}V^{*}\cong(\bigwedge^{k}V)^* $ given by $ (\alpha_1\wedge\dots\wedge\alpha_k)(v_1\wedge\dots\wedge v_k)=\det(\alpha_i(v_j))_{i,j} $.
+
+\begin{definition}\label{rop}
+    With respect to the direct sum decomposition \eqref{hhh} and the proposition above one defines the natural projections\[
+        \mathnormal{\Pi}^{k}:\bigwedge\nolimits^*V_{\mathbb{C}}\longrightarrow\bigwedge\nolimits^k V_{\mathbb{C}}\ and\ \mathnormal{\Pi}^{p,q}:\bigwedge\nolimits^* V_{\mathbb{C}}\longrightarrow\bigwedge\nolimits^{p,q}V.
+    \]Besides,\[
+        \mathrm{\mathbf{I}}:=\sum_{p,q}i^{p-q}\cdot \mathnormal{\Pi}^{p,q}.
+    \]
+\end{definition}
+
+The operator $ \mathnormal{\Pi}^{k} $ does not depned on the almost complex structure $ I $, but the operators $ \mathrm{\mathbf{I}} $ and $ \mathnormal{\Pi}^{p,q} $ certainly do. Note that $ \mathrm{\mathbf{I}} $ is the multiplicative extension of the almost complex structure $ I $ on $ V_{\mathbb{C}} $. Since $ I $ is defined on the real vector space $ V $, also $ \mathrm{\mathbf{I}} $ is an endomorphism of the real exterior algebra $ \bigwedge^* V $.
+
+We donte the corresponding operators on the dual space $ \bigwedge^* V_{\mathbb{C}}^{*} $ also by $ \mathnormal{\Pi}^{k},\mathnormal{\Pi}^{p,q} $, respectively $ \mathrm{\mathbf{I}} $. Note that $ \mathrm{\mathbf{I}}(\alpha)(v_1,\dots,v_k)=\alpha(I(v_1),\dots,I(v_k)) $ for $ \alpha\in \bigwedge^k V_{\mathbb{C}} $ and $ v_i\in V_{\mathbb{C}} $.
+
+\subsection{Hermitian Structures}
+
+Let $ (V,\langle\ ,\ \rangle) $ be finite-dimensional euclidian vector space, i.e. $ V $ is a real vector space and $ \langle\ ,\ \rangle $ is a positive definite symmetric bilinear form.\
+
+\begin{definition}
+    An almost complex structure $ I $ on $ V $ is \textbf{compatible} with the scalar product $ \langle\ ,\ \rangle $ if $ \langle I(v),I(w)\rangle=\langle v,w\rangle $ for all $ v,w\in V $.
+\end{definition}
+
+\begin{definition}\label{gc}
+    The \textbf{fundamental form} associated to $ (V,\langle\ ,\ \rangle,I) $ is the form\[
+        \omega := -\langle(\ ),I(\ )\rangle=\langle I(\ ),(\ )\rangle.
+    \]
+\end{definition}
+
+One considers the extension of the scalar product $ \langle\ ,\ \rangle $ to a positive definite hermitian form $ \langle\ ,\ \rangle_{\mathbb{C}} $ on $ V_{\mathbb{C}} $. This is defined by\[
+    \langle v\otimes \Lambda, w\otimes\mu\rangle_{\mathbb{C}}:=(\lambda\bar{\mu})\cdot\langle v,w\rangle
+\]for $ v,w\in V $ and $ \lambda,\mu\in\mathbb{C} $. Note that $ \omega $ can be extended to $ \omega_{\mathbb{C}} $ on $ V_{\mathbb{C}} $, too.
+
+\begin{lemma}
+    $ \omega\in \bigwedge^{2}V^*,\omega_{\mathbb{C}}\in\bigwedge^{1,1}V^* $.
+\end{lemma}
+
+Recall that $ \bigwedge^{2}V^* $ is a real vector space and $ \bigwedge^{1,1}V^* $ is a complex vector space.
+
+\begin{proof}
+    For all $ v,w\in V $,\[
+        \langle v,I(w)\rangle=\langle I(v),I(I(w))\rangle=-\langle I(v),w\rangle=-\langle w,I(v)\rangle \Rightarrow \omega \in \bigwedge\nolimits^2 V^*.
+    \]
+    For all $ v,w\in V_{\mathbb{C}} $,\[
+        (\mathrm{\mathbf{I}}\omega)(v,w)_{\mathbb{C}}=\omega(I(v),I(w))_{\mathbb{C}}=\langle I(I(v)),I(w)\rangle=\omega(v,w)_{\mathbb{C}} \Rightarrow \omega\in\bigwedge\nolimits^{1,1}V^*.
+    \]
+\end{proof}
+
+One can regard $ \omega $ as the restriction of $ \omega_{\mathbb{C}} $ to $ V $. For convenience I just use $ \omega $ to denote $ \omega_{\mathbb{C}} $ later. (Of course, this is abuse of notation.)
+
+Note that two of the three structures $ \lbrace\langle\ ,\ \rangle,I,\omega\rbrace $ determine the remaining one.
+
+
+\begin{lemma}
+    If $ (V,\langle\ ,\ \rangle) $ is an euclidian vector space with a compatible almost complex structure $ I $. Then $ V_{\mathbb{C}}=V^{1,0}\oplus V^{0,1} $ is an orthogonal decomposition with respect to the hermitian product $ \langle\ ,\ \rangle_{\mathbb{C}} $.
+\end{lemma}
+
+\begin{proof}
+    Let $ v-iI(v)\in V^{1,0} $ and $ w+iI(w)\in V^{0,1} $ with $ v,w\in V $. Then an easy calculation shows $ \langle v-iI(v),w+iI(w)\rangle_{\mathbb{C}}=0 $.
+\end{proof}
+
+\begin{definition}
+    Let $ (V,\langle\ ,\ \rangle) $ be an euclidian vector space and let $ I $ be a compatible almost complex structure. Furthermore, let $ \omega $ be the associated fundamental form. Then the \textbf{Lefschetz operator} $ L:\bigwedge^{*}V_{\mathbb{C}}^{*}\rightarrow\bigwedge^* V_{\mathbb{C}}^{*} $ is given by $ \alpha\mapsto \omega\wedge\alpha $.
+\end{definition}
+
+\begin{remark}
+    \begin{enumerate}[(i)]
+        \item $ L $ is the $ \mathbb{C} $-linear extension of the real operator $ \bigwedge^{*}V^{*}\rightarrow \bigwedge^{*}V^{*},\alpha\mapsto\omega\wedge\alpha $. Note that $ \omega\in\bigwedge^{2}V^{*} $.
+        \item $ L(\bigwedge^{p,q}V^*)\subset\bigwedge^{p+1,q+1}V^* $. Note that $ \omega\in\bigwedge^{1,1}V^* $.
+    \end{enumerate}
+\end{remark}
+
+Let $ (V,\langle\ ,\ \rangle) $ be an oriented euclidian vector space of dimension $ d $, then $ \langle\ ,\ \rangle $ defines scalar products on all the exterior powers $ \bigwedge^{k}V $. Explicitly, if $ e_1,\dots,e_d\in V $ is an orthonormal basis of $ V $, then $ e_I\in\bigwedge^k V $ with $ I=\{i_1\le\dots\le i_k
+\} $ is an orthonormal basis of $ \bigwedge^k V $. Let $ \mathrm{vol}\in \bigwedge^d V $ be the orientation of $ V $ of norm $ 1 $ given by $ \mathrm{vol}=e_1\wedge\dots\wedge e_d $.\label{wds}
+
+\begin{definition}
+    The \textbf{Hodge} $ * $\textbf{-operator} is defined by\[
+        \alpha\wedge *\beta=\langle\alpha,\beta\rangle\cdot\mathrm{vol}
+    \]for $ \alpha,\beta\in\bigwedge^* V $.
+\end{definition}
+
+This determines $ * $, for the exterior product defines a nondegenerate pairing $ \bigwedge^k V\times \bigwedge^{d-k}V\rightarrow\bigwedge^d V=\mathrm{vol}\cdot\mathbb{R} $. One easily sees that $ *:\bigwedge^k V\rightarrow \bigwedge^{d-k}V $.
+
+\begin{proposition}
+    Any almost complex structure on $ V $ induces a natural orientation on $ V $. The orientation is well-defined, as it does not change under $ \mathbb{C} $-linear automorphisms.
+\end{proposition}
+
+\begin{proof}
+    By~\ref{hh} we just need to consider $ \mathbb{C}^n $. When $ n=1 $ we use the orientation given by the basis $ \{1,i\} $. When $ n>1 $ we construct likewise.
+\end{proof}
+
+\begin{remark}
+    Using the natural orientation, the Hodge $ * $-operator is well-defined.
+\end{remark}
+
+\begin{proposition}
+    Notation as above, we have:
+    \begin{enumerate}[(i)]
+        \item If $ \{i_1,\dots,i_k,j_1,\dots,j_{d-k} \}=\{1,\dots,d\} $ one has\[
+            *(e_{i_1}\wedge\dots\wedge e_{i_k})=\epsilon\cdot e_{j_1}\wedge\dots\wedge e_{j_{d-k}},
+        \]where $ \epsilon=\mathrm{sgn}(i_1,\dots,i_k,j_1,\dots,j_{d-k}) $. In particular, $ *1=\mathrm{vol} $.
+        \item $ \langle\alpha,*\beta\rangle=(-1)^{k(d-k)}\langle*\alpha,\beta\rangle $ for $ \alpha\in\bigwedge^k V $.
+        \item $ *^2|_{\bigwedge^k V}=(-1)^{k(d-k)} $.
+        \item Hodge $ * $-operator is an isometry on $ (\bigwedge^* V,\langle\ ,\ \rangle) $.
+    \end{enumerate}
+\end{proposition}
+
+In following situation we will usually have $ d=2n $ and $ *,\langle\ ,\ \rangle $ will be considered \textbf{on the dual space} $ \bigwedge^* V^* $.\footnote{From now on, the main object become to $ \bigwedge^* V^* $ from $ \bigwedge^* V $. Recall that if we have $ \langle\ ,\ \rangle $ on $ V $ then there is a natural $ \langle\ ,\ \rangle $ on $ V^* $ therefore on $ \bigwedge^* V^* $.\label{dual}}
+
+\begin{definition}
+    The \textbf{dual Lefschetz operator} $ \varLambda:\bigwedge^* V^*\rightarrow\bigwedge^* V^* $ is adjoint to $ L $ with respect to $ \langle\ ,\ \rangle $, i.e. $ \Lambda\alpha $ is uniquely determined by the condition\[
+        \langle\varLambda\alpha,\beta\rangle=\langle\alpha,L\beta\rangle\ for\ all\ \beta\in\bigwedge\nolimits^* V^*.
+    \]The $ \mathbb{C} $-linear extension $ \bigwedge^* V_{\mathbb{C}}^*\rightarrow\bigwedge^*V_{\mathbb{C}}^* $ of the dual Lefschetz operator will also be denoted by $ \varLambda $.
+\end{definition}
+
+\begin{lemma}
+    $ \varLambda(\bigwedge^k V^*)\subset\bigwedge^{k-2}V^* $.Moreover, one has $ \varLambda=*^{-1}\circ L\circ * $.
+\end{lemma}
+
+\begin{proof}
+    \[
+        \langle\alpha,L\beta\rangle\cdot\mathrm{vol}=\langle L\beta,\alpha\rangle\cdot\mathrm{vol}=L\beta\wedge*\alpha=\omega\wedge\beta\wedge*\alpha=\beta\wedge(\omega\wedge*\alpha)=\langle\beta,*^{-1}(L(*\alpha))\rangle\cdot\mathrm{vol}.
+    \]
+\end{proof}
+
+The Hodge $ * $-operator associated to $ (V,\langle\ ,\ \rangle) $ can be extended $ \mathbb{C} $-linearly to $ *:\bigwedge^k V_{\mathbb{C}}^*\rightarrow\bigwedge^{2n-k}V_{\mathbb{C}}^* $. On $ \bigwedge^* V_{\mathbb{C}}^* $ we have\[
+    \alpha\wedge*\bar{\beta}=\langle\alpha,\beta\rangle_{\mathbb{C}}\cdot\mathrm{vol}.
+\]Still, $ L $ and $ \varLambda $ are adjoint to each other with respect to $ \langle\ ,\ \rangle_{\mathbb{C}} $ after $ \mathbb{C} $-linear extension and $ \varLambda=*^{-1}\circ L\circ * $ on $ \bigwedge^* V_{\mathbb{C}}^* $.
+
+\begin{lemma}
+    Let $ \langle\ ,\ \rangle_{\mathbb{C}},\ \varLambda $, and $ * $ be as above. Then
+    \begin{enumerate}[(i)]
+        \item The decomposition $ \bigwedge^k V_{\mathbb{C}}^*=\bigoplus\bigwedge^{p,q}V^* $ is orthogonal with respect to $ \langle\ ,\ \rangle_{\mathbb{C}} $.
+        \item The Hodge $ * $-operator maps $ \bigwedge^{p,q}V^* $ to $ \bigwedge^{n-q,n-p}V^* $, where $ n=\mathrm{dim}_{\mathbb{C}}(V,I) $.
+        \item $ \varLambda(\bigwedge^{p,q}V^*)\subset\bigwedge^{p-1,q-1}V^* $.
+    \end{enumerate}
+\end{lemma}
+
+\begin{definition}
+    \[
+        H:=\sum_{k=0}^{2n}(k-n)\cdot\varPi^k.
+    \]
+\end{definition}
+
+We use the notation $ [A,B]=A\circ B-B\circ A $.
+
+\begin{proposition}
+    Let $ (V,\langle\ ,\ \rangle,I) $ be as above. Consider the following three linear operators on $ \bigwedge^* V^* $: $ L,\ \varLambda,\ H $. They satisfy:\[
+        [H,L]=2L,[H,\varLambda]=-2\varLambda,[L,\varLambda]=H.
+    \]
+\end{proposition}
+
+\begin{corollary}
+    $ (V,\langle\ ,\ \rangle,I) $. The action of $ L,\varLambda,H $ defines a natural $ \mathfrak{sl}(2,\mathbb{R}) $-representation on $ \bigwedge^* V^* $.The $ \mathfrak{sl}(2,\mathbb{C}) $-representation is obtained by tensorizing with $ \mathbb{C} $.
+\end{corollary}
+
+\begin{definition}
+    $ (V,\langle\ ,\ \rangle,I) $. An element $ \alpha\in\bigwedge^k V^* $ is called \textbf{primitive} if $ \varLambda\alpha=0 $. The linear subspace of all primitve elements $ \alpha\in\bigwedge^k V^* $ is denoted by $ P^k\subset\bigwedge^k V^* $.
+\end{definition}
+
+Accordingly, an element $ \alpha\in\bigwedge^k V_{\mathbb{C}}^* $ is called primitive if $ \varLambda\alpha=0 $. Clearly the subspace of those is just the complexification of $ P^k $.
+
+\begin{proposition}\label{prd}
+    $ (V,\langle\ ,\ \rangle,I) $, dimension $ 2n $.
+    \begin{enumerate}[(i)]
+        \item Lefschetz decomposition:\begin{equation}
+            \bigwedge\nolimits^k V^*=\bigoplus_{i\geqslant 0}L^i(P^{k-2i}).
+        \end{equation}The decomposition is orthogonal with respect to $ \langle\ ,\ \rangle $.
+        \item If $ k>n $, $ P^k=0 $.
+        \item $ L^{n-k}:P^k\rightarrow \bigwedge^{2n-k}V^* $ is injective for $ k\leqslant n $.
+        \item $ L^{n-k}:\bigwedge^k V^*\rightarrow \bigwedge^{2n-k}V^* $ is bijective for $ k\leqslant n $.
+        \item If $ k\leqslant n $, then $ P^k=\{\alpha\in\bigwedge^k V^*\mid L^{n-k+1}\alpha=0\} $.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Use the theory of representation of $ \mathfrak{sl}(2,\mathbb{R}) $.
+\end{proof}
+
+\begin{remark}
+    Since $ L,\varLambda,H $ are of pure type $ (1,1),(-1,-1),(0,0) $, respectively, and the Lefschetz decomposition is compatible with the bidegree decomposition. Thus, $ P^k_{\mathbb{C}}=\bigoplus_{p+q=k}P^{p,q} $, where $ P^{p,q}=P^k_{\mathbb{C}}\cap\bigwedge^{p,q}V^* $. Since $ \varLambda,L $ are real, one also has $ \overline{P^{p,q}}=P^{q,p} $.
+\end{remark}
+
+\section{Complex Structures on Manifolds}
+
+\subsection{Local Situtation}
+
+A real manifold $ M $ is studied by means of its tangent bundle $ TM $, the collection of all tangent spaces $ T_x M $ for $ x\in M $, and its $ k $-form bundle $ \bigwedge^k T^* M $. We now apply the linear algebra developed previously to the form bundles of an open subset $ M=U\in\mathbb{C}^n $. 
+
+Let $ U\in\mathbb{C}^n $ be an open subset. Thus, $ U $ can in particular be considered as a $ 2n $-dimensional real manifold. For $ x\in U $ we have its real tangent space $ T_x U $ at the point $ x $ which is of real dimension $ 2n $. A canonical basis of $ T_x U $ is given by the tangent vectors\[
+    \frac{\partial}{\partial x_1},\dots,\frac{\partial}{\partial x_n},\frac{\partial}{\partial y_1},\dots,\frac{\partial}{\partial y_n},
+\]where $ z_1=x_1+iy_1,\dots,z_n=x_n+iy_n $ are the standard coordinates on $ \mathbb{C}^n $. Moreover, the vectors $ \frac{\partial}{\partial x_1},\dots,\frac{\partial}{\partial y_n} $ are global trivializing setctions of $ TU $.
+
+Each tangent space $ T_x U $ admits a natural almost complex structure defined by\[
+    I:T_x U\rightarrow T_x U,\ \frac{\partial}{\partial x_i}\mapsto\frac{\partial}{\partial y_i},\ \frac{\partial}{\partial y_i}\mapsto -\frac{\partial}{\partial x_i},
+\]which is compatible with the global trivialization. We shall regard $ I $ as a vector bundle endomorphism of the real vector bundle $ TU $ over $ U $.
+
+The dual basis of $ T_x^* U $ is denoted by $ dx_1,\dots,dx_n,dy_1,\dots,dy_n $. Recall that the induced almost complex structure on $ T_x^* U $ in terms of this dual basis is described by $ I(dx_i)=-dy_i,\ I(dy_i)=dx_i $.
+
+Previous result yields the following
+
+\begin{proposition}
+    The complexified tangent bundle $ T_{\mathbb{C}}U:=TU\otimes\mathbb{C} $ decomposes as a direct sum of complex vector bundles\[
+        T_{\mathbb{C}}U=TU^{1,0}\oplus TU^{0,1},
+    \]such that the complex linear extension of $ I $ statisfies\[
+        I|_{TU^{1,0}}=i\cdot\mathrm{id}\ and\ I|_{TU^{0,1}}=-i\cdot\mathrm{id}.
+    \]The vector bundles $ TU^{1,0} $ and $ TU^{0,1} $ are trivialized by the sections $ \frac{\partial}{\partial z_i}:=\frac{1}{2}(\frac{\partial}{\partial x_i}-i\frac{\partial}{\partial y_i}) $ and $ \frac{\partial}{\partial\bar{z_i}}:=\frac{1}{2}(\frac{\partial}{\partial x_i}+i\frac{\partial}{\partial y_i}) $, $ i=1,\dots,n $, respectively.
+\end{proposition}
+
+The complexified bundle $ T_{\mathbb{C}}^* U:=T^* U\otimes\mathbb{C} $ admits an analogous decomposition $ T_{\mathbb{C}}^* U=T^* U^{1,0}\oplus T^* U^{0,1} $ and $ T^* U^{1,0} $ and $ T^* U^{0,1} $ are trivialized by the dual basis $ dz_i:=dx_i+idy_i $ and $ d\bar{z}_i:=dx_i-idy_i $, $ i=1,\dots,n $, respectively.
+
+\begin{definition}
+    Let $ U\in\mathbb{C}^n $ be an open subset.\[
+        \bigwedge\nolimits^{k}_{\mathbb{C}}U:=\bigwedge\nolimits^{k} T_{\mathbb{C}}^* U,\ \bigwedge\nolimits^{p,q}U:=(\bigwedge\nolimits^p T^* U^{1,0})\otimes_{\mathbb{C}}(\bigwedge\nolimits^q T^* U^{0,1}).
+    \]By $ \mathcal{A}^{k}_{\mathbb{C}}(U) $ and $ \mathcal{A}^{p,q}(U) $ we donted the spaces of sections of $ \bigwedge^{k}_{\mathbb{C}}U $ and $ \bigwedge^{p,q} U $, respectively.
+\end{definition}
+
+\begin{corollary}
+    There are natural decompositions $ \bigwedge^{k}_{\mathbb{C}}U=\oplus_{p+q=k}\bigwedge^{p,q}U $ and $ \mathcal{A}^{k}_{\mathbb{C}}(U)=\oplus_{p+q=k}\mathcal{A}^{p,q}(U) $.
+\end{corollary}
+
+As before, the projection operators will be donoted by $ \varPi^{p,q} $.
+
+\begin{definition}
+    Let $ d:\mathcal{A}^{k}_{\mathbb{C}}(U)\rightarrow\mathcal{A}^{k+1}_{\mathbb{C}}(U) $ be the complex linear extension of the usual exterior differential. Then\[
+        \partial: \mathcal{A}^{p,q}(U)\longrightarrow\mathcal{A}^{p+1,q}(U)\ and\ \bar{\partial}:\mathcal{A}^{p,q}(U)\longrightarrow\mathcal{A}^{p,q+1}(U)
+    \]are defined as $ \partial:\varPi^{p+1,q}\circ d $ and $ \bar{\partial}:\varPi^{p,q+1}\circ d $.
+\end{definition}
+
+For any local function $ f $ one has\[
+    df=\sum_{i}\frac{\partial f}{\partial x_i}dx_i+\sum_{i}\frac{\partial f}{\partial y_i}dy_i=\sum_{i}\frac{\partial f}{\partial z_i}dz_i+\sum_{i}\frac{\partial f}{\partial \bar{z}_i}d\bar{z}_i.
+\]
+
+\begin{lemma}
+    \begin{enumerate}[(i)]
+        \item $ d=\partial+\bar{\partial}. $
+        \item $ \partial^{2}=\bar{\partial}^{2}=0,\ \partial\bar{\partial}=-\bar{\partial}\partial. $
+        \item \[
+            \partial(\alpha\wedge\beta)=\partial(\alpha)\wedge\beta+(-1)^{p+q}\alpha\wedge\partial(\beta),\ \bar{\partial}(\alpha\wedge\beta)=\bar{\partial}(\alpha)\wedge\beta+(-1)^{p+q}\alpha\wedge\bar{\partial}(\beta)
+        \]for $ \alpha\in\mathcal{A}^{p,q}(U) $ and $ \beta\in\mathcal{A}^{r,s}(U) $.
+    \end{enumerate}
+\end{lemma}
+
+In the following, $ B $ shall denote a polydisc $ B_{\varepsilon} $ which can be unbounded, i.e. $ \varepsilon_{i}=\infty $ is allowed.\footnote{$ B_{\varepsilon}=\{(z_i)\in\mathbb{C}^n\mid |z_i|<\varepsilon_i,\ \forall i\}. $}
+
+\begin{lemma}[\textbf{$ \bar{\partial} $-Poincar\'{e} lemma on the open disc}]\label{plm}
+    If $ \alpha\in\mathcal{A}^{p,q}(B) $ is $ \bar{\partial} $-closed and $ q>0 $, then there exists $ \beta\in\mathcal{A}^{p,q-1}(B) $ with $ \alpha=\bar{\partial}\beta $.
+\end{lemma}
+
+\subsection{Global Situation}
+
+\begin{definition}
+    An \textbf{almost complex manifold} is a differentiable manifold $ X $ together with a vector bundle endomorphism\[
+        I:TX\longrightarrow TX,\ with\ I^2=-\mathrm{id}.
+    \]Here, $ TX $ is the real tangent bundle of the underlying real manifold. $ I $ is called the \textbf{almost complex structure} on $ X $.
+\end{definition}
+
+\begin{proposition}
+    Any complex manifold $ X $\footnote{Recall that transition maps on complex manifolds are all holomorphic.} admits a natural almost complex structure.
+\end{proposition}
+
+\begin{remark}
+    Not every real manifold of even dimension admits an almost complex structure.
+\end{remark}
+
+$ T_{\mathbb{C}}X:=TX\otimes\mathbb{C} $. We emphasize that even for a complex manifold $ X $ the bundle $ T_{\mathbb{C}}X $ is a priori just a complex vector bundle without a holomorphic structure.
+
+\begin{proposition}
+    \begin{enumerate}[(i)]
+        \item Let $ X $ be an almost complex manifold. Then\[
+            T_{\mathbb{C}}X=TX^{1,0}\oplus TX^{0,1}.
+        \]And\[
+            I|_{TX^{1,0}}=i\cdot\mathrm{id}\ and\ I|_{TX^{0,1}}=-i\cdot\mathrm{id}.
+        \]
+        \item If $ X $ is a complex manifold, then $ T^{1,0}X $ is naturally isomorphic (as a complex vector bundle) to the holomorphic tangent bundle $ \mathcal{T}_X $.
+    \end{enumerate}
+    
+\end{proposition}
+
+\begin{definition}
+    The bundles $ T^{1,0}X $ and $ T^{0,1}X $ are called the \textbf{holomorphic} respectively the \textbf{antiholomorphic tangent bundle} of the (almost) complex manifold $ X $.
+\end{definition}
+
+We tacitly use the isomorphism of vector bundles: $ (TX^{1,0})^*\cong(T^*X)^{1,0},\ (TX^{0,1})^*\cong(T^*X)^{0,1} $.
+
+\begin{definition}
+    Let $ X $ be an almost complex manifold.\[
+        \bigwedge\nolimits^{k}_{\mathbb{C}}X:=\bigwedge\nolimits^{k} T_{\mathbb{C}}^* X,\ \bigwedge\nolimits^{p,q}X:=(\bigwedge\nolimits^p T^* X^{1,0})\otimes_{\mathbb{C}}(\bigwedge\nolimits^q T^* X^{0,1}).
+    \]Their sheaves of sections are denoted by $ \mathcal{A}^{k}_{X,\mathbb{C}} $ and $ \mathcal{A}^{p,q}_{X} $, respectively. Elements in $ \mathcal{A}^{p,q}_{X}(X) $, i.e. global sections of $ \mathcal{A}^{p,q}_{X} $, are called forms of type (or bidegree) $ (p,q) $.
+\end{definition}
+
+\begin{proposition}\label{decom}
+    There exists a natural direct sum decomposition\[
+        \bigwedge\nolimits^k_{\mathbb{C}}X=\bigoplus_{p+q=k}\bigwedge\nolimits^{p,q}X\ and\ \mathcal{A}^k_{X,\mathbb{C}}=\bigoplus_{p+q=k}\mathcal{A}_{X}^{p,q}.
+    \]
+\end{proposition}
+
+\textbf{Projections} $ \varPi^{k}:=\mathcal{A}^*_{X,\mathbb{C}}\rightarrow\mathcal{A}^{k}_{X,\mathbb{C}} $ and $ \varPi^{p,q}:=\mathcal{A}^*_{X,\mathbb{C}}\rightarrow\mathcal{A}^{p,q}_{X} $.
+
+\begin{definition}
+    $ X $ almost complex manifold. $ d:\mathcal{A}^{k}_{X,\mathbb{C}}\rightarrow\mathcal{A}^{k+1}_{X,\mathbb{C}} $ is the $ \mathbb{C} $-linear extension of the exterior differential, then\[
+        \partial:=\varPi^{p+1,q}\circ d:\mathcal{A}^{p,q}_{X}\longrightarrow\mathcal{A}^{p+1,q}_{X},\ \bar{\partial}:=\varPi^{p,q+1}\circ d:\mathcal{A}^{p,q}_{X}\longrightarrow\mathcal{A}^{p,q+1}_{X}.
+    \]
+\end{definition}
+
+As above, $ \partial(\alpha\wedge\beta)=\partial(\alpha)\wedge\beta+(-1)^{p+q}\alpha\wedge\partial(\beta) $ holds, so does $ \bar{\partial} $.
+
+\textbf{Bundles of holomorphic $ p $-forms}: $ \varOmega^p_X $.
+
+\begin{proposition}\label{abc}
+    The space $ H^0(X,\varOmega^p_X) $ of holomorphic $ p $-forms on a complex manifold $ X $ is the subspace $ \{\alpha\in \mathcal{A}^{p,0}_X(X)\mid \bar{\partial}\alpha=0\} $.
+\end{proposition}
+
+We next wish to discuss what an almost complex structure needs in order to be induced by a complex one.
+
+\begin{proposition}
+    $ X $ almost complex manifold. Then the following two conditions are equivalent:\begin{enumerate}[(i)]
+            \item $ d\alpha=\partial(\alpha)+\bar{\partial}(\alpha),\ \forall\alpha\in\mathcal{A}^*_{X,\mathbb{C}}(X). $
+            \item On $ \mathcal{A}^{1,0}_{X,\mathbb{C}}(X) $ one has $ \varPi^{0,2}\circ d=0 $.
+    \end{enumerate}Both conditions hold true if $ X $ is a complex manifold.
+\end{proposition}
+
+\begin{definition}
+    An almost complex structure $ I $ on $ X $ is called \textbf{integrable} if above two equivalent conditions are satisfied. 
+\end{definition}
+
+\begin{proposition}
+    If $ I $ is an integrable almost complex structure, then $ \partial^2=\bar{\partial}^2=0 $ and $ \partial\bar{\partial}=-\bar{\partial}\partial $.
+\end{proposition}
+
+\begin{theorem}[\textbf{Newlander-Nierenberg}]
+    Any integrable almost complex structure is induced by a complex structure.
+\end{theorem}
+
+Thus, complex manifolds and differentiable manifolds endowed with an integrable almost complex structure are describing the same geometrical object!
+
+\begin{definition}
+    $ X $, endowed with an almost complex structure. Then the \textbf{(p,q)-Dolbeault cohomology} is the vector space\[
+        H^{p,q}(X):=H^q(\mathcal{A}^{p,\bullet}_X(X),\bar{\partial})=\frac{\mathrm{Ker}(\bar{\partial}:\mathcal{A}^{p,q}_X(X)\rightarrow\mathcal{A}^{p,q+1}_X(X))}{\mathrm{Im}(\bar{\partial}:\mathcal{A}^{p,q-1}_X(X)\rightarrow\mathcal{A}^{p,q}_X(X))}.
+    \]
+\end{definition}
+
+By $ \bar{\partial} $-Poincar\'{e} lemma~\ref{plm} and~\ref{abc} we have the following exact sequence of sheaves on $ X $:\[
+    0\longrightarrow\varOmega^{p}_X\longrightarrow\mathcal{A}^{p,0}_X\longrightarrow\mathcal{A}^{p,1}_X\longrightarrow\dots.
+\]
+
+\begin{lemma}
+    $ H^k(X,\mathcal{A}^{p,q}_X)=0,\ \forall k>0,p\geqslant 0,q\geqslant 0. $
+\end{lemma}
+
+\begin{proposition}
+    The Dolbeault cohomology of $ X $ computes the cohomology of the sheaf $ \varOmega^P_X $: $ H^{p,q}(X)\cong H^q(X,\varOmega^p_X) $.
+\end{proposition}
+
+\section{K\"{a}hler Manifolds}
+
+\subsection{K\"{a}hler Identities}
+
+Let $ X $ be a complex manifold. We donote the induced almost complex structure by $ I $. A local version of the following definition has already been discussed in Section 1.2.
+
+\begin{definition}
+    A Riemann metric $ g $ on $ X $ is an \textbf{hermitian structure} on $ X $ if $ \ \forall x\in X $ the scalar product $ g_x $ on $ T_x X $ is compatible with the almost complex structure $ I_x $. The induced real $ (1,1) $-form $ \omega:=g(I(\ ),(\ )) $ is called the \textbf{fundamental form}.
+\end{definition}
+
+It can be computed that locally the fundamental form $ \omega $ if of the form\[
+    \omega=\frac{i}{2}\sum_{i,j=1}^n h_{ij}dz_i\wedge d\bar{z}_j,
+\]where $ \forall x\in X $ the matrix $ (h_{ij}(x)) $ is a positive definite hermitian matrix. The complex manifold $ X $ endowed with an hermitian structure $ g $ is called an \textbf{hermitian manifold}. Note that the hermitian structure $ g $ is uniquely determined by $ I $ and $ \omega $: $ g(\ ,\ )=\omega(\ ,I(\ )) $.
+
+In analogy to the theory developed in Section 1.2, one defines the following vector bundle homomorphisms on any hermitian manifolds of complex dimension $ n $:
+\begin{enumerate}[(i)]
+    \item The \textbf{Lefschetz operator}\[
+        L:\bigwedge\nolimits^k X\rightarrow \bigwedge\nolimits^{k+2}X,\ \mathcal{A}^{k}_X\rightarrow\mathcal{A}^{k+2}_X,\ \alpha\rightarrow\alpha\wedge\omega
+    \]is an operator of degree $ 2 $, bidegree $ (1,1) $.
+    \item The \textbf{Hodge $ * $-operator}\[
+        *:\bigwedge\nolimits^k X\rightarrow \bigwedge\nolimits^{2n-k}X,\ \mathcal{A}^k_X\rightarrow\mathcal{A}^{2n-k}_X,\ \mathcal{A}^{p,q}_X\rightarrow\mathcal{A}^{n-q,n-p}_X
+    \]is induced by the metric $ g $ and the natural orientation of the complex manifold $ X $. Here, $ 2n $ is the real dimension of $ X $.
+    \item The \textbf{dual Lefschetz operator}\[
+        \varLambda:=*^{-1}\circ L\circ *:\bigwedge\nolimits^k X\rightarrow\bigwedge\nolimits^{k-2}X,\ \mathcal{A}^k_X\rightarrow\mathcal{A}^{k-2}_X
+    \]is an operator of degree $ -2 $ and depneds on the K\"{a}hler form $ \omega $ and the metric $ g $.
+\end{enumerate}
+
+All three operators can be extended $ \mathbb{C} $-linearly to the complexified bundles $ \bigwedge^k_{\mathbb{C}}X $. By abuse of notation, those will again be called $ L,*,\varLambda $, respectively.Also, \textbf{Keep in mind the connection between vector bundles and locally free sheaves.}
+
+$ P^{k}X:=\mathrm{Ker}(\varLambda:\bigwedge^{k}X\rightarrow\bigwedge^{k-2}X) $, $ P^k_{\mathbb{C}}X:=\mathrm{Ker}(\varLambda:\bigwedge^{k}_{\mathbb{C}}X\rightarrow\bigwedge^{k-2}_{\mathbb{C}}X) $.
+
+\begin{corollary}
+    $ (X,g) $ hermitian manifold. Then\begin{enumerate}[(i)]
+            \item \[
+                \bigwedge\nolimits^k X=\bigoplus_{i\geqslant 0} L^i(P^{k-2i}X)
+            \]
+            \item \[
+                \bigwedge\nolimits^k_{\mathbb{C}} X=\bigoplus_{i\geqslant 0}L^i(P^{k-2i}_{\mathbb{C}}X)
+            \]
+            \item \[
+                P^k_{\mathbb{C}}X=\bigoplus_{p+q=k}P^{p,q}X
+            \]
+            \item \[
+                \bigwedge\nolimits^{p,q}X=\bigoplus_{i\geqslant 0}L^i(P^{p-i,q-i}X)
+            \]
+        \end{enumerate}
+\end{corollary}
+
+Recall~\ref{decom}. Then\[
+    H:=\sum^{2n}_{k=0}(k-n)\cdot\varPi^k,\ \mathrm{\mathbf{I}}=\sum^{n}_{p,q=0}i^{p-q}\cdot\varPi^{p,q}.
+\]And $ \mathrm{\mathbf{I}} $ is also in fact a real operator on $ \mathcal{A}^*_X $ (cf.~\ref{rop}).
+
+We now pass from linear operators to differential operators. On an Hermitian manifold $ (X,g) $ the \textbf{adjoint operator $ d^* $} is defined as \[
+    d^*=-*\circ\ d\circ *:\mathcal{A}^k_{X,\mathbb{C}}\rightarrow \mathcal{A}^{k-1}_{X,\mathbb{C}}
+\]and the \textbf{Laplace operator} is given by\[
+    \varDelta=d^* d+dd^*.
+\]Analogously, we have 
+
+\begin{definition}
+    $ (X,g) $. \[
+        \partial^*:=-*\circ \bar{\partial}\circ *,\ \mathcal{A}^{p,q}_X\rightarrow\mathcal{A}^{p-1,q}_X;\ \bar{\partial}^*:=-*\circ\partial\circ *,\ \mathcal{A}^{p,q}_X\rightarrow\mathcal{A}^{p,q-1}_X.
+    \]
+\end{definition}
+
+\begin{lemma}
+    $ d^*=\partial^*+\bar{\partial}^*,\ \partial^2=\bar{\partial}^{*2}=0. $
+\end{lemma}
+
+\begin{definition}
+    $ (X,g) $.\[
+        \varDelta_{\partial}:=\partial^* \partial+\partial\partial^*,\ \mathcal{A}^{p,q}_X\rightarrow\mathcal{A}^{p,q}_X;\ \varDelta_{\bar{\partial}}:=\bar{\partial}^*\bar{\partial}+\bar{\partial}\bar{\partial}^*,\ \mathcal{A}^{p,q}_X\rightarrow\mathcal{A}^{p,q}_X.
+    \]
+\end{definition}
+
+All these linear and differential operators behave especially well if a further compatibility condition on the Riemann metric and the complex structure is imposed. This is the famous K\"{a}hler condition formulated for the first time by K\"{a}hler.
+
+\begin{definition}
+    A \textbf{K\"{a}hler structure} (or \textbf{K\"{a}hler metric}) is an hermitian structure $ g $ for which the fundamental form $ \omega $ is closed, i.e. $ d\omega=0 $. In this case, the fundamental form $ \omega $ is called the \textbf{K\"{a}hler form}.
+\end{definition}
+
+The complex manifold endowed with the K\"{a}hler structure is called a \textbf{K\"{a}hler manifold}. Generally, when a complex manifold admits K\"{a}hler structures which may be without actually fixing one, we call it a K\"{a}hler manifold.
+
+\begin{remark}
+    K\"{a}hler structures do not always exist.
+\end{remark}
+
+\begin{example}
+    Projective manifolds are K\"{a}hler.
+\end{example}
+
+\begin{proposition}[\textbf{K\"{a}hler identities}]
+    $ (X,g) $ a K\"{a}hler manifold.\begin{enumerate}[(i)]
+        \item $ [\bar{\partial},L]=[\partial,L]=0,\ [\partial^*,\varLambda]=[\bar{\partial}^*,\varLambda]=0. $
+        \item $ [\bar{\partial}^*,L]=i\partial,\ [\partial^*,L]=-i\bar{\partial};\ [\varLambda,\bar{\partial}]=-i\partial^*,\ [\varLambda,\partial]=i\bar{\partial}^*. $
+        \item $ \varDelta_{\partial}=\varDelta_{\bar{\partial}}=\frac{1}{2}\varDelta $ and $ \varDelta $ commutes with $ *,\ \partial,\ \bar{\partial},\ \partial^*,\ \bar{\partial}^*,\ L,\ \varLambda $.
+    \end{enumerate}
+\end{proposition}
+
+\subsection{Hodge structures}
+
+Let's digeress a bit and talk about the general Hodge structures. We are interested in rational and integral Hodge structures. In this subsection, $ V $ always stands for either a free $ \mathbb{Z} $-module of finite rank or a finite-dimensional vector space over $ \mathbb{Q} $. By $ V_{\mathbb{R}} $ and $ V_{\mathbb{C}} $ we dontoe the real and complex vector spaces obtained by scalar extension. And we consider $ V_{\mathbb{C}} $ as a complex vector space with almost complex structure induced by multiplying $ i $.
+
+\begin{definition}
+    A \textbf{Hodge structure of weight $ n\in \mathbb{Z} $} on $ V $ is given by a direct sum decomposition of the complex vector space $ V_{\mathbb{C}} $\[
+        V_{\mathbb{C}}=\bigoplus_{p+q=n}V^{p,q}
+    \]such that $ \overline{V^{p,q}}=V^{q,p} $.
+\end{definition}
+
+Note that $ n $ can be negetive!
+
+For a Hodge structure $ V $ (integral or rational) of even weight $ n=2k $ the intersection $ V\cap V^{k,k} $ is called the space of \textbf{Hodge classes} in $ V $.
+
+\begin{definition}
+    A \textbf{sub-Hodge structure} of a Hodge structure $ V $ of weight $ n $ is given by a $ \mathbb{Q} $-linear subspace (resp. submodule) $ V'\subset V $ such tha the Hodge structure on $ V $ induces a Hodge structure on $ V' $, i.e. $ V_{\mathbb{C}}'=\bigoplus(V_{\mathbb{C}}'\cap V^{p,q}) $.
+
+    A sub-Hodge structure $ V'\subset V $ of an integral Hodge structure $ V $ is called primitive if $ V/V' $ is torsion free. Any Hodge structure that doesn't contain any non-trivial proper and primitive (in the integral case) Hodge structure $ V'\subset V $ is called \textbf{irreducible}.
+\end{definition}
+
+\begin{example}
+    The \textbf{Tate Hodge structure} $ \mathbb{Z}(1):= (2\pi i)\mathbb{Z} $ is the Hodge structure of weight $ -2 $, on which $ \mathbb{Z}(1)_{\mathbb{C}}=\mathbb{C}=\mathbb{Z}(1)^{-1,-1} $. So $ \mathbb{Z}(1)^{-2,0} $, $ \mathbb{Z}(1)^{0,-2} $ and all other components are all zero. Similarly, one defines the rational Tate Hodge structure $ \mathbb{Q}(1) $.
+\end{example}
+
+Most of the standard linear algebra constructions have analogues in Hodge theory.
+
+\begin{enumerate}[(i)]
+    \item The \textbf{direct sum} $ V\oplus W $ of two Hodge structures $ V $ and $ W $ of the same weight $ n $ is endowed again with a Hodge structure of weight $ n $ by setting\[
+        (V\oplus W)^{p,q}=V^{p,q}\oplus W^{p,q}.
+    \]
+    \item The \textbf{tensor product} $ V\otimes W $ of Hodge structures $ V $ and $ W $ of weight $ n $ and $ m $, respectively, comes naturally with a Hodge structure of weight $ n+m $ by putting\[
+        (V\otimes W)^{p,q}=\bigoplus_{p_1+p_2=p,q_1+q_2=q}V^{p_1,q_1}\otimes W^{p_2,q_2}.
+    \]
+    \item For a Hodge structure $ V $ of weight $ n $, one defines a Hdoge structure of weight $ -n $ on the dual $ V^*:=\mathrm{Hom}_{\mathbb{Z}}(V,\mathbb{Z}) $ (or $ =\mathrm{Hom}_{\mathbb{Q}}(V,\mathbb{Q}) $ if $ V $ is rational) by\[
+        V^{*-p,-q}:=\mathrm{Hom}_{\mathbb{C}}(V^{p,q},\mathbb{C})\subset \mathrm{Hom}_{\mathbb{C}}(V_{\mathbb{C}},\mathbb{C})=V^*_{\mathbb{C}}.
+    \]
+\end{enumerate}
+
+\begin{example}
+    Applying to the Tate Hodge structure, we get the Hodge structure $ \mathbb{Z}(-1):=\mathbb{Z}(1)^* $ of weight $ 2 $ and the Hodge structures $ \mathbb{Z}(k):=\mathbb{Z}(1)^{\otimes k} $ for $ k>0 $ and $ \mathbb{Z}(k):=\mathbb{Z}(-1)^{\otimes -k} $ for $ k<0 $, which are of weight $ -2k $. Explicitly, $ \mathbb{Z}(k)_{\mathbb{C}}=\mathbb{C}=\mathbb{Z}(k)^{-k,-k} $, with other components being zero.
+    
+    For an arbitrary integral or rational Hodge structure $ V $ of weight $ n $ one defines the Hodge structure of weight $ n-2k $\[
+        V(k):=V\otimes \mathbb{Z}(k)\ or\ V(k):=V\otimes \mathbb{Q}(k)
+    \]respectively, for which $ V(k)^{p,q}=V^{p+k,q+k} $.
+\end{example}
+
+\subsection{Hodge Theory on K\"{a}hler Manifolds}
+
+In this section we will focus on compact hermitian and K\"{a}hler manifolds. The compactness allows us to apply Hodge theory for real manifolds.
+
+If $ X $ is a complex manifold with an hermitian structure $ g $, we denote the hermitian extension of $ g $ to $ \bigwedge^*_{\mathbb{C}}X $ by $ g_{\mathbb{C}} $ (cf.\ \ref{gc} and footnote~\ref{dual}).
+
+\begin{definition}
+    $ (X,g) $ a compact hermitian manifold. Define a \textbf{hermitian product} on $ \mathcal{A}^*_{X,\mathbb{C}}(X) $ by\[
+        (\alpha,\beta):=\int_{X} g_{\mathbb{C}}(\alpha,\beta)*\mathrm{1}.
+    \]
+\end{definition}
+
+\begin{proposition}
+    $ (X,g) $. Following decompositions are orthogonal with respect to $ (\ ,\ ) $:\begin{enumerate}[(i)]
+        \item $ \mathcal{A}^*_{X,\mathbb{C}}(X)=\bigoplus_k\mathcal{A}^k_{X,\mathbb{C}}(X) $
+        \item $ \mathcal{A}^k_{X,\mathbb{C}}=\bigoplus_{p+q=k}\mathcal{A}^{p,q}_{X}(X) $
+        \item $ \mathcal{A}^k_{X,\mathbb{C}}(X)=\bigoplus_{i\geqslant 0}L^i \mathcal{P}^{k-2i}_{X,\mathbb{C}}(X). $
+    \end{enumerate}Here $ \mathcal{P}^k_{X,\mathbb{C}} $ is the sheaf of complex primitve $ k $-form on $ X $.
+\end{proposition}
+
+\begin{lemma}
+    $ (X,g) $. Then with respect to hermitian product $ (\ ,\ ) $ the operators $ \partial^*,\ \bar{\partial}^*\ ,d^* $ are the formal adjoints of $ \partial,\ \bar{\partial},\ d $, respectively.
+\end{lemma}
+
+\begin{definition}
+    Let $ (X,g) $ be an hermitian complex manifold. A form $ \alpha\in\mathcal{A}^k_{X,\mathbb{C}}(X) $ is called \textbf{$ \bar{\partial} $-harmonic} if $ \varDelta_{\bar{\partial}}(\alpha)=0 $. Moreover, \[
+        \mathcal{H}^k_{\bar{\partial}}(X,g):=\{\alpha\in\mathcal{A}^k_{X,\mathbb{C}}(X)\mid \varDelta_{\bar{\partial}}(\alpha)=0\},\ \mathcal{H}^{p,q}_{\bar{\partial}}(X,g):=\{\alpha\in\mathcal{A}^{p,q}_{X}(X)\mid \varDelta_{\bar{\partial}}(\alpha)=0\}.
+    \]
+    Analogously, \textbf{$ \partial $-harmonic} forms, $ \mathcal{H}^k_{\partial}(X,g),\ \mathcal{H}^{p,q}_{\partial}(X,g) $ and \textbf{(d-)harmonic} forms, $ \mathcal{H}^k(X,g):=\{\alpha\in\mathcal{A}^k_{X}(X)\mid \varDelta(\alpha)=0\},\ \mathcal{H}^k_{\mathbb{C}}(X,g):=\{\alpha\in\mathcal{A}^k_{X,\mathbb{C}}(X)\mid \varDelta(\alpha)=0\},\ \mathcal{H}^{p,q}(X,g):=\{\alpha\in\mathcal{A}^{p,q}_{X}(X)\mid \varDelta(\alpha)=0\} $.
+\end{definition}
+
+\begin{lemma}\label{aaa}
+    $ (X,g) $ a compact hermitian manifold. A form $ \alpha $ is $ \bar{\partial} $-harmonic (resp. $ \partial $-harmonic, harmonic) if and only if $ \bar{\partial}\alpha=\bar{\partial}^*\alpha=0 $ (resp. $ \partial\alpha=\partial^*\alpha=0 $, $ d\alpha=d^*\alpha=0 $).
+\end{lemma}
+
+\begin{proof}
+    $ (\varDelta_{\bar{\partial}}(\alpha),\alpha)=\|\bar{\partial}^*(\alpha)\|^2+\|\bar{\partial}(\alpha)\|^2 $.
+\end{proof}
+
+\begin{proposition}
+    $ (x,g) $ an hermitian manifold, not necessarily compact. Then\begin{enumerate}[(i)]
+        \item $ \mathcal{H}^k_{\bar{\partial}}(X,g)=\bigoplus_{p+q=k}\mathcal{H}^{p,q}_{\bar{\partial}}(X,g),\ \mathcal{H}^k_{\partial}(X,g)=\bigoplus_{p+q=k}\mathcal{H}^{p,q}_{\partial}(X,g) $.
+        \item If $ (X,g) $ is K\"{a}hler then $ \mathcal{H}^{p,q}_{\partial}(X,g)=\mathcal{H}^{p,q}_{\bar{\partial}}(X,g)=\mathcal{H}^{p,q}(X,g) $, $ \mathcal{H}^k_{\bar{\partial}}(X,g)=\mathcal{H}^k_{\partial}(X,g)=\mathcal{H}^k_{\mathbb{C}}(X,g) $ and $ \mathcal{H}^k_{\mathbb{C}}(X,g)=\bigoplus_{p+q=k}\mathcal{H}^{p,q}(X,g) $.
+    \end{enumerate}
+\end{proposition}
+
+\begin{remark}
+    For an arbitrary hermitian manifold, the bidegeree decomposition of $ \mathcal{H}^{k}_{\mathbb{C}}(X,g) $ may not hold.
+\end{remark}
+
+\begin{remark}\label{sd}
+    \begin{enumerate}[(i)]
+        \item Let $ (X,g) $ be an hermitian manifold, not necessarily compact. Then by calculation we get $ * $ is commutative with $ \varDelta $. Using this, $ * $ induces $ \mathbb{C} $-linear isomorphism\[
+            *:\mathcal{H}^{p,q}(X,g)\cong\mathcal{H}^{n-q,n-p}(X,g).
+        \]Also note that complex conjugation interchange $ \mathcal{H}^{p,q}(X,g) $ and $ \mathcal{H}^{q,p}(X,g) $.
+        \item Let $ (X,g) $ be a compact hermitian manifold. Then the pairing\[
+            \mathcal{H}^{p,q}(X,g)\times\mathcal{H}^{n-p,n-q}(X,g)\longrightarrow \mathbb{C},\ (\alpha,\beta)\longmapsto\int\nolimits_{X}\alpha\wedge\beta
+        \]is non-degenerate. Indeed, if $ 0\neq\alpha\in\mathcal{H}^{p,q}(X,g) $ then $ *\bar{\alpha}\in\mathcal{H}^{n-p,n-q}(X,g) $ and $ \int\alpha\wedge*\bar{\alpha}=\|\alpha\|^2>0 $. This yields \textbf{Serre duality} on the level of harmonic forms:\[
+            \mathcal{H}^{p,q}(X,g)\cong\mathcal{H}^{n-p,n-q}(X,g)^*.
+        \]
+        \item If $ (X,g) $ is a (possibly non-compact) K\"{a}hler manifold of complex dimension $ n $, then for $ \forall k\geqslant n,\ 0\geqslant p\geqslant k $, the Lefschetz operator induces an isomorphism\[
+            L^{n-k}:\mathcal{H}^{p,k-p}(X,g)\cong\mathcal{H}^{n-k+p,n-p}(X,g).
+        \]Here one uses $ [L,\varDelta]=0 $, $ [\varLambda,\varDelta]=0 $ and some representation theory to prove the bijection. However, we cannot expect anything for arbitrary hermitian manifolds, as the product of an harmonic form with the fundamental form will hardly be closed (let alone harmonic) if the fundamental form is not closed.
+    \end{enumerate}
+\end{remark}
+
+\begin{theorem}[\textbf{Hodge decomposition}]
+    Let $ (X,g) $ be a compact hermitian manifold. Then there exist two natural orthogonal decompositions\[
+        \mathcal{A}^{p,q}_{X}(X)=\partial\mathcal{A}^{p,q-1}_{X}(X)\oplus\mathcal{H}^{p,q}_{\partial}(X,g)\oplus\partial^*\mathcal{A}^{p+1,q}_{X}(X)
+    \]and\[
+        \mathcal{A}^{p,q}_{X}(X)=\bar{\partial}\mathcal{A}^{p,q-1}_{X}(X)\oplus\mathcal{H}^{p,q}_{\partial}(X,g)\oplus\bar{\partial}^*\mathcal{A}^{p+1,q}_{X}(X).
+    \]
+\end{theorem}
+
+Whereas the orthogonality of the decomposition is easy to verify, the crucial fact is the existence of the direct sum decomposition.
+
+\begin{corollary}
+    $ (X,g) $ a compact hermitian manifold. Then the canonical projection $ \mathcal{H}^{p,q}_{\bar{\partial}}(X,g)\rightarrow H^{p,q}(X) $ is an isomorphism.
+\end{corollary}
+
+\begin{proof}
+    Since any $ \alpha\in\mathcal{H}^{p,q}_{\bar{\partial}}(X,g) $ is $ \bar{\partial} $-closed (\ref{aaa}), mapping $ \alpha $ to its Dolbeault cohomology class $ [\alpha]\in H^{p,q}(X) $ defines a map $ \mathcal{H}^{p,q}_{\bar{\partial}}(X,g)\rightarrow H^{p,q}(X) $. Moreover, $ \mathrm{Ker}(\bar{\partial}:\mathcal{A}^{p,q}_{X}(X)\rightarrow\mathcal{A}^{p,q+1}_{X}(X))=\bar{\partial}(\mathcal{A}^{p,q-1}_{X})\oplus\mathcal{H}^{p,q}_{\bar{\partial}}(X,g) $, as $ \bar{\partial}\bar{\partial}^*\beta=0 $ if and only if $ \bar{\partial}^*\beta=0 $. Indeed, $ \bar{\partial}\bar{\partial}^*\beta=0 $ implies $ 0=(\bar{\partial}\bar{\partial}^*\beta,\beta)=\|\bar{\partial}^*\beta\|^2 $. Thus $ \mathcal{H}^{p,q}_{\bar{\partial}}(X,g)\rightarrow H^{p,q}(X) $ is an isomorphism.
+\end{proof}
+
+\begin{corollary}
+    Let $ (X,g) $ be a compact K\"{a}hler manifold. Then there exists a decomposition\[
+        H^k(X,\mathbb{C})=\bigoplus_{p+q=k}H^{p,q}(X).
+    \]This decomposition doesn't depend on the chosen K\"{a}hler structure.
+    Moreover, with respect to complex conjugation on $ H^*(X,C)=H^*(X,\mathbb{R})\otimes\mathbb{C} $ one has $ \overline{H^{p,q}(X)}=H^{q,p}(X) $ and Serre duality yields $ H^{p,q}(X)\cong H^{n-p,n-q}(X)^* $.
+\end{corollary}
+
+\begin{proof}
+    The decomposition is induced by\[
+        H^k(X,\mathbb{C})=\mathcal{H}^k_{\mathbb{C}}(X,g)=\bigoplus_{p+q=k}\mathcal{H}^{p,q}(X,g)=\bigoplus_{p+q=k}H^{p,q}(X),
+    \]which a priori might depend on the K\"{a}hler metric $ g $. Let $ g' $ be a second K\"{a}hler metric. The two groups $ \mathcal{H}^{p,q}(X,g) $ and $ \mathcal{H}^{p,q}(X,g') $ are naturally identified by $ \mathcal{H}^{p,q}(X,g)\cong H^{p,q}(X)\cong \mathcal{H}^{p,q}(X,g') $. Let $ \alpha\in\mathcal{H}^{p,q}(X,g) $ and denote the corresponding element in $ \mathcal{H}^{p,q}(X,g') $ by $ \alpha' $. We have to show that the associated de Rham cohomology classes $ [\alpha],\ [\alpha']\in H^k(X,\mathbb{C}) $ coincide.
+
+    Since $ \alpha $ and $ \alpha' $ induce the same element in $ H^{p,q}(X) $, they differ by some $ \bar{\partial}\gamma $, i.e. $ \alpha'=\alpha+\bar{\partial}\gamma $. But then $ d\bar{\partial}\gamma=d(\alpha'-\alpha)=0 $. Moreover, $ \bar{\partial}\gamma $ is orthogonal to $ \mathcal{H}^k_{\mathbb{C}}(X,g) $. By Hodge decomposition with respect to the ordinary exterior differential $ d $ this yields $ \bar{\partial}\gamma\in d(\mathcal{A}^{k-1}_{X,\mathbb{C}}(X)) $. Thus, $ [\alpha]=[\alpha']\in H^k(X,\mathbb{C}) $. For the second assertion see~\ref{sd}.
+\end{proof}
+
+\subsection{Lefschetz Theorems}
+
+Let $ X $ be a compact K\"{a}hler manifold. $ \mathcal{O} $ is the sheaf of holomorphic functions on $ X $. $ \mathcal{O}^* $ is the sheaf of nowhere vanishing holomorphic functions on $ X $.
+
+Recall that the exponential sequence is a natural short exact sequence of sheaves:\[
+    0\longrightarrow \mathbb{Z}\longrightarrow\mathcal{O}\longrightarrow\mathcal{O}^*\longrightarrow 0.
+\]Take the long exact sequence of sheaf cohomology we get a canonical boundary map $ Pic(X)\cong H^1(X,\mathcal{O}^*)\rightarrow H^2(X,\mathbb{Z}) $ which can be composed with $ H^2(X,\mathbb{Z})\rightarrow H^2(X,\mathbb{C}) $ induced by the inclusion $ \mathbb{Z}\subset\mathbb{C} $.
+
+\begin{lemma}
+    Let $ X $ be a compact K\"{a}hler manifold. The two natural maps $ H^k(X,\mathbb{C})\rightarrow H^k(X,\mathcal{O}) $, induced by $ \mathbb{C}\subset\mathcal{O} $, and $ H^k(X,\mathbb{C})\rightarrow H^{0,k}(X) $, given by the bidegree decomposition, coincide.
+\end{lemma}
+
+So image of $ Pic(X) $ in $ H^2(X,\mathbb{C}) $ is contained in $ \mathrm{Ker}(H^2(X,\mathbb{C})\rightarrow H^2(X,\mathcal{O}))=\mathrm{Ker}(\varPi^{0,2}:H^2(X,\mathbb{C})\rightarrow H^{0,2}(X))=H^{2,0}(X)\oplus H^{1,1}(X) $.
+
+\[
+    H^{1,1}(X,\mathbb{Z}):=\mathrm{Im}\big(H^2(X,\mathbb{Z})\longrightarrow H^2(X,\mathbb{C})\big)\cap H^{1,1}(X).
+\]
+
+\begin{proposition}[\textbf{Lefschetz theorem on $ (1,1) $-classes}]
+    X a compact K\"{a}hler manifold. Then $ Pic(X)\rightarrow H^{1,1}(X,\mathbb{Z}) $ is surjective.
+\end{proposition}
+
+\begin{corollary}
+    Let $ (X,g) $ be a compact K\"{a}hler manifold. Then the Lefschetz operator $ L $ adn its dual $ \varLambda $ define natural operators on cohomology\[
+        L: H^{p,q}(X)\longrightarrow H^{p+1,q+1}(X),\ \varLambda:H^{p,q}(X)\longrightarrow H^{p-1,q-1}(X).
+    \]Moreover, $ L $ and $ \varLambda $ only depend on the K\"{a}hler class $ [\omega]\in H^{1,1}(X)\cap H^2(X,\mathbb{R}) $.
+\end{corollary}
+
+\begin{definition}
+    Let $ (X,g) $ be a compact K\"{a}hler manifold. Then the \textbf{primitive cohomology} is defined as \[
+        H^k_{\mathfrak{p}}(X,\mathbb{R}):=\mathrm{Ker}\big(\varLambda: H^k(X,\mathbb{R})\longrightarrow H^{k-2}(X,\mathbb{R})\big),\ H^k_{\mathfrak{p}}(X,\mathbb{C}):=\mathrm{Ker}\big(\varLambda: H^k(X,\mathbb{C})\longrightarrow H^{k-2}(X,\mathbb{C})\big)
+    \]and\[
+        H^{p,q}_{\mathfrak{p}}(X):=\mathrm{Ker}\big(\Lambda:H^{p,q}(X)\longrightarrow H^{p-1,q-1}(X)\big).
+    \]
+\end{definition}
+
+$ \varLambda $ respects the bidegeree decomposition, so $ H^k_{\mathfrak{p}}(X,\mathbb{C})=\bigoplus_{p+q=k}H^{p,q}_{\mathfrak{p}}(X) $.
+
+\begin{proposition}[\textbf{Hard Lefschetz theorem}]
+    Let $ (X,g) $ be a compact K\"{a}hler manifold of complex dimension $ n $. Then for $ k\leqslant n $\[
+        L^{n-k}: H^k(X,\mathbb{R})\cong H^{2n-k}(X,\mathbb{R}),\ H^k(X,\mathbb{C})\cong H^{2n-k}(X,\mathbb{C})
+    \]and for $ \forall k $\[
+        H^k(X,\mathbb{R})=\bigoplus_{i\geqslant 0}L^i H^{k-2i}_{\mathfrak{p}}(X,\mathbb{R}),\ H^k(X,\mathbb{C})=\bigoplus_{i\geqslant 0}L^i H^{k-2i}_{\mathfrak{p}}(X,\mathbb{C}).
+    \]Besides, both assertions respect the bidegree decomposition, i.e.\[
+        L^{n-k}:H^{p,q}(X)\cong H^{n-q,n-p}(X),\ H^{p,q}(X)=\bigoplus_{i\geqslant 0}L^i H^{p-i,q-i}_{\mathfrak{p}}(X).
+    \]
+\end{proposition}
+
+\begin{proof}
+    Consider on the level of harmonic forms (\ref{sd}) and use previous results (\ref{prd}).
+\end{proof}
+
+\begin{definition}
+    \textbf{Hodge numbers} $ h^{p,q}(X):=\mathrm{dim}_{\mathbb{C}}(H^{p,q}(X)) $.
+\end{definition}
+
+The Hodge numbers of a compact K\"{a}hler manifold $ X $ of complex dimension $ n $ are visualized by the \textbf{Hodge diamond}, whose symmetry is given by Serre duality, Hodge $ * $-operator and conjugation.
+
+\subsection{Polarized Hodge Structure}
+
+The intersection pairing on the middle primitive cohomology or more geneally the Hodge-Riemann pairing with respect to a (rational or integral) K\"{a}hler class is formalized by the notion of a polarization.
+
+Now $ V $ again stands for either a free $ \mathbb{Z} $-module of finite rank or a finite-dimensional vector space over $ \mathbb{Q} $. For the following we shall need the notion of the \textbf{Weil operator} $ C $, which acts on $ V^{p,q} $ by multiplication with $ i^{p-q} $. It clerly preserves the real vector space $ (V^{p,q}\oplus V^{q,p})\cap V_{\mathbb{R}} $.
+
+\begin{definition}
+    A \textbf{polarization} of a rational Hodge structure $ V $ of weight $ n $ is a morphism of Hodge structures\[
+        \psi:V\otimes V\longrightarrow \mathbb{Q}(-n)
+    \]such that its $ \mathbb{R} $-linear extension yields a positive definite symmetric form\[
+        (v,w)\longmapsto \psi(v,Cw)
+    \]on the real part of $ V^{p,q}\oplus V^{q,p} $. Then $ (V,\psi) $ is called a \textbf{polarized Hodge structure}. A Hodge structure is called \textbf{polarizable} if it admits a polarization. An isomorphism $ V_1\cong V_2 $ of Hodge structures that is compatible with given polarization $ \psi_1 $ resp. $ \psi_2 $ is called a \textbf{Hodge isometry}.
+\end{definition}
+Note that $ \psi $ as a morphism of Hodge structures is a  pairing on $ V $ whosse $ \mathbb{C} $-linear extension has the property that $ \psi(v_1,v_2)=0 $ for $ v_i\in V^{p_i,q_i} $ except possibly when $ (p_1,q_1)=(q_2,p_2) $. Integral polarizations are defined analogously.
+
+We come back to the Hodge structure $ H^n(X,\mathbb{C}) $ of a compact K\"{a}hler manifold. 
+
+\begin{proposition}[\textbf{Hodge-Riemann bilinear relation}]
+    Let $ (X,g) $ be a compact K\"{a}hler manifold of complex dimension $ d $ with K\"{a}hler class $ [\omega] $ and let $ 0\neq \alpha \in H^{p,q}_{\mathfrak{p}}(X) $. Then\[
+        i^{p-q}(-1)^{\frac{(p+q)(p+q-1)}{2}}\int\nolimits_X \alpha\wedge\bar{\alpha}\wedge[\omega]^{d-(p+q)}>0.
+    \]
+\end{proposition}
+
+Then define on $ H^n(X,\mathbb{C}) $ with $ n\leqslant d $ the \textbf{Hodge-Riemann pairing}\[
+    (v,w)\longmapsto (-1)^{\frac{n(n-1)}{2}}\int\nolimits_{X}v\wedge \bar{w}\wedge [\omega]^{d-n},
+\]which defines a polarization on $ H^n_{\mathfrak{p}}(X,\mathbb{C}) $.
+
+To be consistent with the above definition, one should take suitable $ [\omega]\in H^2(X,\mathbb{Q}) $ and make some argument changing the base field from $ \mathbb{C} $ to $ \mathbb{Q} $. But in general rational K\"{a}hler class may not exist, in this case we can only modify the above argument from $ \mathbb{C} $ to $ \mathbb{R} $.
+
+% \newpage
+
+% \begin{thebibliography}{99}
+%     \bibitem{a}作者. \emph{文献}[M]. 地点:出版社,年份.
+%     \bibitem{b}作者. \emph{文献}[M]. 地点:出版社,年份.
+% \end{thebibliography}
+
+% \newpage
+
+% \begin{appendices}
+%     \renewcommand{\thesection}{\Alph{section}}
+%     \section{附录标题}
+%         这里是附录. 
+% \end{appendices}
+
+\end{document}

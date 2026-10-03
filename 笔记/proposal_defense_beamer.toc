@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Preliminaries}{3}{0}{1}
+\beamer@sectionintoc {2}{Smooth Calabi-Yau Manifolds}{9}{0}{2}
+\beamer@sectionintoc {3}{Threefold Calabi-Yau Varities with ODP}{15}{0}{3}
+\beamer@sectionintoc {4}{Expected Outcomes and References}{20}{0}{4}

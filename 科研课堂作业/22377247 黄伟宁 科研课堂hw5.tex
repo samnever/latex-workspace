@@ -1,0 +1,68 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{科研课堂课程作业}}
+\author{黄伟宁}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\\\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\\\par}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+求方程$ y''=xy+e^{y'} -1 $的无穷小$ \xi,\eta  $.
+\end{problem}
+
+\begin{solution}
+    对比例2.4的方程可以可以得到$ \xi,\eta $ 需要满足下面的方程
+    \begin{align*}
+         & [\eta_{xx} +(\eta_{y} -2\xi_{x} )(xy-1)-\xi y-\eta x]+[2\eta_{xy} -\xi_{xx} -3xy\xi_{y} ]z+(\eta_{yy} -2\xi_{xy} )z^{2} -\xi_{yy} z^{3} \\
+         & =e^{z} [(2\xi_{x} -\eta_{y} +\eta_{x} )+(3\xi_{y} +\eta_{y} -\xi_{x} )z-\xi_{y} z^{2} ]
+    \end{align*}
+    类似地,有$ \xi_{xx} =\eta_{yx} =\eta_{xy} =-\xi_{xy} =0 $.于是
+    $$
+        \xi(x,y)=c_{1} x+c_{2} ,\eta(x,y)=c_{1} (y-x)+c_{3}
+    $$
+    将表达式代入先前方程计算可得
+    $$
+        c_{1} =c_{2} =c_{3} =0
+    $$
+    即$ \xi(x,y)=0 , \eta(x,y)=0$,所以不存在OPG使得方程保持形式不变,另外该方程有平凡解$ y=0 $.
+\end{solution}
+
+\begin{problem}
+验证例2.3的方程在所得8个OPG下保持不变.
+\end{problem}
+
+\begin{solution}
+    计算可得8个OPG分别是
+    \begin{align*}
+         & \xi=c_{1} xy,\eta=c_{1} y^{2} ; \\
+         & \xi=c_{2} y,\eta=0;             \\
+         & \xi=c_{3} x^{2} ,\eta=c_{3} xy; \\
+         & \xi=c_{4} x,\eta=0;             \\
+         & \xi=c_{5} ,\eta=0;              \\
+         & \xi=0,\eta=c_{6} y;             \\
+         & \xi=0,\eta=c_{7} x;             \\
+         & \xi=0,\eta=c_{8} .
+    \end{align*}
+    不难验证以上8个OPG都满足方程(19),从而例2.3的方程在8个OPG下形式保持不变.
+\end{solution}
+
+\begin{problem}
+若定义无穷小生成子$ V=\xi\frac{\partial }{\partial x}+\eta\frac{\partial }{\partial y} $ ,验证例2.3的8个$ V_{i}(c_{i} =1,c_{j} =0,j\neq i)  $ 是否构成李代数.
+\end{problem}
+
+\begin{solution}
+    略.
+    % 我怎么就只有8个OPG了,我怎么就生成了
+\end{solution}
+
+\end{document}

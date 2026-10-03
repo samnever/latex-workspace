@@ -1,0 +1,276 @@
+\chapter{复几何方法下的形变理论}
+
+\section{Maurer-Cartan方程}
+
+复流形按其定义是一个微分流形 $M$，配备了一族坐标卡，其转移函数是全纯的。众所周知，这种由坐标卡定义的复结构也可以由一个可积的近复结构 $I$ 来刻画，$I$ 就是切丛的一个满足某种非线性可积条件的自同态。在本节中，我们将采用后一种对复结构的描述。我们将解释如何将 $M$ 上的不同复结构 $I$，或者更准确地说，将给定复结构的（小）形变视为一个整体。
+
+我们从所有近复结构的集合\[
+    \mathcal{A}_{ac}(M):=\{I\mid I^2=-\mathrm{id}\}\subset \mathrm{End}(TM)
+\]出发。首先考虑一个任意的 $I\in \mathcal{A}_{ac}(M)$。回想一下，一个近复结构 $I$ 由切丛的分解 $T_{\mathbb{C}}M=T^{1,0}\oplus T^{0,1}$ 唯一确定，其中 $I=i\cdot \mathrm{id}$ 作用在 $T^{1,0}$ 上，$I=-i\cdot\mathrm{id}$ 作用在 $T^{0,1}$ 上。事实上，给出 $T^{0,1}\subset T_{\mathbb{C}}M$ 就足够了，因为 $T^{1,0}=\overline{T^{0,1}}$。
+
+如果 $I(t)$ 是一族连续的近复结构，且 $I(0)=I$，那么就有一族连续的分解 $T_{\mathbb{C}}M=T^{1,0}_t\oplus T^{0,1}_t$，等价地，一族子空间 $T^{0,1}_t\subset T_{\mathbb{C}}M$。
+
+因此，对于很小的 $t$，$I$ 的形变 $I(t)$ 可以通过一个映射\[
+    \phi(t):T^{0,1}\rightarrow T^{1,0}\ \text{满足}\ v+\phi(t)(v)\in T^{0,1}_t
+\]来编码。我们用 $T^{1,0}$ 和 $T^{0,1}$ 表示由 $I$ 定义的子丛。
+
+反过来，如果给定了 $\phi(t)$，则对于很小的 $t$ 可以定义\[
+    T^{0,1}_t:=(\mathrm{id}+\phi(t))(T^{0,1}).
+\]必须施加 $t$ “很小”的条件，以保证这样定义的 $T^{0,1}_t$ 具有正确的维数。更准确地说，$t$ 很小意味着 $T^{0,1}_t\subset T_{\mathbb{C}}\rightarrow T^{0,1}$ 是同构，这当然是一个开性质，至少在紧流形上如此。为避免非紧带来的问题，从现在起我们假定 $M$ 是紧的。
+
+现在考虑给定 $\phi$ 的幂级数展开\[
+    \phi(t)=\phi_0+\phi_1 t+\phi_2 t^2+\cdots
+\]则 $\phi_0=0$，而高阶系数 $\phi_{i>0}$ 将被视为 $\bigwedge^{0,1}\otimes T^{1,0}$ 的截面。
+
+接下来，我们研究变形后的近复结构 $I(t)$ 的可积性。从现在起，我们假设 $I$ 是可积的，并用 $X$ 表示复流形 $(M,I)$。特别地，高阶系数 $\phi_i$ 对应于 $\mathcal{A}^{0,1}(\mathcal{T}_X)$ 中的元素。
+
+$I(t)$ 的可积性条件可以表示为\[
+    [T^{0,1}_t,T^{0,1}_t]\subset T^{0,1}_t.
+\]
+
+让我们用 $\phi(t)$ 重新表述这个条件。首先注意，在 $X=(M,I)$ 的全纯切丛 $\mathcal{T}_X$ 上存在 $\bar{\partial}$-算子，它可以特别地作用于 $\phi(t)\in \mathcal{A}^{0,1}(\mathcal{T}_X)$。其次，可以定义一个“李括号”\[
+    [\ ,\ ]:\mathcal{A}^{0,p}(\mathcal{T}_X)\times \mathcal{A}^{0,q}(\mathcal{T}_X)\longrightarrow \mathcal{A}^{0,p+q}(\mathcal{T}_X)
+\]通过在 $\mathcal{T}_X$ 中取李括号，并在形式部分 $\mathcal{A}^{0,*}$ 中外乘。用局部坐标具体写出，对于 $\alpha=\sum d\bar{z}_I\otimes v_I$ 和 $\beta=\sum d\bar{z}_J\otimes w_J$，其中 $v_I=\sum \alpha_{Ij}\frac{\partial}{\partial z_j}$、$w_J=\sum \beta_{Jl}\frac{\partial}{\partial z_l}$，有以下公式\[
+    [\alpha,\beta]=\sum (d\bar{z}_I \wedge d\bar{z}_J)[v_I , w_J]=\sum_{I,j,J,l}(d\bar{z}_I \wedge d\bar{z}_J)\big[\alpha_{Ij}\frac{\partial}{\partial z_j},\beta_{Jl}\frac{\partial}{\partial z_{l}}\big].
+\]这的确是良定义的，因为任何全纯坐标变换只会将切向量场 $v_I,w_I$ 乘以反全纯因子 $\bar{f}$，而 $\frac{\partial\bar{f}}{\partial z_m}=0$。
+
+\begin{remark}\label{cvb}
+    利用局部描述，容易验证 $\bar{\partial}[\alpha,\beta]=[\bar{\partial}\alpha,\beta]\pm[\alpha,\bar{\partial}\beta]$。特别地，两个 $\bar{\partial}$-闭的 $\mathcal{A}^{0,*}(\mathcal{T}_X)$ 截面的李括号仍是闭的，一个闭截面和一个恰当截面的括号是恰当的。因此，括号诱导出映射\[
+        H^p(X,\mathcal{T}_X)\times H^q(X,\mathcal{T}_X)\longrightarrow H^{p+q}(X,\mathcal{T}_X).
+    \]
+\end{remark}
+
+\begin{lemma}
+    可积性方程 $[T^{0,1}_t,T^{0,1}_t]\subset T^{0,1}_t$ 等价于 \textbf{Maurer-Cartan 方程}\begin{equation}\label{wer}
+        \bar{\partial}\phi(t)+[\phi(t),\phi(t)]=0.
+    \end{equation}
+\end{lemma}
+
+\begin{proof}
+    该断言可以局部地证明。我们将在记号中省略参数 $t$，并记\[
+        \phi=\sum_{i,j}\phi_{ij}d\bar{z}_i\otimes \frac{\partial}{\partial z_j}.
+    \]如果可积性条件成立，那么特别地有\[
+        \bigg[\frac{\partial}{\partial \bar{z}_i}+\phi\bigg(\frac{\partial}{\partial \bar{z}_i}\bigg),\frac{\partial}{\partial \bar{z}_k}+\phi\bigg(\frac{\partial}{\partial\bar{z}_k}\bigg)\bigg]\in T^{0,1}_t.
+    \]由于 $[\frac{\partial}{\partial \bar{z}_i},\frac{\partial}{\partial \bar{z}_k}]=0$，这等价于\[
+        \biggl(\sum_l \bigg[\frac{\partial}{\partial \bar{z}_i},\phi_{kl}\frac{\partial}{\partial z_l}\bigg]+\sum_j\bigg[\phi_{ij}\frac{\partial}{\partial z_j},\frac{\partial}{\partial\bar{z}_k}\bigg]+\sum_{j,l}\bigg[\phi_{ij}\frac{\partial}{\partial z_j},\phi_{kl}\frac{\partial}{\partial z_l}\bigg] \biggr)\in T^{0,1}_t.
+    \]而\[
+        \bigg[\frac{\partial}{\partial\bar{z}_i},\phi_{kl}\frac{\partial}{\partial z_l}\bigg]=\frac{\partial \phi_{kl}}{\partial\bar{z}_i}\frac{\partial}{\partial z_l}\ \text{和}\ \bigg[\phi_{ij}\frac{\partial}{\partial z_j},\frac{\partial}{\partial\bar{z}_k}\bigg]=-\frac{\partial\phi_{ij}}{\partial \bar{z}_k}\frac{\partial}{\partial z_j}
+    \]因此，\begin{align*}
+        &\sum_l\bigg[\frac{\partial}{\partial\bar{z}_i},\phi_{kl}\frac{\partial}{\partial z_l}\bigg]+\sum_j\bigg[\phi_{ij}\frac{\partial}{\partial z_j},\frac{\partial}{\partial \bar{z}_k}\bigg]\\
+        =&\sum_{j}\bigg(\frac{\partial\phi_{kj}}{\partial \bar{z}_i}-\frac{\partial\phi_{ij}}{\partial\bar{z}_k}\bigg)\frac{\partial}{\partial z_j}\\
+        =&(\bar{\partial}\phi)\bigg(\frac{\partial}{\partial\bar{z}_i},\frac{\partial}{\partial\bar{z}_k}\bigg).
+    \end{align*}另一方面，\[
+        \sum_{j,l}\bigg[\phi_{ij}\frac{\partial}{\partial z_j},\phi\frac{\partial}{\partial z_l}\bigg]=[\phi,\phi]=\bigg(\frac{\partial}{\partial \bar{z}_i},\frac{\partial}{\partial\bar{z}_k}\bigg).
+    \]因此，可积性条件表明 $\bar{\partial}\phi+[\phi,\phi]\in\mathcal{A}^{0,2}(\mathcal{T}^{1,0}X)$ 满足\[
+        (\bar{\partial}\phi+[\phi,\phi])\bigg(\frac{\partial}{\partial\bar{z}_i},\frac{\partial}{\partial\bar{z}_k}\bigg)\in T^{0,1}_t.
+    \]于是 $\bar{\partial}+[\phi,\phi]\in\mathcal{A}^{0,2}(T^{1,0}X\cap T^{0,1}_t)$。但对于很小的 $t$，有 $T^{1,0}X\cap T^{0,1}_t =0$，因此 $\bar{\partial}\phi+[\phi,\phi]=0$。
+
+    反过来，如果 Maurer-Cartan 方程成立，那么可积性条件对 $T^{0,1}_t$ 的一个局部标架成立。这立即推出对 $T^{0,1}_t$ 的所有截面也成立。
+\end{proof}
+
+现在我们来考虑 Maurer-Cartan 方程的幂级数展开，即在 (\ref{wer}) 中将 $\phi$ 替换为 $\phi=\sum_{i=1}^{\infty}\phi_i t^i$：\[
+    \bar{\partial}\bigg(\sum_{i=1}^{\infty}\phi_i t^i\bigg)+\sum_{i,j=1}^{\infty}[\phi_i,\phi_j]t^{i+j}=0.
+\]这给出一个递推方程组：\begin{align*}
+    0&=\bar{\partial}\phi_1\\
+    0&=\bar{\partial}\phi_2+[\phi_1,\phi_1]\\
+    \vdots& \\
+    0&=\bar{\partial}\phi_k +\sum_{0<i<k}[\phi_i,\phi_{k-i}].
+\end{align*}
+
+我们首先详细研究一阶方程 $\bar{\partial}\phi_1=0$。Maurer-Cartan 方程特别地表明，复结构 $I$ 的一阶形变由一个 $\bar{\partial}$-闭的 $(0,1)$-形式 $\phi_1$ 描述，其值在切丛 $\mathcal{T}_X$ 中。因此，它定义了 $[\phi_1]\in H^1(X,\mathcal{T}_X)$ 中的一个元素。
+
+\begin{definition}
+    复结构 $I$ 的单参数形变 $I_t$ 的 \textbf{Kodaira-Spencer 类} 是指诱导的上同调类 $[\phi_1]\in H^1(X,\mathcal{T}_X)$。
+\end{definition}
+
+为了识别同构的（一阶）形变，必须考虑微分同胚群 $\mathrm{Diff}(M)$ 的（无穷小）作用。设 $F_t$ 是流形 $M$ 的单参数微分同胚族。关于局部坐标函数 $x_i$，它可以展开成幂级数 $\tilde{x_i}=x_i+tF_i (x)+t^2\dots$。一阶项 $\sum_i F_i \frac{\partial}{\partial x_i}$ 定义了一个整体向量场\[
+    \frac{dF_t}{dt}|_{t=0}\in \mathcal{A}^0(TM).
+\]
+
+我们可以在复流形 $X=(M,I)$ 上利用全纯坐标 $z_i$ 改写这个识别为 $\tilde{z_i}=z_i+tf_i(z,\bar{z})+t^2\dots$。对于反全纯坐标 $\bar{z_i}$，我们有 $\bar{\tilde{z_i}}=\bar{z_i}+t\bar{f_i}(z,\bar{z})+t^2\dots$。于是，$\frac{dF_t}{dt}|_{t=0}\in\mathcal{A}^0(TX)$ 在局部坐标下（相差因子 2）由下式给出\[
+    \sum f_i\frac{\partial}{\partial z_i}+\sum \bar{f}_i\frac{\partial}{\partial\bar{z}_i}.
+\]
+
+任何微分同胚都可以用来从给定的复结构 $I$ 构造新的复结构，即通过微分同胚的微分将 $I$ 前推。更明确地，对于微分同胚 $F_t$，新的复结构为 $dF_t\circ I\circ {(dF_{t})}^{-1}$。这个复结构的反全纯切丛因此为\[
+    T^{0,1}_t=dF_t(T^{0,1}X).
+\]
+
+在局部坐标下，$T^{0,1}X$ 的一阶形变可描述为在以下映射下 $T^{0,1}X$ 的像\[
+    \mathrm{id}+\sum_{i,j}\frac{\partial f_i}{\partial z_j}\otimes\frac{\partial}{\partial z_j}+\frac{\partial f_i}{\partial\bar{z_j}}d\bar{z_j}\otimes\frac{\partial}{\partial z_i}+\frac{\partial \bar{f_i}}{\partial z_j}dz_j\otimes\frac{\partial}{\partial \bar{z_i}}+\frac{\partial\bar{f_i}}{\partial\bar{z_j}}d\bar{z_j}\otimes\frac{\partial}{\partial \bar{z_i}}.
+\]在这个和中，只有第三项和第五项在 $T^{0,1}X$ 上非平凡。而且，第五项是 $T^{0,1}X$ 的自同态。
+
+因此，由 $M$ 的单参数微分同胚族 $F_t$ 诱导的 $T^{0,1}X$ 的一阶形变由同态\[
+    T^{0,1}X\longrightarrow T^{1,0}X,\ \frac{\partial}{\partial\bar{z_j}}\longmapsto \sum_i \frac{\partial f_i}{\partial \bar{z_j}}\frac{\partial}{\partial z_i}.
+\]描述。这给出
+
+\begin{lemma}
+    流形 $M$ 上复结构 $I$（定义复流形 $X=(M,I)$）的由单参数微分同胚族 $F_t$ 诱导的一阶形变由映射\[
+        \phi_1=\bar{\partial}\bigg({\big(\frac{dF_t}{dt}|_{t=0}\big)}^{1,0}\bigg):T^{0,1}X\longrightarrow T^{1,0}X
+    \]确定。
+\end{lemma}
+
+作为结论，我们得到 $X=(M,I)$ 的所有一阶形变同构类的描述。
+
+\begin{proposition}
+    设 $X$ 是一个复流形。在 $X$ 的所有一阶形变与 $H^1(X,\mathcal{T}_X)$ 的元素之间存在一个自然的一一对应。
+\end{proposition}
+
+\begin{proof}
+    记 $X=(M,I)$。那么 $I$ 的一阶形变对应于 $\mathcal{A}^{0,1}(\mathcal{X})$ 中 $\bar{\partial}$-闭的元素，而由前述引理，定义同构形变的那些元素相差 $\bar{\partial}:\mathcal{A}^{0}(\mathcal{T}_X)\rightarrow\mathcal{A}^{0,1}(\mathcal{T}_X)$ 的像中的元素，即 $\bar{\partial}$-恰当的。由于 Dolbeault 上同调恰好计算 $\mathcal{T}_X$ 的层上同调，这就证明了断言。
+\end{proof}
+
+换句话说，Kodaira-Spencer 类决定了 $X$ 的一阶形变，并且 $H^1(X,\mathcal{T}_X)$ 中的任何类都可以作为 Kodaira-Spencer 类出现。
+
+形变理论的核心任务是积分给定的一阶形变 $v\in H^1(X,\mathcal{T}_X)$，即找到一个单参数族 $I_t$，使得其 Kodaira-Spencer 类为 $v$。一般来说这是不可能的。障碍可能在任何阶出现。
+
+此外，由于我们必须在每一步商掉微分同胚群的作用，我们必须仔细研究所有可能的 $\phi_i$。这是为了确保幂级数的收敛性并求解递推方程。
+
+存在障碍这一事实在二阶时就可以看出：一旦选定了 $v\in H^1(X,\mathcal{T_X})$ 的一个提升 $\phi_1$，我们就需要寻找 $\phi_2$ 使得 $\bar{\partial}\phi_2=-[\phi_1,\phi_1]$。但很可能无论怎样选择 $\phi_1$，形式 $[\phi_1,\phi_1]$ 都不是 $\bar{\partial}$-恰当的。
+
+利用~\ref{cvb}，我们可以将任何一阶形变 $v\in H^1(X,\mathcal{T}_X)$ 与一个类 $[v,v]\in H^2(X,\mathcal{T}_X)$ 联系起来。
+
+\begin{corollary}
+    如果 $[v,v]\in H^2(X,\mathcal{T}_X)$ 不为零，那么一阶形变 $v\in H^1(X,\mathcal{T}_X)$ 就不能被积分。
+\end{corollary}
+
+\section{Calabi-Yau流形的形变}
+
+接下来，我们将描述当底层流形 $X$ 拥有一个全纯体积形式，即 $X$ 是一个 \textbf{Calabi-Yau 流形}时，如何求解 Maurer-Cartan 方程给出的递推方程组。更准确地说，这里所说的 Calabi-Yau 流形是指一个 $n$ 维紧 Kähler 流形 $X$，其典范丛平凡：$\bigwedge^n\varOmega_X=K_X \cong \mathcal{O}_X$。此外，我们固定一个全纯体积形式，即一个平凡化截面 $\varOmega\in H^0(X,K_X)$。
+
+形式 $\varOmega$ 可以用来定义一个自然同构\[
+    \eta:\bigwedge\nolimits^p\mathcal{T}_X\cong \bigwedge\nolimits^{n-p}\varOmega_X.
+\]
+
+定义\[
+    \eta(v_1\wedge\dots\wedge v_p)=i_{v_1}\dots i_{v_p}(\varOmega),
+\]其中 $i_v$ 是由 $i_v(\alpha)(w_1,\dots,w_i)=\alpha(v,w_1,\dots,w_i)$ 定义的内缩。如果 $\varOmega$ 局部地写为 $fdz_1\wedge\dots\wedge dz_n$，那么对于 $i_1 < \cdots <i_p$，有\[
+    \eta(\frac{\partial}{\partial z_{i_1}}\wedge\dots\wedge\frac{\partial}{\partial z_{i_p}})={(-1)}^{(\sum i_j)-p}fdz_1\wedge\dots\wedge\widehat{dz_{i_1}}\wedge\dots\wedge\widehat{dz_{i_p}}\wedge\dots dz_n.
+\]
+
+此外，同构 $\eta$ 诱导出典范同构\[
+    \eta:\mathcal{A}^{0,q}(\bigwedge\nolimits^p\mathcal{T}_X)\cong\mathcal{A}^{n-p,q}(X).
+\]
+
+\begin{definition}
+    算子 $\varDelta:\mathcal{A}^{0,q}(\bigwedge^p\mathcal{T}_X)\rightarrow \mathcal{A}^{0,q}(\bigwedge^{p-1}\mathcal{T}_X)$ 定义为\[
+        \varDelta:\mathcal{A}^{0,q}(\bigwedge\nolimits^p\mathcal{T}_X)\stackrel{\eta}{\longrightarrow}\mathcal{A}^{n-p,q}(X)\stackrel{\partial}{\longrightarrow}\mathcal{A}^{n-p+1,q}(X)\stackrel{\eta^{-1}}{\longrightarrow}\mathcal{A}^{0,q}(\bigwedge\nolimits^{p-1}\mathcal{T}_X).
+    \]
+\end{definition}
+
+注意，$\partial$ 本身在 $\mathcal{A}^{0,q}(\bigwedge^p\mathcal{T}_X)$ 上不是良定义的。
+
+\begin{lemma}
+    算子 $\varDelta$ 与 $\bar{\partial}$ 反交换，即 $\varDelta\circ\bar{\partial}=-\bar{\partial}\circ\varDelta$。
+\end{lemma}
+
+\begin{proof}
+    我们利用 $\varOmega\in\mathcal{A}^{n,0}(X)$ 是全纯的，即 $\bar{\partial}$-闭的这一事实。如果在局部坐标下写为 $\varOmega=fdz_1\wedge\dots\wedge dz_n$，那么 $f$ 是全纯函数。于是\[
+        \eta(g\cdot d\bar{z}_{I}\otimes\frac{\partial}{\partial z_J})=\pm(fg)\cdot d\bar{z}_{I}\otimes dz_{\{1,\dots,n\}\backslash J}.
+    \]因此 $\bar{\partial}\circ\eta=\eta\circ\bar{\partial}$，从而\begin{align*}
+        \bar{\partial}(\varDelta(\alpha))&=\eta^{-1}(\bar{\partial}\partial\eta(\alpha))=-\eta^{-1}(\partial\bar{\partial}\eta(\alpha))\\
+        &=-\eta^{-1}(\partial\eta(\bar{\partial}\alpha))=-\varDelta(\bar{\partial}(\alpha)).
+    \end{align*}
+\end{proof}
+
+同时注意 $\varDelta^2=0$。因此，$\varDelta$ 可以作为微分使用，但它关于外积 $\mathcal{A}^{0,p}(\bigwedge^r \mathcal{T}_X)\times\mathcal{A}^{0,q}(\bigwedge^s \mathcal{T}_X)\rightarrow\mathcal{A}^{0,p+q}(\bigwedge^{r+s}\mathcal{T}_X)$ 的性质不好。这一点由 Tian 和 Todorov~\cite{Tian87,TT89} 的以下关键结果更精确地说明。
+
+\begin{lemma}[Tian-Todorov 引理]
+    如果 $\alpha\in\mathcal{A}^{0,p}(\mathcal{T}_X)$ 和 $\beta\in\mathcal{A}^{0,q}(\mathcal{T}_X)$，那么\[
+        {(-1)}^p [\alpha,\beta]=\varDelta(\alpha\wedge\beta)-\varDelta(\alpha)\wedge\beta-{(-1)}^{p+1} \alpha\wedge\varDelta(\beta).
+    \]
+\end{lemma}
+
+\begin{proof}
+    由于该断言是局部的，并且对 $\alpha$ 和 $\beta$ 具有加性，只需对 $\alpha=ad\bar{z}_I\otimes\frac{\partial}{\partial z_i}$ 和 $\beta=bd\bar{z}_J\otimes\frac{\partial}{\partial z_j}$ 证明即可。
+
+    首先，我们将断言归结为 $p=q=0$ 的情形。利用简记\[
+        G(\alpha,\beta):=\varDelta(\alpha\wedge\beta)-\varDelta(\alpha)\wedge\beta-{(-1)}^{p+1}\alpha\wedge\varDelta(\beta),
+    \]通过证明\[
+        G(\alpha,\beta)=(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes G(a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j})
+    \]来实现归约。利用标准符号规则，确实可以算出\begin{align*}
+        \varDelta(\alpha\beta)&=\eta^{-1}\partial\eta(\alpha\wedge\beta)=(-1)^q \eta^{-1}\partial\eta\bigg((d\bar{z}_I \wedge d\bar{z}_J)\otimes(a\frac{\partial}{\partial z_i}\wedge b\frac{\partial}{\partial z_j})\bigg)\\
+        &=(-1)^q \eta^{-1}\partial\bigg((d\bar{z}_I \wedge d\bar{z}_J)\otimes \eta\bigg(a\frac{\partial}{\partial}\wedge b\frac{\partial}{\partial z_j}\bigg)\bigg)\\
+        &=(-1)^q \cdot (-1)^{p+q} \eta^{-1}\bigg((d\bar{z}_I \wedge d\bar{z}_J)\otimes\partial\eta\bigg(a\frac{\partial}{\partial z_i}\wedge b\frac{\partial}{\partial z_j}\bigg)\bigg).\\
+        &=(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes\varDelta\bigg(a\frac{\partial}{\partial z_i}\wedge b\frac{\partial}{\partial z_j}\bigg).
+    \end{align*}
+    类似地，\begin{align*}
+        \varDelta(\alpha)\wedge\beta&=\eta^{-1}\partial\eta\bigg(d\bar{z}_I \otimes a\frac{\partial}{\partial z_i}\bigg)\wedge\beta=(-1)^p \bigg(d\bar{z}_I \otimes \varDelta\bigg( a\frac{\partial}{\partial z_i}\bigg)\bigg)\wedge\beta\\
+        &=(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes \bigg(\varDelta \bigg(a\frac{\partial}{\partial z_i}\bigg)\wedge b\frac{\partial}{\partial z_j}\bigg)
+    \end{align*}并且\begin{align*}
+        (-1)^{p+1}\alpha\wedge\varDelta(\beta)&=(-1)^{p+1}\alpha\wedge\bigg((-1)^q d\bar{z}_J \otimes \varDelta\bigg(b\frac{\partial}{\partial z_j}\bigg)\bigg)\\
+        &=(-1)^p (-1)(d\bar{z}_I \wedge d\bar{z}_J)\otimes \bigg(a\frac{\partial}{\partial  z_i}\wedge\varDelta(b\frac{\partial}{\partial z_j})\bigg).
+    \end{align*}于是，\begin{align*}
+        G(\alpha,\beta)=&(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes \bigg(\varDelta\bigg(a\frac{\partial}{\partial z_i}\wedge b\frac{\partial}{\partial z_j}\bigg)\\ &-\varDelta\bigg(a\frac{\partial}{\partial z_i}\bigg)\wedge b\frac{\partial}{\partial z_j}-(-1)a\frac{\partial}{\partial z_i}\wedge\varDelta\bigg(b\frac{\partial}{\partial z_j}\bigg)\bigg)\\
+        =&(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes G\bigg(a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j}\bigg).
+    \end{align*}
+
+    为了处理 $p=q=0$ 的情形，我们首先明确写出\[
+        \eta(\frac{\partial}{\partial z_i})=(-1)^{i-1} fdz_1\wedge\dots\wedge\widehat{dz_i}\wedge\dots\wedge dz_n
+    \]以及\[
+        \eta\bigg(\frac{\partial}{\partial z_i}\wedge\frac{\partial}{\partial z_j}\bigg)=(-1)^{i+j-2} fdz_1 \wedge \dots\wedge\widehat{dz_i}\wedge\dots\wedge\widehat{dz_j}\wedge\dots\wedge dz_n.
+    \]这也表明 $\eta^{-1}(dz_1\wedge\dots\wedge\widehat{dz_i}\wedge\dots dz_n)=f^{-1}\frac{\partial}{\partial z_i}$ 和 $\eta(dz_1\wedge\dots\wedge dz_n)=f^{-1}$。
+
+    因此，\begin{align*}
+        \varDelta(a\frac{\partial}{\partial z_i})&=\eta^{-1}\partial\Big((-1)^{i-1}(af)dz_1\wedge\dots\wedge\widehat{dz_i}\wedge\dots\wedge dz_n\Big)\\
+        &=\eta^{-1}\frac{\partial(af)}{\partial z_i}dz_1 \wedge \dots\wedge dz_n=\frac{\partial(af)}{\partial z_i}f^{-1}
+    \end{align*}类似地\[
+        \varDelta\bigg(b\frac{\partial}{\partial z_j}\bigg)=\frac{\partial(bf)}{\partial z_j}f^{-1}.
+    \]此外，\begin{align*}
+        \varDelta\bigg(a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j}\bigg)=&\eta^{-1}\partial\Big((-1)^{i+j}(abf)dz_1 \wedge\dots\wedge\widehat{dz_i}\wedge\dots\wedge\widehat{dz_j}\wedge\dots\wedge dz_n\Big)\\
+        =&\eta^{-1}\bigg((-1)^{j-1}\frac{\partial(abf)}{\partial z_i}dz_1 \wedge\dots\wedge\widehat{dz_j}\wedge\dots\wedge dz_n\\
+        &+(-1)^i \frac{\partial(abf)}{\partial z_j}dz_1\wedge\dots\wedge\widehat{dz_i}\wedge\dots\wedge dz_n\bigg)\\
+        =&\frac{\partial(abf)}{\partial z_i}f^{-1}\frac{\partial}{\partial z_j}-\frac{\partial(abf)}{\partial z_j}f^{-1}\frac{\partial}{\partial z_i}\\
+        =&\bigg[a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j}\bigg]+\varDelta\bigg(a \frac{\partial}{\partial z_i}\bigg)b\frac{\partial}{\partial z_j}-a\frac{\partial}{\partial z_i}\varDelta\bigg(b\frac{\partial}{\partial z_j}\bigg).
+    \end{align*}这就证明了 $p=q=0$ 时的断言。
+\end{proof}
+
+\begin{corollary}
+    设 $\alpha$ 和 $\beta$ 是 $\mathcal{A}^{0,*}(\mathcal{T}_X)$ 中 $\varDelta$-闭的元素。那么括号 $[\alpha,\beta]$ 是 $\varDelta$-恰当的。
+\end{corollary}
+
+Tian-Todorov 引理将被应用于复结构形变的幂级数展开系数 $\phi_i\in \mathcal{A}^{0,1}(\mathcal{T}_X)$。在证明一般结果之前，我们先阐明前两步。
+
+给定 $v\in H^1(X,\mathcal{T}_X)$。我们首先寻找一个好的代表元 $\phi_1\in\mathcal{A}^{0,1}(\mathcal{T}_X)$。为了求解 Maurer-Cartan 方程 $\bar{\partial}\phi_2=-[\phi_1,\phi_1]$，我们必须保证\begin{itemize}
+    \item $[\phi_1,\phi_1]$ 是 $\bar{\partial}$-闭的，
+    \item $[\phi_1,\phi_1]$ 没有调和部分。
+\end{itemize}
+
+这里我们需要用到关于 $X$ 上的一个 Hermite 度量（从而在 $\mathcal{T}_X$ 上诱导度量）的 Hodge 分解 $\mathcal{A}^{0,1}(\mathcal{T}_X)=\bar{\partial}\mathcal{A}^{0}(\mathcal{T}_X)\oplus\mathcal{H}^{0,1}(\mathcal{T}_X)\oplus\bar{\partial}^*\mathcal{A}^{0,2}(\mathcal{T}_X)$。
+
+第一个条件总是满足的：如果 $\alpha_i\in\mathcal{A}^{0,q_i}(\mathcal{T}_X),\, i=1,2$，是 $\bar{\partial}$-闭的，那么 $[\alpha_1,\alpha_2]$ 也是 $\bar{\partial}$-闭的。这由 (\ref{cvb}) 推出。
+
+Tian-Todorov 引理给出：如果选取 $\alpha_i\in\mathcal{A}^{0,q_i}(\mathcal{T}_X),\, i=1,2$ 使得 $\eta(\alpha_i)\in\mathcal{A}^{n-1,q_i}(X)$ 是 $\partial$-闭的，那么 $\eta[\alpha_1,\alpha_2]$ 是 $\partial$-恰当的。更明确地，$\eta[\alpha_1,\alpha_2]=(-1)^{q_1}\cdot \partial\eta(\alpha_1 \wedge\alpha_2)$。
+
+最终，我们发现：如果选取 $\phi_1\in \mathcal{A}^{0,1}(\mathcal{T}_X)$ 使得 $\eta(\phi_1)\in\mathcal{A}^{n-1,1}(X)$ 关于 $X$ 上的一个 Kähler 度量是调和的，那么 $\bar{\partial}\phi_2=-[\phi_1,\phi_1]$ 存在解 $\phi_2\in\mathcal{A}^{0,1}(\mathcal{T}_X)$，而且还可选取使其 $\eta(\phi_2)$ 是 $\partial$-恰当的。
+
+事实上，根据上述论证，$\eta[\phi_1,\phi_1]$ 既是 $\partial$-恰当的，又是 $\bar{\partial}$-闭的。因为在紧 Kähler 流形上的 Hodge 理论中，一个 $\partial$-恰当的形式不可能有非平凡的调和部分，这就证明了 $\eta[\phi_1,\phi_1]$ 是 $\bar{\partial}$-恰当的。而利用 $\partial\bar{\partial}$-引理，我们还可以进一步说，存在一个形式 $\gamma\in\mathcal{A}^{n-2,1}(X)$ 满足 $\bar{\partial}\partial\gamma=-\eta[\phi_1,\phi_1]$。然后令 $\phi_2:=\eta^{-1}(\partial\gamma)$。由于 $\eta$ 与 $\bar{\partial}$ 交换，这就证明了断言。
+
+所有这些论证现在都可以被轻易地推广，以证明同样由 Tian 和 Todorov 得出的一般结果。
+
+\begin{proposition}
+    设 $X$ 是 Calabi-Yau 流形，$v\in H^1(X,\mathcal{T}_X)$。则存在一个形式幂级数 $\phi_1 t+\phi_2 t^2+\cdots$，其系数 $\phi_i\in\mathcal{A}^{0,1}(\mathcal{T}_X)$ 满足 Maurer-Cartan 方程\[
+        \bar{\partial}\phi_1=0\ \text{和}\ \bar{\partial}\phi_k=-\sum_{0<i<k}[\phi_i,\phi_{k-i}],
+    \]其中 $[\phi_1]=v$，并且对于所有 $i>1$，$\eta(\phi_i)\in\mathcal{A}^{n-1,1}(X)$ 是 $\partial$-恰当的。
+\end{proposition}
+
+\begin{proof}
+    我们从代表 $v$ 的 $\phi_1\in\mathcal{A}^{0,1}(\mathcal{T}_X)$ 开始，并使得 $\eta(\phi_1)\in\mathcal{A}^{n-1,1}(X)$ 是调和的。然后如上求出 $\phi_2$。假设我们已经找到了满足命题要求的 $\phi_2,\dots,\phi_{k-1}$。那么根据 Tian-Todorov 引理，对于 $0<i<k$，$\eta[\phi_i,\phi_{k-i}]$ 是 $\partial$-恰当的。因此，要找到满足断言的 $\phi_k$，我们必须确保和式 $\sum_{0<i<k}[\phi_i,\phi_{k-i}]$ 是 $\bar{\partial}$-闭的。正如我们之前隐含地使用过的那样，有\[
+        \bar{\partial}\bigg(\sum_{0<i<k}[\phi_i,\phi_{k-i}]\bigg)=\sum_{0<i<k}([\bar{\partial}\phi_i,\phi_{k-i}]-[\phi_{i},\bar{\partial}\phi_{k-i}])
+    \]根据归纳假设，这等于\begin{align*}
+        & -\sum_{0<i<k}\bigg(\sum_{0<j<i}[[\phi_j,\phi_{i-j}],\phi_{k-i}]-\sum_{0<l<k-i}[\phi_i,[\phi_l,\phi_{k-i-l}]]\bigg)\\
+        =&-\sum_{0<i<k}\sum_{0<j<i}[[\phi_j,\phi_{i-j}],\phi_{k-i}]+\sum_{0<i<k}\sum_{0<l<i}[\phi_{k-i},[\phi_l,\phi_{i-l}]]\\
+        =&2\sum_{0<i<k}\sum_{0<l<i}[\phi_{k-i},[\phi_l,\phi_{i-l}]]=0
+    \end{align*}其中我们利用了当 $\alpha\in\mathcal{A}^{0,2}(\mathcal{T}_X)$ 时 $[\alpha,\beta]=-[\beta,\alpha]$ 以及对任意 $\beta$ 的 Jacobi 恒等式，最后推出结果为 0。
+
+    $\partial\bar{\partial}$-引理最终保证我们可以选取形如 $\eta^{-1}(\partial\gamma)$ 的 $\phi_k$，即 $\eta(\phi_k)$ 是 $\partial$-恰当的。
+\end{proof}
+
+\begin{remark}
+    很可能存在 Maurer-Cartan 方程的其他解，它们不满足 $\eta(\phi_i)$ 对于 $i>1$ 是 $\partial$-恰当的这一额外条件。事实上，$\eta(\phi_i)$ 甚至未必是 $\partial$-闭的。
+\end{remark}
+
+\begin{remark}
+    到目前为止，我们还没有涉及收敛解的存在性。事实上，有一个标准的程序可以将任何形式解转化为收敛解。在这里会涉及大量的分析技术。细节可参考~\cite[Sect. 5.3]{Kodaira}。
+
+    主要思想是考虑 $\mathcal{A}^{0,q}(\mathcal{T}_X)$ 上的算子 $\bar{\partial}$ 及其关于选定的 Kähler（或仅仅是 Hermite）度量的伴随算子。为清晰起见，我们将这两个算子记为 $\bar{\partial}_{\mathcal{T}_X}$ 和 $\bar{\partial}^*_{\mathcal{T}_X}$。然后可以证明，如果系数 $\phi_k$ 是 $\bar{\partial}^*_{\mathcal{T}_X}$-恰当的，那么形式解收敛。接下来，将任何形式解转化为满足这个附加条件的解并不太困难，因为形式解的存在本身就保证了所有可能的障碍都是平凡的。
+\end{remark}

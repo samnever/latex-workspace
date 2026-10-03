@@ -1,0 +1,543 @@
+\documentclass[CJK]{beamer}
+
+\mode<presentation> {
+	
+	\usetheme{Singapore}
+	
+}
+
+\usepackage{ctex}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb,latexsym}
+\usepackage{amsbsy}
+\usepackage{amsxtra}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{bbm} 
+
+
+
+
+\title[线性空间]{线性空间}
+
+\author{}
+\institute{}
+\date{2024年10月25日}
+
+\begin{document}
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{线性相关与线性无关} \pause
+		我们将在以下概念上定义线性相关、线性无关等概念:
+		\begin{itemize}
+			\item 向量组: 有限个向量$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$ (允许有相同的) 按顺序排列\pause
+			\item 有限个向量组成的向量集: 将向量编号后可视作向量组\pause
+			\item 无穷多个向量组成的向量集
+		\end{itemize}
+	\end{frame}
+
+\begin{frame}
+	\frametitle{线性相关与线性无关} \pause
+	\begin{definition}
+		设$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$为线性空间$V$的一个向量组, $k_{1}, k_{2}, \cdots, k_{m}\in F$, 称$k_{1}\alpha_{1}+k_{2}\alpha_{2}+\cdots+k_{m}\alpha_{m}$
+		为$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$的一个线性组合. \pause
+		
+		如果$\beta\in V$能表示成$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$的一个线性组合, 就说$\beta$可以由$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$线性表出. \pause
+	\end{definition}
+
+\begin{definition}
+	设$S$是线性空间$V$的一个 (无限) 向量集, $S$中\textcolor{red}{有限个}向量的线性组合$k_{1}\alpha_{1}+k_{2}\alpha_{2}+\cdots+k_{r}\alpha_{r}$, ($\alpha_{1}, \alpha_{2}, \cdots, \alpha_{r}\in S$), 称为$S$的一个线性组合. \pause
+	
+	如果$\beta\in V$可以表示成$S$中\textcolor{red}{有限个}向量的线性组合, 就说$\beta$可以由$S$线性表出.
+\end{definition}
+\end{frame}
+
+\begin{frame}
+	\frametitle{线性相关与线性无关} \pause
+	\begin{definition}
+		线性空间$V$的一个向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$称为是线性相关的, 如果存在不全为$0$的数$k_{1}, k_{2}, \cdots, k_{m}\in F$, 使得$
+		k_{1}\alpha_{1}+k_{2}\alpha_{2}+\cdots+k_{m}\alpha_{m}=0$. \pause
+		
+		$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$称为是线性无关的, 如果从$k_{1}\alpha_{1}+k_{2}\alpha_{2}+\cdots+k_{m}\alpha_{m}=0$可以推出$k_{1}=k_{2}=\cdots=k_{m}=0$. \pause
+	\end{definition}
+	
+	\begin{definition}
+		设$S$是线性空间$V$的一个 (无限) 向量集, 如果$S$的一个\textcolor{red}{有限}子集线性相关, 即存在$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{r}\in S$, 以及不全为$0$的数$k_{1}, k_{2}, \cdots, k_{r}\in F$，使得$
+		k_{1}\alpha_{1}+k_{2}\alpha_{2}+\cdots+k_{r}\alpha_{r}=0$，
+		则说$S$线性相关. \pause
+		
+		如果$S$的\textcolor{red}{任意有限子集}都线性无关, 就说$S$线性无关.
+	\end{definition}
+\end{frame}
+
+\begin{frame}
+	\frametitle{线性相关与线性无关} \pause
+	\begin{itemize}
+		\item 单个向量$\alpha$线性相关$\Longleftrightarrow$ $\alpha=0$.
+		
+		单个向量$\alpha$线性无关$\Longleftrightarrow$ $\alpha\neq 0$.
+		
+		(因为$k\alpha=0$且$k\neq0$ $\Longrightarrow\alpha=0$.) \pause
+		
+		\item 包含零向量的向量组 (向量集) 线性相关.
+		
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{线性相关与线性无关} \pause
+	\begin{theorem}
+		向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$ $(m>1)$线性相关$\Longleftrightarrow$ 其中至少有一个向量可以由其余的向量线性表出. \pause
+		
+		向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$$(m>1)$线性无关$\Longleftrightarrow$ 其中任何向量都不能由其余的向量线性表出.
+		\end{theorem} \pause
+		
+		\vspace{2ex}
+		
+		上述定理里的``向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$''改成``向量集$S$'', 定理也成立.
+		
+\end{frame}
+
+\begin{frame}
+	\frametitle{线性相关与线性无关} \pause
+	\begin{theorem}
+		线性空间$V$中, 设向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$线性无关. 如果$\beta\in V$可以由$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$线性表出, 那么$\beta$由$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$线性表出的表法唯一.
+	\end{theorem} \pause
+	
+	\vspace{2ex}
+	
+	上述定理里的``向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$''改成``向量集$S$'', 定理也成立.
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{线性相关与线性无关} \pause
+	\begin{theorem}
+		设线性空间$V$的向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$线性无关, $\beta\in V$. 如果$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}, \beta$线性相关, 则$\beta$可以由$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$线性表出. 
+	\end{theorem} \pause
+	
+	\begin{corollary}
+		设线性空间$V$的向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$线性无关, $\beta\in V$. 如果$\beta$不能由$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$线性表出, 则$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}, \beta$线性无关.
+		\end{corollary} \pause
+		
+		\vspace{2ex}
+		
+		上述定理里的``向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$''改成``向量集$S$'', 定理也成立.
+\end{frame}
+
+\begin{frame}
+	\frametitle{线性相关与线性无关} \pause
+	\begin{theorem}
+		如果向量组 (resp. 向量集) 的一个部分组 (resp. 子集) 线性相关, 那么整个向量组 (resp. 向量集) 线性相关. \pause
+		
+		如果一个向量组 (resp. 向量集) 线性无关, 那么它的任何部分组 (resp. 子集) 都线性无关. 
+	\end{theorem}
+\end{frame}
+
+\begin{frame}
+	\frametitle{线性相关与线性无关} \pause
+	例. 在$\mathbb{R}$上所有连续函数构成的$\mathbb{R}$上的线性空间中, $\mathrm{sin}x$, $\mathrm{cos}x$, $e^{x}\mathrm{sin}x$是否线性无关? \pause
+	
+	\vspace{0.5cm}
+	
+	解. 考虑$k_{1}\mathrm{sin}x+k_{2}\mathrm{cos}x+k_{3}e^{x}\mathrm{sin}x=0$. \pause 分别代入$x=0, \frac{\pi}{2}, -\frac{\pi}{2}$, 得到,
+	\[\left\{\begin{aligned}
+		k_{2}&=0\\
+		k_{1}+k_{3}e^{\frac{\pi}{2}}&=0\\
+		-k_{1}-k_{3}e^{-\frac{\pi}{2}}&=0
+	\end{aligned}\right..\] \pause
+解这个线性方程组, 得到$k_{1}=k_{2}=k_{3}=0$, 因此$\mathrm{sin}x$, $\mathrm{cos}x$, $e^{x}\mathrm{sin}x$线性无关.
+\end{frame}
+
+\begin{frame}
+	\frametitle{线性相关与线性无关} \pause
+注. \begin{enumerate}[1]
+	\item 在$k_{1}\mathrm{sin}x+k_{2}\mathrm{cos}x+k_{3}e^{x}\mathrm{sin}x=0$中, 等式右端的$0$代表零函数. \pause
+	\item 如果代入$x=0, \frac{\pi}{2}, \pi$, 则得到的线性方程组有非零解, 但不能就此认为$\mathrm{sin}x$, $\mathrm{cos}x$, $e^{x}\mathrm{sin}x$线性相关, 因为那些非零解只在$x=0, \frac{\pi}{2}, \pi$处使得$k_{1}\mathrm{sin}x+k_{2}\mathrm{cos}x+k_{3}e^{x}\mathrm{sin}x=0$, 在其他$x$的值处却未必.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{极大线性无关组} \pause
+	\begin{definition}
+		设$S$是线性空间$V$的一个向量组 (resp. 向量集). $S$的部分组 (resp. 子集) $M$称为$S$的一个极大线性无关组 (resp. 极大线性无关子集), 如果$M$本身线性无关, 但是从$S$的其余向量 (如果还有的话) 中任取一个添加进$M$后得到的新部分组 (resp. 新子集) 都线性相关.
+	\end{definition}
+\end{frame}
+	
+\begin{frame}
+		\frametitle{极大线性无关组} \pause
+		\begin{theorem}
+			设$S$是线性空间$V$的一个向量组 (resp. 向量集), $M$是$S$的一个部分组 (resp. 子集), 则$M$是$S$的极大线性无关组 (resp. 极大线性无关子集) $\Longleftrightarrow$\begin{enumerate}[(1)]
+				\item $M$线性无关;
+				\item $S$中的每一个向量都可以由$M$线性表出.
+			\end{enumerate}
+		\end{theorem}
+\end{frame}
+
+\begin{frame}
+	\frametitle{极大线性无关组} \pause
+	\begin{theorem}
+		向量组的任何线性无关部分组都可以扩充成一个极大线性无关组.
+	\end{theorem} \pause
+
+\vspace{0.5cm}
+ 
+ 所以, 任何含非零向量的向量组一定有极大线性无关组. \pause 事实上,
+ 
+\vspace{0.5cm}
+
+	\begin{theorem}
+		任何 (无限) 向量集也一定有极大线性无关子集.
+	\end{theorem} \pause
+
+\vspace{0.5cm}
+
+证明需要用到偏序集的概念和Zorn引理, 会在更高级的课程中学习.
+\end{frame}
+
+\begin{frame}
+	\frametitle{极大线性无关组} \pause
+	\begin{definition}
+		设$S$和$T$都是线性空间$V$的向量组 (或向量集). 如果$T$中的每一个向量都可以由$S$线性表出, 就说$T$可以由$S$线性表出. 
+		
+		如果$S$和$T$可以互相线性表出, 就说$S$和$T$ (线性) 等价, 记作$S\cong T$.
+	\end{definition}
+\end{frame}
+
+\begin{frame}
+	\frametitle{极大线性无关组} \pause
+	\begin{theorem}
+		如果线性空间$V$的向量组 (或向量集) $S_{2}$可以由$S_{1}$线性表出, $S_{3}$可以由$S_{2}$线性表出, 那么$S_{3}$可以由$S_{1}$线性表出.
+	\end{theorem} \pause
+\vspace{0.5cm}
+
+因此，向量组 (或向量集) 的线性等价满足: \pause \begin{itemize}
+	\item 反身性: 任何向量组 (向量集) 都与其自身等价. \pause
+	\item 对称性: 如果$S_{1}$与$S_{2}$等价, 那么$S_{2}$与$S_{1}$等价. \pause
+	\item 传递性: 如果$S_{1}\cong S_{2}$, $S_{2}\cong S_{3}$, 那么$S_{1}\cong S_{3}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{极大线性无关组} \pause
+	\begin{theorem}
+		线性空间$V$的向量组 (resp. 向量集) 与其极大线性无关组 (resp. 极大线性无关子集) 等价. \pause
+	\end{theorem}
+
+\begin{theorem}
+	线性空间$V$的向量组 (resp. 向量集) 的任意两个极大线性无关组 (resp. 极大线性无关子集) 等价.
+\end{theorem}
+\end{frame}
+	
+	\begin{frame}
+		\frametitle{极大线性无关组} \pause
+		\begin{lemma}
+			设$V$的向量组$\beta_{1}, \beta_{2}, \cdots, \beta_{s}$可以由向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{r}$线性表出, 并且$s>r$, 那么$\beta_{1}, \beta_{2}, \cdots, \beta_{s}$线性相关.
+		\end{lemma}
+		
+		
+	\end{frame}
+
+\begin{frame}
+	\frametitle{向量组的极大线性无关组} \pause
+	\begin{corollary}
+		设$V$的向量组$\beta_{1}, \beta_{2}, \cdots, \beta_{s}$可以由向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{r}$线性表出, 并且$\beta_{1}, \beta_{2}, \cdots, \beta_{s}$线性无关, 则$s\leqslant r$.
+	\end{corollary} \pause
+
+\begin{center}
+	$\Downarrow$
+\end{center}
+	
+	\begin{corollary}
+		等价的线性无关向量组所含向量的个数相等.\pause
+	\end{corollary}
+
+\begin{center}
+	$\Downarrow$
+\end{center}
+
+\begin{corollary}
+	向量组的任何两个极大线性无关组所含向量的个数相等.
+\end{corollary}
+
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{向量组的极大线性无关组} \pause
+	\begin{definition}
+		称向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$的一个极大线性无关组所含向量的个数为这个向量组的秩, 记作$\mathrm{rank}[\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}]$.
+	\end{definition} \pause
+	
+	\begin{theorem}
+		向量组$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$线性无关$\Longleftrightarrow\mathrm{rank}[\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}]=m$. \pause
+	\end{theorem}
+	
+	\begin{theorem}
+		如果向量组$S_{1}$可以由向量组$S_{2}$线性表出，那么$\mathrm{rank}S_{1}\leqslant\mathrm{rank}S_{2}$. \pause
+	\end{theorem}
+	
+	\begin{corollary}
+		等价的向量组的秩相等.
+	\end{corollary}
+\end{frame}
+
+\begin{frame}
+	\frametitle{向量集的极大线性无关子集} \pause
+	\begin{block}{命题}
+		向量集$S$如果有一个极大线性无关子集$M$包含有限 ($r$) 个向量, 则$S$的任何极大线性无关子集都含有$r$个向量. 
+	\end{block} \pause
+
+\vspace{0.3cm}
+
+证明. 设$M=\{\alpha_{1}, \alpha_{2}, \cdots, \alpha_{r}\}$. 设$M_{1}$是$S$的另一个极大线性无关子集. 首先证明$M_{1}$不可能包含无穷多个向量. \pause 假设$M_{1}$包含无穷多个向量, 从中任取$r+1$个: $\beta_{1}$, $\beta_{2}$, $\cdots$, $\beta_{r+1}$. \pause 则$\beta_{1}$, $\beta_{2}$, $\cdots$, $\beta_{r+1}$可以由$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{r}$线性表出. \pause 于是$\beta_{1}$, $\beta_{2}$, $\cdots$, $\beta_{r+1}$线性相关. \pause 但这和 $M_{1}$是极大线性无关子集矛盾. 因此$M_{1}$只能包含有限多个向量. \pause
+
+于是, $M$和$M_{1}$是等价的线性无关向量组, 从而它们所含向量的个数相等. \qed
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{向量集的极大线性无关子集} \pause
+	由上面的命题立即得到:
+	
+\begin{corollary}
+	向量集$S$如果有一个极大线性无关子集包含无穷多个向量, 则$S$的任何极大线性无关子集都含有无穷多个向量.
+\end{corollary}
+\end{frame}
+
+\begin{frame}
+	\frametitle{向量集的极大线性无关子集} \pause
+	\begin{definition}
+		设$S$是向量集, 如果$S$有一个极大线性无关子集含有$r$个向量, 就说$S$的秩为$r$, 记作$\mathrm{rank}S=r$.\pause
+		\vspace{0.5cm}
+		
+		如果$S$有一个极大线性无关子集包含无穷多个向量, 就说$S$的秩为$\infty$, 记作$\mathrm{rank}S=\infty$.
+	\end{definition}
+\end{frame}
+
+\begin{frame}
+	\frametitle{基与维数} \pause
+	\begin{definition}
+		设$V$是数域$F$上的线性空间, $V$中的向量集$S$称为$V$的一组基, 如果\begin{enumerate}[1]
+			\item $S$线性无关;
+			\item $V$的每一个向量都可以由$S$线性表出.
+		\end{enumerate} \pause
+	\vspace{0.5cm}
+	
+	规定只含零向量的线性空间的基为$\emptyset$.
+	\end{definition}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{基与维数} \pause
+	\begin{theorem}
+		数域$F$上的任何线性空间都有一组基.
+	\end{theorem} \pause
+\vspace{0.5cm}
+
+定理的证明同样需要用到偏序集的概念和Zorn引理.
+\end{frame}
+
+\begin{frame}
+	\frametitle{基与维数} \pause
+	由于线性空间$V$的基就是$V$的极大线性无关子集, 所以\pause
+	
+	\begin{definition}
+		如果$V$的一组基含有有限 ($n$) 个向量, 那么$V$的任意一组基都含有$n$个向量. 此时, 说$V$是有限维的, 并把$n$称为$V$的维数, 记作$\mathrm{dim}_{F}V=n$或$\mathrm{dim}V=n$.
+    \end{definition}	\pause
+
+\begin{definition}
+	如果线性空间$V$的一组基含有无限多个向量, 则$V$的任意一组基都含有无限多个向量. 此时, 称$V$是无限维的, 记作$\mathrm{dim}V=\infty$.
+\end{definition}
+\end{frame}
+
+\begin{frame}
+	\frametitle{有限维线性空间} \pause
+	\begin{theorem}
+	   如果$\mathrm{dim}V=n$, 则$V$中任意$n+1$个向量一定线性相关.
+	\end{theorem}\pause
+	
+	\begin{theorem}
+		如果$\mathrm{dim}V=n$, 则$V$中任意$n$个线性无关的向量都是$V$的一组基.
+	\end{theorem}\pause
+
+\begin{theorem}
+	设$\mathrm{dim}V=n$, $\alpha_{1}, \alpha_{2}, \cdots, \alpha_{n}\in V$. 如果$V$的每个向量都可以由$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{n}$线性表出, 则$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{n}$是$V$的一组基.
+\end{theorem}\pause
+
+\begin{theorem}
+	设$\mathrm{dim}V=n$, 则$V$的任何一个线性无关的向量组都可以扩充成$V$的一组基.
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+	\frametitle{有限维线性空间}
+	设$V$是$n$维线性空间, $\alpha_{1}, \alpha_{2}, \cdots, \alpha_{n}$是$V$的一组基, 那么$V$中任何向量$\alpha$都可以由$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{n}$唯一地线性表出:
+	\[\alpha=x_{1}\alpha_{1}+x_{2}\alpha_{2}+\cdots+x_{n}\alpha_{n}.\]
+	将系数排成向量$\begin{pmatrix}
+		x_{1}\\x_{2}\\\vdots\\x_{n}
+	\end{pmatrix}$, 称之为$\alpha$在基$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{n}$下的坐标.
+\end{frame}
+
+\begin{frame}
+	\frametitle{基与维数} 
+例. \pause \begin{itemize}
+	\item $F^{n}$是$F$上的$n$维线性空间, 它的一组基是$e_{1}, e_{2}, \cdots, e_{n}$.\pause
+	
+	\item 容易证明, $M_{m\times n}(F)$的一组基是$E_{ij}\ (i=1, 2, \cdots, m, j=1, 2, \cdots, n)$, 这里, $E_{ij}$表示第$(i, j)$元为$1$, 其他元素为$0$的矩阵. 因此, $M_{m\times n}(F)$是$F$上的$m\times n$维线性空间.
+\end{itemize}
+\end{frame}
+	
+\begin{frame}
+	\frametitle{基与维数}
+	例. 证明: $F[x]$的一组基是$1, x, x^{2}, \cdots, x^{n}, \cdots$, 从而它是$F$上的无穷维线性空间.\pause
+	\vspace{0.5cm}
+	
+	证明: 一方面, 我们证明$1, x, x^{2}, \cdots, x^{n}, \cdots$线性无关的. \pause 任取$1, x, x^{2}, \cdots, x^{n}, \cdots$中的有限个元素$x^{k_{1}}, x^{k_{2}}, \cdots, x^{k_{m}}$, 其中$k_{1}<k_{2}<\cdots <k_{m}$为非负整数. 考虑以$a_{1}, a_{2}, \cdots, a_{m}$为未知数的方程
+	\begin{equation} \label{1}
+		a_{1}x^{k_{1}}+a_{2}x^{k_{2}}+\cdots+a_{m}x^{k_{m}}=0.
+	\end{equation}\pause
+	由于一个$n$ $(n\geqslant 0)$次非零一元多项式最多只有$n$个根, 要使方程\eqref{1}左边的多项式等于右边的零多项式, 只能有$a_{1}=a_{2}= \cdots=a_{m}=0$. 因此$1, x, x^{2}, \cdots, x^{n}, \cdots$线性无关.
+\end{frame}
+
+\begin{frame}
+	\frametitle{基与维数}
+	另一方面，显然$F[x]$中的每个多项式都是$1, x, x^{2}, \cdots, x^{n}, \cdots$的线性组合, 所以$1, x, x^{2}, \cdots, x^{n}, \cdots$是$F[x]$的一组基. $1, x, x^{2}, \cdots, x^{n}, \cdots$包含无穷多个元素, 所以$\mathrm{dim}F[x]=\infty$. \qed
+\end{frame}
+
+\begin{frame}
+	\frametitle{基与维数}
+	 例. 
+	 \begin{itemize}
+	 	\item 类似地可以证明, $F[x]_{n}$的一组基是$1, x, x^{2}, \cdots, x^{n-1}$, 从而$F[x]_{n}$是$F$上的$n$维线性空间. \pause
+	 	
+	 	\item $\mathbb{C}$是它自身上的$1$维线性空间, 它的一组基是$1$. 任何数域都是其自身上的$1$维线性空间, 一组基是$1$.
+	 \end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{基与维数}
+	例. 证明: $\mathbb{C}$是$\mathbb{R}$上的$2$维线性空间, 它的一组基是$1, i$.\pause
+	
+	\vspace{0.5cm}
+	
+	证明. 先证明$1, i$在$\mathbb{R}$上线性无关. \pause 从$x\cdot 1+y\cdot i=0$, $x, y\in\mathbb{R}$, 可以推出$x=y=0$, 所以$1, i$在$\mathbb{R}$上线性无关. \pause 
+	
+	另一方面, 任何复数$a+bi$都是$1, i$在$\mathbb{R}$上的线性组合, 所以$\mathbb{C}$作为$\mathbb{R}$上的线性空间的一组基是$1, i$, $\mathrm{dim}_{\mathbb{R}}\mathbb{C}=2$. \qed \pause
+	
+	\vspace{0.5cm}
+	
+	学完多项式以后可以证明: $\mathbb{R}$是$\mathbb{Q}$上的无穷维线性空间.
+\end{frame}
+
+\begin{frame}
+	\frametitle{子空间} \pause
+	\begin{definition}
+		设$V$是数域$F$上的线性空间, $V$的子集$W$称为$V$的一个 (线性) 子空间, 记作$W\leqslant V$, 如果 \begin{enumerate}[1]
+			\item $0\in W$;
+			\item $\forall\alpha, \beta\in W$, 有$\alpha+\beta\in W$;
+			\item $\forall\alpha\in W, k\in F$, 有$k\alpha\in W$.
+		\end{enumerate}
+	\end{definition}
+\end{frame}
+
+\begin{frame}
+\frametitle{子空间} \pause
+设$W$是$V$的子空间. \pause
+\begin{itemize}
+	\item 零向量在$W$中. \pause
+	\item $\forall\alpha\in W$, 由于子空间对数乘封闭, $(-1)\alpha\in W$. 而$(-1)\alpha=-\alpha$, 所以$W$中任何向量的负向量也在$W$中. \pause
+	\item $W$上的加法和数乘就是$V$上的加法和数乘, 因而$W$上的加法和数乘也满足$8$条运算法则. 
+\end{itemize}
+
+于是, $W$自己对于加法和数乘也构成$F$上的线性空间.\pause
+
+\vspace{2ex}
+
+\textcolor{red}{线性空间的子空间自身也是线性空间}.\pause
+
+\vspace{0.5cm}
+
+显然, $\{0\}$和$V$都是$V$的子空间, 称它们为平凡的子空间. 称$V$的其他子空间为非平凡的子空间. $\{0\}$也叫零子空间.
+\end{frame}
+
+\begin{frame}
+	\frametitle{向量组生成的子空间} \pause
+	\begin{definition}
+		设$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$是线性空间$V$的一个向量组, 则\[\{k_{1}\alpha_{1}+k_{2}\alpha_{2}+\cdots+k_{m}\alpha_{m}| k_{1}, \cdots, k_{m}\in F\}\]
+		是$V$的一个子空间, 称为由$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$生成 (或张成) 的子空间, 记作$L(\alpha_{1}, \cdots, \alpha_{m})$或$\mathrm{span}(\alpha_{1}, \cdots, \alpha_{m})$. 它是包含$\alpha_{1}, \cdots, \alpha_{m}$的最小的子空间. 称$\alpha_{1}, \cdots, \alpha_{m}$为$L(\alpha_{1}, \cdots, \alpha_{m})$的生成元.
+	\end{definition} \pause
+
+\vspace{0.5cm}
+
+有限维线性空间$V$的任何子空间$W$ (包括$V$自身) 都可以通过上面的方式得到. 只要取$W$的一组基$\beta_{1}, \beta_{2}, \cdots, \beta_{r}$, 则$W=L(\beta_{1}, \beta_{2}, \cdots, \beta_{r})$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{向量组生成的子空间} \pause
+	\begin{theorem}
+		$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$的一个极大线性无关组就是$L(\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m})$的一组基, 从而\[
+		\mathrm{dim}L(\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m})=\mathrm{rank}[\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}].\]	
+	\end{theorem} \pause
+	
+	所以, 如果线性空间$V$可以由有限个向量生成, 那么它一定是有限维的. 这有限个向量的一个极大线性无关组就是$V$的一组基, 这有限个向量的秩等于$V$的维数.
+\end{frame}
+
+\begin{frame}
+	\frametitle{(无限) 向量集生成的子空间} \pause
+	\begin{definition}
+		设$S$是线性空间$V$的一个 (无限) 向量集. 容易证明, 所有$S$中有限个向量的线性组合构成的集合\[\{k_{1}\alpha_{1}+k_{2}\alpha_{2}+\cdots+k_{s}\alpha_{s}|s\in\mathbb{Z_{+}}, k_{1}, \cdots, k_{s}\in F, \alpha_{1}, \cdots, \alpha_{s}\in S\}\]
+		是$V$的一个子空间, 称为由$S$生成的子空间, 记作$L(S)$或$\mathrm{span}(S)$. 称$S$为$L(S)$的生成元. \pause
+		
+		\vspace{0.5cm}
+		
+		由子空间的定义, 任何包含$S$的子空间一定包含$L(S)$. 因此, $L(S)$是包含$S$的最小子空间. 
+	\end{definition}
+\end{frame}
+
+\begin{frame}
+	\frametitle{子空间} \pause
+	由线性表出的传递性可知:
+	\begin{theorem}
+		\begin{enumerate}
+			\item 向量组 (或向量集) $T$可以由$S$线性表出$\Longleftrightarrow L(T)\subseteq L(S)$.
+			\item 向量组 (或向量集) $S$与$T$等价$\Longleftrightarrow L(S)=L(T)$.
+		\end{enumerate}
+		
+	\end{theorem}
+\end{frame}
+
+\begin{frame}
+	\frametitle{子空间} \pause
+	\begin{theorem}
+		设$V$是有限维线性空间, $W$是$V$的子空间, 则$\mathrm{dim}W\leqslant\mathrm{dim}V$. \pause
+	\end{theorem}
+	
+	\begin{theorem}
+		设$V$是有限维线性空间, $W$是$V$的子空间. 如果$\mathrm{dim}W=\mathrm{dim}V$, 那么$W=V$.
+	\end{theorem}
+\end{frame}
+
+\begin{frame}
+	\frametitle{总结}\pause
+	我们的课程主要讨论有限维线性空间, 所以: \pause
+	\begin{itemize}
+		\item 熟练掌握: 向量组的线性相关/无关, 向量组的极大线性无关组与秩, 有限维线性空间的基与维数, 子空间. 理论与$F^{n}$上的完全一样! \pause
+		
+		\item 了解: (无限) 向量集的线性/无关, (无限)向量集的极大线性无关子集与秩, 无限维线性空间.
+	\end{itemize}
+\end{frame}
+
+
+
+\end{document} 

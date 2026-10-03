@@ -1,0 +1,69 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{科研课堂课程作业}}
+\author{黄伟宁}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\\\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\\\par}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+验证KdV方程$ u_{t} +6uu_{x} +u_{xxx} =0 $ 的Lax对.
+\end{problem}
+
+\begin{solution}
+    考虑如下两个线性算子$ L,A $
+    $$
+        \begin{cases}
+            L=\frac{\partial ^{2} }{\partial x^{2} }+u \\
+            A=-4\frac{\partial ^{3} }{\partial x^{3} }-6u\frac{\partial }{\partial x}-3u_{x}
+        \end{cases}
+    $$
+    那么我们有
+    $$
+        \begin{cases}
+            L\varphi=\lambda\varphi \\
+            \varphi_{t} =A\varphi
+        \end{cases}
+    $$
+    不难发现
+    \begin{align*}
+         & L_{t} \varphi+L\varphi_{t} =\lambda\varphi_{t} =\lambda A\varphi \\
+         & \Rightarrow L_{t} \varphi=(AL-LA)\varphi
+    \end{align*}
+    即Lax对满足
+    $$
+        L_{t} =AL-LA\equiv[A,L]
+    $$
+    我们有
+    \begin{align*}
+         & L_{t} =u_{t}                                                                                                                                                                                                                      \\
+         & AL=-(4\frac{\partial ^{5} }{\partial x^{5} }+10u\frac{\partial ^{3} }{\partial x^{3} }+15u_{x} \frac{\partial ^{2} }{\partial x^{2} }+4u_{xxx}+12u_{xx} \frac{\partial }{\partial x}+6u^{2} \frac{\partial }{\partial x}+9uu_{x}) \\
+         & LA=-(4\frac{\partial ^{5} }{\partial x^{5} }+12u_{xx} \frac{\partial }{\partial x}+15u_{x} \frac{\partial ^{2} }{\partial x^{2} }+10u\frac{\partial ^{3} }{\partial x^{3} }+6u^{2} \frac{\partial }{\partial x}+3u_{xxx}+3uu_{x}) \\
+         & AL-LA=-u_{xxx} -6uu_{x}
+    \end{align*}
+    从而有
+    $$
+        u_{t} +6uu_{x} +u_{xxx} =0
+    $$
+    此即所给KdV方程.
+\end{solution}
+
+\begin{problem}
+验证KdV方程$ u_{t} +6uu_{x} +u_{xxx} =0 $ 的DT.
+\end{problem}
+
+\begin{solution}
+    略.
+\end{solution}
+
+\end{document}

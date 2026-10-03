@@ -1,0 +1,100 @@
+\documentclass[12pt,a4paper,oneside]{ctexart}
+\usepackage{amsmath,amsthm,amssymb,bm,graphicx,hyperref,mathrsfs}
+
+\title{\textbf{作业答案}}
+% \author{黄伟宁}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\\\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\\\par}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+
+\maketitle
+% \begin{problem}
+% 这里是题目.
+% \end{problem}
+
+% \begin{solution}
+%     这里是解答.
+% \end{solution}
+
+% \begin{note}
+%     这里是注记.
+% \end{note}
+
+% \begin{problem}
+% \end{problem}
+1.\begin{solution}
+    $ (a-b)+b+\frac{1}{b(a-b)}\geqslant 3\sqrt[3]{(a-b)\cdot b\cdot \frac{1}{b(a-b)}}=3 $,所以$ a+\frac{1}{b(a-b)} $的最小值为$ 3 $.
+\end{solution}
+
+2.\begin{solution}
+    因为$ a,b,c $为正实数,$ N-M=c+\sqrt{ab}+\sqrt{ab}-3\sqrt[3]{abc}\geqslant 3\sqrt[3]{c\cdot \sqrt{ab}\cdot \sqrt{ab}}-3\sqrt[3]{abc}=0 $,故$ M\leqslant N $,当且仅当$ c=\sqrt{ab} $时等号成立.
+\end{solution}
+
+3.\begin{solution}
+    (1)证法一:\( a+b+c \geqslant 3 \sqrt[3]{abc} \), \( \frac{1}{a}+\frac{1}{b}+\frac{1}{c} \geqslant 3 \sqrt[3]{\frac{1}{abc}} \),两式相乘即得.
+
+    证法二:左边 \( \frac{a+b+c}{a}+\frac{a+b+c}{b}+\frac{a+b+c}{c}=3+(\frac{b}{a}+\frac{a}{b})+(\frac{c}{a}+\frac{a}{c})+(\frac{c}{b}+\frac{b}{c})\geqslant 3+2+2=9 \).
+
+    (2) 因为 \( \frac{a+b}{2}+\frac{b+c}{2}+\frac{c+a}{2}\geqslant \frac{3}{2} \sqrt[3]{(a+b)(b+c)(c+a)} \), \( \frac{1}{a+b}+\frac{1}{b+c}+\frac{1}{c+a}\geqslant 3 \sqrt[3]{\frac{1}{(a+b)(b+c)(c+a)}} \),两式相乘即得.
+
+    (3) 证法一:由 (1) 知 \( (a+b+c)\left(\frac{1}{a+b}+\frac{1}{b+c}+\frac{1}{c+a}\right)\geqslant \frac{9}{2} \),
+
+    所以 \( 1+\frac{c}{a+b}+1+\frac{a}{b+c}+1+\frac{b}{c+a}\geqslant \frac{9}{2} \),即 \( \frac{a}{b+c}+\frac{b}{c+a}+\frac{c}{a+b}\geqslant \frac{3}{2} \).
+
+    证法二:\begin{align*}
+        & \frac{a}{b+c}+\frac{b}{c+a}+\frac{c}{a+b}=(a+b+c)\left(\frac{1}{b+c}+\frac{1}{c+a}+\frac{1}{a+b}\right)-3 \\
+    =&\frac{1}{2}[(a+b)+(b+c)+(c+a)]\left(\frac{1}{b+c}+\frac{1}{c+a}+\frac{1}{a+b}\right)-3\\
+    \geqslant & \frac{1}{2} \times 3\sqrt[3]{(a+b)(b+c)(c+a)} \cdot 3\sqrt[3]{\frac{1}{a+b}+\frac{1}{b+c}+\frac{1}{c+a}}-3=\frac{3}{2},
+    \end{align*}
+    当且仅当$ a=b=c $时等号成立.
+\end{solution}
+
+4. \begin{solution}
+    原不等式等价于$ (ab+bc+ca)\bigg[\frac{a^2}{b}+\frac{b^2}{c}+\frac{c^2}{a}+2(a+b+c)\bigg]\geqslant (a+b+c)^2 $.
+
+    展开得$ a^2b^4+b^2c^4+c^2a^4\geqslant ab^3c^2+bc^3a^2+ca^3b^2 $.
+
+    令$ x=ab^2,y=bc^2,z=ca^2 $,则只需证明$ x^2+y^2+z^2\geqslant xy+yz+zx $. 这是显然成立的. 得证.
+\end{solution}
+
+5.
+\begin{solution}
+    从不等式局部入手,先尝试证明$ (1-\sqrt{a})(1-\sqrt{b})\geqslant \sqrt{cd} $.
+
+    事实上$ 2(1-\sqrt{a})(1-\sqrt{b})=2+2\sqrt{ab}-2\sqrt{a}-2\sqrt{b}=(\sqrt{a}+\sqrt{b}-1)^2+1-a-b\geqslant 1-a-b=c+d\geqslant 2\sqrt{cd} $.
+
+    同理$ (1-\sqrt{c})(1-\sqrt{d})\geqslant \sqrt{ab} $. 相乘得证.
+\end{solution}
+
+6. 5
+\begin{solution}
+    $ (a+b+c)^2\geqslant a^2+b^2+c^2-ab-bc-ca=25 $. 当$ (a,b,c)=(5,0,0), (0,5,0)$ 或 $ (0,0,5) $时取等号.
+\end{solution}
+
+7. $ (-4,-2) $
+\begin{solution}
+    由已知得$ a>0, c<0, 1>\frac{b}{a}>\frac{c}{a}, 3+\frac{2b}{a}+\frac{c}{a}=0, \frac{b+c}{a}=-\frac{3}{2}+\frac{c}{2a} $.
+
+    由$ 5+\frac{c}{a}>3+\frac{2b}{a}+\frac{c}{a}>3+\frac{3c}{a} $,得$ -5<\frac{c}{a}<-1 $,故$ \frac{b+c}{a}\in (-4,-2) $.
+\end{solution}
+
+8. 1
+\begin{solution}
+    因为$ 1\leqslant a\leqslant b\leqslant c\leqslant d\leqslant 4 $,所以$ \frac{a}{b}\geqslant \frac{1}{b}\geqslant \frac{1}{c}, \frac{c}{d}\geqslant \frac{c}{4} $,于是$ \frac{a}{b}+\frac{c}{d}\geqslant \frac{1}{c}+\frac{c}{4}=(\frac{1}{\sqrt{c}-\frac{\sqrt{c}}{2}})^2+1\geqslant 1 $. 等号当且仅当$ a=1, b=c=2, d=4 $时成立,所以$ \frac{a}{b}+\frac{c}{d} $的最小值为$ 1 $.
+\end{solution}
+
+9. $ (\frac{2}{3},\frac{3}{2}) $
+\begin{solution}
+    令$ b=au,u>0 $,已知条件可化为$ a<ua+c\leqslant 2a, ua<c+a\leqslant 2ua $,即$ 1-u<\frac{c}{a}\leqslant 2-u, u-1<\frac{c}{a}\leqslant 2u-1 $.
+
+    若$ u\geqslant 1 $, 则$ u-1<2-u $,即$ 1\leqslant u<\frac{3}{2} $;若$ u<1 $,则$ 1-u<2u-1 $,即$ \frac{2}{3}<u<1 $.故$ u\in (\frac{2}{3},\frac{3}{2}) $.
+\end{solution}
+
+\end{document}

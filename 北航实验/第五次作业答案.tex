@@ -1,0 +1,79 @@
+\documentclass[12pt,a4paper,oneside]{ctexart}
+\usepackage{amsmath,amsthm,amssymb,bm,graphicx,hyperref,mathrsfs}
+
+\title{\textbf{作业答案}}
+% \author{黄伟宁}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\\\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\\\par}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+
+\maketitle
+% \begin{problem}
+% 这里是题目.
+% \end{problem}
+
+% \begin{solution}
+%     这里是解答.
+% \end{solution}
+
+% \begin{note}
+%     这里是注记.
+% \end{note}
+
+% \begin{problem}
+% \end{problem}
+1. C
+\begin{solution}
+    设$ D,E $分别是边$ AC,BC $的重点，则$ \overrightarrow{OA}+\overrightarrow{OC}=2\overrightarrow{OD},\ 2(\overrightarrow{OB}+\overrightarrow{OC})=4\overrightarrow{OE} $, 由此可得$ \overrightarrow{OA}+2\overrightarrow{OB}+3\overrightarrow{OC}=2(\overrightarrow{OD}+2\overrightarrow{OE})=\boldsymbol{0} $, 即$ \overrightarrow{OD} $与$ \overrightarrow{OE} $共线，且$ |\overrightarrow{OD}|=2|\overrightarrow{OE}| $, 所以$ \frac{S_{\triangle AEC}}{S_{\triangle AOC}}=\frac{3}{2} $, 所以$ \frac{S_{\triangle ABC}}{S_{\triangle AOC}}=\frac{3\times 2}{2}=3 $.
+\end{solution}
+
+2. $ \sqrt{3} $
+\begin{solution}
+    以$ AB $为$ x $轴，$ AD $为$ y $轴建立坐标系，令$ B(x_B,0),\ C(x_C,y_C),\ D(0,1) $, 则$ \overrightarrow{BC}=(x_C-x_b,y_C),\ \overrightarrow{BD}=(-x_B,1) $, 因为$ \overrightarrow{BC}=\sqrt{3}\overrightarrow{BD} $, 所以$ \begin{cases}
+        x_C-x_B=\sqrt{3}(-x_B),\\
+        y_c=\sqrt{3},
+    \end{cases} $所以$ x_C=(1-\sqrt{3})x_B,\ y_C=\sqrt{3} $. $ \overrightarrow{AC}=((1-\sqrt{3})x_B, \sqrt{3}),\ \overrightarrow{AD}=(0,1) $, 则$ \overrightarrow{AC}\cdot\overrightarrow{AD}=\sqrt{3} $.
+\end{solution}
+
+3. $ \frac{5}{2} $
+\begin{solution}
+    作$ \overrightarrow{OG}=2\overrightarrow{OA},\ \overrightarrow{OE}=2\overrightarrow{OB},\ \overrightarrow{OF}=2\overrightarrow{OA}+2\overrightarrow{OB} $, $ M,\ N $分别为$ OF,\ EF $的中点，则点$ P $在$ \triangle MNF $内，面积为$ \frac{5}{2} $.
+\end{solution}
+
+4.\begin{solution}
+    因为$ \overrightarrow{GA}+\overrightarrow{GB}+\overrightarrow{GC}=\boldsymbol{0} $, 所以$ 40b\overrightarrow{GA}+40b\overrightarrow{GB}+40b\overrightarrow{GC}=\boldsymbol{0} $, 故$ (56a-40b)\overrightarrow{GA}+(35c-40b)\overrightarrow{GC}=\boldsymbol{0} $. 因为$ \overrightarrow{GA}, \overrightarrow{GC} $不共线，所以$ 7a-5b=0,7c-8b=0 $. 设$ a=5k $, 则$ b=7k,\ c=8k $. 由余弦定理得$ \cos B=\frac{25k^2+64k^2-49k^2}{2\times 5k\times 8k}=\frac{1}{2} $, 所以$ \angle B=60^{\circ} $.
+\end{solution}
+
+5. C
+\begin{solution}
+    由已知可得$ |\boldsymbol{c}-t_1\boldsymbol{a}-t_2\boldsymbol{b}|^{2}=|c|^2-6t_1-8t_2+t_1^2+t_2^2=169+(t_1-3)^2+(t_2-4)^2-25=144+(t_1-3)^2+(t_2-4)^2\geqslant 144 $. 当$ t_1=3,t_2=4 $时，$ |\boldsymbol{c}-t_1\boldsymbol{a}-t_2\boldsymbol{b}|^2=144 $, 故$ |\boldsymbol{c}-t_1\boldsymbol{a}-t_2\boldsymbol{b}| $的最小值为$ 12 $.
+\end{solution}
+
+6. $ \frac{2\sqrt{3}}{3} $
+\begin{solution}
+    由题意得$ \overrightarrow{AO}\cdot\overrightarrow{BC}=\frac{1}{2}(\overrightarrow{AC}+\overrightarrow{AB})\cdot(\overrightarrow{AC}-\overrightarrow{AB})=\frac{1}{2}(b^2-c^2),\ \overrightarrow{BO}\cdot\overrightarrow{CA}=\frac{1}{2}(c^2-a^2),\ \overrightarrow{CO}\cdot\overrightarrow{AB}=\frac{1}{2}(a^2-b^2) $, 代入已知条件得$ a^2+c^2=2b^2\geqslant 2ac $, 得$ \sin^2 B\geqslant \sin A\cdot\sin C,\ \cos B=\frac{a^2+c^2-b^2}{2ac}\geqslant \frac{1}{2} $, 所以$ 0< B\leqslant \frac{\pi}{3},\ \frac{1}{\tan A}+\frac{1}{\tan C}=\frac{\sin B}{\sin A\sin C}\geqslant \frac{1}{\sin B}\geqslant\frac{2\sqrt{3}}{3} $, 当且仅当$ A=B=C=\frac{\pi}{3} $时，等号成立。
+\end{solution}
+
+7. $ \sqrt{3}+1 $
+\begin{solution}
+    由条件知$ \overrightarrow{AM}=\frac{1}{2}(\overrightarrow{AB}+\overrightarrow{AC}),\ \overrightarrow{AN}=\frac{3}{4}\overrightarrow{AB}+\frac{1}{4}\overrightarrow{AC} $, 故$ \overrightarrow{AM}\cdot \overrightarrow{AN}=\frac{1}{2}(\overrightarrow{AB}+\overrightarrow{AC})\cdot(\frac{3}{4}\overrightarrow{AB}+\frac{1}{4}\overrightarrow{AC})=\frac{1}{8}(3|\overrightarrow{AB}|^2+|\overrightarrow{AC}|^2+4\overrightarrow{AB}\cdot\overrightarrow{AC}) $. 由于$ \sqrt{3}=S_{\triangle ABC}=\frac{1}{2}|\overrightarrow{AB}||\overrightarrow{AC}|\sin A=\frac{\sqrt{3}}{4}|\overrightarrow{AB}||\overrightarrow{AC}| $, 所以$ |\overrightarrow{AB}||\overrightarrow{AC}|=4 $. 进一步可得$ \overrightarrow{AB}\cdot\overrightarrow{AC}=|\overrightarrow{AB}||\overrightarrow{AC}|\cos A=2 $.
+\end{solution}
+
+8. $ \frac{\sqrt{3}}{3} $
+\begin{solution}
+    由条件得$ (\boldsymbol{a}+k\boldsymbol{b})\cdot\boldsymbol{a}=|\boldsymbol{a}+k\boldsymbol{b}||\boldsymbol{a}|\cos 30^{\circ} $, 即$ |\boldsymbol{a}|^2+k\boldsymbol{a}\cdot\boldsymbol{b}=\frac{\sqrt{3}}{2}|\boldsymbol{a}||\boldsymbol{a}+k\boldsymbol{b}| $. 因为$ \boldsymbol{a}\cdot\boldsymbol{b}=|\boldsymbol{a}||\boldsymbol{b}|\cos 60^{\circ}=\frac{1}{2}|\boldsymbol{a}|\cdot 2|\boldsymbol{a}|=|\boldsymbol{a}|^2 $, 所以$ (1+k)|\boldsymbol{a}|^2=\frac{\sqrt{3}}{2}|\boldsymbol{a}||\boldsymbol{a}+k\boldsymbol{b}| $. 即$ 2(1+k)|\boldsymbol{a}|=\sqrt{3}|\boldsymbol{a}+k\boldsymbol{b}| $, 所以$ 4(1+k)^2|\boldsymbol{a}|^2=3|\boldsymbol{a}+k\boldsymbol{b}|^2 $, $ \frac{|\boldsymbol{a}|}{|\boldsymbol{a}+k\boldsymbol{b}|}=\frac{\sqrt{3}}{2(1+k)} $, 即$ 8k^2-2k-1=0 $, 解得$ k=-\frac{1}{4} $(舍去)或$ k=\frac{1}{2} $. 此时$ \frac{|\boldsymbol{a}|}{|\boldsymbol{a}+k\boldsymbol{b}|}=\frac{\sqrt{3}}{2(1+k)}=\frac{\sqrt{3}}{3} $.
+\end{solution}
+
+9. $ \frac{1}{2} $
+\begin{solution}
+    由$ |k\boldsymbol{a}+\boldsymbol{b}|^2=(\sqrt{3}|\boldsymbol{a}-k\boldsymbol{b}|)^2 $得$ 8k\boldsymbol{a}\cdot\boldsymbol{b}=(3-k^2)\boldsymbol{a}^2+(3k^2-1)\boldsymbol{b}^2 $, 故$ \boldsymbol{a}\cdot\boldsymbol{b}=\frac{(3-k^2)\boldsymbol{a}^2+(3k^2-1)\boldsymbol{b}^2}{8k} $. 因为$ \boldsymbol{a}=(\cos \alpha,\sin \alpha),\ \boldsymbol{b}=(\cos \beta,\sin \beta) $, 所以$ \boldsymbol{a}^2=1,\ \boldsymbol{b}^2=1,\ \boldsymbol{a}\cdot\boldsymbol{b}=\frac{k^2+1}{4k} $. 因为$ k>0,\ k^2+1\geqslant 2k $, 则$ \frac{k^2+1}{4k}\geqslant\frac{2k}{4k}=\frac{1}{2} $, 所以$ \boldsymbol{a}\cdot\boldsymbol{b} $的最小值为$ \frac{1}{2} $.
+\end{solution}
+
+\end{document}

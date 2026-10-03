@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{xeCJK}
+\usepackage{amsmath}
+\linespread{1.5}
+
+\title{第一课：函数}
+\author{任天一 }
+\date{2025.9}
+
+\begin{document}
+
+\maketitle
+
+\section{映射与函数的定义}
+设$A,B$是两个非空集合，所谓从$A$到$B$的一个映射，是指一个对应法则 $f:A \rightarrow B$，对于$\forall a \in A$，都有唯一一个$b \in B$与之对应. \newline
+\newline
+如果在映射$f$下$a \in A$对应的元素是$b \in B$，则称$b$是$a$在$f$下的像，称$a$是$b$在$f$下的原像，将$b$记作$f(a)$.\newline
+\newline
+$b \in B$在$f$下的所有原像的集合记作$f^{-1}(b):f^{-1}(b) = \{a \in A|f(a) = b\}$.\newline
+类似地，$B$的非空子集$S$在$f$下的所有原像的集合记作$f^{-1}(S):f^{-1}(S) = \{a \in A|f(a) \in S\}$.\newline
+\newline
+函数是由非空数集到非空数集的映射.
+
+\section{函数的三要素：定义域、对应法则、值域}
+1.函数的自然定义域：\newline
+（1）分式的分母不为0；\newline
+（2）偶次方根的被开方数非负；\newline
+（3）对数的真数$>0$；\newline
+（4）指数函数与对数函数的底数$>0$且$\ne 1$；\newline
+（5）正切函数的定义域.\newline
+2.复合函数的定义域：已知$f(x)$的定义域是$[a,b]$，则$f[g(x)]$的定义域是满足$a \leq g(x) \leq b$的$x$的取值范围.\newline
+3.实际问题或几何问题给出的函数的定义域：要使实际问题或几何问题有意义.\newline
+4.求函数的值域的方法：单调性，不等式，几何构造等.
+
+\section{一些经典的函数类型}
+1.分段函数.\newline
+2.复合函数与函数迭代：将同一个函数多次复合得到的函数是函数的迭代.\newline
+3.抽象函数：给出函数所具备的一些性质，去探讨其它的性质.
+
+\section{例题}
+例1.设函数$f(x)$满足$2f(3x)+f(2-3x)=6x+1$,则$f(x)=$.\newline
+\newline
+例2.设函数$f(x)$的定义域是$\mathbb{R}-\{0,1\}$，且满足$f(x)+f(\frac{x-1}{x})=x+1$，则$f(x)$的解析式是：\newline
+\newline
+例3.已知函数$f(x) = -\frac{1}{2}x^2+x$，若$f(x)$的定义域为$[m,n]$，其中$m < n, m, n$均为整数，值域为$[km,kn](k > 1)$，则$n$的值为：\newline
+\newline
+例4.对于实数$a$和$b$，定义运算$a * b = \left\{\begin{matrix}a^2 - ab,a \leq b   \\b^2 - ab,a < b\end{matrix}\right.$,设$f(x) = (2x-1)*(x-1)$，且关于$x$的方程$f(x) = m(m \in \mathbb{R})$
+恰有三个互不相等的实数根$x_1,x_2,x_3$,则$x_1x_2x_3$的取值范围是：\newline
+\newline
+例5.求$|x-1|+|2x-1|+|3x-1|+ \cdots + |2011x-1|$的最小值.\newline
+\newline
+例6.已知定义在正整数集上的函数$f(n)$满足条件：（1）$f(m+n) = f(m) + f(n) + mn$,其中$m,n \in \mathbb{N}^*$，（2）$f(3) = 6$，则$f(2011) = $.\newline
+\newline
+例7.若正整数$a,b$满足$\log_{ 2}a + \log_{4}b = 8 ,\log_{4}a + \log_{8}b = 2$,则$\log_{8}a + \log_{ 2}b $的值为\newline
+\newline
+例8.已知$f(x) = m(x - 2m)(x + m +3),g(x) = 2^x - 2$同时满足条件$(1)\forall x \in \mathbb{R}, f(x) < 0$或$g(x) < 0,(2) \exists (-\infty,-4),f(x)g(x) < 0,$则实数$m$的取值范围是：\newline
+\newline
+例9.函数$y = a^x - \frac{1}{a}(a>0,a \ne 1)$的图像可能是().\newline
+\newline
+例10.设函数$f(x) = |2 - \log_{3}x|$，正实数$a,b,c$满足$a<b<c$.且$f(a) = 2f(b) = 2f(c)$，求$\frac{ac}{b}$的值.\newline
+\newline
+例11.解不等式$\log_{2}(x^{12}+3x^{10}+5x^{8}+3x^6+1) > 1 + \log_{2}(x^4+1)$.
+
+\end{document}

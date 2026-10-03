@@ -1,0 +1,321 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{xcolor, graphicx, booktabs}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage{ctex}          % 支持中文
+
+% -------------------- Theme settings --------------------
+\usetheme{Berlin}
+\usecolortheme{whale}
+\setmainfont{Times New Roman}
+
+% -------------------- Theorem environments --------------------
+\theoremstyle{definition}
+\newtheorem{defn}{定义}[section]
+\newtheorem{ex}[defn]{例}
+\newtheorem{remark}[defn]{注记}
+\theoremstyle{plain}
+\newtheorem{thm}[defn]{定理}
+\newtheorem{lem}[defn]{引理}
+\newtheorem{cor}[defn]{推论}
+\newtheorem{prop}[defn]{命题}
+
+% -------------------- Title page --------------------
+\title[Calabi-Yau簇的形变理论]{Calabi-Yau簇的形变理论}
+% \subtitle{复几何与代数方法的交汇}
+\author[黄伟宁]{答辩人：黄伟宁\\ 指导教师：张旭成}
+\institute[北京航空航天大学]{北京航空航天大学 \and 数学科学学院}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \thispagestyle{empty}
+    \maketitle
+\end{frame}
+
+\begin{frame}{目录}
+    \tableofcontents[hideallsubsections]
+\end{frame}
+
+%============================================
+\section{引言}
+%============================================
+\begin{frame}{Calabi-Yau流形与形变理论}
+\begin{itemize}
+    \item \textbf{Calabi-Yau流形}：紧Kähler复流形，具有平凡典范丛 $\Omega_X^n\cong\mathcal{O}_X$。
+    \item 在代数几何、微分几何与弦理论中占据核心地位。
+    % \item 经典结果：\textbf{Bogomolov-Tian-Todorov 定理} —— 光滑Calabi-Yau流形的形变无障碍。
+    \item 两条主要进路：
+    \begin{enumerate}
+        \item 复几何方法 (Maurer-Cartan方程, $\partial\bar\partial$-引理, Tian-Todorov引理)
+        \item 代数方法 ($T^i$函子, Schlessinger判别法, $T^1$提升)
+    \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{主要结果}
+\begin{enumerate}
+    \item \textbf{光滑 Calabi-Yau 流形的形变无障碍} （Bogomolov-Tian-Todorov 定理）
+    \item \textbf{代数形变理论与 Schlessinger 判别法}
+    \item \textbf{Ran-Kawamata $T^1$ 提升性质与复射影CY簇形变无障碍的代数证明} 
+\end{enumerate}
+\end{frame}
+
+%============================================
+% \section{GAGA原理}
+%============================================
+\begin{frame}{GAGA原理}
+\begin{thm}[GAGA\cite{SerreGAGA}]
+设 $X$ 是复紧合代数簇，$X^{\mathrm{an}}$ 为其解析化。
+代数凝聚层与解析凝聚层范畴等价，且上同调一致：
+\[
+H^q(X,\mathscr{F})\cong H^q(X^{\mathrm{an}},\mathscr{F}^{\mathrm{an}}).
+\]
+\end{thm}
+\vspace{-5pt}
+\textbf{文中应用：}对于一个复紧合代数簇，除了从代数视角看待它，我们也可以将其视为一个紧复流形，并用一些复几何的工具研究它。
+\end{frame}
+
+%============================================
+\section{复几何方法}
+% \subsection{Maurer-Cartan方程}
+%============================================
+\begin{frame}{复结构的形变与Maurer-Cartan方程}
+\begin{itemize}
+    \item 给定紧复流形 $(M,I)$，其中 $I^2=-\mathrm{Id}$且$ I $满足一个可积性条件，由此给出复化切丛的分解$T_{\mathbb{C}}M=T^{1,0}\oplus T^{0,1}$。
+    \item 形变族 $I(t)$ 由 $\phi(t):T^{0,1}\to T^{1,0}$ 编码：
+    \[
+    T^{0,1}_t=(\mathrm{Id}+\phi(t))(T^{0,1}),\qquad \phi(t)=\sum_{i\ge1}\phi_i t^i\in\mathcal{A}^{0,1}(\mathcal{T}_X).
+    \]
+    \item 可积性条件等价于 \textbf{Maurer-Cartan 方程}：
+    \[
+    \bar\partial\phi(t)+\frac12[\phi(t),\phi(t)]=0.
+    \]
+    \item 一阶项：$\bar\partial\phi_1=0$ $\Rightarrow$ Kodaira-Spencer 类 $[\phi_1]\in H^1(X,\mathcal{T}_X)$。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{一阶形变与障碍}
+\begin{prop}
+光滑紧复流形 $X$ 的一阶形变等价类与 $H^1(X,\mathcal{T}_X)$ 一一对应。
+\end{prop}
+\vspace{-5pt}
+\begin{itemize}
+    \item 二阶障碍：给定 $v=[\phi_1]\in H^1(X,\mathcal{T}_X)$，需解 $\bar\partial\phi_2=-[\phi_1,\phi_1]$。
+    \item 映射 $v\mapsto [v,v]\in H^2(X,\mathcal{T}_X)$ 给出阻碍。
+    \item 如果 $[v,v]\neq 0$，则 $v$ 解不出$ \phi_2 $。
+\end{itemize}
+\end{frame}
+
+% \subsection{Tian-Todorov引理与BTT定理}
+\begin{frame}{全纯体积形式诱导的同构}
+假设 $X$ 是 Calabi-Yau 流形，固定全纯体积形式 $\Omega\in H^0(X,K_X)$。
+\[
+\eta:\bigwedge^p \mathcal{T}_X \xrightarrow{\cong} \bigwedge^{n-p}\Omega_X,\quad
+\eta(v_1\wedge\cdots\wedge v_p)=i_{v_1}\cdots i_{v_p}\Omega.
+\]
+推广到形式层面：
+\[
+\eta:\mathcal{A}^{0,q}(\bigwedge^p \mathcal{T}_X)\cong\mathcal{A}^{n-p,q}(X).
+\]
+定义算子 $\Delta = \eta^{-1}\circ\partial\circ\eta$，满足 $\Delta\bar\partial+\bar\partial\Delta=0$，$\Delta^2=0$。
+\end{frame}
+
+\begin{frame}{Tian-Todorov 引理}
+\begin{lem}[Tian-Todorov\cite{Tian,TT89}]
+若 $\alpha\in\mathcal{A}^{0,p}(\mathcal{T}_X)$, $\beta\in\mathcal{A}^{0,q}(\mathcal{T}_X)$，则
+\[
+(-1)^p[\alpha,\beta] = \Delta(\alpha\wedge\beta) - \Delta(\alpha)\wedge\beta - (-1)^{p+1}\alpha\wedge\Delta(\beta).
+\]
+\end{lem}
+\vspace{-5pt}
+\textbf{重要推论：} 若 $\alpha,\beta$ 是 $\Delta$-闭的，则 $[\alpha,\beta]$ 是 $\Delta$-恰当的。
+\end{frame}
+
+\begin{frame}{Bogomolov-Tian-Todorov 定理}
+\begin{thm}[Bogomolov-Tian-Todorov\cite{Tian,TT89}]
+设 $X$ 是光滑 Calabi-Yau 流形。对任意 $v\in H^1(X,\mathcal{T}_X)$，存在形式幂级数 $\phi(t)=\sum \phi_i t^i$ 满足 Maurer-Cartan 方程且 $[\phi_1]=v$。即任意一阶形变均可提升为真正的复结构形变（形变无障碍）。
+\end{thm}
+\vspace{-5pt}
+\textbf{证明思路：}
+\begin{itemize}
+    \item 选取 $\phi_1$ 使 $\eta(\phi_1)$ 调和。
+    \item 利用 Tian-Todorov 引理与 $\partial\bar\partial$-引理，递推构造 $\phi_k$ 满足 $\bar\partial\phi_k = -\sum_{i<k}[\phi_i,\phi_{k-i}]$。
+    \item Jacobi 恒等式保证右边是 $\bar\partial$-闭的，且 $\eta(\text{右边})$ 是 $\partial$-恰当，从而可解。
+\end{itemize}
+\end{frame}
+
+%============================================
+\section{代数方法}
+% \subsection{$T^i$ 函子与余切复形}
+%============================================
+\begin{frame}{余切复形与 $T^i$ 函子}
+\begin{defn}
+设 $A\to B$ 为环同态，$M$ 为 $B$-模。
+\begin{enumerate}
+    \item 取多项式环 $R=A[x]$ 及表示 $0\to I\to R\to B\to0$。
+    \item 取自由 $R$-模 $F$ 及正合列 $0\to Q\to F\xrightarrow{j} I\to0$。
+    \item 定义余切复形 $L_\bullet$:
+    \[
+    L_2 = Q/F_0,\; L_1 = F\otimes_R B,\; L_0 = \Omega_{R/A}\otimes_R B.
+    \]
+    \item $T^i(B/A,M) := H^i(\operatorname{Hom}_B(L_\bullet, M))$, $i=0,1,2$.
+\end{enumerate}
+\end{defn}
+\textbf{性质：} 不依赖于选取；与平坦基变换相容；可层化到概型上。
+\end{frame}
+
+\begin{frame}{$T^i$ 函子与几何意义}
+\begin{prop}
+\begin{itemize}
+    \item $T^0(B/A,M) = \operatorname{Der}_A(B,M) = \operatorname{Hom}_B(\Omega_{B/A},M)$ （切模）。
+    \item 若 $A\to B$ 满射，核为 $I$，则 $T^1(B/A,M)=\operatorname{Hom}_B(I/I^2,M)$ （法模）。
+    \item $X/\operatorname{Spec} k$ 光滑 $\iff$ $T^1(B/k,-)=0$，且此时 $T^2(B/k,-)=0$。
+\end{itemize}
+\end{prop}
+对于射影光滑态射 $f:X\to Y$，$\mathcal{T}^1_{X/Y}=0$，$\mathcal{T}^2_{X/Y}=0$，其中 $\mathcal{T}^i$ 为层化版本。
+\end{frame}
+
+% \subsection{形变与障碍理论}
+\begin{frame}{概型的形变与障碍}
+取定代数闭域$ k $，定义概型$X_0/k$ 上的形变函子 $F(A):=\operatorname{Def}(X_0/k,A)$，其中 $A$ 为局部 Artin $k$-代数。
+对于光滑的$ X_0 $，我们有
+\begin{thm}
+设 $A'\twoheadrightarrow A$，核 $J$ 满足 $\mathfrak{m}_{A'}J=0$。对于 $X\in F(A)$ 到 $A'$ 的扩张：
+\begin{itemize}
+    \item 存在障碍 $\delta\in H^2(X_0,\mathcal{T}_{X_0}\otimes J)$，$\delta=0$ 当且仅当扩张存在。
+    \item 若存在，扩张的等价类构成 $H^1(X_0,\mathcal{T}_{X_0}\otimes J)$-主齐性空间。
+    \item 自同构群 $\cong H^0(X_0,\mathcal{T}_{X_0}\otimes J)$。
+\end{itemize}
+\end{thm}
+所以对光滑的 $X_0$，障碍仅由 $H^2(\mathcal{T}_{X_0})$ 控制（与复几何一致）。
+\end{frame}
+
+% \subsection{Schlessinger 判别法}
+\begin{frame}{局部 Artin 环上的函子与 pro-可表示性}
+\begin{defn}
+函子 $F:\mathsf{C}\to\mathsf{Set}$ 称为 \textbf{pro-可表示的}，如果 $F\cong h_R=\operatorname{Hom}(R,-)$，其中 $\mathsf{C}$ 为局部 Artin $k$-代数组成的范畴，$R$ 是完备局部 $k$-代数。
+\end{defn}
+\vspace{-5pt}
+\begin{thm}[Schlessinger 判别法]
+$F$ 具有极小通用族 (miniversal family) 当且仅当：
+\begin{enumerate}
+    \item[H0] $F(k)$ 单点。
+    \item[H1] 对小扩张 $A''\to A$，$F(A'\times_A A'')\twoheadrightarrow F(A')\times_{F(A)}F(A'')$ 满射。
+    \item[H2] 对于 $A''=D$ 且 $A=k$ 时为双射。
+    \item[H3] $t_F=F(k[\varepsilon]/\varepsilon^2)$ 是有限维 $k$-向量空间。
+\end{enumerate}
+若进一步在小扩张纤维上 $t_F$ 作用为双射，则 $F$ pro-可表示。
+\end{thm}
+\end{frame}
+
+\begin{frame}{形变函子的 pro-可表示性}
+\begin{thm}
+设 $X_0$ 为 $k$ 上有限型仿射概型（至多孤立奇点）或射影概型，则形变函子 $F=\operatorname{Def}(X_0/k,-)$ 具有极小通用族。
+\end{thm}
+\begin{cor}
+若 $X_0$ 光滑射影且 $H^0(\mathcal{T}_{X_0})=0$，则形变函子 pro-可表示。
+\end{cor}
+\end{frame}
+
+% \subsection{Ran-Kawamata $T^1$ 提升性质}
+\begin{frame}{$T^1$ 提升性质与无障碍}
+一般地，取定某概型$ X_0/k $的形变函子$ F=\operatorname{Def}(X_0/k,-) $。任意$ n $，设 $A_n=k[t]/(t^{n+1})$, $B_n=A_n\otimes A_1$，以及对任意形变 $X_n\in F(A_n)$记
+\[
+T^1(X_n/A_n)=\{Y_n\in F(B_n)\mid Y_n\otimes_{B_n}A_n \cong X_n\}.
+\]
+\begin{thm}[Ran-Kawamata $ T^1 $ 提升性质\cite{Kawamata92}]
+若 $F$ pro-可表示，且对所有 $n$以及所有相容的$ X_{n+1}\in F(A_{n+1}) $和$ X_n\in F(A_n) $自然映射
+\[
+T^1(X_{n+1}/A_{n+1})\to T^1(X_n/A_n)
+\]
+为满射，则 $F$ 无障碍。
+% \\(无需 pro-可表示性也成立，若采用改进定义。)
+\end{thm}
+\end{frame}
+
+\begin{frame}{$T^1$ 提升性质与无障碍}
+    \begin{remark}
+        在\cite{Kawamata97} 中，Kawamata 将 \(T^1\) 空间的定义替换为 \(T^1(X_n/A_n):=\mathrm{Def}(X_n/A_n,B_n)\)。采用这个新定义后，上述定理不需要 \(F\)  pro-可表示只需要$ F $存在极小通用族就成立。
+    \end{remark}
+\end{frame}
+
+% \subsection{光滑射影 Calabi-Yau 簇的无障碍性（代数）}
+\begin{frame}{关键引理：Hodge 上同调的自由性}
+\begin{lem}
+设 $f:X\to \operatorname{Spec} A_n$ 为光滑射影态射，$A_n=\mathbb{C}[t]/(t^{n+1})$。则对所有 $p,q$，
+$H^q(X,\Omega^p_{X/A_n})$ 是自由 $A_n$-模。
+\end{lem}
+\textbf{证明思路：}
+\begin{itemize}
+    \item 建立微分形式层的层上同调与复系数de Rham 上同调的联系 (GAGA，Hodge分解)。
+    \item 利用Hodge到de Rham谱序列得到一个长度不等式。
+    \item 以上导出另一个长度不等式取等，这是每个 $H^q(\Omega^p)$ 自由的等价条件。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{光滑射影 Calabi-Yau 簇的无障碍性}
+\begin{thm}
+设 $X$ 是光滑复射影 Calabi-Yau 簇，则 $\operatorname{Def}(X/\mathbb{C},-)$ 无障碍。特别地，任意 $D=\mathbb{C}[t]/(t^2)$ 上的形变均可拓展为 $\mathbb{C}[[t]]$ 上的形式族。
+\end{thm}
+\textbf{证明思路：}
+\begin{enumerate}
+    \item 验证 $T^1$ 提升性质：需证 $H^1(\mathcal{T}_{X_{n+1}/A_{n+1}})\to H^1(\mathcal{T}_{X_n/A_n})$ 满射。
+    \item 利用 $\mathcal{T}_{X/A}\cong\Omega^{d-1}_{X/A}$ (Calabi-Yau 条件) 及前述引理。
+    \item $H^1(\Omega^{d-1})$ 作为自由模的秩恒定，故限制映射满射。
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{光滑射影 Calabi-Yau 簇的无障碍性}
+    \begin{remark}
+        要求$ X $射影仅为了保证$ X^{\mathrm{an}} $是Kähler流形从而可以应用Hodge分解定理且形变函子存在极小通用族，$ X $射影可以进行一定程度的弱化。
+    \end{remark}
+    \begin{remark}[无障碍性与pro-可表性]
+        尽管利用改进之后的$ T^1 $提升性质不需要形变函子的pro-可表性也能证明无障碍性，但pro-可表性在形变理论领域仍然是重要的研究对象，出于完整性这部分内容仍然是必要的。
+    \end{remark}
+\end{frame}
+
+%============================================
+\section{总结}
+%============================================
+\begin{frame}{总结}
+\begin{itemize}
+    \item 复几何进路：Maurer-Cartan 方程、Tian-Todorov 引理、$\partial\bar\partial$-引理 $\Rightarrow$ BTT 定理。
+    \item 代数进路：$T^i$ 函子与余切复形 $\to$ 障碍理论；Schlessinger 判别法 $\to$ 极小通用族 / pro-可表示性。
+    \item $T^1$ 提升性质 + Hodge 理论 (GAGA) $\Rightarrow$ 光滑射影 Calabi-Yau 簇形变无障碍。
+    \item 整体上，光滑 Calabi-Yau 流形形变的无障碍性是形变理论中最优美的现象之一，它与Hodge 理论、镜像对称以及 Calabi-Yau 簇模空间的构造紧密相连。
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\Large 请批评指正！
+\end{center}
+\end{frame}
+
+%============================================
+\section*{参考文献}
+%============================================
+\begin{frame}[allowframebreaks]{参考文献}
+\footnotesize
+\begin{thebibliography}{99}
+\bibitem{Huy05} Huybrechts, D. \textit{Complex Geometry: An Introduction}. Springer, 2005.
+\bibitem{Kodaira} Kodaira, K. \textit{Complex Manifolds and Deformation of Complex Structures}. Springer, 1986.
+\bibitem{Tian} Tian, G. Smoothness of the universal deformation space of compact Calabi-Yau manifolds and its Petersson-Weil metric. \textit{Mathematical aspects of string theory}, 629--646, 1987.
+\bibitem{TT89} Todorov, A. The Weil-Petersson geometry of the moduli space of $SU(n\ge 3)$ (Calabi-Yau) manifolds. \textit{Comm. Math. Phys.} 126 (1989), 325--346.
+\bibitem{SerreGAGA} Serre, J.-P. Géométrie algébrique et géométrie analytique. \textit{Ann. Inst. Fourier} 6 (1956), 1--42.
+\bibitem{LichtenbaumSchlessinger} Lichtenbaum, S., Schlessinger, M. The cotangent complex of a morphism. \textit{Trans. Amer. Math. Soc.} 128 (1967), 41--70.
+\bibitem{Har10} Hartshorne, R. \textit{Deformation Theory}. Graduate Texts in Mathematics 257, Springer, 2010.
+\bibitem{Kawamata92} Kawamata, Y. Unobstructed deformations. \textit{J. Algebraic Geom.} 1 (1992), 183--190.
+\bibitem{Kawamata97} Kawamata, Y. Erratum: Unobstructed deformations. \textit{J. Algebraic Geom.} 6 (1997), 803--804.
+\end{thebibliography}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,217 @@
+\documentclass[12pt,a4paper,oneside]{ctexart}
+\usepackage{amsmath,amsthm,amssymb,bm,graphicx,hyperref,mathrsfs}
+
+\title{\textbf{作业答案}}
+% \author{黄伟宁}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\\\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\\\par}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+
+\maketitle
+% \begin{problem}
+% 这里是题目.
+% \end{problem}
+
+% \begin{solution}
+%     这里是解答.
+% \end{solution}
+
+% \begin{note}
+%     这里是注记.
+% \end{note}
+
+% \begin{problem}
+% \end{problem}
+
+1. $ (\frac{3}{4},\frac{7}{9})\cup(\frac{5}{4},+\infty) $ 
+
+\begin{solution}
+    设$ g(x)=\frac{1}{2}ax^2-x+\frac{1}{2} $,由$ g(2)=2a-2+\frac{1}{2}>0 $得$ a>\frac{3}{4} $.
+
+    当$ a>\frac{3}{4} $ 且$ 2<x<3 $ 时,$ g'(x)=ax-1>0 $,所以$ g(x)=\frac{1}{2}ax^2-x+\frac{1}{2} $ 在区间$ [2,3] $ 上单调递增.
+
+    $ (1) $若$ \frac{3}{4}<a<1 $ ,则$ x\in[2,3] $ ,$ f(x)>0\Leftrightarrow \begin{cases}
+        g(2)>0,\\
+        g(3)<1,
+    \end{cases} $因此$ \frac{3}{4}<a<\frac{7}{9} $.
+
+    $ (2) $ 若$ a>1, $ 则$ x\in[2,3],f(x)>0\Leftrightarrow g(2)>1, $因此$ a>\frac{5}{4} $ .
+    
+    综上,$ a $ 的取值范围是$ (\frac{3}{4},\frac{7}{9})\cup(\frac{5}{4},+\infty) $. 
+\end{solution}
+
+2. $ (32,35) $ 
+
+\begin{solution}
+    画出函数$ y=f(x) $ 的图象.不妨设$ f(a)=f(b)=f(c)=f(d)=t $(其中$ 0<t<2 $ ),$ a<b<c<d $,则$ a,b $是方程$ |\log_2 x|=t $ 的两个根,故$ \lg a+\lg b=0, $  所以$ ab=1,c,d $ 是方程$ \frac{2}{3}x^2-8x+\frac{70}{3}=t $ 的两个根,故$ c+d=\frac{8}{\frac{2}{3}}=12, $ 其中$ 4<c<5 $ ,所以$ abcd=cd=c(12-c)\in(32,35). $ 
+\end{solution}
+
+3. $ \sqrt{3} $ 
+
+\begin{solution}
+    依题意$ x>-2y,x>2y,x^2-4y^2=4 $ .由对称性,只需考虑$ x\geqslant 0,y\geqslant 0 $ 的情况.
+
+    设$ t=|x|-|y|=x-y, $ 将其带入$ x^2-4y^2=4, $ 可得$ 3x^2-8tx+4(t^2+1)=0. $ 
+
+    这个关于$ x $ 的方程由非负实数根,则$ \begin{cases}
+        \Delta=(8t)^2-48(t^2+1)\geqslant 0,\\
+        t\geqslant 0
+    \end{cases}\Rightarrow t\geqslant \sqrt{3}. $ 
+
+    另外,当$ x=\frac{4}{3}\sqrt{3},y=\frac{\sqrt{3}}{3} $ 时,$ |x|-|y|=\sqrt{3}. $ 所以$ |x|-|y| $ 的最小值是$ \sqrt{3}. $ 
+\end{solution}
+
+4. $ \frac{17}{5} $ 
+
+\begin{solution}
+    用$ \Gamma $ 表示函数$ y=f(x) $ 的图象.对任意的$ x_0\in(0,1) $ ,令$ y_0=\log_2(1+x_0) $ ,则$ (x_0,y_0)\in\Gamma, $且$ y_0\in(0,1), $ 利用$ \Gamma $ 的中心对称性与轴对称性,依次推得$ (2-x_0,2-y_0)\in\Gamma,(y_0-2,x_0-2)\in\Gamma,(4-y_0,4-x_0)\in\Gamma. $ 
+
+    取$ x_0=\frac{3}{5}, $则$ 4-y_0=4-\log_2(1+x_0)=\log_2 10. $ 因此$ f(\log_2 10)=f(4-y_0)=4-x_0=4-\frac{3}{5}=\frac{17}{5} $.
+\end{solution}
+
+5. $ a=-\frac{2}{5} $,$ b=-\frac{1}{3} $
+
+\begin{solution}
+    由$ f(a)=f(-\frac{b+1}{b+2}) $ 可得$ |\lg(a+1)|=|\lg\frac{1}{b+2}| $ ,即$ |\lg(a+1)|=|\lg(b+2)|. $ 因为$ a<b\Rightarrow a+1<b+2, $ 所以$ -\lg(a+1)=\lg(b+2), $ 即$ (a+1)(b+2)=1 $(其中$ -1<a<b $ ) (1).
+
+    由$ f(10a+6b+21=4\lg 2) $ 以及$ 10a+6b+21+1>6>1 $ 可得$ 10a+6b+22=16, $ 即$ 10(a+1)+6(b+2)=16 $ (2).
+
+    综合(1)(2)可得$ a+1=\frac{3}{5},b+2=\frac{5}{3} $(将$ a+1=1,b+2=1 $舍去 ),所以$ a=-\frac{2}{5},b=-\frac{1}{3}. $ 
+\end{solution}
+
+6. $ \frac{7}{2} $
+
+\begin{solution}
+    由题意知,存在$ x_0>0, $ 使得$ f(x_0)=3. $ 又$ f(x) $ 在区间$ (0,+\infty) $ 上为单调函数,则这样的$ x_0>0 $ 是唯一的.
+    
+    由$ f(f(x_0)+\frac{4}{x_0})=3 $ 得$ x_0=f(x_0)+\frac{4}{x_0}=3+\frac{4}{x_0}, $ 解得$ x_0=4 $ 或$ x_0=-1 $(舍去).
+    
+    故$ f(x)=4-\frac{4}{x},f(8)=4-\frac{4}{8}=\frac{7}{2}. $ 
+\end{solution}
+
+7. $ \frac{1-\sqrt{5}}{2} $ 
+
+\begin{solution}
+    设$ f(1)=a, $ 结合条件(3),令$ x=1, $ 得$ af(a+1)=1\Rightarrow f(a+1)=\frac{1}{a}. $ 
+    
+    再令$ x=a+1, $ 得$ f(a+1)f(f(a+1)+\frac{1}{a+1})=1\Rightarrow f(\frac{1}{a}+\frac{1}{a+1})=f(1). $ 
+    
+    由函数$ f(x) $ 严格单调递增知$ \frac{1}{a}+\frac{1}{a+1}=1\Rightarrow a=\frac{1\pm\sqrt{5}}{2}. $ 若$ a=\frac{1+\sqrt{5}}{2}, $ 则$ 1<a=f(1)<f(1+a)=\frac{1}{a}<1, $ 矛盾.
+    
+    综上所述,仅有唯一的$ a=\frac{1-\sqrt{5}}{2}, $ 即$ f(1)=\frac{1-\sqrt{5}}{2}. $ 
+\end{solution}
+
+8. $ 8 $ 
+
+\begin{solution}
+    由题设知$ a>0,b^2-4ac\leqslant 0\Rightarrow c\geqslant\frac{b^2}{4a}, $ 由于$ a<b, $ 则$ b-a>0, $ 所以$ M=\frac{a+2b+4c}{b-a}\geqslant\frac{a+2b+\frac{b^2}{a}}{b-a}=\frac{(a+b)^2}{a(b-a)}=\frac{(1+\frac{b}{a})^2}{\frac{b}{a}-1}. $设$ t=\frac{b}{a}, $  则$ t-1\in(0,+\infty),M\geqslant\frac{(1+t)^2}{t-1}=\frac{(t-1+2)^2}{t-1}=(t-1)+\frac{4}{t-1}+4. $ 易知函数$ g(x)=x+\frac{4}{x}+4(x>0) $ 在区间$ (0,2) $ 上单调递减,在区间$ (2,+\infty) $ 上单调递增,所以$ g(x) $ 的最小值是$ g(2)=8, $ 故$ M\geqslant(t-1)+\frac{4}{t-1}+4\geqslant 8, $ 当$ b=3a,c=\frac{9}{4}a $ 时取得等号,所以$ M $ 的最小值是$ 8. $ 
+\end{solution}
+
+9. $ (2,3] $ 
+
+\begin{solution}
+    由$ f(x) $ 的定义域知$ \begin{cases}
+        -3\leqslant x^2-2x \leqslant 3 ,\\
+        -3\leqslant x-2\leqslant 3.
+    \end{cases} $ 
+
+    由$ -3\leqslant x^2-2x\leqslant 3 $ 解得$ -1\leqslant x\leqslant 3, $ 由$ -3\leqslant x-2\leqslant 3 $ 解得$ -1\leqslant x\leqslant 5 $ .
+
+    综上可得$ -1\leqslant x\leqslant 3 $ (1).
+
+    因为$ f(x) $ 是奇函数,所以$ f(x^2-2x)<-f(x-2)=f(2-x). $ 又因为$ f(x) $ 在定义域内单调递减,故$ x^2-2x>2-x, $ 解得$ x<-1 $ 或$ x>2 $ (2).
+
+    由(1)(2)得$ 2<x\leqslant 3, $ 即实数$ x $ 的取值范围是$ (2,3]. $ 
+\end{solution}
+
+10. 最小值$ 32 $,最大值$ 74 $.
+
+\begin{solution}
+    由题意函数$ f(x) $ 的图象为开头向上的抛物线,若$ f(x) $ 在区间$ (2,3] $上存在最大值,则该最大值只能是$ f(3), $  故由$ f(2)\leqslant f(3)=1, $ 从而$ b\geqslant -5 $ 且$ c=-3b-8. $ 
+
+    (1)若$ f(x)=0 $ 有实数根,则$ \Delta=b^2-4c\geqslant 0, $ 则实数根在区间$ [-2,2] $ 上,所以有
+
+    $ \begin{cases}
+        f(-2)\geqslant 0,\\
+        f(2)\geqslant 0,\\
+        -2\leqslant \frac{b}{2}\leqslant 2,
+    \end{cases} $ 即$ \begin{cases}
+        4-2b+c\geqslant 0,\\
+        4+2b+c\geqslant 0,\\
+        -4\leqslant b\leqslant 4.
+    \end{cases} $ 消去$ c $ ,解出$ \begin{cases}
+        b\leqslant -\frac{4}{5},\\
+        b\leqslant -4,\\
+        -4\leqslant b\leqslant 4,
+    \end{cases} $ 
+
+    即$ b=-4, $ 这时$ c=4, $ 且$ \Delta=0. $ 
+
+    (2)若$ f(x)=0 $ 无实数根,则$ \Delta=b^2-4c<0, $ 将$ c=-3b-8 $ 带入解得$ -8<b<-4. $ 
+
+    综上可得,$ -5\leqslant b\leqslant -4. $ 函数$ g(b)=b^2+c^2=b^2+(-3b-8)^2=10b^2+48b+64 $ 在区间$ [-5,-4] $ 上单调递减,故$ (b^2+c^2)_{\min} =32,(b^2+c^2)_{\max} =74. $ 
+\end{solution}
+
+11. $ 4 $ 
+
+\begin{solution}
+    由题意,函数$ f(x) $ 的周期是$ 4 $ ,当$ x\in[-2,0] $ 时,$ -x\in[0,2], $ 此时$ f(x)=f(-x)=-x+2. $ 依据函数$ f(x) $ 的周期性可知,$ f(x)=4 $ 当且仅当$ x=4k+2(k\in \mathbb{Z}) $ .故直线$ y=4 $ 与函数$ f(x) $ 的图象交点中最近的两点之间的距离为$ 4. $ 
+\end{solution}
+
+12. $ 3 $
+
+\begin{solution}
+    用$ x-2 $ 代替$ f(x+2)+f(2-x)=4 $ 中的$ x, $ 得$ f(x)+f(4-x)=4. $ 如果点$ (x,y) $ 在$ y=f(x) $ 的图象上,则$ 4-y=f(4-x), $ 即点$ (x,y) $ 关于点$ (2,2) $ 的对称点$ (4-x,4-y) $ 也在$ y=f(x) $ 的图象上,反之亦然,故(1)是真命题.
+
+    用$ x-2 $ 代替$ f(x+2)=f(2-x) $ 中的$ x, $ 得$ f(x)=f(4-x), $ 如果点$ (x,y) $ 在$ y=f(x) $ 的图象上,则$ y=f(4-x) $ ,即点$ (x,y) $ 关于直线$ x=2 $ 的对称点$ (4-x,y) $ 也在$ y=f(x) $ 的图象上,故(2)是真命题.
+
+    设$ (x,y) $ 是函数$ y=f(x-2) $ 图象上任意一点,则$ y=f(x-2)=f(2-(4-x)). $ 这说明$ (x,y) $ 关于直线$ x=2 $ 的对称点$ (4-x,y) $ 落在函数$ y=f(2-x) $ 的图象上.反之,以类似的方法可以证明函数$ y=f(2-x) $ 的图象上任意点关于直线$ x=2 $ 的对称点$ (4-x,y) $ 落在函数$ y=f(x-2) $ 的图象上,因此(3)也是真命题.
+
+    综上可得,(1)(2)(3)均是真命题,故真命题的个数是$ 3 $个.
+\end{solution}
+
+13. $ x\in[\pi -2,8-2\pi] $ 
+
+\begin{solution}
+    由$ f(x) $ 为偶函数及在区间$ [0,1] $ 上严格递减知,$ f(x) $ 在区间[-1,0]上严格递增.
+
+    又$ f(x) $ 以2为周期,可知$ [1,2] $ 是$ f(x) $ 的严格递增区间.
+
+    注意到$ f(\pi -2)=f(\pi)=1,f(8-2\pi)=f(-2\pi)=f(2\pi)=2, $ 所以$ 1\leqslant f(x)\leqslant 2\Leftrightarrow f(\pi -2)\leqslant f(x)\leqslant f(8-2\pi). $ 
+
+    而$ 1<\pi-2\le 8-2\pi<2, $ 故原不等式组的解集为$ x\in[\pi-2,8-2\pi]. $ 
+\end{solution}
+
+14. $ 2 $ 
+
+\begin{solution}
+    因为函数$ f(x) $ 的图象关于点$ (-\frac{3}{4},0) $ 成中心对称,所以$ f(x)=-f(-\frac{3}{2}-x) $ 对任意实数$ x $ 恒成立.依题设得$ f(x)=-f(x+\frac{3}{2}), $ 所以$ f(x+\frac{3}{2})=f(-\frac{3}{2}-x), $ 故$ f(x) $ 是偶函数,故$ f(1)=f(-1)=1. $ 
+
+    另外,$ f(x)=-f(x+\frac{3}{2})=-[-f(x+3)]=f(x+3), $ 这说明$ f(x) $ 是以$ 3 $ 为周期的周期函数,因此,$ f(1)+f(2)+f(3)+\cdots+f(2009)=669\times[f(1)+f(2)+f(3)]+f(2008)+f(2009)=669\times[f(-1)+f(0)+f(1)]+f(1)+f(-1)=2. $ 
+\end{solution}
+
+15. (1) $ f(x)=x^2+x+11 $ (2) $ (10,121) $ 
+
+\begin{solution}
+    (1)因为函数$ y=f(x-\frac{1}{2}) $ 是偶函数,所以二次函数$ f(x)=x^2+bx+c $ 图象的对称轴方程为$ x=-\frac{1}{2}, $ 故$ b=1. $ 又因为二次函数$ f(x)=x^2+bx+c $ 的图象过点$ (1,13), $ 所以$ 1+b+c=13, $ 故$ c=11. $ 故$ f(x) $ 的解析式为$ f(x)=x^2+x+11. $ 
+
+    (2)如果函数$ y=f(x) $ 的图象上存在符合要求的点,设为$ P(m,n^2), $ 其中$ m $ 为正整数,$ n $ 为自然数,则$ m^2+m+11=n^2, $ 从而$ 4n^2-(2m+1)^2=43, $ 即$ [2n+(2m+1)][2n-(2m+1)]=43. $ 
+
+    注意到$ 43 $ 是质数,且$ 2n+(2m+1)>2n-(2m+1),2n+(2m+1)>0, $ 所以$ \begin{cases}
+        2n+(2m+1)=43,\\
+        2n-(2m+1)=1,
+    \end{cases} $ 解得$ \begin{cases}
+        m=10,\\
+        n=11.
+    \end{cases} $ 
+    因此,函数$ y=f(x) $ 的图象上存在符合要求的点,它的坐标为$ (10,121). $ 
+\end{solution}
+
+\end{document}

@@ -1,0 +1,79 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{科研课堂课程作业}}
+\author{黄伟宁}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\\\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\\\par}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+求例2.2中KdV方程的单孤子解
+\end{problem}
+
+\begin{solution}
+    设$ \phi(x,t)=1+e^{Ax+Bt+\delta}  $,其中$ A\neq0 $ ,$ \delta $ 为任意常数.
+
+    将上式代入(78)或(79)之后均可得到$ AB+A^{4} =0 $ ,而$ A\neq0 $ 从而有$ B=-A^{3}  $ .
+
+    然后我们有
+    \begin{align*}
+        u & =12\frac{\partial ^{2} }{\partial x^{2} }(\ln\phi)         \\&=12(\frac{\phi_{x} }{\phi})_{x
+        }                                                              \\
+          & =\frac{12\phi_{xx} \phi-12\phi_{x} ^{2} }{\phi^{2} }       \\
+          & =\frac{12A^{2} }{e^{Ax+Bt+\delta} +e^{-(Ax+Bt+\delta)} +2} \\
+          & =\frac{6A^{2} }{\cosh(Ax-A^{3} t+\delta)+1}
+    \end{align*}
+\end{solution}
+
+\begin{problem}
+求例2.2中KdV方程的一个有理解
+\end{problem}
+
+\begin{solution}
+    设$ \phi(x,t) $和$ u_{2} $ 有以下形式
+    $$
+        \phi(x,t)=A(t)x^{2} +B(t)x+C(t),u_{2} =s(t)x+r(t)
+    $$
+    代入(73)-(75)后可以得到
+    $$
+        \begin{cases}
+            A(t)(A'(t) x+B'(t))+(s(t)x+r(t))(A(t)x+B(t))^{2} =0 \\
+            2A'(t)+B'(t)+2A(t)(s(t)x+r(t))=0                    \\
+            s'(t)x+r'(t)+(s(t)x+r(t))s(t) =0                    \\
+        \end{cases}
+    $$
+    进而推出
+    $$
+        \begin{cases}
+            s(t)=\frac{1}{x+c_{1} }                                                                                                                                         \\
+            r(t)=\frac{c_{2} }{x+c_{1} }                                                                                                                                    \\
+            A(t)=\frac{c_{3} }{c_{1} +t}                                                                                                                                    \\
+            B(t)=\frac{2c_{2} c_{3} }{t+c_{1} }+c_{4}                                                                                                                       \\
+            C(t)=\frac{6c_{3} -c_{2} ^{2} c_{4} }{c_{2} }\ln(c_{1} +t)-\frac{6c_{3} }{c_{2} }\ln(c_{1} +t+\frac{2c_{3} c_{2} }{c_{4} })+\frac{2c_{2} ^{2} c_{3} }{c_{1} +t} \\
+        \end{cases}
+    $$
+    其中$ c_{1} ,c_{2},c_{3} ,c_{4},c_{5} $ 为积分常数并且
+    $$
+        u=12\frac{\partial ^{2} }{\partial x^{2} }(\ln\phi)+u_{2} =\frac{x+c_{2} }{t+c_{1} }-12\cdot\frac{2A^{2} (t)x^{2} +2A(t)B(t)x-2A(t)C(t)+B^{2} (t)}{(A(t)x^{2} +B(t)x+C(t))^{2} }
+    $$
+\end{solution}
+
+\begin{problem}
+求二维Burges方程的解析解.
+\end{problem}
+
+\begin{solution}
+    略.
+\end{solution}
+
+\end{document}

@@ -1,0 +1,59 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{科研课堂课程作业}}
+\author{黄伟宁}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\\\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\\\par}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+验证例4方程的自伴随方程是(18).
+\end{problem}
+
+\begin{solution}
+    方程为$ v[4x(u_{x} +u+u^{2} )+x^{2} (u_{xx} +u_{x} +2uu_{x} )-u_{t} ]=0 $ .
+
+    变分算子为$ \frac{\delta}{\delta u}=\frac{\partial }{\partial u}-D_{x} \frac{\partial }{\partial u_{x} }-D_{t} \frac{\partial }{\partial t}+D_{x} D_{x} \frac{\partial }{\partial u_{xx} } $.
+
+    $ \frac{\partial }{\partial u} $作用结果为
+    $$
+        4xv+8xvu+2x^{2} vux
+    $$
+    $ D_{x} \frac{\partial }{\partial u_{x} } $ 作用结果为
+    $$
+        4v+4xv_{x} +2xv+x^{2} v_{x} +2u_{x} v_{x} ^{2} +2uv_{x} x^{2} +4uv_{x}
+    $$
+    $ D_{t} \frac{\partial }{\partial t} $ 作用结果为
+    $$
+        -v_{t}
+    $$
+    $ D_{x} D_{x} \frac{\partial }{\partial u_{xx} } $ 作用结果为
+    $$
+        4xv_{x} +x^{2} v_{xx} +2v
+    $$
+    整合上述计算结果可以得到例4的自伴随方程为
+    $$
+        v_{t} +x^{2} v_{xx} -x^{2} (1+2u)v_{x} +2(2xu+x-1)v=0
+    $$
+    得证.
+\end{solution}
+
+\begin{problem}
+验证$ \mu F=0 $ 是严格自伴随的.
+\end{problem}
+
+\begin{solution}
+    略.
+\end{solution}
+
+\end{document}

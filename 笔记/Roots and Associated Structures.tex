@@ -1,0 +1,192 @@
+\documentclass{article}
+\usepackage{amsmath, amsthm, amssymb, appendix, bm, graphicx, hyperref, mathrsfs}
+\usepackage{enumerate}
+%\usepackage[nocap]{ctex}
+% \usepackage{ctex}
+\usepackage[english]{babel}
+
+\title{\textbf{Roots and Associated Structures}}
+\author{hwn}
+\date{\today}
+\linespread{1.5}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+\renewcommand{\abstractname}{\Large\textbf{Abstract}}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+\setcounter{secnumdepth}{5}
+
+\begin{document}
+
+\maketitle
+\pagenumbering{arabic}
+\tableofcontents
+\newpage
+
+\section{Lie Algebras}
+
+\subsection{Basic Definitions}
+
+\subsection{Lie Algebras for the Compact Classical Lie Groups}
+
+\paragraph{$ SL(n) $} 
+
+\[
+    \mathfrak{sl}(n,\mathbb{F})=\{X\in \mathfrak{gl}(n,\mathbb{F})\mid\mathrm{tr}\, X=0\}.
+\]
+
+\paragraph{$ U(n)\ \&\ SU(n) $}
+\begin{align*}
+    &\mathfrak{u}(n)=\{X\in\mathfrak{gl}(n,\mathbb{C} )\mid X^*=-X\},\\
+    &\mathfrak{t}=\{ \mathrm{diag}(i\theta_1,\dots,i\theta_n) \mid \theta_i \in\mathbb{R} \},\\
+    &\mathfrak{g}_{\mathbb{C} }=\mathfrak{gl}(n,\mathbb{C}),\\
+    &\mathfrak{t}_{\mathbb{C} }=\{\mathrm{diag}(z_1,\dots,z_n)\mid z_i\in \mathbb{C} \}.
+\end{align*}
+\begin{align*}
+    &\mathfrak{su}(n)=\{X\in \mathfrak{gl(n,\mathbb{C} )}\mid X^*=-X,\ \mathrm{tr}\, X=0\},\\
+    & \mathfrak{t}=\{\mathrm{diag}(i\theta_1,\dots,i\theta_n)\mid \theta_i\in \mathbb{R}, \textstyle\sum\nolimits_i \theta_i =0\},\\
+    & \mathfrak{g}_{\mathbb{C} }=\mathfrak{sl}(n,\mathbb{C} ),\\
+    & \mathfrak{t}_{\mathbb{C} }=\{\mathrm{diag}(z_1,\dots,z_n)\mid z_i\in \mathbb{C} ,\textstyle\sum\nolimits_i z_i=0\}.
+\end{align*}
+
+\paragraph{$ Sp(n) $}
+
+For the first realization, \[
+    \mathfrak{sp}(n)=\{X\in \mathfrak{gl}(n,\mathbb{H})\mid X^*=-X\}.
+\]
+For the second and most used realization,\[
+    J=\begin{pmatrix}
+        0 & -I_n\\ I_n & 0
+    \end{pmatrix},\ \mathfrak{sp}(n,\mathbb{C} )=\{X\in \mathfrak{gl}(2n,\mathbb{C} )\mid X^t J=-JX\}.
+\]
+\begin{align*}
+    &\mathfrak{sp}(n)\cong \mathfrak{u}(2n)\cap \mathfrak{sp}(n,\mathbb{C} ),\\
+    & \mathfrak{t}=\{\mathrm{diag}(i\theta_1,\dots,i\theta_n,-i\theta_1,\dots,-i\theta_n)\mid \theta_i\in \mathbb{R}\},\\
+    & \mathfrak{g}_{\mathbb{C} }=\mathfrak{sp}(n,\mathbb{C} ),\\
+    & \mathfrak{t}_{\mathbb{C} }=\{\mathrm{diag}(z_1,\dots,z_n,-z_1,\dots,-z_n)\mid z_i\in \mathbb{C} \}.
+\end{align*}
+
+\paragraph{$ SO(n) $}
+Define
+\begin{align*}
+    &T_{2m}=\frac{1}{\sqrt{2}}\left(\begin{matrix}
+    I_m & I_m \\ iI_m & -i I_m
+    \end{matrix}\right), E_{2m}=\left(\begin{matrix}
+    0 & I_m \\ I_m & 0
+    \end{matrix}\right),\\
+    & T_{2m+1}=\left(\begin{matrix}
+    T_{2m} & 0 \\ 0 & 1
+    \end{matrix}\right), E_{2m+1}=\left(\begin{matrix}
+    E_{2m} & 0 \\ 0 & 1
+    \end{matrix}\right),\\
+    & SO(E_n)=\{g\in SL(n,\mathbb{C} )\mid \bar{g}=E_n g E_n,\ g^t E_n g=E_n,\ \det g=1\}.
+\end{align*}
+
+Then
+\begin{align*}
+    &\mathfrak{o}(n)=\mathfrak{so}(n)=\{X\in\mathfrak{gl}(n,\mathbb{R} )\mid X^t=-X\},\\
+    & \mathfrak{so}(E_n)=\{X\in \mathfrak{gl}(n,\mathbb{C} )\mid \bar{X}=E_n X E_n,\ X^t E_n+E_n X=0\},\\
+    & \mathfrak{so}(E_n)_{\mathbb{C} }=\mathfrak{so}(E_n,\mathbb{C} )=\{X\in \mathfrak{gl}(n,\mathbb{C} )\mid X^t E_n+E_n X=0\}.
+\end{align*}
+
+Working with $ G=SO(E_{2n}) $, 
+\begin{align*}
+    & \mathfrak{t}=\{\mathrm{diag}(i\theta_1,\dots,i\theta_n,-i\theta_1,\dots,-i\theta_n)\mid \theta_i\in \mathbb{R}\},\\
+    & \mathfrak{t}_{\mathbb{C} }=\{\mathrm{diag}(z_1,\dots,z_n,-z_1,\dots,-z_n)\mid z_i\in \mathbb{C}\}
+\end{align*}
+
+Working with $ G=SO(E_{2n+1}) $,
+\begin{align*}
+        & \mathfrak{t}=\{\mathrm{diag}(i\theta_1,\dots,i\theta_n,-i\theta_1,\dots,-i\theta_n,0)\mid \theta_i\in \mathbb{R}\},\\
+    & \mathfrak{t}_{\mathbb{C} }=\{\mathrm{diag}(z_1,\dots,z_n,-z_1,\dots,-z_n,0)\mid z_i\in \mathbb{C}\}
+\end{align*}
+
+\section{Root Theory}
+
+\subsection{Representations of Lie Algebras}
+
+\begin{definition}
+    \begin{itemize}
+        \item Let $ \mathfrak{g} $ be the Lie algebra of a Lie subgroup of $ GL(n,\mathbb{C}) $. A \textbf{representation} of $ \mathfrak{g} $ is a pair $ (\psi,V) $, where $ V $ is a finite-dimensional complex vector space and $ \psi $ is a linear map $ \psi: \mathfrak{g}\rightarrow \mathrm{End}(V) $, satisfying $ \psi([X,Y])=\psi(X)\circ\psi(Y)-\psi(Y)\circ\psi(X) $ for $ X, Y\in \mathfrak{g} $.
+        \item The representation $ (\psi,V) $ is said to be \textbf{irreducible} if there are no proper $ \psi(\mathfrak{g}) $-invariant subspaces, i.e., the only $ \psi(\mathfrak{g}) $-invariant subspaces are $ {0} $ and $ V $. Otherwise $ (\psi,V) $ is called reducible.
+    \end{itemize}
+\end{definition}
+
+\subsection{Weights and Roots}
+
+\subsection{Cartan Involution and Killing Form}
+
+\begin{definition}
+    $ Z=X+iY\in \mathfrak{g}_{\mathbb{C} } $, $ X,Y\in \mathfrak{g} $. The \textbf{Cartan involution} $ \theta $ is given by $ \theta(Z)=X-iY $.
+\end{definition}
+
+Check that $ \theta Z=-Z^* $.
+
+\begin{definition}
+    For $ X,Y\in \mathfrak{g}_{\mathbb{C} } $, the symmetric complex bilinear form $ B(X,Y)=\text{tr}(\text{ad}X\circ \text{ad}Y) $ on $ \mathfrak{g}_{\mathbb{C} } $ is called the \textbf{Killing form}.
+\end{definition}
+
+\subsection{The Standard $ \mathfrak{sl}(2,\mathbb{C} ) $ and $ \mathfrak{su}(2) $ Triples}
+
+Let $ G $ be a compact Lie algebra and $ \mathfrak{t} $ a Cartan subalgebra of $ \mathfrak{g} $. When $ \mathfrak{g} $ is semisimple, recall that $ B $ is negative definite on $ \mathfrak{t} $. It follows that $ B $ restricts to a real inner product on the real vector space $ i\mathfrak{t} $. Continuing to write $ (i\mathfrak{t})^* $ for the set of $ \mathbb{R} $-linear functionals on $ i\mathfrak{t} $, $ B $ induces an isomorphism between $ i\mathfrak{t} $ and $ (i\mathfrak{t})^* $ as follows.
+
+\begin{definition}
+    Let $ G $ be a compact Lie group with semisimple Lie algebra. Let $ u_{\alpha}\in i\mathfrak{t} $ be uniquely determined by the equation\[
+        \alpha(H)=B(H,u_{\alpha})
+    \]for all $ H\in i\mathfrak{t} $ and, when $ \alpha\neq 0 $, let\[
+        h_{\alpha}=\frac{2u_{\alpha}}{B(u_{\alpha},u_{\alpha})}.
+    \]
+\end{definition}
+
+In case $ \mathfrak{g} $ is not semisimple, define $ u_{\alpha}\in i\mathfrak{t}'\in i\mathfrak{t} $. Note that the equation $ \alpha(H)=B(H,u_{\alpha}) $ now holds for all $ H\in \mathfrak{t}_{\mathbb{C} } $ by $ \mathbb{C}  $-linear extension. An alternate notation for $ h_{\alpha} $ is $ \alpha^{\vee} $.
+
+Check that $ h_{\alpha} $ can be computed with respect to the trace form instead of the Killing form.
+
+\begin{lemma}
+    Let $ G $ be a compact Lie group, $ \mathfrak{t} $ a Cartan subalgebra of $ \mathfrak{g} $, and $ \alpha\in \Delta(\mathfrak{g}_{\mathbb{C} }) $.
+    \begin{itemize}
+        \item For $ E\in\mathfrak{g}_{\alpha} $ and $ F\in \mathfrak{g}_{-\alpha} $,\[
+            [E,F]=B(E,F)u_{\alpha}=\frac{1}{2}B(E,F)B(u_{\alpha},u_{\alpha})h_{\alpha}.
+        \]
+        \item Given a nonzero $ E\in \mathfrak{g}_{\alpha} $, E may be rescaled by an element of $ \mathbb{R} $, so that $ [E,-\theta E]=h_{\alpha} $.
+    \end{itemize}
+\end{lemma}
+
+For the next theorem, recall that $ B $ is nonsingular on $ \mathfrak{g}_{\alpha}\times \mathfrak{g}_{-\alpha} $ and that $ -B(X,\theta Y) $ is an Ad-invariant inner product on $ \mathfrak{g}_{\mathbb{C} }' $ for $ X,Y\in \mathfrak{g}_{\mathbb{C} } $.
+
+\begin{theorem}
+    Let $ G $ be a compact Lie group, $ \mathfrak{t} $ a Cartan subalgebra of $ \mathfrak{g} $, and $ \alpha\in\Delta(\mathfrak{g}_{\mathbb{C} }) $. Fix a non zero $ E_{\alpha}\in\mathfrak{g}_{\alpha} $ and let $ F_{\alpha}=-\theta E_{\alpha} $. Rescale $ E_{\alpha} $ (and therefore $ F_{\alpha} $), so that $ [E_{\alpha},F_{\alpha}]=H_{\alpha} $ where $ H_{\alpha}=h_{\alpha} $.
+    \begin{itemize}
+        \item $ \mathfrak{sl}(2,\mathbb{C})\cong \text{span}_{\mathbb{C} }(E_{\alpha},H_{\alpha},F_{\alpha}) $ with $ \{E_{\alpha},H_{\alpha},F_{\alpha}\} $ corresponding to the standard basis\[
+            E=\left(\begin{matrix}
+            0 & 1 \\ 0 & 0
+            \end{matrix}\right),\ H=\left(\begin{matrix}
+            1 & 0 \\ 0 & -1 
+            \end{matrix}\right),\ F=\left(\begin{matrix}
+            0 & 0\\ 1 & 0 
+            \end{matrix}\right)
+        \]of $ \mathfrak{sl}(2,\mathbb{C} ) $.
+        \item Let $ \mathcal{I}_{\alpha}=iH_{\alpha},\ \mathcal{J}_{\alpha}=-E_{\alpha}+F_{\alpha},\ \mathcal{K}_{\alpha}=-i(E_{\alpha}+F_{\alpha}) $. Then $ \mathcal{I}_{\alpha},\mathcal{J}_{\alpha},\mathcal{K}_{\alpha}\in\mathfrak{g} $ and $ \mathfrak{su}(2)\cong\mathrm{span}_{\mathbb{R}}\{\mathcal{I}_{\alpha},\mathcal{J}_{\alpha},\mathcal{K}_{\alpha}\} $ with $ \{\mathcal{I}_{\alpha},\mathcal{J}_{\alpha},\mathcal{K}_{\alpha}\} $ corresponding to the basis\[
+            \left(\begin{matrix}
+            i & 0 \\ 0 & -i
+            \end{matrix}\right),\ \left(\begin{matrix}
+            0 & -1 \\ 1 & 0
+            \end{matrix}\right),\ \left(\begin{matrix}
+            0 & -i \\ -i & 0
+            \end{matrix}\right)
+        \]of $ \mathfrak{su}(2) $.
+        \item There exists a Lie algebra homomorphism $ \varphi_{\alpha}:SU(2)\rightarrow G $, so that $ d\varphi:\mathfrak{su}(2)\rightarrow \mathfrak{g} $ implements the iso in the 2nd and whose complexification $ d\varphi:\mathfrak{sl}(2,\mathbb{C} )\rightarrow \mathfrak{g}_{\mathbb{C} } $ implements the iso in the 1st.
+        \item The image of $ \varphi_{\alpha} $ in $ G $ is a Lie subgroup of $ G $ isomorphic to either $ SU(2) $ or $ SO(3) $ depending on whether the kernel of $ \varphi_{\alpha} $ is $ \{I\} $ or $ \{\pm I\} $.
+    \end{itemize}
+\end{theorem}
+
+(Recall: complexificate $ \mathfrak{su}(2) $ getting $ \mathfrak{sl}(2,\mathbb{C} ) $, then `diagonalize' $ H $ getting $ \{E,H,F\} $.)
+
+\end{document}

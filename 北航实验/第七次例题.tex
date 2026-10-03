@@ -1,0 +1,58 @@
+\documentclass[12pt,a4paper,oneside]{ctexart}
+\usepackage{amsmath,amsthm,amssymb,bm,graphicx,hyperref,mathrsfs}
+
+\title{\textbf{例题}}
+% \author{黄伟宁}
+\date{\today}
+\linespread{1.5}
+\newcounter{problemname}
+\newenvironment{problem}{\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\\\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\\\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\\\par}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+\begin{document}
+
+\maketitle
+% \begin{problem}
+% 这里是题目.
+% \end{problem}
+
+% \begin{solution}
+%     这里是解答.
+% \end{solution}
+
+% \begin{note}
+%     这里是注记.
+% \end{note}
+
+% \begin{problem}
+% \end{problem}
+\begin{problem}
+    已知正实数$ a,b $满足$ a(a+b)=27 $,求$ a^2b $的最大值.
+\end{problem}
+
+\begin{problem}
+    (1)设$ a,b,c $为正实数,证明:$ \frac{1}{a^3}+\frac{1}{b^3}+\frac{1}{c^3}+abc\geqslant 2\sqrt{3} $.
+\end{problem}
+
+\begin{problem}
+    设正实数$ a,b,c $满足$ abc=1 $,证明:对于整数$ k\geqslant 2 $,有$ \frac{a^k}{a+b}+\frac{b^k}{b+c}+\frac{c^k}{c+a}\geqslant \frac{3}{2} $.
+\end{problem}
+
+\begin{problem}
+    已知$ a,b,c>0,\ a+b+c=1 $,证明:$ \frac{a-bc}{a+bc}+\frac{b-ca}{b+ca}+\frac{c-ab}{c+ab}\leqslant \frac{3}{2} $.
+\end{problem}
+
+\begin{problem}
+    已知非负数$ x_1,x_2,\cdots,x_n $满足$ x_1+x_2+\cdots+x_n=1 $,证明:对任意$ r>0 $,有$ (1+rx_1)(1+rx_2)\cdots(1+rx_n)\geqslant (n+r)^n x_1x_2\cdots x_n $.
+\end{problem}
+
+\begin{problem}
+    设$ x_1,x_2,\cdots,x_n $是正实数,证明:\[
+        (1+x_1)(1+x_1+x_2)(1+x_1+x_2+x_3)\cdots(1+x_1+\cdots+x_n)\geqslant \sqrt{(n+1)^{n+1}x_1x_2\cdots x_n}.
+    \]
+\end{problem}
+
+\end{document}

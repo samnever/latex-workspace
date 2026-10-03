@@ -1,0 +1,262 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{xcolor, graphicx, booktabs}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta}
+
+% -------------------- Theme settings --------------------
+\usetheme{Berlin}
+\usecolortheme{whale}
+\setmainfont{Times New Roman}
+
+% -------------------- Theorem environments --------------------
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{ex}[defn]{Example}
+\newtheorem{remark}[defn]{Remark}
+\theoremstyle{plain}
+\newtheorem{thm}[defn]{Theorem}
+\newtheorem{lem}[defn]{Lemma}
+\newtheorem{cor}[defn]{Corollary}
+\newtheorem{prop}[defn]{Proposition}
+
+% -------------------- Title page --------------------
+\title{Deformation Theory of Calabi-Yau Varieties}
+\subtitle{Midterm Defense}
+\author{Weining Huang}
+\institute{Beihang University \\ School of Mathematical Sciences}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \thispagestyle{empty}
+    \maketitle
+\end{frame}
+
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
+% ------------------------------------------------------------------------------------------
+%     Part 1: Preliminaries
+% ------------------------------------------------------------------------------------------
+\section{Preliminaries}
+
+\begin{frame}{Convention}
+    \begin{itemize}
+        \item Throughout, $k = \mathbb{C}$ (algebraically closed field of characteristic $0$).
+        \item Varieties are assumed to be projective, so by GAGA we can freely switch between algebraic and analytic viewpoints.
+        \item A \textbf{Calabi-Yau manifold} is a compact Kähler manifold $X$ with $K_X \cong \mathcal{O}_X$ (trivial canonical bundle).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Two Approaches to Deformation Theory}
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \textbf{Complex Geometric}
+        \begin{itemize}
+            \item Complex structure = integrable almost complex structure.
+            \item Deformation encoded by $\phi(t) \in \mathcal{A}^{0,1}(T_X)$.
+            \item Integrability $\iff$ Maurer-Cartan equation:
+            \[
+            \bar\partial \phi + \tfrac12[\phi,\phi]=0.
+            \]
+            \item Kodaira-Spencer class $[\phi_1] \in H^1(X,T_X)$.
+        \end{itemize}
+        \column{0.48\textwidth}
+        \textbf{Algebraic}
+        \begin{itemize}
+            \item Deformation functor $\operatorname{Def}_X: \mathsf{C} \to \mathsf{Set}$.
+            \item $\mathsf{C}$ = local Artinian $k$-algebras with residue $k$.
+            \item Obstruction theory via $T^i$ functors (Lichtenbaum–Schlessinger).
+            \item Schlessinger's criterion for pro-representability.
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------------------------------------
+%     Part 2: Complex Geometric Approach
+% ------------------------------------------------------------------------------------------
+\section{Complex Geometric Approach}
+
+\begin{frame}{Maurer-Cartan Equation}
+    Let $X = (M,I)$ be a complex manifold. A deformation $I(t)$ of $I$ gives a map
+    \[
+    \phi(t): T^{0,1} \to T^{1,0}, \quad \phi(t) = -\operatorname{pr}_{T_t^{1,0}}\circ j.
+    \]
+    \begin{lem}
+        Integrability $[T_t^{0,1},T_t^{0,1}]\subset T_t^{0,1}$ is equivalent to
+        \[
+        \bar\partial \phi(t) + [\phi(t),\phi(t)] = 0.
+        \]
+    \end{lem}
+    \pause
+    Expanding $\phi(t)=\sum_{i\ge1}\phi_i t^i$ yields a recursive system:
+    \[
+    \bar\partial\phi_1=0,\quad \bar\partial\phi_2+[\phi_1,\phi_1]=0,\quad \dots
+    \]
+    Hence first-order deformations correspond to $H^1(X,T_X)$.
+\end{frame}
+
+\begin{frame}{Tian–Todorov Lemma}
+    On a Calabi-Yau manifold, fix a holomorphic volume form $\Omega$. Define an isomorphism
+    \[
+    \eta: \bigwedge^p \mathcal{T}_X \xrightarrow{\cong} \bigwedge^{n-p}\Omega_X,\quad
+    \eta(v_1\wedge\cdots\wedge v_p) = i_{v_1}\cdots i_{v_p}(\Omega).
+    \]
+    \begin{lem}[Tian–Todorov]
+        For $\alpha\in\mathcal{A}^{0,p}(\mathcal{T}_X)$, $\beta\in\mathcal{A}^{0,q}(\mathcal{T}_X)$,
+        \[
+        (-1)^p[\alpha,\beta] = \Delta(\alpha\wedge\beta) - \Delta(\alpha)\wedge\beta - (-1)^{p+1}\alpha\wedge\Delta(\beta),
+        \]
+        where $\Delta = \eta^{-1}\partial\eta$ anti-commutes with $\bar\partial$.
+    \end{lem}
+    \pause
+    \textbf{Consequence:} If $\eta(\phi_1)$ is harmonic, then $[\phi_1,\phi_1]$ is $\bar\partial$-exact, allowing recursive solution of MC equation.
+\end{frame}
+
+\begin{frame}{Unobstructedness for Smooth CY}
+    \begin{thm}[Bogomolov–Tian–Todorov]
+        Let $X$ be a smooth Calabi-Yau manifold. Then the deformation functor is unobstructed: every first-order deformation extends to a formal (and convergent) deformation.
+    \end{thm}
+    \pause
+    \textbf{Key steps:}
+    \begin{enumerate}
+        \item Choose harmonic representative $\phi_1$ using Hodge theory.
+        \item Inductively solve $\bar\partial\phi_k = -\sum_{0<i<k}[\phi_i,\phi_{k-i}]$ using the Tian–Todorov lemma and the $\partial\bar\partial$-lemma.
+        \item The formal solution converges by analytic estimates (Kodaira–Nirenberg–Spencer).
+    \end{enumerate}
+\end{frame}
+
+% ------------------------------------------------------------------------------------------
+%     Part 3: Algebraic Approach
+% ------------------------------------------------------------------------------------------
+\section{Algebraic Approach}
+
+\begin{frame}{The $T^i$ Functors (Lichtenbaum–Schlessinger)}
+    For a ring homomorphism $A\to B$ and a $B$-module $M$, define $T^i(B/A,M)$ via the cotangent complex:
+    \[
+    L_2 \xrightarrow{d_2} L_1 \xrightarrow{d_1} L_0,
+    \]
+    where $L_0 = \Omega_{R/A}\otimes_R B$, $L_1 = F\otimes_R B$, $L_2 = Q/F_0$ from a presentation $R=A[x]\twoheadrightarrow B$ and $F\twoheadrightarrow I=\ker(R\to B)$.
+    \pause
+    \begin{itemize}
+        \item $T^0(B/A,M) = \operatorname{Der}_A(B,M) = \operatorname{Hom}_B(\Omega_{B/A},M)$.
+        \item For $B=A/I$, $T^1(B/A,M)=\operatorname{Hom}_B(I/I^2,M)$ (normal module).
+        \item Smoothness $\iff$ $T^1(B/k,M)=0$ for all $M$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Schlessinger's Criterion}
+    Let $F:\mathsf{C}\to\mathsf{Set}$ be a functor of Artin rings.
+    \begin{thm}[Schlessinger]
+        $F$ has a \textbf{miniversal (versal) family} iff:
+        \begin{itemize}
+            \item[(H0)] $F(k)$ is a singleton.
+            \item[(H1)] $F(A'\times_A A'') \to F(A')\times_{F(A)}F(A'')$ surjective for $A''\to A$ small.
+            \item[(H2)] The map is bijective when $A''=D$, $A=k$.
+            \item[(H3)] $t_F = F(D)$ is a finite-dimensional $k$-vector space.
+        \end{itemize}
+        $F$ is pro-representable iff additionally (H4) the $t_F$-action on fibres of small extensions is bijective.
+    \end{thm}
+    \pause
+    For projective $X$, $\text{Def}_X$ satisfies (H0)-(H3); pro-representability holds when $\operatorname{Aut}(X/X_0)$ lifts.
+\end{frame}
+
+\begin{frame}{Ran–Kawamata $T^1$ Lifting}
+    \begin{defn}
+        $T^1(X_n/A_n) := \text{Def}(X_n/A_n, B_n)$ where $A_n=k[t]/(t^{n+1})$, $B_n = A_n\otimes A_1$.
+    \end{defn}
+    \begin{thm}[Kawamata, 1992]
+        Assume $\mathsf{Def}_X$ is pro-representable and satisfies the \textbf{$T^1$ lifting property}: for every $X_{n+1}\in F(A_{n+1})$,
+        \[
+        T^1(X_{n+1}/A_{n+1}) \to T^1(X_n/A_n) \quad\text{is surjective}.
+        \]
+        Then $F$ is unobstructed (the base ring is a power series ring).
+    \end{thm}
+\end{frame}
+
+\begin{frame}{Ran–Kawamata $T^1$ Lifting}
+    The $T^1$ lifting property for smooth CY follows from Hodge–de Rham spectral sequence degeneration and the fact that $H^q(X_n,\Omega^p_{X_n/A_n})$ are free $A_n$-modules.
+\end{frame}
+
+% ------------------------------------------------------------------------------------------
+%     Part 4: Deformations of Singular CY
+% ------------------------------------------------------------------------------------------
+% \section{Singular Calabi-Yau Varieties}
+
+% \begin{frame}{Threefolds with Ordinary Double Points}
+%     \begin{defn}[ODP]
+%         An isolated singularity in a threefold locally isomorphic to
+%         \[
+%         \{z_1^2+z_2^2+z_3^2+z_4^2=0\}\subset\mathbb{C}^4.
+%         \]
+%     \end{defn}
+%     \pause
+%     Let $X_0$ be a CY threefold with only ODPs. Let $\pi:\widetilde{X}\to X_0$ be a small resolution, exceptional curves $C_1,\dots,C_r\subset\widetilde{X}$.
+%     \begin{thm}[Friedman, 1986]
+%         $X_0$ is smoothable (deforms to a smooth CY) iff
+%         \[
+%         \sum_{i=1}^r a_i [C_i] = 0 \quad\text{in } H^4(\widetilde{X},\mathbb{C}) \text{ with all } a_i\neq0,
+%         \]
+%         and the classes $[C_i]$ generate $H^2(\widetilde{X},\Omega^2_{\widetilde{X}})$.
+%     \end{thm}
+% \end{frame}
+
+% \begin{frame}{Generalizations}
+%     \begin{itemize}
+%         \item Kawamata, Ran, Tian (independently) removed the generation condition when $\widetilde{X}$ is Kähler.
+%         \item \textbf{Kawamata–Ran–Tian Theorem:} A Calabi-Yau threefold with only ODPs and a Kähler resolution is unobstructed.
+%         \item For higher odd dimensions $2m+1\ge5$, Rollenske–Thomas (2009) introduced a \textit{non-linear} condition involving the Yukawa coupling.
+%         \item Very recently, Friedman–Laza (2024) unified these via the notion of \textit{$k$-liminal singularities}.
+%     \end{itemize}
+% \end{frame}
+
+% ------------------------------------------------------------------------------------------
+%     Part 5: Expected Outcomes and Plan
+% ------------------------------------------------------------------------------------------
+\section{Expected Outcomes}
+
+\begin{frame}{Work Completed and Planned}
+    \textbf{Completed:}
+    \begin{itemize}
+        \item Maurer-Cartan equation and Tian–Todorov lemma.
+        \item Algebraic deformation theory: $T^i$ functors, Schlessinger's criterion.
+        \item Ran–Kawamata $T^1$ lifting and proof of unobstructedness for smooth CY.
+    \end{itemize}
+    \pause
+    \textbf{Ongoing / Future:}
+    \begin{itemize}
+        \item Prepare a final thesis summarizing deformation theory of CY varieties from smooth to mildly singular cases.
+    \end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------------------------------------
+%     References
+% ------------------------------------------------------------------------------------------
+\begin{frame}[allowframebreaks]{References}
+    \begin{thebibliography}{99}
+        \bibitem{TT89} A. Todorov, \textit{The Weil-Petersson geometry of the moduli space of $\mathrm{SU}(n\ge 3)$ (Calabi-Yau) manifolds I}, Comm. Math. Phys. 126 (1989), 325--346.
+        \bibitem{Tian87} G. Tian, \textit{Smoothness of the universal deformation space of compact Calabi-Yau manifolds and its Petersson-Weil metric}, in Mathematical Aspects of String Theory, 629--646, World Scientific, 1987.
+        \bibitem{Ran92} Z. Ran, \textit{Deformations of manifolds with torsion or negative canonical bundle}, J. Algebraic Geom. 1 (1992), 279--291.
+        \bibitem{Kaw92} Y. Kawamata, \textit{Unobstructed deformations. A remark on a paper of Z. Ran}, J. Algebraic Geom. 1 (1992), 517--520.
+        \bibitem{Fr86} R. Friedman, \textit{Simultaneous resolution of threefold double points}, Math. Ann. 274 (1986), 671--689.
+        \bibitem{RT09} S. Rollenske, R. Thomas, \textit{Smoothing nodal Calabi-Yau $n$-folds}, J. Topol. 2 (2009), 405--421.
+        \bibitem{FL24} R. Friedman, R. Laza, \textit{Deformations of Calabi-Yau varieties with k-liminal singularities}, Forum Math. Sigma (2024).
+        \bibitem{Har10} R. Hartshorne, \textit{Deformation Theory}, GTM 257, Springer, 2010.
+        \bibitem{LS67} S. Lichtenbaum, M. Schlessinger, \textit{The cotangent complex of a morphism}, Trans. Amer. Math. Soc. 128 (1967), 41--70.
+    \end{thebibliography}
+\end{frame}
+
+\begin{frame}
+    \centering
+    \Huge{Thank you!}
+    
+    \vspace{1cm}
+    \large{Questions and comments are welcome.}
+\end{frame}
+
+\end{document}

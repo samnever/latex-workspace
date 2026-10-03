@@ -1,0 +1,19 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Deformation theory with approaches of complex geometry}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}The Maurer-Cartan equation}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Deformations of Calabi-Yau manifolds}{7}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Deformation theory with algebraic approaches}{11}{section.2}%
+\contentsline {subsection}{\numberline {2.1}The $ T^i $ functors}{11}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Deformations of schemes and obstruction theory}{19}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Functors of Artin rings}{26}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Schlessinger's criterion}{28}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Deformation functor}{32}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Ran-Kawamata $ T^1 $ lifting}{34}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Deformations of smooth Calabi-Yau varieties}{37}{subsection.2.7}%
+\contentsline {section}{\numberline {3}Threefold Calabi-Yau varieties with ordinary double points}{41}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Setup}{41}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Friedman's theorem}{41}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Unobstructedness and the theorem of Kawamata-Ran-Tian}{41}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Sketch of proofs}{42}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Friedman's smoothing criterion}{42}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Unobstructedness for ODP Calabi-Yau threefolds}{42}{subsubsection.3.4.2}%

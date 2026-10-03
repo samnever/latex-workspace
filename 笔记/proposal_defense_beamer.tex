@@ -1,0 +1,288 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{xcolor, graphicx, booktabs}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta}
+
+% -------------------- Theme settings --------------------
+\usetheme{Berlin}
+\usecolortheme{whale}
+\setmainfont{Times New Roman}
+
+% -------------------- Theorem environments --------------------
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{ex}[defn]{Example}
+\newtheorem{remark}[defn]{Remark}
+\theoremstyle{plain}
+\newtheorem{thm}[defn]{Theorem}
+\newtheorem{lem}[defn]{Lemma}
+\newtheorem{cor}[defn]{Corollary}
+\newtheorem{prop}[defn]{Proposition}
+
+% -------------------- Title page --------------------
+\title{Deformation Theory of Calabi-Yau Varieties}
+\subtitle{Undergraduate Thesis Proposal}
+\author{Weining Huang}
+\institute{Beihang University \\ School of Mathematical Sciences}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \thispagestyle{empty}
+    \maketitle
+\end{frame}
+
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
+% ------------------------------------------------------------------------------------------
+%     Part 1: Background and Preliminaries
+% ------------------------------------------------------------------------------------------
+\section{Preliminaries}
+
+\begin{frame}{Convention}
+    \begin{itemize}
+        \item Usually `Variety' means a seperated integral scheme of finite type over a fixed field $ k $. Here we can think $ k=\mathbb{C}  $. 
+        \item But for convenience we assume all varieties appear in the slides are projective.
+        \item Thus we can regard varieties over $ \mathbb{C} $ as complex compact K\"{a}hler manifolds and use tools in both algebraic geometry and complex geometry to investigate by GAGA.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Deformation Theory with Complex-geometric Approach}
+    For a smooth complex manifold $ X $, we have:
+    \pause
+    \begin{itemize}
+        \item First order deformations of complex structure (of $ X $) are described by \textbf{Kodaira-Spencer class} in $ H^1(T_X) $.
+        \pause
+        \item Deformations are governed by the \textbf{Maurer-Cartan equation}:
+        \[
+        \bar{\partial} \varphi + \frac{1}{2}[\varphi, \varphi] = 0, \quad \varphi \in \mathcal{A}^{0,1}(T_X)
+        \]
+        % \pause
+        % \item \textbf{Kuranishi theorem}: For compact $ X $ there exists a versal deformation space $(S,0)$ with tangent space $H^1(T_X)$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Deformation Theory with Algebraic Approach}
+    Let $ X $ be a scheme over a fixed field $ k(=\mathbb{C} ) $.
+    \begin{itemize}
+        \item Define the deformation functor of $ X $:
+        \[
+        \text{Def}_X:= \mathsf{C} \to \mathsf{Set},\ A \mapsto \{\text{deformations of}\ X\ \text{over}\ A\}.
+        \]Here $ \mathsf{C} $ is he category of local artinian $ k $-algebras with residue field $ k $.
+        \pause
+        \item \textbf{Schlessinger's Criterion} helps to investigate properties of deformation functor.
+    \end{itemize}
+\end{frame}
+
+% \subsection{Local Deformation Theory: ODP and Cusp Cases}
+
+%         1111111  odp cusp统一到特定维数
+
+% \begin{frame}{ODP:Definition and 3-fold Geometry}
+%     \begin{defn}[Original Double Point]
+%         Isolated hypersurface singularity locally $\cong \{ \sum_{i=1}^{4} z_i^2 = 0 \} \subset \mathbb{C}^{4}$.
+%     \end{defn}
+%     \pause
+%     \begin{itemize}
+%         \item \textbf{Resolution (dim 3)}: Blow-up replaces point by $Q \cong \mathbb{P}^1\times\mathbb{P}^1$.
+%         \pause
+%         \item On $Q$, curve classes $A := [\mathbb{P}^1\times\mathrm{pt}]$, $B := [\mathrm{pt}\times\mathbb{P}^1]$.
+%         \pause
+%         \item Their difference $A-B$ is central in Friedman's condition.
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Cusp Singularities: Definition and Smoothing}
+%     \begin{defn}[Cusp (surface singularity)]
+%         Minimal resolution consists of a cycle of smooth rational curves meeting transversely.
+%     \end{defn}
+%     \pause
+%     \begin{itemize}
+%         \item \textbf{Smoothing criterion}: A cusp is smoothable iff minimal resolution of its dual cusp embeds as an anticanonical divisor in a smooth rational surface.
+%         \pause
+%         % 444444444444 surface的cusp替换掉一部分主要内容
+%         \item \textbf{Necessity}: proved by Looijenga in 1981 and Looijenga conjectured the sufficiency holds.
+%         \pause
+%         \item \textbf{Sufficiency}: proved by Gross-Hacking-Keel and Philip Engel independently.
+%     \end{itemize}
+% \end{frame}
+
+% rigidity of some varieties
+% \begin{frame}{Rigidity of Homogeneous Varieties}
+%     \begin{itemize}
+%         \item \textbf{Homogeneous varieties}: $\P^n$, Grassmannians, etc.
+%         \pause
+%         \item \textbf{Borel-Weil-Bott theorem}: $H^i(\P^n, T_{\P^n}) = 0$ for $i>0$
+%         \pause
+%         \item \textbf{Consequence}: Projective spaces and Grassmannians are \textbf{rigid}
+%         \[
+%         \operatorname{Def}(\P^n) = \{\text{point}\}
+%         \]
+%         \pause
+%         \item Intuition: these varieties have too much symmetry to admit non-trivial deformations.
+%     \end{itemize}
+% \end{frame}
+
+% ------------------------------------------------------------------------------------------
+%     Part 2: Deformation of Calabi-Yau Varieties
+% ------------------------------------------------------------------------------------------
+
+\section{Smooth Calabi-Yau Manifolds}
+
+\begin{frame}{Deformations of Smooth CY Manifolds}
+    \begin{defn}
+        A compact Kähler manifold $X$ is called a \textbf{Calabi-Yau manifold} if $K_X \cong \mathcal{O}_X$ (trivial canonical bundle).
+    \end{defn}
+    \pause
+    \begin{thm}[Bogomolov-Tian-Todorov, 1980s]
+        Deformations of a smooth Calabi-Yau manifold are unobstructed; i.e., the Kuranishi space is smooth.
+    \end{thm}
+    \pause
+    \begin{itemize}
+        \item Complex-geometric proof: Calabi-Yau theorem + Tian-Todorov lemma.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Algebraic proof for BTT Theorem}
+    \begin{thm}[Z. Ran, Y. Kawamata, 1992]
+        Let $ X $ be a scheme over a fixed field $ k(=\mathbb{C} ) $. If the deformation functor $ \text{Def}_X $ satisfies the $T^1$ lifting property, then deformations of $ X $ are unobstructed.
+    \end{thm}
+    \pause
+    \begin{itemize}
+        \item It can be proved that for $ X $ being a nonsingular Calabi-Yau variety, $ \text{Def}_X $ satisfies the $ T^1 $ lifting property.
+        \pause
+        \item Ziv Ran developed the purely algebraic approach, and Yujiro Kawamata modified the $T^1$ lifting property to more natural version.
+    \end{itemize}
+\end{frame}
+
+% 222222222222222表述修改，顺序修改，friedman往前放
+
+\section{Threefold Calabi-Yau Varities with ODP}
+
+\begin{frame}{Deformations of Threefold CY varieties with ODP}
+    Let's shift our scope to singular and threefold case. Usually our main aim is to deform a singular variety to a nonsingular one.
+    \begin{defn}[Original Double Point]
+        An \textbf{ODP} is an isolated singularity in a threefold locally analytically isomorphic to the origin of 
+        \[
+        \{\, (z_1,\dots,z_{4})\in\mathbb{C}^{4} \mid z_1^2+z_2^2+\cdots+z_{4}^2 = 0 \,\}.
+        \]
+    \end{defn}
+\end{frame}
+
+\begin{frame}{Deformations of Threefold CY varieties with ODP}
+    Let $ X_0 $ be a threefold Calabi-Yau variety in the sense that dualizing sheaf $ \omega_{X_0}\cong \mathcal{O}_{X_0} $, with only ODP as singularities. Let $ X\rightarrow X_0 $ be a small resolution, with exceptional curves $ C_1,\dots,C_r $, and Let $ [C_i] $ be the class of $ C_i $ in $ H^4(X,\mathbb{C} ) $.
+    \pause
+    \begin{thm}[Friedman, 1986]
+        $ X_0 $ is smoothable if
+        \begin{itemize}
+            \item $ [C_1],[C_r] $ generate $ H^2(X,\varOmega_{X}^2) $
+            \item There exists a relation $ a_1[C_1]+\cdots+a_r[C_r]=0 \in H^4(X,\mathbb{C} ) $ with $ a_i\neq 0 $ for every $ i $.
+        \end{itemize}
+    \end{thm}
+    $ X_0 $ is smoothable means $ X_0 $ can be deformed to a nonsingular variety $ X_t $.
+\end{frame}
+
+\begin{frame}{Deformations of Threefold CY varieties with ODP}
+    \begin{itemize}
+        \item Subsequently, independent work of Y. Kawamata, Z. Ran and G. Tian showed that the first assumption is not necessary provided that there exists a resolution $ X'\rightarrow X_0 $ where $ X' $ is K\"{a}hler.
+        \item The key point in removing this assumption is a generalization of the unobstructedness theorem for smooth Calabi-Yau manifolds, in any dimension:
+    \end{itemize}
+    \pause
+    \begin{thm}[Kawamata, Ran, Tian]
+        Let $ X_0 $ be a Calabi-Yau variety in the sense that dualizing sheaf $ \omega_{X_0}\cong \mathcal{O}_{X_0} $, with only ODP as singularities and there exists a resolution $ X'\rightarrow X_0 $ where $ X' $ is K\"{a}hler. Then deformations of $ X_0 $ are unobstructed.
+    \end{thm}
+\end{frame}
+
+% \begin{frame}{Topological Interpretation of Friedman's Condition}
+%     \begin{itemize}
+%         \item The condition is equivalent to the existence of a 3-chain $\overline{\Delta}$ with boundary $\sum \delta_i (A_i-B_i)$.
+%         \pause
+%         \item Projecting to $X$ yields a 3-cycle $\Delta \in H_3(X,\mathbb{R})$.
+%         \pause
+%         \item In the smoothing family, this $\Delta$ corresponds to a \textbf{vanishing cycle}.
+%         \pause
+%         \item Smoothing exists $\Longleftrightarrow$ there exists a non-zero 3-cycle intersecting all singularities.
+%     \end{itemize}
+%     \begin{center}
+%         \begin{tikzpicture}
+%             \draw[thick] (0,0) circle (1);
+%             \node at (0,0) {$p_i$};
+%             \draw[thick, -{Latex[length=3mm]}] (1.5,0) -- (3,0);
+%             \node at (2.25,0.3) {blow up};
+%             \draw[thick] (4,-1) .. controls (5,0.5) and (6,-0.5) .. (7,0);
+%             \node at (5.5,0.8) {$Q_i\cong\P^1\times\P^1$};
+%         \end{tikzpicture}
+%     \end{center}
+% \end{frame}
+
+% \begin{frame}{Higher-Dimensional Generalisation: Rollenske-Thomas}
+%     \begin{thm}[Rollenske-Thomas, 2009]
+%         Let $X$ be an odd-dimensional nodal Calabi-Yau variety with $n=2m+1\ge 5$. A necessary condition for the existence of a first-order smoothing is a \textbf{non-linear topological condition}:
+%         \[
+%         \text{a certain vanishing condition involving the Yukawa coupling}
+%         \]
+%     \end{thm}
+%     \pause
+%     \begin{itemize}
+%         \item Yukawa coupling: $H^{m,m}(Q) \times H^{m,m}(Q) \times H^{m,m}(Q) \to \mathbb{C}$.
+%         \item For threefolds ($m=1$) this reduces to Friedman's linear condition.
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Recent Developments: Friedman-Laza's Unified Theory}
+%     \begin{block}{Friedman-Laza (2024)}
+%         Introduced the notion of \textbf{$k$-liminal singularities}, unifying all the above results.
+%         \begin{itemize}
+%             \item ODP in threefolds is $1$-liminal.
+%             \item For $k$-liminal singularities, the smoothing condition becomes a \textbf{$k$-linear or non-linear topological condition}.
+%             \item Gives a complete description for weighted homogeneous singularities.
+%         \end{itemize}
+%     \end{block}
+% \end{frame}
+
+% ------------------------------------------------------------------------------------------
+%     Part 4: Research Plan and Schedule
+% ------------------------------------------------------------------------------------------
+\section{Expected Outcomes and References}
+
+\begin{frame}{Expected Outcomes}
+    \begin{itemize}
+        \item Understand the basic framework of deformation theory.
+        \pause
+        \item Master the key results in deformation theory of both smooth and singular Calabi-Yau varieties.
+    \end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------------------------------------
+%     References
+% ------------------------------------------------------------------------------------------
+\begin{frame}[allowframebreaks]{References}
+    \begin{thebibliography}{99}
+        \bibitem{Fr86} R. Friedman, \textit{Simultaneous resolution of threefold double points}, Math. Ann. 274 (1986), 671--689.
+        \bibitem{TT89} A. Todorov, \textit{The Weil-Petersson geometry of the moduli space of $\mathrm{SU}(n\ge 3)$ (Calabi-Yau) manifolds I}, Comm. Math. Phys. 126 (1989), 325--346.
+        \bibitem{Tian87} G. Tian, \textit{Smoothness of the universal deformation space of compact Calabi-Yau manifolds and its Petersson-Weil metric}, in Mathematical Aspects of String Theory, 629--646, World Scientific, 1987.
+        \bibitem{Ran92} Z. Ran, \textit{Deformations of manifolds with torsion or negative canonical bundle}, J. Algebraic Geom. 1 (1992), 279--291.
+        \bibitem{RT09} S. Rollenske, R. Thomas, \textit{Smoothing nodal Calabi-Yau $n$-folds}, J. Topol. 2 (2009), 405--421.
+        \bibitem{FL24} R. Friedman, R. Laza, \textit{Deformations of Calabi-Yau varieties with k-liminal singularities}, Forum Math. Sigma (2024).
+        \bibitem{Har77} R. Hartshorne, \textit{Algebraic Geometry}, Graduate Texts in Mathematics 52, Springer-Verlag, New York, 1977.
+        \bibitem{Huy05} D. Huybrechts, \textit{Complex Geometry: An Introduction}, Universitext, Springer, Berlin-New York, 2005.
+        \bibitem{Har10} R. Hartshorne, \textit{Deformation Theory}, Graduate Texts in Mathematics 257, Springer, New York, 2010.
+        \bibitem{GJ03} M. Gross, D. Joyce, and D. Huybrechts, \textit{Calabi-Yau Manifolds and Related Geometries}, Universitext, Springer, Berlin, 2003.
+    \end{thebibliography}
+\end{frame}
+
+\begin{frame}
+    \centering
+    \Huge{Thank you!}
+    
+    \vspace{1cm}
+    \large{Questions and comments are welcome.}
+\end{frame}
+
+\end{document}

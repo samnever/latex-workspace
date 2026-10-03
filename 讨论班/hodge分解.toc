@@ -1,0 +1,13 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Complex and Hermitian Structures on Vector Spaces}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Complex Structures}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Hermitian Structures}{4}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Complex Structures on Manifolds}{8}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Local Situtation}{8}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Global Situation}{9}{subsection.2.2}%
+\contentsline {section}{\numberline {3}K\"{a}hler Manifolds}{11}{section.3}%
+\contentsline {subsection}{\numberline {3.1}K\"{a}hler Identities}{11}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Hodge structures}{14}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Hodge Theory on K\"{a}hler Manifolds}{15}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Lefschetz Theorems}{18}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Polarized Hodge Structure}{19}{subsection.3.5}%

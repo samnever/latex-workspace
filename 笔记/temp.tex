@@ -1,0 +1,488 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\usepackage[utf8]{inputenc}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\mathrm{Hom}}{\operatorname{Hom}}
+\newcommand{\mathrm{Der}}{\operatorname{Der}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\supp}{\operatorname{Supp}}
+\newcommand{\red}{\operatorname{red}}
+\newcommand{\Tor}{\operatorname{Tor}}
+
+\title{Deformation Theory Notes}
+\author{Based on Har10}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{First order deformations}
+
+The main reference for Appendix is \cite{Har10}.
+
+\subsection{The \(T^{i}\) Functors}
+
+Let \(A\rightarrow B\) be a homomorphism of rings and let \(M\) be a \(B\)-module.
+Choose the set of variables \(x = \{x_{i}\}\) and a free \(R\)-module \(F\) such that
+\[
+0\longrightarrow I\longrightarrow R\longrightarrow B\longrightarrow 0,\qquad 
+0\longrightarrow Q\longrightarrow F\longrightarrow I\longrightarrow 0
+\]
+and let
+\[
+F_{0} = \langle j(a)b - j(b)a \mid a,b\in F\rangle_{R}\subseteq F.
+\]
+Define a complex of \(B\)-modules, called the cotangent complex
+\[
+L_{2}\xrightarrow{d_{2}}L_{1}\xrightarrow{d_{1}}L_{0}
+\]
+as follows.
+Take \(L_{2} = Q / F_{0}\), which is a \(B\)-module. Indeed, if \(x\in I\) and \(a\in Q\).
+Write \(x = j(x^{\prime})\) for some \(x^{\prime}\in F\), then
+\[
+x a = j(x^{\prime})a\equiv j(a)x^{\prime} = 0 \pmod{F_{0}}.
+\]
+Take \(L_{1} = F\otimes_{R}B = F / IF\), and let \(d_{2}:L_{2}\to L_{1}\) be the map induced from the inclusion \(Q\to F\).
+Take \(L_{0} = \varOmega_{R / A}\otimes_{R}B\), where \(\varOmega_{R / A}\) is the module of relative Kähler differentials.
+Let \(d_{1}\) be the composition
+\[
+L_{1} = F\otimes_{R}B \longrightarrow \varOmega_{R/A}\otimes_{R}B = L_{0}
+\]
+induced by the universal derivation.
+It is clear that \(d_{1}d_{2} = 0\), so we defined a complex of \(B\)-modules.
+Notice that \(L_{0}, L_{1}\) are free \(B\)-modules, since \(R\) is a polynomial ring over \(A\).
+
+Indeed, the second fundamental exact sequence of Kähler differentials
+\[
+I / I^{2}\xrightarrow{d}\varOmega_{R / A}\otimes_{R}B\xrightarrow{}\varOmega_{B / A}\xrightarrow{}0
+\]
+gives the exact sequence
+\[
+L_{2}\xrightarrow{d_{2}}L_{1}\xrightarrow{d_{1}}L_{0}\xrightarrow{}\varOmega_{B / A}\xrightarrow{}0. \tag{10}
+\]
+
+For any \(B\)-module \(M\), define
+\[
+T^{i}(B / A,M):= H^{i}(\mathrm{Hom}_{B}(L_{\bullet},M)),
+\]
+which is independent of the choice of \(F\) and \(R\).
+
+\begin{proof}
+First, we fix the polynomial ring \(R\). If \(F\) and \(F^{\prime}\) are two choices of free \(R\)-modules mapping onto \(I\), then \(F\oplus F^{\prime}\) gives the third choice. Since \(F^{\prime}\) is free, the map \(j^{\prime}:F^{\prime}\to I\) factors through \(F\), i.e., \(j^{\prime} = jp\) for some map \(p:F^{\prime}\to F\). Replacing each generator \(e^{\prime}\) of \(F^{\prime}\subseteq F\oplus F^{\prime}\) by \(e^{\prime} - p(e^{\prime})\), we may assume that the map \(F\oplus F^{\prime}\to I\) is just \((j,0)\). Then \(\ker (j,0) = Q\oplus F^{\prime}\) and thus \((F\oplus F^{\prime})_{0} = F_{0} + I F^{\prime}\). Let \(L_{\bullet}^{\prime}\) be the complex obtained from \((F\oplus F^{\prime},R)\), then
+\[
+L_{2}^{\prime} = L_{2}\oplus F^{\prime} / I F^{\prime},\quad 
+L_{1}^{\prime} = L_{1}\oplus (F^{\prime}\otimes_{R}B),\quad 
+L_{0}^{\prime} = L_{0}.
+\]
+Hence, \(L_{\bullet}^{\prime}\) is obtained by the direct sum of \(L_{\bullet}\) with the free acyclic complex \(F^{\prime}\otimes_{R}B\to F^{\prime}\otimes_{R}B\to 0\), which induces same cohomology after taking \(\mathrm{Hom}\) functor.
+
+Second, it suffices to compare \(R = A[x]\) with \(R^{\prime} = A[x,y]\). Again, the map \(A[y]\to B\) can be factored through \(A[x]\) by a homomorphism \(p:A[y]\to A[x]\). Replacing each \(y_{i}\in A[x,y]\) by \(y_{i} - p(y_{i})\), we may assume the ring homomorphism \(A[x,y]\to B\) maps \(y_{i}\) to 0, then it has kernel \(I R^{\prime} + y R^{\prime}\). Since \(T^{i}\) is independent of the choice of \(F\), we may take \(F^{\prime} = F\otimes_{R}R^{\prime}\) and \(G\) be a free \(R^{\prime}\)-module on the index set of the \(y\) variables. Then we have the following diagram
+\[
+\begin{array}{ccccccccc}
+0 & \to & Q R^{\prime} & \to & F^{\prime} & \to & I R^{\prime} & \to & 0 \\
+& & \downarrow & & \downarrow & & \downarrow & & \\
+0 & \to & Q R^{\prime} + \langle y_i a - j(a)e_i \rangle & \to & F^{\prime} \oplus G & \to & I R^{\prime} + y R^{\prime} & \to & 0 \\
+& & \downarrow & & \downarrow & & \downarrow & & \\
+0 & \to & P & \to & G & \to & J & \to & 0
+\end{array}
+\]
+and it is clear that
+\[
+Q^{\prime} = Q R^{\prime} + \langle y_{i}a - j(a)e_{i}\mid a\in F\rangle_{R^{\prime}} + \langle y_{i}e_{j} - y_{j}e_{i}\rangle_{R^{\prime}}.
+\]
+Since \(\langle y_{i}a - j(a)e_{i}\mid a\in F\rangle_{R^{\prime}} + \langle y_{i}e_{j} - y_{j}e_{i}\rangle_{R^{\prime}}\subseteq (F^{\prime}\oplus G^{\prime})_{0}\), we have \(L_{2}^{\prime} = L_{2}\).
+
+On the other hand, \(L_{1}^{\prime} = L_{1}\oplus (G^{\prime}\otimes_{R^{\prime}}B)\) and \(L_{0}^{\prime} = L_{0}\oplus (\varOmega_{A[y] / A}\otimes B)\). Then \(L_{\bullet}^{\prime}\) is obtained by the direct sum of \(L_{\bullet}\) with the free acyclic complex
+\[
+G^{\prime}\otimes_{R^{\prime}}B\longrightarrow \varOmega_{A[y] / A}\otimes B\longrightarrow 0,\qquad e_{i}\longrightarrow dy_{i},
+\]
+and thus induces same cohomology after taking \(\mathrm{Hom}\) functor.
+\end{proof}
+
+\begin{remark}
+The proof also shows that \(L_{\bullet}\) is a well-defined element in the derived category of the category of \(B\)-modules.
+\end{remark}
+
+\begin{theorem}
+Let \(A \to B\) be a homomorphism of rings. Then \(T^{i}(B / A, - )\) is a covariant, additive functor from \(\mathsf{Mod}_{B}\) to itself. If
+\[
+0\to M^{\prime}\to M\to M^{\prime \prime}\to 0
+\]
+is a short exact sequence of \(B\)-modules, then there is a long exact sequence
+\[
+\begin{aligned}
+0 &\longrightarrow T^{0}(B / A,M^{\prime})\longrightarrow T^{0}(B / A,M)\longrightarrow T^{0}(B / A,M^{\prime \prime}) \\
+&\longrightarrow T^{1}(B / A,M^{\prime})\longrightarrow T^{1}(B / A,M)\longrightarrow T^{1}(B / A,M^{\prime \prime}) \\
+&\longrightarrow T^{2}(B / A,M^{\prime})\longrightarrow T^{2}(B / A,M)\longrightarrow T^{2}(B / A,M^{\prime \prime}).
+\end{aligned}
+\]
+\end{theorem}
+
+\begin{proof}
+By construction, \(T^{i}(B / A, - )\) is a covariant additive functor. Since the terms \(L_{1}\) and \(L_{0}\) of the complex \(L_{\bullet}\) are free, we get a sequence of complexes
+\[
+0\longrightarrow \mathrm{Hom}_{B}(L_{\bullet},M^{\prime})\longrightarrow \mathrm{Hom}_{B}(L_{\bullet},M)\longrightarrow \mathrm{Hom}_{B}(L_{\bullet},M^{\prime \prime})\longrightarrow 0
+\]
+that is exact except possibly for the map
+\[
+\mathrm{Hom}_{B}(L_{2},M)\to \mathrm{Hom}_{B}(L_{2},M^{\prime \prime})
+\]
+may not be surjective. This sequence of complexes gives the long exact sequence of cohomology above.
+\end{proof}
+
+\begin{theorem}
+Let \(A \to B \to C\) be homomorphisms of rings, and let \(M\) be a \(C\)-module. Then there is a long exact sequence
+\[
+\begin{aligned}
+0 &\longrightarrow T^{0}(C / B,M)\longrightarrow T^{0}(C / A,M)\longrightarrow T^{0}(B / A,M) \\
+&\longrightarrow T^{1}(C / B,M)\longrightarrow T^{1}(C / A,M)\longrightarrow T^{1}(B / A,M) \\
+&\longrightarrow T^{2}(C / B,M)\longrightarrow T^{2}(C / A,M)\longrightarrow T^{2}(B / A,M).
+\end{aligned}
+\]
+\end{theorem}
+
+\begin{proof}
+Choose
+\[
+0\longrightarrow I\longrightarrow A[x]\longrightarrow B\longrightarrow 0,\qquad 
+0\longrightarrow Q\longrightarrow F\longrightarrow I\longrightarrow 0
+\]
+\[
+0\longrightarrow J\longrightarrow B[y]\longrightarrow C\longrightarrow 0,\qquad 
+0\longrightarrow P\longrightarrow G\longrightarrow J\longrightarrow 0
+\]
+to calculate \(T^{i}(B / A, M)\) and \(T^{i}(C / B, M)\). Then \(A[x, y] \to B[y] \to C\) is surjective, and denote its kernel by \(K\). It induces an exact sequence
+\[
+0\longrightarrow I[y]\longrightarrow K\longrightarrow J\longrightarrow 0
+\]
+of \(A\)-modules. Let \(F^{\prime}\) and \(G^{\prime}\) be free \(A[x,y]\)-modules on the same index sets as \(F\) and \(G\) respectively. Choose a lifting of the map \(G\to J\) to a map \(G^{\prime}\to K\). From the map \(F\to I\) we get the natural map \(F^{\prime}\to I[y]\). Hence, we get the surjection \(F^{\prime}\oplus G^{\prime}\to K\), and let \(S\) be its kernel. Now, we can calculate \(T^{i}(C/A, M)\) by
+\[
+0 \to K \to A[x,y] \to C \to 0,\qquad
+0 \to S \to F^{\prime}\oplus G^{\prime} \to K \to 0.
+\]
+Now, we have the following diagram
+\[
+\begin{array}{ccccccccc}
+0 & \to & Q[y] & \to & F^{\prime} & \to & I[y] & \to & 0 \\
+& & \downarrow & & \downarrow & & \downarrow & & \\
+0 & \to & S & \to & F^{\prime}\oplus G^{\prime} & \to & K & \to & 0 \\
+& & \downarrow & & \downarrow & & \downarrow & & \\
+0 & \to & P & \to & G & \to & J & \to & 0
+\end{array}
+\]
+which is exact for each horizontal sequence, but not exact for vertical sequence. It induces the maps of complexes
+\[
+L_{\bullet}(B/A) \otimes_B C \to L_{\bullet}(C/A) \to L_{\bullet}(C/B).
+\]
+Indeed, on the degree 0 level we have split exact sequence
+\[
+\varOmega_{A[x]/A}\otimes_{A[x]} C \to \varOmega_{A[x,y]/A}\otimes_{A[x,y]} C \to \varOmega_{B[y]/B}\otimes_{B[y]} C
+\]
+given by \(dx_i \mapsto dx_i\), \(dx_i, dy_j \mapsto 0, dy_j\).
+On the degree 1 level we have split exact sequence
+\[
+F \otimes_{A[x]} C \to (F^{\prime}\oplus G^{\prime})\otimes_{A[x,y]} C \to G \otimes_{B[y]} C
+\]
+of free \(C\)-modules. On the degree 2 level we have
+\[
+(Q/F_0)\otimes_B C \to S/(F^{\prime}\oplus G^{\prime})_0 \to P/G_0. \tag{11}
+\]
+We claim that \(S\to P\) is surjective. Indeed, if \(p\in P\). Take \((f^{\prime}, g^{\prime})\in F^{\prime}\oplus G^{\prime}\) mapping to \(p\). Then the image of \((f^{\prime}, g^{\prime})\) in \(K\) is contained in \(I[y]\). Since \(F^{\prime}\to I[y]\) is surjective, there exists \(\tilde f\in F^{\prime}\) having the same image in \(K\) as \((f^{\prime}, g^{\prime})\). Hence, \((f^{\prime}-\tilde f, g^{\prime})\in S\) maps to \(p\).
+
+To complete the proof, we remain to show the exactness of (11) in the middle. Let \(s = f + g\) be an element of \(S\subseteq F^{\prime}\oplus G^{\prime}\) such that its image in \(P\) is contained in \(G_0\). Then the image \(g\) of \(g^{\prime}\) in \(G\) belongs to \(G_0\), write \(g = j(a)b - j(b)a\) for some \(a,b\in G\). Lift \(a,b\) to elements \(a^{\prime},b^{\prime}\) in \(G^{\prime}\), then \(j(a^{\prime})b^{\prime} - j(b^{\prime})a^{\prime}\in S\). Let \(g^{\prime\prime} = g - j(a^{\prime})b^{\prime} + j(b^{\prime})a^{\prime}\), then \(g^{\prime\prime}\in \ker(G^{\prime}\to G) = IG^{\prime}\). Say \(g^{\prime\prime} = xh\) and \(x = j(x^{\prime})\) for some \(x\in I\), \(h\in G^{\prime}\), and \(x^{\prime}\in F\). Then
+\[
+xh = j(x^{\prime})h \equiv j(h)x^{\prime} \pmod{(F^{\prime}+G^{\prime})_0}.
+\]
+Therefore,
+\[
+s \equiv f^{\prime} + g^{\prime\prime} \equiv f^{\prime} + j(h)x^{\prime} \pmod{(F^{\prime}+G^{\prime})_0}
+\]
+and \(f^{\prime} + j(h)x^{\prime}\in F^{\prime}\cap S = Q[y]\).
+\end{proof}
+
+\begin{proposition}
+For any morphism \(A \to B\) and \(M \in \mathsf{Mod}_{B}\),
+\[
+T^{0}(B / A,M) = \mathrm{Hom}_{B}(\varOmega_{B / A},M) = \mathrm{Der}_{A}(B,M).
+\]
+In particular,
+\[
+T^{0}(B / A,B) = \mathrm{Hom}_{B}(\varOmega_{B / A},B) = T_{B / A}
+\]
+is the tangent module of \(B\) over \(A\).
+\end{proposition}
+
+\begin{proof}
+Taking \(\mathrm{Hom}(-, M)\) to the exact sequence (10), we have the exact sequence
+\[
+0\to \mathrm{Hom}(\varOmega_{B / A},M)\to \mathrm{Hom}(L_{0},M)\to \mathrm{Hom}(L_{1},M).
+\]
+\end{proof}
+
+\begin{proposition}
+If \(B\) is a polynomial ring over \(A\), then \(T^{i}(B / A, M) = 0\) for \(i = 1, 2\) and for all \(M\).
+\end{proposition}
+
+\begin{proof}
+We may take \(R = B\) and \(F = 0\) in our construction. Hence, the cotangent complex only has \(L_{0}\) term.
+\end{proof}
+
+\begin{proposition}
+If \(A \to B\) is a surjective ring homomorphism with kernel \(I\), then
+\[
+T^{0}(B / A,M) = 0,\quad T^{1}(B / A,M) = \mathrm{Hom}_{B}(I / I^{2},M)
+\]
+for any \(M \in \mathsf{Mod}_{B}\). In particular, \(T^{1}(B / A, B) = \mathrm{Hom}_{B}(I / I^{2}, B)\) is the normal module \(N_{B / A}\) of \(\Spec B\) in \(\Spec A\).
+\end{proposition}
+
+\begin{proof}
+In this case, we can take \(R = A\), and thus \(L_{0} = 0\). Hence, \(T^{0} = 0\) for any module \(M\). Furthermore, the exact sequence
+\[
+0\longrightarrow Q\longrightarrow F\stackrel{j}{\longrightarrow}I\longrightarrow 0
+\]
+tensored with \(B\) gives
+\[
+Q\otimes_{A}B\longrightarrow F\otimes_{A}B\stackrel{j}{\longrightarrow}I / I^{2}\longrightarrow 0
+\]
+and we have
+\[
+L_{2}\longrightarrow L_{1}\longrightarrow I / I^{2}\longrightarrow 0,
+\]
+thus \(T^{1}(B / A, M) = \mathrm{Hom}_{B}(I / I^{2}, M)\).
+\end{proof}
+
+\begin{corollary}
+Suppose that \(A\) is a local ring and \(B = A / I\), where \(I\) is generated by a regular sequence \(a_{1},\ldots ,a_{r}\). Then \(T^{2}(B / A,M) = 0\) for all \(M\).
+\end{corollary}
+
+\begin{proof}
+Since the Koszul complex of a regular sequence is exact, we conclude that \(Q = F_{0}\). Hence, \(L_{2} = 0\) and \(T^{2}(B / A,M) = 0\) for all \(M\).
+\end{proof}
+
+\begin{proposition}
+Suppose that \(A = k[x_{1},\ldots ,x_{n}]\) and \(B = A / I\). Then for any \(M\), there is an exact sequence
+\[
+0\longrightarrow T^{0}(B / k,M)\longrightarrow \mathrm{Hom}_{A}(\varOmega_{A / k},M)\longrightarrow \mathrm{Hom}_{B}(I / I^{2},M)\longrightarrow T^{1}(B / k,M)\longrightarrow 0
+\]
+and an isomorphism
+\[
+T^{2}(B / A,M)\simeq T^{2}(B / k,M).
+\]
+\end{proposition}
+
+\begin{proof}
+It follows from the long exact sequence of \(T^{i}\)-functors for \(k\to A\to B\) and Propositions A.5, A.6, and A.7.
+\end{proof}
+
+\begin{remark}
+In this section, we have not made any finiteness assumptions on the rings and modules. It is clear that if \(A\) is a Noetherian ring, \(B\) is a finitely generated \(A\)-algebra, and \(M\) is a finitely generated \(B\)-module, then \(T^{i}(B / A,M)\) are finitely generated \(B\)-modules.
+\end{remark}
+
+\begin{lemma}
+The construction of the \(T^{i}\) functors is compatible with localization, and thus we may define sheaves \(\mathcal{T}^{i}(X / Y,\mathcal{F})\) for any morphism of schemes \(f:X\to Y\) and any sheaf \(\mathcal{F}\) of \(\mathcal{O}_{X}\)-modules, such that for any open affine \(\Spec A\subseteq Y\) and any open affine \(\Spec B\subseteq f^{-1}(\Spec A)\), where \(\mathcal{F}|_{\Spec B} = \widetilde{M}\), the section \(\mathcal{T}^{i}(X / Y,\mathcal{F})(\Spec B) = T^{i}(B / A,M)\).
+\end{lemma}
+
+For convenience, denote the modules \(T^{i}(B / A,B)\) and \(T^{i}(B / k,B)\) by \(T_{B / A}^{i}\) and \(T_{B / k}^{i}\) (or \(T_{B}^{i}\)) if no confusion arises. Furthermore, \(T_{B / A}^{0}\) will be written as the tangent module \(T_{B / A}\) of \(B\) over \(A\). Similarly for the sheaves \(\mathcal{T}^{i}(X / Y,\mathcal{O}_{X})\) and \(\mathcal{T}^{i}(X / k,\mathcal{O}_{X})\) we write \(\mathcal{T}_{X / Y}^{i}\) and \(\mathcal{T}_{X / k}^{i}\) (or \(\mathcal{T}_{X}^{i}\)). The sheaf \(\mathcal{T}_{X}^{0}\) will be written as the tangent sheaf \(\mathcal{T}_{X}\) of \(X\).
+
+\begin{proposition}[Base change]
+Assume that \(A\) is Noetherian and \(B\) is a finitely generated \(A\)-algebra.
+\begin{enumerate}
+\item Let \(M\in \mathsf{Mod}_{B}\) and \(A\to A^{\prime}\) be a flat morphism. Let \(B^{\prime} = B\otimes_{A}A^{\prime}\) and \(M^{\prime} = M\otimes_{B}B^{\prime}\). Then \(T^{i}(B / A,M)\otimes_{A}A^{\prime}\simeq T^{i}(B^{\prime} / A^{\prime},M^{\prime})\) for each \(i\).
+\item Let \(A \to A^{\prime}\) be an arbitrary ring homomorphism and \(B\) is flat over \(A\). Let \(B^{\prime} = B\otimes_{A}A^{\prime}\) and \(M^{\prime}\in \mathsf{Mod}_{B^{\prime}}\). Then \(T^{i}(B / A, M^{\prime}) = T^{i}(B^{\prime} / A^{\prime}, M^{\prime})\) for each \(i\).
+\end{enumerate}
+\end{proposition}
+
+\subsection{The infinitesimal Lifting Property}
+
+\begin{proposition}[Infinitesimal Lifting Property]
+Let \(X\) be a nonsingular affine scheme of finite type over \(k\), let \(f: Y \to X\) be a morphism from an affine scheme \(Y\) over \(k\), and let \(Y \subseteq Y'\) be an infinitesimal thickening of \(Y\). Then the morphism \(f\) lifts to a morphism \(g: Y' \to X\) such that \(g|_{Y} = f\).
+\end{proposition}
+
+\begin{proof}
+Since \(Y_{\red}^{\prime} = Y_{\red}\) is affine, we also have \(Y^{\prime}\) is affine. We may transfer the problem to algebra setting. Let \(f:A\to B\) be the ring homomorphism over \(k\) corresponding to \(f:Y\to X\) where \(B = B^{\prime} / I\) with \(I^{n} = 0\) for some \(n\). We want to find a homomorphism \(g:A\to B^{\prime}\) lifting \(f\).
+
+Consider the sequence \(B^{\prime} = B^{\prime} / I^{n}\to B^{\prime} / I^{n-1}\to \dots \to B^{\prime} / I^{2}\to B^{\prime} / I\), it will suffice to lift one step at a time. So we may assume that \(I^{2} = 0\).
+
+Since \(X\) is of finite type over \(k\), we may write \(A = k[x_{1},\ldots ,x_{n}] / J\). Consider any lifting \(h:k[x_{1},\ldots ,x_{n}]\to B^{\prime}\) of \(k[x_{1},\ldots ,x_{n}]\to A\to B\). Then \(h\) induces a map \(J\to I\), and thus induces \(\overline{h}:J / J^{2}\to I\) since \(I^{2} = 0\).
+
+Embed \(X\hookrightarrow \mathbb{A}_{k}^{n}\) by \(P = k[x_{1},\ldots ,x_{n}]\to A\). Since \(X\) is smooth, we obtain an exact sequence
+\[
+0\longrightarrow J / J^{2}\longrightarrow \varOmega_{P / k}^{1}\otimes_{P}A\longrightarrow \varOmega_{A / k}^{1}\longrightarrow 0.
+\]
+Notice that those modules correspond to locally free sheaves on \(X\), and thus are projective \(A\)-modules. Via the maps \(h\), \(f\), we get a \(P\)-module structure on \(B'\), and \(A\)-module structures on \(B\), \(I\). Applying \(\mathrm{Hom}_{A}(-, I)\) will get another exact sequence
+\[
+0\longrightarrow \mathrm{Hom}_{A}(\varOmega_{A / k}^{1},I)\longrightarrow \mathrm{Hom}_{P}(\varOmega_{P / k}^{1},I)\longrightarrow \mathrm{Hom}_{A}(J / J^{2},I)\longrightarrow 0.
+\]
+Let \(\theta \in \mathrm{Hom}_{P}(\varOmega_{P / k}^{1},I) = \mathrm{Der}_{k}(P,I)\) be an element whose image is \(\overline{h}\in \mathrm{Hom}_{A}(J / J^{2},I)\). We claim that \(h^{\prime}:= h - \theta :P\to B^{\prime}\) is a ring homomorphism lifting \(f\) with \(h^{\prime}(J) = 0\). The first assertion follows by the following easy lemma.
+\end{proof}
+
+\begin{lemma}
+Let \(B^{\prime}\to B\) be a surjective homomorphism of \(k\)-algebras with kernel \(I\) of square zero. Let \(R\to B\) be a homomorphism of \(k\)-algebras.
+\begin{enumerate}
+\item If \(f,g: R \to B'\) are two liftings of the map \(R \to B\) to \(B'\), then \(\theta = g - f\) is a \(k\)-derivation of \(R\) to \(I\).
+\item Conversely, if \(f: R \to B'\) is one lifting, and \(\theta: R \to I\) is a derivation, then \(g = f + \theta\) is another homomorphism of \(R\) to \(B'\) lifting the given map \(R \to B\).
+\end{enumerate}
+In other words, if it is nonempty, the set of liftings \(R \to B\) to \(k\)-algebra homomorphisms of \(R \to B^{\prime}\) is a principal homogeneous space under the action of \(\mathrm{Der}_{k}(R,I) = \mathrm{Hom}_{R}(\varOmega_{R / k},I)\).
+\end{lemma}
+
+\begin{proof}[Continuation of the proof of Proposition A.13]
+Since \(h^{\prime}(J)\subseteq I\), we have \(h^{\prime}(J^{2})\subseteq I^{2} = 0\). Then \(h^{\prime}\) descends to \(P / J^{2}\to B^{\prime}\), and thus \(h^{\prime}|_{J / J^{2}} = h - h = 0\) by the choice of \(\theta\). Hence, \(h^{\prime}\) descends to the desired homomorphism \(g:A\to B^{\prime}\) lifting \(f\).
+\end{proof}
+
+\begin{proposition}
+Let \(X\) be a scheme of finite type over an algebraically closed field \(k\). Suppose that for every morphism \(f:Y\to X\) finite over \(k\), where \(Y = \Spec R\) is the spectrum of a local Artinian ring \(R\), and for every infinitesimal thickening \(Y\subseteq Y^{\prime}\) with ideal sheaf of square zero, there is a lifting \(g:Y^{\prime}\to X\). Then \(X\) is nonsingular.
+\end{proposition}
+
+\begin{proof}
+It suffices to show that the local ring \(\mathcal{O}_{X,x}\) is a regular local ring for every closed point \(x\in X\), so the problem is local and can be reformulated to an algebra problem. Let \((A,\mathfrak{m})\) be a local \(k\)-algebra, essentially of finite type over \(k\) with residue field \(k\). Assume that for every homomorphism \(f:A\to B\), where \(B\) is a local Artinian \(k\)-algebra, and for every thickening
+\[
+0\longrightarrow I\longrightarrow B^{\prime}\longrightarrow B\longrightarrow 0
+\]
+with \(I^{2} = 0\), there is a lifting \(g:A\to B^{\prime}\). Then we want to show that \(A\) is a regular local ring.
+
+Let \(a_{1},\ldots ,a_{n}\in A\) such that \(\{\overline{a}_{i}\}_{i = 1}^{n}\) form a basis of \(\mathfrak{m} / \mathfrak{m}^{2}\). By the structure theorem of complete local rings, there is a surjective homomorphism \(f:P:= k[[x_{1},\ldots ,x_{n}]]\to \widehat{A}\) defined by \(x_{i}\mapsto a_{i}\), which induces an isomorphism of \(P / \mathfrak{m}_{P}^{2}\to A / \mathfrak{m}^{2}\).
+
+Consider the thickening \(P / \mathfrak{m}_{P}^{n+1}\to P / \mathfrak{m}_{P}^{n}\) and start with the map \(A\to A / \mathfrak{m}^{2}\simeq P / \mathfrak{m}_{P}^{2}\); we can lift to maps \(A\to P / \mathfrak{m}_{P}^{n}\) for every \(n\) by assumption, and thus get a map \(g:\widehat{A}\to P\). Then the morphism \(P\stackrel{f}{\longrightarrow}\widehat{A}\stackrel{g}{\longrightarrow}P\) induces an isomorphism on \(P / \mathfrak{m}_{P}^{2}\).
+
+\begin{claim}
+Let \((A,\mathfrak{m})\) be a local Noetherian \(k\)-algebra with residue field \(k\). Let \(f\in \End_{k}A\) induce an isomorphism on \(A / \mathfrak{m}^{2}\); then \(f\) is an isomorphism.
+\end{claim}
+\begin{subproof}
+If \(\Im f\subseteq \mathfrak{m}\), then \(A = \Im f + \mathfrak{m}^{2}\subseteq \mathfrak{m}\) gives a contradiction. Tensoring with \(A / \mathfrak{m}\), we have
+\[
+0\longrightarrow \ker f / \mathfrak{m}\ker f\longrightarrow A / \mathfrak{m}\xrightarrow{f}A / \mathfrak{m}\longrightarrow 0,
+\]
+and thus \(\ker f = 0\) by Nakayama's lemma.
+\end{subproof}
+By the claim, \(g\circ f\) is an automorphism, and hence \(f\) is injective. This shows that \(f\) is an isomorphism and \(\widehat{A}\) is regular, which implies \(A\) is also regular.
+\end{proof}
+
+\begin{corollary}
+Let \(X\) be a nonsingular affine scheme over \(k\). Let \(A\) be a local Artinian ring over \(k\), and let \(X^{\prime}\) be a scheme flat over \(A\) such that \(X^{\prime}\times_{A}k\) is isomorphic to \(X\). Then \(X^{\prime}\) is isomorphic to the trivial deformation \(X\times_{k}A\) of \(X\) over \(A\).
+\end{corollary}
+
+\begin{proof}
+Apply Proposition A.13 to \(\id_X:X\to X\) and the infinitesimal thickening \(i:X\to X^{\prime}\); there exists a lifting \(p:X^{\prime}\to X\) such that \(p\circ i = \id_X\). This defines a map \(f:X^{\prime}\to X\times_{k}A\) of flat schemes over \(A\), which induces the identity map on the closed fiber \(X\). By the following claim, \(f\) is an isomorphism.
+
+\begin{claim}
+Let \(A\) be a local Artinian \(k\)-algebra. Let \(f:X_{1}\to X_{2}\) be an \(A\)-morphism between two finite type flat schemes over \(A\), which induces an isomorphism of closed fibers \(f\otimes_{A}k:X_{1}\times_{A}k\to X_{2}\times_{A}k\). Then \(f\) is an isomorphism.
+\end{claim}
+\begin{subproof}
+Since \(X_{i}\times_{A}k\to X_{i}\) is an isomorphism of topological spaces, we only need to show that \(f\) induces an isomorphism on each stalk of the structure sheaf. We may check this locally. Let \(f:B_{2}\to B_{1}\) be the ring homomorphism corresponding to open affine neighborhoods of \(x\) and \(f(x)\) respectively. Let \(\mathfrak{p}\in \Spec B_{1}\) correspond to \(x\) and \(\mathfrak{q} = f^{-1}(\mathfrak{p})\). Then \(f\) induces a morphism \(g:(B_{2})_{\mathfrak{q}}\to (B_{1})_{\mathfrak{p}}\), which induces an isomorphism \(g\otimes_{A}A / \mathfrak{m}_{A}\) by assumption. By the long exact sequence of Tor, we have \(\coker g = 0\). Since \(B_{i}\) are flat over \(A\), we have
+\[
+0 = \Tor_{1}^{A}((B_{1})_{\mathfrak{p}},A / \mathfrak{m}_{A})\longrightarrow \ker g\otimes_{A}A / \mathfrak{m}_{A}\longrightarrow (B_{2})_{q}\otimes_{A}A / \mathfrak{m}_{A}\longrightarrow (B_{1})_{p}\otimes_{A}A / \mathfrak{m}_{A}\longrightarrow 0,
+\]
+and thus \(\ker g = 0\) by Nakayama's lemma.
+\end{subproof}
+\end{proof}
+
+Next, we investigate the relation between nonsingularity and the \(T^{i}\) functors.
+
+\begin{theorem}
+Let \(X = \Spec B\) be an affine scheme over an algebraically closed field \(k\). Then \(X\) is nonsingular if and only if \(T^{1}(B / k,M) = 0\) for all \(M\in \mathsf{Mod}_{B}\). Furthermore, if \(X\) is nonsingular, then \(T^{2}(B / k,M) = 0\) for all \(M\).
+\end{theorem}
+
+\begin{proof}
+Write \(B\) as a quotient of a polynomial ring \(A = k[x_{1},\ldots ,x_{n}]\) over \(k\). Then \(X\) is nonsingular if and only if the conormal sequence
+\[
+0\longrightarrow I / I^{2}\longrightarrow \varOmega_{A / k}\otimes_{A}B\longrightarrow \varOmega_{B / k}\longrightarrow 0 \tag{12}
+\]
+is exact and \(\varOmega_{B / k}\) is locally free, i.e., a projective \(B\)-module. Since \(\varOmega_{A / k}\) is a free \(A\)-module, we conclude that \(X\) is nonsingular if and only if (12) is split exact. From the four-term exact sequence in Proposition A.9
+\[
+0\longrightarrow T^{0}(B / k,M)\longrightarrow \mathrm{Hom}(\varOmega_{A / k},M)\longrightarrow \mathrm{Hom}(I / I^{2},M)\longrightarrow T^{1}(B / k,M)\longrightarrow 0,
+\]
+\(T^{1}(B / k,M) = 0\) for all \(M\in \mathsf{Mod}_{B}\) if and only if the map
+\[
+\mathrm{Hom}(\varOmega_{A / k},M)\longrightarrow \mathrm{Hom}(I / I^{2},M)
+\]
+is surjective for all \(M\), which is equivalent to split exactness by considering \(M = I / I^{2}\).
+
+Again, by Proposition A.9 we have \(T^{2}(B / k,M) = T^{2}(B / A,M)\). Since \(X\) is smooth, the localizing ideal \(I_{x}\) at \(x\in X\) is generated by a regular sequence in the regular local ring \(A_{x}\). By Corollary A.8, \(T^{2}(B_{x} / A_{x},M) = 0\) for all \(M\in \mathsf{Mod}_{B_{x}}\). By Lemma A.11, we conclude that \(T^{2}(B / A,M) = 0\) for all \(M\in \mathsf{Mod}_{B}\).
+\end{proof}
+
+\begin{theorem}
+A morphism of finite type \(f:X\to Y\) of Noetherian schemes is smooth if and only if it is flat, and \(\mathcal{T}^{1}(X / Y,\mathcal{F}) = 0\) for all coherent sheaves \(\mathcal{F}\in \mathcal{C}oh(X)\). Furthermore, if \(f\) is smooth, then \(\mathcal{T}^{2}(X / Y,\mathcal{F}) = 0\) for all \(\mathcal{F}\).
+\end{theorem}
+
+\begin{proof}
+The problem is local, so we may assume that \(X = \Spec B\) and \(Y = \Spec A\) are affine and \(f\) is given by a ring homomorphism \(A\to B\).
+
+First suppose \(B\) is flat over \(A\) and \(T^{1}(B / A,M) = 0\) for all \(M\in \mathsf{Mod}_{B}\). Let \(y\in Y\) correspond to \(\mathfrak{p}\in \Spec A\) and let \(k = k(y)\) be its residue field. Let \(A^{\prime} = A / \mathfrak{p}\) and \(B^{\prime} = B\otimes_{A}A^{\prime} = B / \mathfrak{p}B\); then for any \(M\in \mathsf{Mod}_{B^{\prime}}\) we obtain \(T^{1}(B^{\prime} / A^{\prime},M) = T^{1}(B / A,M) = 0\) by base change A.12. Write \(B^{\prime} = A^{\prime}[x_{1},\ldots ,x_{n}] / I\); then \(T^{1}(B^{\prime} / A^{\prime},I / I^{2}) = 0\).
+
+Now consider the flat base extension from \(A^{\prime}\) to \(\overline{k} = \overline{\Frac(A^{\prime})}\). By base change A.12, we have
+\[
+T^{1}(B^{\prime}\otimes_{A^{\prime}}\overline{k} /\overline{k},(I / I^{2})\otimes \overline{k}) = 0.
+\]
+Since \(\overline{k}\) is flat over \(A^{\prime}\), we have \(B^{\prime}\otimes \overline{k} = \overline{k}[x_{1},\ldots ,x_{n}] / \overline{I}\) and \((I / I^{2})\otimes \overline{k} = \overline{I} / \overline{I}^{2}\), where \(\overline{I} = I\otimes \overline{k}\). Then the proof of A.17 shows that \(\Spec B^{\prime}\otimes \overline{k}\) is nonsingular over \(\overline{k}\). Hence, the geometric fibers of \(f\) are nonsingular, and thus \(f\) is smooth.
+
+Conversely, suppose that \(B\) is smooth over \(A\).
+
+\begin{claim}
+\(T^{1}(B / A,B / \mathfrak{m}) = 0\) for all maximal ideals \(\mathfrak{m}\) of \(B\).
+\end{claim}
+\begin{subproof}
+Let \(\mathfrak{m}\) correspond to the point \(x\in \Spec B\), let \(f(x) = y\), and let \(k = k(y)\). Apply base change on \(B / \mathfrak{m}\in \mathsf{Mod}_{B\otimes_{A}k}\), we obtain
+\[
+T^{1}(B / A,B / \mathfrak{m})\otimes_{k}\overline{k} = T^{1}(B\otimes_{A}k / k,B / \mathfrak{m})\otimes_{k}\overline{k} = T^{1}(B \otimes_{A}\overline{k} /\overline{k},(B / \mathfrak{m})\otimes_{k}\overline{k}) = 0
+\]
+since the geometric fibers are nonsingular. Since \(k\to \overline{k}\) is faithfully flat, we conclude that \(T^{1}(B / A,B / \mathfrak{m}) = 0\).
+\end{subproof}
+
+\begin{lemma}[Devissage]
+Let \(B\) be a Noetherian ring, and let \(F\) be a semi-exact (that is, \(F\) applied to a short exact sequence is exact in the middle) additive functor from finitely generated \(B\)-modules to itself. Assume that \(F(B / \mathfrak{m}) = 0\) for every maximal ideal \(\mathfrak{m}\) of \(B\). Then \(F(M) = 0\) for all finitely generated \(B\)-modules.
+\end{lemma}
+\begin{subproof}
+Let \(0 = M_{n}\subseteq \dots \subseteq M_{1}\subseteq M_{0} = M\) be a composition series such that \(M_{i} / M_{i+1}\simeq B / \mathfrak{p}_{i}\) for some \(\mathfrak{p}_{i}\in \Spec B\). By semi-exactness, it suffices to prove the case for \(M = B / \mathfrak{p}\).
+
+We induct on \(\dim \supp M\). If \(\dim \supp M = 0\), then \(M = B / \mathfrak{m}\) for some maximal ideal, and thus \(F(M) = 0\) by hypothesis. For the general case, let \(M = B / \mathfrak{p}\). For any maximal ideal \(\mathfrak{m}\supseteq \mathfrak{p}\), pick an element \(t\in \mathfrak{m}\backslash \mathfrak{p}\). Then \(t\) is a non-zero divisor for \(M\) and \(M^{\prime}:= \coker(M\stackrel{t}{\longrightarrow}M)\) has support of dimension \(< \dim \supp M\). By the induction hypothesis, \(F(M)\stackrel{t}{\longrightarrow}F(M)\) is surjective. By Nakayama's lemma, \(F(M)_{\mathfrak{m}} = 0\). Hence, \(F(M) = 0\).
+\end{subproof}
+
+Since \(T^{1}(B / A, - )\) satisfies the condition in the Devissage lemma, we have \(T^{1}(B / A,M) = 0\) for all finitely generated \(B\)-modules, and hence for all \(B\)-modules, because \(T^{i}\) commutes with direct sums. The same argument shows also that \(T^{2}(B / A,M) = 0\) for all \(M\).
+\end{proof}
+
+\begin{theorem}
+Let \(A\) be a regular local \(k\)-algebra with residue field \(k = \overline{k}\), and \(B = A / I\). Then \(B\) is a local complete intersection in \(A\) if and only if \(T^{2}(B / k,M) = 0\) for all \(M\in \mathsf{Mod}_{B}\).
+\end{theorem}
+
+\begin{proof}
+Since \(A\) is regular, we have \(T^{1}(A / k,M) = 0\) for \(i = 1,2\) and all \(M\) by Theorem A.17. From the nine-term exact sequence, we have \(T^{2}(B / k,M) = T^{2}(B / A,M) = 0\) by Corollary A.8.
+
+Conversely, suppose that \(T^{2}(B / k,M) = 0\) for all \(M\). As above, this implies \(T^{2}(B / A,M) = 0\) for all \(M\). To compute this group, we may take \(R = A\), \(I = I\), and let \(F\) map to a minimal set of generators \((a_{1},\ldots ,a_{s})\) of \(I\), with kernel \(Q\). Then the hypothesis \(T^{2}(B / A,M) = 0\) for all \(M\) implies that
+\[
+\mathrm{Hom}(F / IF,M)\to \mathrm{Hom}(Q / F_{0},M)
+\]
+is surjective for all \(M\). In particular for \(M = Q / F_{0}\) and the map \(d_{2}:Q / F_{0}\to F / IF\), there exists \(p: F / IF\to Q / F_{0}\) such that \(p\circ d_{2} = \id_{Q / F_{0}}\). By Nakayama's lemma, \(Q\subseteq \mathfrak{m}_{A}F\). Then the identity map \(p\circ d_{2}\) sends \(Q / F_{0}\) into \(\mathfrak{m}_{A}(Q / F_{0})\), and thus \(Q / F_{0} = 0\) by Nakayama's lemma. But \(Q / F_{0}\) is actually the first homology group of the Koszul complex \(K_{\bullet}(a_{1},\ldots ,a_{s})\) over \(A\), and the vanishing of this group is equivalent to \(a_{1},\ldots ,a_{s}\) being a regular sequence.
+\end{proof}
+
+\begin{remark}
+If we define a relative local complete intersection morphism \(f:X\to Y\) to be a flat morphism whose geometric fibers are local complete intersection schemes, then \(f\) is a relative local complete intersection morphism if and only if \(\mathcal{T}^{i}(X / Y,\mathcal{F}) = 0\) for all coherent sheaves \(\mathcal{F}\) on \(X\).
+\end{remark}
+
+\subsection{Deformations of Rings}
+
+\begin{proposition}[Local criterion of flatness]
+Let \(A^{\prime}\to A\) be a surjective homomorphism of Noetherian rings whose kernel \(J\) is square zero. Then an \(A^{\prime}\)-module \(M^{\prime}\) is flat over \(A^{\prime}\) if and only if
+\begin{enumerate}
+\item \(M = M^{\prime}\otimes_{A^{\prime}}A\) is flat over \(A\), and
+\item the natural map \(M\otimes_{A}J\to M^{\prime}\) is injective.
+\end{enumerate}
+\end{proposition}
+
+\begin{thebibliography}{99}
+\bibitem{Har10} Hartshorne, R. \emph{Deformation Theory}. Graduate Texts in Mathematics, 257. Springer, 2010.
+\end{thebibliography}
+
+\end{document}

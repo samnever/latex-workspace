@@ -1,0 +1,1562 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, appendix, bm, graphicx, hyperref, mathrsfs, tikz-cd, enumerate,natbib}
+% 如果不需要ctexart提供的日期格式，可以保留
+\usepackage[english]{babel} % babel 仍然保留，但 ctex 会处理中文，babel 提供英文连字符等，无冲突
+\title{\textbf{Calabi-Yau簇的形变}}
+\author{hwn}
+\date{\today}
+\linespread{1.5}
+\theoremstyle{definition}
+\newtheorem{definition}{定义}[subsection]
+\newtheorem{example}[definition]{例}
+\newtheorem{remark}[definition]{注}
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{定理}
+\newtheorem{lemma}[definition]{引理}
+\newtheorem{corollary}[definition]{推论}
+\newtheorem{proposition}[definition]{命题}
+\renewcommand{\abstractname}{\Large\textbf{摘要}}
+\usepackage{geometry}
+\geometry{left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm}
+\setcounter{secnumdepth}{5}
+
+\begin{document}
+
+\pagenumbering{arabic}
+\maketitle
+\begin{abstract}
+    本文系统介绍了 Calabi‑Yau 簇形变理论的两个主要途径：复几何方法与代数方法。
+    在复几何方面，我们从 Maurer–Cartan 方程出发，建立了 Kodaira–Spencer 映射，
+    并详细讨论了 Tian–Todorov 引理在求解该方程时的关键作用，由此导出光滑 Calabi‑Yau 流形的无障碍定理。
+    在代数方面，我们构造了 Lichtenbaum–Schlessinger 的 \(T^i\) 函子与余切复形，
+    给出了概形形变的障碍理论，证明了形变函子的 Schlessinger 判别法及 pro‑可表示性，
+    并在此基础上介绍了 Ran–Kawamata 的 \(T^1\) 提升原理及其对光滑 Calabi‑Yau 簇的应用。
+    作为这两个理论的交汇，本文最后专门讨论了具有普通双重点的三维 Calabi‑Yau 簇的形变，
+    详细叙述了 Friedman 的光滑化判据以及后来由 Kawamata、Ran 和 Tian 独立证明的推广：
+    只要存在某个 Kähler 解消，形变就是无障碍的，从而 Friedman 的第一个条件可以去掉。
+\end{abstract}
+\tableofcontents
+\newpage
+
+\section{复几何方法下的形变理论}
+
+\subsection{Maurer-Cartan方程}
+
+复流形按其定义是一个微分流形 $M$，配备了一族坐标卡，其转移函数是全纯的。众所周知，这种由坐标卡定义的复结构也可以由一个可积的近复结构 $I$ 来刻画，$I$ 就是切丛的一个满足某种非线性可积条件的自同态。在本节中，我们将采用后一种对复结构的描述。我们将解释如何将 $M$ 上的不同复结构 $I$，或者更准确地说，将给定复结构的（小）形变视为一个整体。
+
+我们从所有近复结构的集合\[
+    \mathcal{A}_{ac}(M):=\{I\mid I^2=-\mathrm{id}\}\subset \mathrm{End}(TM)
+\]出发。首先考虑一个任意的 $I\in \mathcal{A}_{ac}(M)$。回想一下，一个近复结构 $I$ 由切丛的分解 $T_{\mathbb{C}}M=T^{1,0}\oplus T^{0,1}$ 唯一确定，其中 $I=i\cdot \mathrm{id}$ 作用在 $T^{1,0}$ 上，$I=-i\cdot\mathrm{id}$ 作用在 $T^{0,1}$ 上。事实上，给出 $T^{0,1}\subset T_{\mathbb{C}}M$ 就足够了，因为 $T^{1,0}=\overline{T^{0,1}}$。
+
+如果 $I(t)$ 是一族连续的近复结构，且 $I(0)=I$，那么就有一族连续的分解 $T_{\mathbb{C}}M=T^{1,0}_t\oplus T^{0,1}_t$，等价地，一族子空间 $T^{0,1}_t\subset T_{\mathbb{C}}M$。
+
+因此，对于很小的 $t$，$I$ 的形变 $I(t)$ 可以通过一个映射\[
+    \phi(t):T^{0,1}\rightarrow T^{1,0}\ \text{满足}\ v+\phi(t)(v)\in T^{0,1}_t
+\]来编码。我们用 $T^{1,0}$ 和 $T^{0,1}$ 表示由 $I$ 定义的子丛。
+
+反过来，如果给定了 $\phi(t)$，则对于很小的 $t$ 可以定义\[
+    T^{0,1}_t:=(\mathrm{id}+\phi(t))(T^{0,1}).
+\]必须施加 $t$ “很小”的条件，以保证这样定义的 $T^{0,1}_t$ 具有正确的维数。更准确地说，$t$ 很小意味着 $T^{0,1}_t\subset T_{\mathbb{C}}\rightarrow T^{0,1}$ 是同构，这当然是一个开性质，至少在紧流形上如此。为避免非紧带来的问题，从现在起我们假定 $M$ 是紧的。
+
+现在考虑给定 $\phi$ 的幂级数展开\[
+    \phi(t)=\phi_0+\phi_1 t+\phi_2 t^2+\cdots
+\]则 $\phi_0=0$，而高阶系数 $\phi_{i>0}$ 将被视为 $\bigwedge^{0,1}\otimes T^{1,0}$ 的截面。
+
+接下来，我们研究变形后的近复结构 $I(t)$ 的可积性。从现在起，我们假设 $I$ 是可积的，并用 $X$ 表示复流形 $(M,I)$。特别地，高阶系数 $\phi_i$ 对应于 $\mathcal{A}^{0,1}(\mathcal{T}_X)$ 中的元素。
+
+$I(t)$ 的可积性条件可以表示为\[
+    [T^{0,1}_t,T^{0,1}_t]\subset T^{0,1}_t.
+\]
+
+让我们用 $\phi(t)$ 重新表述这个条件。首先注意，在 $X=(M,I)$ 的全纯切丛 $\mathcal{T}_X$ 上存在 $\bar{\partial}$-算子，它可以特别地作用于 $\phi(t)\in \mathcal{A}^{0,1}(\mathcal{T}_X)$。其次，可以定义一个“李括号”\[
+    [\ ,\ ]:\mathcal{A}^{0,p}(\mathcal{T}_X)\times \mathcal{A}^{0,q}(\mathcal{T}_X)\longrightarrow \mathcal{A}^{0,p+q}(\mathcal{T}_X)
+\]通过在 $\mathcal{T}_X$ 中取李括号，并在形式部分 $\mathcal{A}^{0,*}$ 中外乘。用局部坐标具体写出，对于 $\alpha=\sum d\bar{z}_I\otimes v_I$ 和 $\beta=\sum d\bar{z}_J\otimes w_J$，其中 $v_I=\sum \alpha_{Ij}\frac{\partial}{\partial z_j}$、$w_J=\sum \beta_{Jl}\frac{\partial}{\partial z_l}$，有以下公式\[
+    [\alpha,\beta]=\sum (d\bar{z}_I \wedge d\bar{z}_J)[v_I , w_J]=\sum_{I,j,J,l}(d\bar{z}_I \wedge d\bar{z}_J)\big[\alpha_{Ij}\frac{\partial}{\partial z_j},\beta_{Jl}\frac{\partial}{\partial z_{l}}\big].
+\]这的确是良定义的，因为任何全纯坐标变换只会将切向量场 $v_I,w_I$ 乘以反全纯因子 $\bar{f}$，而 $\frac{\partial\bar{f}}{\partial z_m}=0$。
+
+\begin{remark}\label{cvb}
+    利用局部描述，容易验证 $\bar{\partial}[\alpha,\beta]=[\bar{\partial}\alpha,\beta]\pm[\alpha,\bar{\partial}\beta]$。特别地，两个 $\bar{\partial}$-闭的 $\mathcal{A}^{0,*}(\mathcal{T}_X)$ 截面的李括号仍是闭的，一个闭截面和一个恰当截面的括号是恰当的。因此，括号诱导出映射\[
+        H^p(X,\mathcal{T}_X)\times H^q(X,\mathcal{T}_X)\longrightarrow H^{p+q}(X,\mathcal{T}_X).
+    \]
+\end{remark}
+
+\begin{lemma}
+    可积性方程 $[T^{0,1}_t,T^{0,1}_t]\subset T^{0,1}_t$ 等价于 \textbf{Maurer-Cartan 方程}\begin{equation}\label{wer}
+        \bar{\partial}\phi(t)+[\phi(t),\phi(t)]=0.
+    \end{equation}
+\end{lemma}
+
+\begin{proof}
+    该断言可以局部地证明。我们将在记号中省略参数 $t$，并记\[
+        \phi=\sum_{i,j}\phi_{ij}d\bar{z}_i\otimes \frac{\partial}{\partial z_j}.
+    \]如果可积性条件成立，那么特别地有\[
+        \bigg[\frac{\partial}{\partial \bar{z}_i}+\phi\bigg(\frac{\partial}{\partial \bar{z}_i}\bigg),\frac{\partial}{\partial \bar{z}_k}+\phi\bigg(\frac{\partial}{\partial\bar{z}_k}\bigg)\bigg]\in T^{0,1}_t.
+    \]由于 $[\frac{\partial}{\partial \bar{z}_i},\frac{\partial}{\partial \bar{z}_k}]=0$，这等价于\[
+        \biggl(\sum_l \bigg[\frac{\partial}{\partial \bar{z}_i},\phi_{kl}\frac{\partial}{\partial z_l}\bigg]+\sum_j\bigg[\phi_{ij}\frac{\partial}{\partial z_j},\frac{\partial}{\partial\bar{z}_k}\bigg]+\sum_{j,l}\bigg[\phi_{ij}\frac{\partial}{\partial z_j},\phi_{kl}\frac{\partial}{\partial z_l}\bigg] \biggr)\in T^{0,1}_t.
+    \]而\[
+        \bigg[\frac{\partial}{\partial\bar{z}_i},\phi_{kl}\frac{\partial}{\partial z_l}\bigg]=\frac{\partial \phi_{kl}}{\partial\bar{z}_i}\frac{\partial}{\partial z_l}\ \text{和}\ \bigg[\phi_{ij}\frac{\partial}{\partial z_j},\frac{\partial}{\partial\bar{z}_k}\bigg]=-\frac{\partial\phi_{ij}}{\partial \bar{z}_k}\frac{\partial}{\partial z_j}
+    \]因此，\begin{align*}
+        &\sum_l\bigg[\frac{\partial}{\partial\bar{z}_i},\phi_{kl}\frac{\partial}{\partial z_l}\bigg]+\sum_j\bigg[\phi_{ij}\frac{\partial}{\partial z_j},\frac{\partial}{\partial \bar{z}_k}\bigg]\\
+        =&\sum_{j}\bigg(\frac{\partial\phi_{kj}}{\partial \bar{z}_i}-\frac{\partial\phi_{ij}}{\partial\bar{z}_k}\bigg)\frac{\partial}{\partial z_j}\\
+        =&(\bar{\partial}\phi)\bigg(\frac{\partial}{\partial\bar{z}_i},\frac{\partial}{\partial\bar{z}_k}\bigg).
+    \end{align*}另一方面，\[
+        \sum_{j,l}\bigg[\phi_{ij}\frac{\partial}{\partial z_j},\phi\frac{\partial}{\partial z_l}\bigg]=[\phi,\phi]=\bigg(\frac{\partial}{\partial \bar{z}_i},\frac{\partial}{\partial\bar{z}_k}\bigg).
+    \]因此，可积性条件表明 $\bar{\partial}\phi+[\phi,\phi]\in\mathcal{A}^{0,2}(\mathcal{T}^{1,0}X)$ 满足\[
+        (\bar{\partial}\phi+[\phi,\phi])\bigg(\frac{\partial}{\partial\bar{z}_i},\frac{\partial}{\partial\bar{z}_k}\bigg)\in T^{0,1}_t.
+    \]于是 $\bar{\partial}+[\phi,\phi]\in\mathcal{A}^{0,2}(T^{1,0}X\cap T^{0,1}_t)$。但对于很小的 $t$，有 $T^{1,0}X\cap T^{0,1}_t =0$，因此 $\bar{\partial}\phi+[\phi,\phi]=0$。
+
+    反过来，如果 Maurer-Cartan 方程成立，那么可积性条件对 $T^{0,1}_t$ 的一个局部标架成立。这立即推出对 $T^{0,1}_t$ 的所有截面也成立。
+\end{proof}
+
+现在我们来考虑 Maurer-Cartan 方程的幂级数展开，即在 (\ref{wer}) 中将 $\phi$ 替换为 $\phi=\sum_{i=1}^{\infty}\phi_i t^i$：\[
+    \bar{\partial}\bigg(\sum_{i=1}^{\infty}\phi_i t^i\bigg)+\sum_{i,j=1}^{\infty}[\phi_i,\phi_j]t^{i+j}=0.
+\]这给出一个递推方程组：\begin{align*}
+    0&=\bar{\partial}\phi_1\\
+    0&=\bar{\partial}\phi_2+[\phi_1,\phi_1]\\
+    \vdots& \\
+    0&=\bar{\partial}\phi_k +\sum_{0<i<k}[\phi_i,\phi_{k-i}].
+\end{align*}
+
+我们首先详细研究一阶方程 $\bar{\partial}\phi_1=0$。Maurer-Cartan 方程特别地表明，复结构 $I$ 的一阶形变由一个 $\bar{\partial}$-闭的 $(0,1)$-形式 $\phi_1$ 描述，其值在切丛 $\mathcal{T}_X$ 中。因此，它定义了 $[\phi_1]\in H^1(X,\mathcal{T}_X)$ 中的一个元素。
+
+\begin{definition}
+    复结构 $I$ 的单参数形变 $I_t$ 的 \textbf{Kodaira-Spencer 类} 是指诱导的上同调类 $[\phi_1]\in H^1(X,\mathcal{T}_X)$。
+\end{definition}
+
+为了识别同构的（一阶）形变，必须考虑微分同胚群 $\mathrm{Diff}(M)$ 的（无穷小）作用。设 $F_t$ 是流形 $M$ 的单参数微分同胚族。关于局部坐标函数 $x_i$，它可以展开成幂级数 $\tilde{x_i}=x_i+tF_i (x)+t^2\dots$。一阶项 $\sum_i F_i \frac{\partial}{\partial x_i}$ 定义了一个整体向量场\[
+    \frac{dF_t}{dt}|_{t=0}\in \mathcal{A}^0(TM).
+\]
+
+我们可以在复流形 $X=(M,I)$ 上利用全纯坐标 $z_i$ 改写这个识别为 $\tilde{z_i}=z_i+tf_i(z,\bar{z})+t^2\dots$。对于反全纯坐标 $\bar{z_i}$，我们有 $\bar{\tilde{z_i}}=\bar{z_i}+t\bar{f_i}(z,\bar{z})+t^2\dots$。于是，$\frac{dF_t}{dt}|_{t=0}\in\mathcal{A}^0(TX)$ 在局部坐标下（相差因子 2）由下式给出\[
+    \sum f_i\frac{\partial}{\partial z_i}+\sum \bar{f}_i\frac{\partial}{\partial\bar{z}_i}.
+\]
+
+任何微分同胚都可以用来从给定的复结构 $I$ 构造新的复结构，即通过微分同胚的微分将 $I$ 前推。更明确地，对于微分同胚 $F_t$，新的复结构为 $dF_t\circ I\circ {(dF_{t})}^{-1}$。这个复结构的反全纯切丛因此为\[
+    T^{0,1}_t=dF_t(T^{0,1}X).
+\]
+
+在局部坐标下，$T^{0,1}X$ 的一阶形变可描述为在以下映射下 $T^{0,1}X$ 的像\[
+    \mathrm{id}+\sum_{i,j}\frac{\partial f_i}{\partial z_j}\otimes\frac{\partial}{\partial z_j}+\frac{\partial f_i}{\partial\bar{z_j}}d\bar{z_j}\otimes\frac{\partial}{\partial z_i}+\frac{\partial \bar{f_i}}{\partial z_j}dz_j\otimes\frac{\partial}{\partial \bar{z_i}}+\frac{\partial\bar{f_i}}{\partial\bar{z_j}}d\bar{z_j}\otimes\frac{\partial}{\partial \bar{z_i}}.
+\]在这个和中，只有第三项和第五项在 $T^{0,1}X$ 上非平凡。而且，第五项是 $T^{0,1}X$ 的自同态。
+
+因此，由 $M$ 的单参数微分同胚族 $F_t$ 诱导的 $T^{0,1}X$ 的一阶形变由同态\[
+    T^{0,1}X\longrightarrow T^{1,0}X,\ \frac{\partial}{\partial\bar{z_j}}\longmapsto \sum_i \frac{\partial f_i}{\partial \bar{z_j}}\frac{\partial}{\partial z_i}.
+\]描述。这给出
+
+\begin{lemma}
+    流形 $M$ 上复结构 $I$（定义复流形 $X=(M,I)$）的由单参数微分同胚族 $F_t$ 诱导的一阶形变由映射\[
+        \phi_1=\bar{\partial}\bigg({\big(\frac{dF_t}{dt}|_{t=0}\big)}^{1,0}\bigg):T^{0,1}X\longrightarrow T^{1,0}X
+    \]确定。
+\end{lemma}
+
+作为结论，我们得到 $X=(M,I)$ 的所有一阶形变同构类的描述。
+
+\begin{proposition}
+    设 $X$ 是一个复流形。在 $X$ 的所有一阶形变与 $H^1(X,\mathcal{T}_X)$ 的元素之间存在一个自然的一一对应。
+\end{proposition}
+
+\begin{proof}
+    记 $X=(M,I)$。那么 $I$ 的一阶形变对应于 $\mathcal{A}^{0,1}(\mathcal{X})$ 中 $\bar{\partial}$-闭的元素，而由前述引理，定义同构形变的那些元素相差 $\bar{\partial}:\mathcal{A}^{0}(\mathcal{T}_X)\rightarrow\mathcal{A}^{0,1}(\mathcal{T}_X)$ 的像中的元素，即 $\bar{\partial}$-恰当的。由于 Dolbeault 上同调恰好计算 $\mathcal{T}_X$ 的层上同调，这就证明了断言。
+\end{proof}
+
+换句话说，Kodaira-Spencer 类决定了 $X$ 的一阶形变，并且 $H^1(X,\mathcal{T}_X)$ 中的任何类都可以作为 Kodaira-Spencer 类出现。
+
+形变理论的核心任务是积分给定的一阶形变 $v\in H^1(X,\mathcal{T}_X)$，即找到一个单参数族 $I_t$，使得其 Kodaira-Spencer 类为 $v$。一般来说这是不可能的。障碍可能在任何阶出现。
+
+此外，由于我们必须在每一步商掉微分同胚群的作用，我们必须仔细研究所有可能的 $\phi_i$。这是为了确保幂级数的收敛性并求解递推方程。
+
+存在障碍这一事实在二阶时就可以看出：一旦选定了 $v\in H^1(X,\mathcal{T_X})$ 的一个提升 $\phi_1$，我们就需要寻找 $\phi_2$ 使得 $\bar{\partial}\phi_2=-[\phi_1,\phi_1]$。但很可能无论怎样选择 $\phi_1$，形式 $[\phi_1,\phi_1]$ 都不是 $\bar{\partial}$-恰当的。
+
+利用~\ref{cvb}，我们可以将任何一阶形变 $v\in H^1(X,\mathcal{T}_X)$ 与一个类 $[v,v]\in H^2(X,\mathcal{T}_X)$ 联系起来。
+
+\begin{corollary}
+    如果 $[v,v]\in H^2(X,\mathcal{T}_X)$ 不为零，那么一阶形变 $v\in H^1(X,\mathcal{T}_X)$ 就不能被积分。
+\end{corollary}
+
+\subsection{Calabi-Yau流形的形变}
+
+接下来，我们将描述当底层流形 $X$ 拥有一个全纯体积形式，即 $X$ 是一个 \textbf{Calabi-Yau 流形}时，如何求解 Maurer-Cartan 方程给出的递推方程组。更准确地说，这里所说的 Calabi-Yau 流形是指一个 $n$ 维紧 Kähler 流形 $X$，其典范丛平凡：$\bigwedge^n\varOmega_X=K_X \cong \mathcal{O}_X$。此外，我们固定一个全纯体积形式，即一个平凡化截面 $\varOmega\in H^0(X,K_X)$。
+
+形式 $\varOmega$ 可以用来定义一个自然同构\[
+    \eta:\bigwedge\nolimits^p\mathcal{T}_X\cong \bigwedge\nolimits^{n-p}\varOmega_X.
+\]
+
+定义\[
+    \eta(v_1\wedge\dots\wedge v_p)=i_{v_1}\dots i_{v_p}(\varOmega),
+\]其中 $i_v$ 是由 $i_v(\alpha)(w_1,\dots,w_i)=\alpha(v,w_1,\dots,w_i)$ 定义的内缩。如果 $\varOmega$ 局部地写为 $fdz_1\wedge\dots\wedge dz_n$，那么对于 $i_1 < \cdots <i_p$，有\[
+    \eta(\frac{\partial}{\partial z_{i_1}}\wedge\dots\wedge\frac{\partial}{\partial z_{i_p}})={(-1)}^{(\sum i_j)-p}fdz_1\wedge\dots\wedge\widehat{dz_{i_1}}\wedge\dots\wedge\widehat{dz_{i_p}}\wedge\dots dz_n.
+\]
+
+此外，同构 $\eta$ 诱导出典范同构\[
+    \eta:\mathcal{A}^{0,q}(\bigwedge\nolimits^p\mathcal{T}_X)\cong\mathcal{A}^{n-p,q}(X).
+\]
+
+\begin{definition}
+    算子 $\varDelta:\mathcal{A}^{0,q}(\bigwedge^p\mathcal{T}_X)\rightarrow \mathcal{A}^{0,q}(\bigwedge^{p-1}\mathcal{T}_X)$ 定义为\[
+        \varDelta:\mathcal{A}^{0,q}(\bigwedge\nolimits^p\mathcal{T}_X)\stackrel{\eta}{\longrightarrow}\mathcal{A}^{n-p,q}(X)\stackrel{\partial}{\longrightarrow}\mathcal{A}^{n-p+1,q}(X)\stackrel{\eta^{-1}}{\longrightarrow}\mathcal{A}^{0,q}(\bigwedge\nolimits^{p-1}\mathcal{T}_X).
+    \]
+\end{definition}
+
+注意，$\partial$ 本身在 $\mathcal{A}^{0,q}(\bigwedge^p\mathcal{T}_X)$ 上不是良定义的。
+
+\begin{lemma}
+    算子 $\varDelta$ 与 $\bar{\partial}$ 反交换，即 $\varDelta\circ\bar{\partial}=-\bar{\partial}\circ\varDelta$。
+\end{lemma}
+
+\begin{proof}
+    我们利用 $\varOmega\in\mathcal{A}^{n,0}(X)$ 是全纯的，即 $\bar{\partial}$-闭的这一事实。如果在局部坐标下写为 $\varOmega=fdz_1\wedge\dots\wedge dz_n$，那么 $f$ 是全纯函数。于是\[
+        \eta(g\cdot d\bar{z}_{I}\otimes\frac{\partial}{\partial z_J})=\pm(fg)\cdot d\bar{z}_{I}\otimes dz_{\{1,\dots,n\}\backslash J}.
+    \]因此 $\bar{\partial}\circ\eta=\eta\circ\bar{\partial}$，从而\begin{align*}
+        \bar{\partial}(\varDelta(\alpha))&=\eta^{-1}(\bar{\partial}\partial\eta(\alpha))=-\eta^{-1}(\partial\bar{\partial}\eta(\alpha))\\
+        &=-\eta^{-1}(\partial\eta(\bar{\partial}\alpha))=-\varDelta(\bar{\partial}(\alpha)).
+    \end{align*}
+\end{proof}
+
+同时注意 $\varDelta^2=0$。因此，$\varDelta$ 可以作为微分使用，但它关于外积 $\mathcal{A}^{0,p}(\bigwedge^r \mathcal{T}_X)\times\mathcal{A}^{0,q}(\bigwedge^s \mathcal{T}_X)\rightarrow\mathcal{A}^{0,p+q}(\bigwedge^{r+s}\mathcal{T}_X)$ 的性质不好。这一点由 Tian 和 Todorov~\cite{Tian87,TT89} 的以下关键结果更精确地说明。
+
+\begin{lemma}[Tian-Todorov 引理]
+    如果 $\alpha\in\mathcal{A}^{0,p}(\mathcal{T}_X)$ 和 $\beta\in\mathcal{A}^{0,q}(\mathcal{T}_X)$，那么\[
+        {(-1)}^p [\alpha,\beta]=\varDelta(\alpha\wedge\beta)-\varDelta(\alpha)\wedge\beta-{(-1)}^{p+1} \alpha\wedge\varDelta(\beta).
+    \]
+\end{lemma}
+
+\begin{proof}
+    由于该断言是局部的，并且对 $\alpha$ 和 $\beta$ 具有加性，只需对 $\alpha=ad\bar{z}_I\otimes\frac{\partial}{\partial z_i}$ 和 $\beta=bd\bar{z}_J\otimes\frac{\partial}{\partial z_j}$ 证明即可。
+
+    首先，我们将断言归结为 $p=q=0$ 的情形。利用简记\[
+        G(\alpha,\beta):=\varDelta(\alpha\wedge\beta)-\varDelta(\alpha)\wedge\beta-{(-1)}^{p+1}\alpha\wedge\varDelta(\beta),
+    \]通过证明\[
+        G(\alpha,\beta)=(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes G(a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j})
+    \]来实现归约。利用标准符号规则，确实可以算出\begin{align*}
+        \varDelta(\alpha\beta)&=\eta^{-1}\partial\eta(\alpha\wedge\beta)=(-1)^q \eta^{-1}\partial\eta\bigg((d\bar{z}_I \wedge d\bar{z}_J)\otimes(a\frac{\partial}{\partial z_i}\wedge b\frac{\partial}{\partial z_j})\bigg)\\
+        &=(-1)^q \eta^{-1}\partial\bigg((d\bar{z}_I \wedge d\bar{z}_J)\otimes \eta\bigg(a\frac{\partial}{\partial}\wedge b\frac{\partial}{\partial z_j}\bigg)\bigg)\\
+        &=(-1)^q \cdot (-1)^{p+q} \eta^{-1}\bigg((d\bar{z}_I \wedge d\bar{z}_J)\otimes\partial\eta\bigg(a\frac{\partial}{\partial z_i}\wedge b\frac{\partial}{\partial z_j}\bigg)\bigg).\\
+        &=(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes\varDelta\bigg(a\frac{\partial}{\partial z_i}\wedge b\frac{\partial}{\partial z_j}\bigg).
+    \end{align*}
+    类似地，\begin{align*}
+        \varDelta(\alpha)\wedge\beta&=\eta^{-1}\partial\eta\bigg(d\bar{z}_I \otimes a\frac{\partial}{\partial z_i}\bigg)\wedge\beta=(-1)^p \bigg(d\bar{z}_I \otimes \varDelta\bigg( a\frac{\partial}{\partial z_i}\bigg)\bigg)\wedge\beta\\
+        &=(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes \bigg(\varDelta \bigg(a\frac{\partial}{\partial z_i}\bigg)\wedge b\frac{\partial}{\partial z_j}\bigg)
+    \end{align*}并且\begin{align*}
+        (-1)^{p+1}\alpha\wedge\varDelta(\beta)&=(-1)^{p+1}\alpha\wedge\bigg((-1)^q d\bar{z}_J \otimes \varDelta\bigg(b\frac{\partial}{\partial z_j}\bigg)\bigg)\\
+        &=(-1)^p (-1)(d\bar{z}_I \wedge d\bar{z}_J)\otimes \bigg(a\frac{\partial}{\partial  z_i}\wedge\varDelta(b\frac{\partial}{\partial z_j})\bigg).
+    \end{align*}于是，\begin{align*}
+        G(\alpha,\beta)=&(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes \bigg(\varDelta\bigg(a\frac{\partial}{\partial z_i}\wedge b\frac{\partial}{\partial z_j}\bigg)\\ &-\varDelta\bigg(a\frac{\partial}{\partial z_i}\bigg)\wedge b\frac{\partial}{\partial z_j}-(-1)a\frac{\partial}{\partial z_i}\wedge\varDelta\bigg(b\frac{\partial}{\partial z_j}\bigg)\bigg)\\
+        =&(-1)^p (d\bar{z}_I \wedge d\bar{z}_J)\otimes G\bigg(a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j}\bigg).
+    \end{align*}
+
+    为了处理 $p=q=0$ 的情形，我们首先明确写出\[
+        \eta(\frac{\partial}{\partial z_i})=(-1)^{i-1} fdz_1\wedge\dots\wedge\widehat{dz_i}\wedge\dots\wedge dz_n
+    \]以及\[
+        \eta\bigg(\frac{\partial}{\partial z_i}\wedge\frac{\partial}{\partial z_j}\bigg)=(-1)^{i+j-2} fdz_1 \wedge \dots\wedge\widehat{dz_i}\wedge\dots\wedge\widehat{dz_j}\wedge\dots\wedge dz_n.
+    \]这也表明 $\eta^{-1}(dz_1\wedge\dots\wedge\widehat{dz_i}\wedge\dots dz_n)=f^{-1}\frac{\partial}{\partial z_i}$ 和 $\eta(dz_1\wedge\dots\wedge dz_n)=f^{-1}$。
+
+    因此，\begin{align*}
+        \varDelta(a\frac{\partial}{\partial z_i})&=\eta^{-1}\partial\Big((-1)^{i-1}(af)dz_1\wedge\dots\wedge\widehat{dz_i}\wedge\dots\wedge dz_n\Big)\\
+        &=\eta^{-1}\frac{\partial(af)}{\partial z_i}dz_1 \wedge \dots\wedge dz_n=\frac{\partial(af)}{\partial z_i}f^{-1}
+    \end{align*}类似地\[
+        \varDelta\bigg(b\frac{\partial}{\partial z_j}\bigg)=\frac{\partial(bf)}{\partial z_j}f^{-1}.
+    \]此外，\begin{align*}
+        \varDelta\bigg(a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j}\bigg)=&\eta^{-1}\partial\Big((-1)^{i+j}(abf)dz_1 \wedge\dots\wedge\widehat{dz_i}\wedge\dots\wedge\widehat{dz_j}\wedge\dots\wedge dz_n\Big)\\
+        =&\eta^{-1}\bigg((-1)^{j-1}\frac{\partial(abf)}{\partial z_i}dz_1 \wedge\dots\wedge\widehat{dz_j}\wedge\dots\wedge dz_n\\
+        &+(-1)^i \frac{\partial(abf)}{\partial z_j}dz_1\wedge\dots\wedge\widehat{dz_i}\wedge\dots\wedge dz_n\bigg)\\
+        =&\frac{\partial(abf)}{\partial z_i}f^{-1}\frac{\partial}{\partial z_j}-\frac{\partial(abf)}{\partial z_j}f^{-1}\frac{\partial}{\partial z_i}\\
+        =&\bigg[a\frac{\partial}{\partial z_i},b\frac{\partial}{\partial z_j}\bigg]+\varDelta\bigg(a \frac{\partial}{\partial z_i}\bigg)b\frac{\partial}{\partial z_j}-a\frac{\partial}{\partial z_i}\varDelta\bigg(b\frac{\partial}{\partial z_j}\bigg).
+    \end{align*}这就证明了 $p=q=0$ 时的断言。
+\end{proof}
+
+\begin{corollary}
+    设 $\alpha$ 和 $\beta$ 是 $\mathcal{A}^{0,*}(\mathcal{T}_X)$ 中 $\varDelta$-闭的元素。那么括号 $[\alpha,\beta]$ 是 $\varDelta$-恰当的。
+\end{corollary}
+
+Tian-Todorov 引理将被应用于复结构形变的幂级数展开系数 $\phi_i\in \mathcal{A}^{0,1}(\mathcal{T}_X)$。在证明一般结果之前，我们先阐明前两步。
+
+给定 $v\in H^1(X,\mathcal{T}_X)$。我们首先寻找一个好的代表元 $\phi_1\in\mathcal{A}^{0,1}(\mathcal{T}_X)$。为了求解 Maurer-Cartan 方程 $\bar{\partial}\phi_2=-[\phi_1,\phi_1]$，我们必须保证\begin{itemize}
+    \item $[\phi_1,\phi_1]$ 是 $\bar{\partial}$-闭的，
+    \item $[\phi_1,\phi_1]$ 没有调和部分。
+\end{itemize}
+
+这里我们需要用到关于 $X$ 上的一个 Hermite 度量（从而在 $\mathcal{T}_X$ 上诱导度量）的 Hodge 分解 $\mathcal{A}^{0,1}(\mathcal{T}_X)=\bar{\partial}\mathcal{A}^{0}(\mathcal{T}_X)\oplus\mathcal{H}^{0,1}(\mathcal{T}_X)\oplus\bar{\partial}^*\mathcal{A}^{0,2}(\mathcal{T}_X)$。
+
+第一个条件总是满足的：如果 $\alpha_i\in\mathcal{A}^{0,q_i}(\mathcal{T}_X),\, i=1,2$，是 $\bar{\partial}$-闭的，那么 $[\alpha_1,\alpha_2]$ 也是 $\bar{\partial}$-闭的。这由 (\ref{cvb}) 推出。
+
+Tian-Todorov 引理给出：如果选取 $\alpha_i\in\mathcal{A}^{0,q_i}(\mathcal{T}_X),\, i=1,2$ 使得 $\eta(\alpha_i)\in\mathcal{A}^{n-1,q_i}(X)$ 是 $\partial$-闭的，那么 $\eta[\alpha_1,\alpha_2]$ 是 $\partial$-恰当的。更明确地，$\eta[\alpha_1,\alpha_2]=(-1)^{q_1}\cdot \partial\eta(\alpha_1 \wedge\alpha_2)$。
+
+最终，我们发现：如果选取 $\phi_1\in \mathcal{A}^{0,1}(\mathcal{T}_X)$ 使得 $\eta(\phi_1)\in\mathcal{A}^{n-1,1}(X)$ 关于 $X$ 上的一个 Kähler 度量是调和的，那么 $\bar{\partial}\phi_2=-[\phi_1,\phi_1]$ 存在解 $\phi_2\in\mathcal{A}^{0,1}(\mathcal{T}_X)$，而且还可选取使其 $\eta(\phi_2)$ 是 $\partial$-恰当的。
+
+事实上，根据上述论证，$\eta[\phi_1,\phi_1]$ 既是 $\partial$-恰当的，又是 $\bar{\partial}$-闭的。因为在紧 Kähler 流形上的 Hodge 理论中，一个 $\partial$-恰当的形式不可能有非平凡的调和部分，这就证明了 $\eta[\phi_1,\phi_1]$ 是 $\bar{\partial}$-恰当的。而利用 $\partial\bar{\partial}$-引理，我们还可以进一步说，存在一个形式 $\gamma\in\mathcal{A}^{n-2,1}(X)$ 满足 $\bar{\partial}\partial\gamma=-\eta[\phi_1,\phi_1]$。然后令 $\phi_2:=\eta^{-1}(\partial\gamma)$。由于 $\eta$ 与 $\bar{\partial}$ 交换，这就证明了断言。
+
+所有这些论证现在都可以被轻易地推广，以证明同样由 Tian 和 Todorov 得出的一般结果。
+
+\begin{proposition}
+    设 $X$ 是 Calabi-Yau 流形，$v\in H^1(X,\mathcal{T}_X)$。则存在一个形式幂级数 $\phi_1 t+\phi_2 t^2+\cdots$，其系数 $\phi_i\in\mathcal{A}^{0,1}(\mathcal{T}_X)$ 满足 Maurer-Cartan 方程\[
+        \bar{\partial}\phi_1=0\ \text{和}\ \bar{\partial}\phi_k=-\sum_{0<i<k}[\phi_i,\phi_{k-i}],
+    \]其中 $[\phi_1]=v$，并且对于所有 $i>1$，$\eta(\phi_i)\in\mathcal{A}^{n-1,1}(X)$ 是 $\partial$-恰当的。
+\end{proposition}
+
+\begin{proof}
+    我们从代表 $v$ 的 $\phi_1\in\mathcal{A}^{0,1}(\mathcal{T}_X)$ 开始，并使得 $\eta(\phi_1)\in\mathcal{A}^{n-1,1}(X)$ 是调和的。然后如上求出 $\phi_2$。假设我们已经找到了满足命题要求的 $\phi_2,\dots,\phi_{k-1}$。那么根据 Tian-Todorov 引理，对于 $0<i<k$，$\eta[\phi_i,\phi_{k-i}]$ 是 $\partial$-恰当的。因此，要找到满足断言的 $\phi_k$，我们必须确保和式 $\sum_{0<i<k}[\phi_i,\phi_{k-i}]$ 是 $\bar{\partial}$-闭的。正如我们之前隐含地使用过的那样，有\[
+        \bar{\partial}\bigg(\sum_{0<i<k}[\phi_i,\phi_{k-i}]\bigg)=\sum_{0<i<k}([\bar{\partial}\phi_i,\phi_{k-i}]-[\phi_{i},\bar{\partial}\phi_{k-i}])
+    \]根据归纳假设，这等于\begin{align*}
+        & -\sum_{0<i<k}\bigg(\sum_{0<j<i}[[\phi_j,\phi_{i-j}],\phi_{k-i}]-\sum_{0<l<k-i}[\phi_i,[\phi_l,\phi_{k-i-l}]]\bigg)\\
+        =&-\sum_{0<i<k}\sum_{0<j<i}[[\phi_j,\phi_{i-j}],\phi_{k-i}]+\sum_{0<i<k}\sum_{0<l<i}[\phi_{k-i},[\phi_l,\phi_{i-l}]]\\
+        =&2\sum_{0<i<k}\sum_{0<l<i}[\phi_{k-i},[\phi_l,\phi_{i-l}]]=0
+    \end{align*}其中我们利用了当 $\alpha\in\mathcal{A}^{0,2}(\mathcal{T}_X)$ 时 $[\alpha,\beta]=-[\beta,\alpha]$ 以及对任意 $\beta$ 的 Jacobi 恒等式，最后推出结果为 0。
+
+    $\partial\bar{\partial}$-引理最终保证我们可以选取形如 $\eta^{-1}(\partial\gamma)$ 的 $\phi_k$，即 $\eta(\phi_k)$ 是 $\partial$-恰当的。
+\end{proof}
+
+\begin{remark}
+    很可能存在 Maurer-Cartan 方程的其他解，它们不满足 $\eta(\phi_i)$ 对于 $i>1$ 是 $\partial$-恰当的这一额外条件。事实上，$\eta(\phi_i)$ 甚至未必是 $\partial$-闭的。
+\end{remark}
+
+\begin{remark}
+    到目前为止，我们还没有涉及收敛解的存在性。事实上，有一个标准的程序可以将任何形式解转化为收敛解。在这里会涉及大量的分析技术。细节可参考~\cite[Sect. 5.3]{Kodaira}。
+
+    主要思想是考虑 $\mathcal{A}^{0,q}(\mathcal{T}_X)$ 上的算子 $\bar{\partial}$ 及其关于选定的 Kähler（或仅仅是 Hermite）度量的伴随算子。为清晰起见，我们将这两个算子记为 $\bar{\partial}_{\mathcal{T}_X}$ 和 $\bar{\partial}^*_{\mathcal{T}_X}$。然后可以证明，如果系数 $\phi_k$ 是 $\bar{\partial}^*_{\mathcal{T}_X}$-恰当的，那么形式解收敛。接下来，将任何形式解转化为满足这个附加条件的解并不太困难，因为形式解的存在本身就保证了所有可能的障碍都是平凡的。
+\end{remark}
+
+\section{代数方法下的形变理论}
+
+\subsection{$T^i$ 函子}
+
+我们首先介绍由 Lichtenbaum 和 Schlessinger~\cite{LichtenbaumSchlessinger} 引入的 $T^i$ 函子的构造及其主要性质。
+
+设 $A\rightarrow B$ 是环同态，$M$ 是一个 $B$-模。我们在此构造 $i=0,1,2$ 时的群 $T^i(B/A,M)$。环默认为带单位元的交换环，但暂不施加任何有限性条件。
+
+首先选取一个多项式环 $R=A[x]$，其变元集合 $x=\{x_i\}$（可能无限），使得 $B$ 可以作为 $A$-代数的商表示。设 $I$ 是定义 $B$ 的理想，于是有正合列\[
+    0\longrightarrow I\longrightarrow R\longrightarrow B\longrightarrow 0.
+\]其次，选取一个自由 $R$-模 $F$ 和一个满射 $j:F\rightarrow I\rightarrow 0$，并令 $Q$ 为其核：\[
+    0\longrightarrow Q\longrightarrow F\stackrel{j}{\longrightarrow}I\longrightarrow 0.
+\]设\[
+    F_0=(j(a)b-j(b)a)_{a,b\in F}\subseteq F.
+\]定义一个由 $B$-模构成的复形，称为 \textbf{余切复形} \[
+    L_2\stackrel{d_2}{\longrightarrow}L_1\stackrel{d_1}{\longrightarrow}L_0
+\]如下：\begin{itemize}
+    \item 取 $L_2=Q/F_0$，这是一个 $B$-模。确实，若 $x\in I$ 且 $a\in Q$，将 $x$ 写为 $x=j(x')$ 对某个 $x'\in F$，则\[
+        xa=j(x')a\equiv j(a)x'=0\pmod{F_0}.
+    \]
+    \item 取 $L_1=F\otimes_R B=F/IF$，并令 $d_2:L_2\rightarrow L_1$ 为由包含 $Q\rightarrow F$ 诱导的映射。
+    \item 取 $L_0=\varOmega_{R/A}\times_R B$，其中 $\varOmega_{R/A}$ 是相对 Kähler 微分模。令 $d_1$ 为以下复合\begin{align*}
+        L_1\twoheadrightarrow I/I^2 &\rightarrow \varOmega_{R/A}\otimes_R B\\
+        x &\rightarrow d_{R/A}(x)\otimes 1
+    \end{align*}显然 $d_1 d_2=0$，因此我们定义了一个 $B$-模的复形。注意 $L_0$、$L_1$ 是自由 $B$-模，因为 $R$ 是 $A$ 上的多项式环。
+    \item 事实上，Kähler 微分的第二个基本正合列\[
+        I/I^2\stackrel{d}{\longrightarrow}\varOmega_{R/A}\otimes_R B\longrightarrow \varOmega_{B/A}\longrightarrow 0
+    \]给出了正合列\begin{equation}\label{eq10}
+        L_2\stackrel{d_2}{\longrightarrow}L_1\stackrel{d_1}{\longrightarrow}L_0\longrightarrow\varOmega_{B/A}\longrightarrow 0.
+    \end{equation}
+\end{itemize}
+
+\begin{lemma}\label{A1}
+    对于任何 $B$-模 $M$，定义\[
+        T^i(B/A,M):=H^i(\mathrm{Hom}_B(L_{\bullet},M)),
+    \]此定义不依赖于 $F$ 和 $R$ 的选取。
+\end{lemma}
+
+\begin{proof}
+    首先，固定多项式环 $R$。如果 $F$ 和 $F'$ 是 $R$ 的两个自由模且都满射到 $I$，那么 $F\oplus F'$ 给出第三种选择。由于 $F'$ 是自由的，映射 $j':F'\rightarrow I$ 穿过 $F$，即存在 $p:F'\rightarrow F$ 使得 $j'=jp$。将 $F'\subseteq F\oplus F'$ 的每个生成元 $e'$ 替换为 $e'-p(e')$，我们可以假定 $F\oplus F'\rightarrow I$ 的映射就是 $(j,0)$。那么 $\ker(j,0)=Q\oplus F'$，从而 $(F \oplus F')_0=F_0+IF'$。令 \(L_{\bullet}^{\prime}\) 为从 \((F\oplus F^{\prime},R)\) 得到的复形，则\[
+        L_{2}^{\prime} = L_{2}\oplus F^{\prime} / I F^{\prime},\ L_{1}^{\prime} = L_{1}\oplus (F^{\prime}\otimes_{R}B),\ L_{0}^{\prime} = L_{0}.
+    \]
+    因此，\(L_{\bullet}^{\prime}\) 是 \(L_{\bullet}\) 与自由零调复形 \(F^{\prime}\otimes_{R}B\to F^{\prime}\otimes_{R}B\to 0\) 的直和，从而在取 $ \mathrm{Hom} $ 函子后诱导相同的上同调。
+
+    其次，只需比较 \(R = A[x]\) 与 \(R^{\prime} = A[x,y]\)。同样，映射 \(A[y]\to B\) 可以通过同态 \(p:A[y]\to A[x]\) 穿过 \(A[x]\)。将 \(A[x,y]\) 中的每个 \(y_{i}\) 替换为 \(y_{i} - p(y_{i})\)，我们可以假定环同态 \(A[x,y]\to B\) 将 \(y_{i}\) 映为 0，此时其核为 \(I R^{\prime} + y R^{\prime}\)。由于 \(T^{i}\) 不依赖于 $F$ 的选择，我们可以取 \(F^{\prime} = F\otimes_{R}R^{\prime}\) 并令 \(G\) 为以 \(y\) 变量为指标集的自由 \(R^{\prime}\)-模。于是我们有下面的交换图% https://quiver.taskfirst.cn/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIlEnIl0sWzIsMCwiRidcXG9wbHVzIEcnIl0sWzMsMCwiSVInXFxvcGx1cyB5UiciXSxbNCwwLCIwIl0sWzQsMSwiMCJdLFszLDEsIkkiXSxbMiwxLCJGIl0sWzEsMSwiUSJdLFswLDEsIjAiXSxbMCwxXSxbMSwyXSxbOSw4XSxbOCwxXSxbOCw3XSxbNywyXSxbNyw2XSxbNiwzXSxbNiw1XSxbMyw0XSxbMiwzXV0=
+    \[\begin{tikzcd}
+        0 & {Q'} & {F'\oplus G'} & {IR'\oplus yR'} & 0 \\
+        0 & Q & F & I & 0
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=1-4, to=1-5]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=1-2]
+        \arrow[from=2-2, to=2-3]
+        \arrow[from=2-3, to=1-3]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=2-4, to=1-4]
+        \arrow[from=2-4, to=2-5]
+    \end{tikzcd}\]并且显然有\[
+        Q^{\prime} = Q R^{\prime} + \langle y_{i}a - j(a)e_{i}\mid a\in F\rangle_{R^{\prime}} + \langle y_{i}e_{j} - y_{j}e_{i}\rangle_{R^{\prime}}.
+    \]
+    由于 \(\langle y_{i}a - j(a)e_{i}\mid a\in F\rangle_{R^{\prime}} + \langle y_{i}e_{j} - y_{j}e_{i}\rangle_{R^{\prime}}\subseteq (F^{\prime}\oplus G^{\prime})_{0}\)，我们有 \(L_{2}^{\prime} = L_{2}\)。
+
+    另一方面，\(L_{1}^{\prime} = L_{1}\oplus (G^{\prime}\otimes_{R^{\prime}}B)\) 且 \(L_{0}^{\prime} = L_{0}\oplus (\varOmega_{A[y] / A}\otimes B)\)。那么 \(L_{\bullet}^{\prime}\) 是 \(L_{\bullet}\) 与自由零调复形\begin{align*}
+        G^{\prime}\otimes_{R^{\prime}}B&\longrightarrow \varOmega_{A[y] / A}\otimes B\longrightarrow 0\\
+        e_{i}&\longrightarrow dy_{i},
+    \end{align*}的直和，因此在取 $ \mathrm{Hom} $ 函子后诱导相同的上同调。
+\end{proof}
+
+\begin{theorem}
+设 \(A \to B\) 是环同态。则 \(T^{i}(B / A, - )\) 是从 \(\mathsf{Mod}_{B}\) 到其自身的协变可加函子。如果
+\[
+0\longrightarrow M^{\prime}\longrightarrow M\longrightarrow M^{\prime \prime}\longrightarrow 0
+\]
+是 \(B\)-模的短正合列，那么有长正合列
+\[
+\begin{aligned}
+0 &\longrightarrow T^{0}(B / A,M^{\prime})\longrightarrow T^{0}(B / A,M)\longrightarrow T^{0}(B / A,M^{\prime \prime}) \\
+&\longrightarrow T^{1}(B / A,M^{\prime})\longrightarrow T^{1}(B / A,M)\longrightarrow T^{1}(B / A,M^{\prime \prime}) \\
+&\longrightarrow T^{2}(B / A,M^{\prime})\longrightarrow T^{2}(B / A,M)\longrightarrow T^{2}(B / A,M^{\prime \prime}).
+\end{aligned}
+\]
+\end{theorem}
+
+\begin{proof}
+由构造，\(T^{i}(B / A, - )\) 是协变可加函子。由于复形 \(L_{\bullet}\) 的项 \(L_{1}\) 和 \(L_{0}\) 是自由的，我们得到复形的序列
+\[
+0\longrightarrow \mathrm{Hom}_{B}(L_{\bullet},M^{\prime})\longrightarrow \mathrm{Hom}_{B}(L_{\bullet},M)\longrightarrow \mathrm{Hom}_{B}(L_{\bullet},M^{\prime \prime})\longrightarrow 0
+\]
+除了映射
+\[
+\mathrm{Hom}_{B}(L_{2},M)\to \mathrm{Hom}_{B}(L_{2},M^{\prime \prime})
+\]
+可能不是满射之外，该序列是正合的。这个复形的序列给出了上述上同调长正合列。
+\end{proof}
+
+\begin{theorem}
+    设 \(A \to B \to C\) 是环同态，且 \(M\) 是一个 \(C\)-模。那么有长正合列\[
+        \begin{aligned}
+            0 &\longrightarrow T^{0}(C / B,M)\longrightarrow T^{0}(C / A,M)\longrightarrow T^{0}(B / A,M) \\
+            &\longrightarrow T^{1}(C / B,M)\longrightarrow T^{1}(C / A,M)\longrightarrow T^{1}(B / A,M) \\
+            &\longrightarrow T^{2}(C / B,M)\longrightarrow T^{2}(C / A,M)\longrightarrow T^{2}(B / A,M).
+        \end{aligned}
+    \]
+\end{theorem}
+
+\begin{proof}
+    选取\[
+        0\longrightarrow I\longrightarrow A[x]\longrightarrow B\longrightarrow 0,\quad 
+        0\longrightarrow Q\longrightarrow F\stackrel{j}{\longrightarrow} I\longrightarrow 0
+    \]\[
+        0\longrightarrow J\longrightarrow B[y]\longrightarrow C\longrightarrow 0,\quad 
+        0\longrightarrow P\longrightarrow G\longrightarrow J\longrightarrow 0
+    \]来计算 \(T^{i}(B / A, M)\) 和 \(T^{i}(C / B, M)\)。那么 \(A[x, y] \to B[y] \to C\) 是满射，记其核为 \(K\)。它诱导出 \(A\)-模的正合列\[
+        0\longrightarrow I[y]\longrightarrow K\longrightarrow J\longrightarrow 0
+    \]令 \(F^{\prime}\) 和 \(G^{\prime}\) 分别是以 \(F\) 和 \(G\) 为指标集的自由 \(A[x,y]\)-模。选取映射 \(G\to J\) 的提升 \(G^{\prime}\to K\)。由映射 \(F\to I\) 我们得到自然映射 \(F^{\prime}\to I[y]\)。于是得到满射 \(F^{\prime}\oplus G^{\prime}\to K\)，并设 \(S\) 为其核。现在，我们可以通过\[
+        0 \longrightarrow K \longrightarrow A[x,y] \longrightarrow C \longrightarrow 0,\quad 0 \longrightarrow S \longrightarrow F^{\prime}\oplus G^{\prime} \stackrel{j}{\longrightarrow} K \longrightarrow 0.
+    \]来计算 \(T^{i}(C/A, M)\)。此时有如下交换图% https://quiver.taskfirst.cn/#q=WzAsMTUsWzAsMCwiMCJdLFswLDEsIjAiXSxbMCwyLCIwIl0sWzEsMCwiUVt5XSJdLFsyLDAsIkYnIl0sWzMsMCwiSVt5XSJdLFs0LDAsIjAiXSxbNCwxLCIwIl0sWzQsMiwiMCJdLFsxLDIsIlAiXSxbMiwyLCJHIl0sWzMsMiwiSiJdLFszLDEsIksiXSxbMiwxLCJGJ1xcb3BsdXMgRyciXSxbMSwxLCJTIl0sWzAsM10sWzMsNF0sWzQsNV0sWzUsNl0sWzEyLDddLFsxLDE0XSxbMTQsMTNdLFsxMywxMl0sWzMsMTRdLFs0LDEzXSxbNSwxMl0sWzE0LDldLFsxMywxMF0sWzEyLDExXSxbMiw5XSxbOSwxMF0sWzEwLDExXSxbMTEsOF1d
+    \[\begin{tikzcd}
+        0 & {Q[y]} & {F'} & {I[y]} & 0 \\
+        0 & S & {F'\oplus G'} & K & 0 \\
+        0 & P & G & J & 0
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-4, to=1-5]
+        \arrow[from=1-4, to=2-4]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+        \arrow[from=2-2, to=3-2]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=2-3, to=3-3]
+        \arrow[from=2-4, to=2-5]
+        \arrow[from=2-4, to=3-4]
+        \arrow[from=3-1, to=3-2]
+        \arrow[from=3-2, to=3-3]
+        \arrow[from=3-3, to=3-4]
+        \arrow[from=3-4, to=3-5]
+    \end{tikzcd}\]其每一行均正合，但列不一定正合。它诱导出复形态射\[
+        L_{\bullet}(B/A) \otimes_B C \to L_{\bullet}(C/A) \to L_{\bullet}(C/B).
+    \]事实上，在 0 次层次我们有分裂正合列% https://quiver.taskfirst.cn/#q=WzAsNyxbMCwwLCJcXE9tZWdhX3tBW3hdL0F9XFxvdGltZXNfe0FbeF19IEMiXSxbMSwwLCJcXE9tZWdhX3tBW3gseV0vQX1cXG90aW1lc197QVt4LHldfSBDIl0sWzIsMCwiXFxPbWVnYV97Qlt5XS9CfVxcb3RpbWVzX3tCW3ldfSBDIl0sWzAsMSwiZHhfaSJdLFsxLDEsImR4X2kiXSxbMSwyLCJkeF9pLFxcIGR5X2oiXSxbMiwyLCIwLFxcIGR5X2oiXSxbMCwxXSxbMSwyXSxbMyw0LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzUsNiwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dXQ==
+    \[\begin{tikzcd}
+        {\varOmega_{A[x]/A}\otimes_{A[x]} C} & {\varOmega_{A[x,y]/A}\otimes_{A[x,y]} C} & {\varOmega_{B[y]/B}\otimes_{B[y]} C} \\
+        {dx_i} & {dx_i} \\
+        & {dx_i,\ dy_j} & {0,\ dy_j}
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[maps to, from=2-1, to=2-2]
+        \arrow[maps to, from=3-2, to=3-3]
+    \end{tikzcd}\]在 1 次层次我们有自由 \(C\)-模的分裂正合列\[
+        F \otimes_{A[x]} C \longrightarrow (F^{\prime}\oplus G^{\prime})\otimes_{A[x,y]} C \longrightarrow G \otimes_{B[y]} C
+    \]在 2 次层次我们有\begin{equation}\label{xbm}
+        (Q/F_0)\otimes_B C \longrightarrow S/(F^{\prime}\oplus G^{\prime})_0 \longrightarrow P/G_0.
+    \end{equation}我们断言 \(S\to P\) 是满射。事实上，若 \(p\in P\)，取 \((f^{\prime}, g^{\prime})\in F^{\prime}\oplus G^{\prime}\) 映到 \(p\)。那么 \((f^{\prime}, g^{\prime})\) 在 \(K\) 中的像落在 \(I[y]\) 中。由于 \(F^{\prime}\to I[y]\) 是满射，存在 \(\tilde f\in F^{\prime}\) 在 \(K\) 中与 \((f^{\prime}, g^{\prime})\) 有相同的像。因此 \((f^{\prime}-\tilde f, g^{\prime})\in S\) 映到 \(p\)。
+
+    为完成证明，我们还需证明 (\ref{xbm}) 在中间的正合性。设 \(s = f + g\) 是 \(S\subseteq F^{\prime}\oplus G^{\prime}\) 中的元素，使得其在 \(P\) 中的像落在 \(G_0\) 中。那么 \(g'\) 的像 \(g\) 在 \(G\) 中属于 \(G_0\)，记为 \(g = j(a)b - j(b)a\)，其中 \(a,b\in G\)。将 \(a,b\) 提升为 \(G^{\prime}\) 中的元素 \(a^{\prime},b^{\prime}\)，则 \(j(a^{\prime})b^{\prime} - j(b^{\prime})a^{\prime}\in S\)。令 \(g^{\prime\prime} = g - j(a^{\prime})b^{\prime} + j(b^{\prime})a^{\prime}\)，则 \(g^{\prime\prime}\in \ker(G^{\prime}\to G) = IG^{\prime}\)。设 \(g^{\prime\prime} = xh\)，且 \(x = j(x^{\prime})\) 对某个 \(x\in I\)、\(h\in G^{\prime}\) 及 \(x^{\prime}\in F\)。那么
+    \[
+    xh = j(x^{\prime})h \equiv j(h)x^{\prime} \pmod{(F^{\prime}+G^{\prime})_0}.
+    \]
+    因此，
+    \[
+    s \equiv f^{\prime} + g^{\prime\prime} \equiv f^{\prime} + j(h)x^{\prime} \pmod{(F^{\prime}+G^{\prime})_0}
+    \]
+    且 \(f^{\prime} + j(h)x^{\prime}\in F^{\prime}\cap S = Q[y]\)。
+\end{proof}
+
+\begin{proposition}\label{A5}
+    对任意态射 \(A \to B\) 和 \(M \in \mathsf{Mod}_{B}\)，\[
+        T^{0}(B / A,M) = \mathrm{Hom}_{B}(\varOmega_{B / A},M) = \mathrm{Der}_{A}(B,M).
+    \]特别地，\[
+        T^{0}(B / A,B) = \mathrm{Hom}_{B}(\varOmega_{B / A},B) = T_{B / A}
+    \]是 \(B\) 在 \(A\) 上的切模。
+\end{proposition}
+
+\begin{proof}
+    对正合列 (\ref{eq10}) 取 \(\mathrm{Hom}(-, M)\)，得到正合列\[
+        0\to \mathrm{Hom}(\varOmega_{B / A},M)\to \mathrm{Hom}(L_{0},M)\to \mathrm{Hom}(L_{1},M).
+    \]
+\end{proof}
+
+\begin{proposition}\label{A6}
+    如果 \(B\) 是 \(A\) 上的多项式环，那么对一切 \(M\) 有 \(T^{i}(B / A, M) = 0\)（\(i = 1, 2\)）。
+\end{proposition}
+
+\begin{proof}
+    在构造中可取 \(R = B\) 和 \(F = 0\)。于是余切复形只余下 \(L_{0}\) 项。
+\end{proof}
+
+\begin{proposition}\label{A7}
+    如果 \(A \to B\) 是满同态，核为 \(I\)，那么对任何 \(M \in \mathsf{Mod}_{B}\)，有\[
+        T^{0}(B / A,M) = 0,\ T^{1}(B / A,M) = \mathrm{Hom}_{B}(I / I^{2},M).
+    \]特别地，\(T^{1}(B / A, B) = \mathrm{Hom}_{B}(I / I^{2}, B)\) 是 \(\mathrm{Spec}\, B\) 在 \(\mathrm{Spec}\, A\) 中的法模 \(N_{B / A}\)。
+\end{proposition}
+
+\begin{proof}
+    此时可取 \(R = A\)，从而 \(L_{0} = 0\)。因此对任意模 \(T^{0} = 0\)。此外，正合列\[
+        0\longrightarrow Q\longrightarrow F\stackrel{j}{\longrightarrow}I\longrightarrow 0
+    \]与 \(B\) 张量后给出% https://quiver.taskfirst.cn/#q=WzAsNixbMCwwLCJRXFxvdGltZXNfe0F9QiJdLFsxLDAsIkZcXG90aW1lc197QX1CIl0sWzIsMCwiSSAvIEleezJ9Il0sWzMsMCwiMCJdLFswLDEsIlEvRl8wIl0sWzEsMSwiRi9JRiJdLFswLDFdLFsxLDIsImoiXSxbMiwzXSxbNCw1XSxbMCw0LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMSw1LCJcXHNpbSJdXQ==
+    \[\begin{tikzcd}
+        {Q\otimes_{A}B} & {F\otimes_{A}B} & {I / I^{2}} & 0 \\
+        {Q/F_0} & {F/IF}
+        \arrow[from=1-1, to=1-2]
+        \arrow[two heads, from=1-1, to=2-1]
+        \arrow["j", from=1-2, to=1-3]
+        \arrow["\sim", from=1-2, to=2-2]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=2-1, to=2-2]
+    \end{tikzcd}\]因此有正合列\[
+        L_{2}\longrightarrow L_{1}\longrightarrow I / I^{2}\longrightarrow 0,
+    \]从而 \(T^{1}(B / A, M) = \mathrm{Hom}_{B}(I / I^{2}, M)\)。
+\end{proof}
+
+\begin{corollary}\label{A8}
+    假设 \(A\) 是局部环，\(B = A / I\)，其中 \(I\) 由正则序列 \(a_{1},\ldots ,a_{r}\) 生成。则对所有 \(M\) 都有 \(T^{2}(B / A,M) = 0\)。
+\end{corollary}
+
+\begin{proof}
+    由于正则序列的 Koszul 复形是正合的，我们推出 \(Q = F_{0}\)。因此 \(L_{2} = 0\)，从而对所有 \(M\) 有 \(T^{2}(B / A,M) = 0\)。
+\end{proof}
+
+\begin{proposition}\label{A9}
+    假设 \(A = k[x_{1},\ldots ,x_{n}]\) 且 \(B = A / I\)。那么对任何 \(M\)，存在正合列\[
+        0\longrightarrow T^{0}(B / k,M)\longrightarrow \mathrm{Hom}_{A}(\varOmega_{A / k},M)\longrightarrow \mathrm{Hom}_{B}(I / I^{2},M)\longrightarrow T^{1}(B / k,M)\longrightarrow 0
+    \]以及同构\[
+        T^{2}(B / A,M)\stackrel{\sim}{\longrightarrow} T^{2}(B / k,M).
+    \]
+\end{proposition}
+
+\begin{proof}
+    由 \(k\to A\to B\) 的 \(T^{i}\)-函子的长正合列以及 (\ref{A5},~\ref{A6},~\ref{A7}) 即得。
+\end{proof}
+
+\begin{remark}\label{A10}
+    我们没有对环和模施加任何有限性假设。显然，若 $A$ 是 Noether 环，$B$ 是有限生成 $A$-代数，$M$ 是有限生成 $B$-模，则 $T^i(B/A,M)$ 是有限生成 $B$-模。
+\end{remark}
+
+\begin{lemma}\label{A11}
+    \(T^{i}\) 函子的构造与局部化相容，因此对任意概形态射 \(f:X\to Y\) 和任意 \(\mathcal{O}_{X}\)-模层 \(\mathcal{F}\)，我们可以定义层 \(\mathcal{T}^{i}(X / Y,\mathcal{F})\)，使得对任何开仿射 \(\mathrm{Spec}\, A\subseteq Y\) 和任何开仿射 \(\mathrm{Spec}\, B\subseteq f^{-1}(\mathrm{Spec}\, A)\)，其中 \(\mathcal{F}|_{\mathrm{Spec}\, B} = \widetilde{M}\)，截面 \(\mathcal{T}^{i}(X / Y,\mathcal{F})(\mathrm{Spec}\, B) = T^{i}(B / A,M)\) 成立。
+\end{lemma}
+
+为方便起见，将模 \(T^{i}(B / A,B)\) 和 \(T^{i}(B / k,B)\) 分别记为 \(T_{B / A}^{i}\) 和 \(T_{B / k}^{i}\)（或 \(T_{B}^{i}\)），如无歧义。此外，\(T_{B / A}^{0}\) 将记作 \(B\) 在 \(A\) 上的切模 \(T_{B / A}\)。类似地，对于层 \(\mathcal{T}^{i}(X / Y,\mathcal{O}_{X})\) 和 \(\mathcal{T}^{i}(X / k,\mathcal{O}_{X})\)，我们记作 \(\mathcal{T}_{X / Y}^{i}\) 和 \(\mathcal{T}_{X / k}^{i}\)（或 \(\mathcal{T}_{X}^{i}\)）。层 \(\mathcal{T}_{X}^{0}\) 将记作 \(X\) 的切层 \(\mathcal{T}_{X}\)。
+
+\begin{proposition}[基变换]\label{A12}
+    设 \(A\) 是 Noether 环，\(B\) 是有限生成 \(A\)-代数。\begin{enumerate}[(1)]
+        \item 设 \(M\in \mathsf{Mod}_{B}\) 且 \(A\to A^{\prime}\) 是平坦态射。令 \(B^{\prime} = B\otimes_{A}A^{\prime}\)，\(M^{\prime} = M\otimes_{B}B^{\prime}\)。则对每个 \(i\)，有 \(T^{i}(B / A,M)\otimes_{A}A^{\prime}\simeq T^{i}(B^{\prime} / A^{\prime},M^{\prime})\)。
+        \item 设 \(A \to A^{\prime}\) 是任意环同态，且 \(B\) 在 \(A\) 上平坦。令 \(B^{\prime} = B\otimes_{A}A^{\prime}\)，\(M^{\prime}\in \mathsf{Mod}_{B^{\prime}}\)。则对每个 \(i\)，有 \(T^{i}(B / A, M^{\prime}) = T^{i}(B^{\prime} / A^{\prime}, M^{\prime})\)。
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \cite[Ex. 3.7, 3.8]{Har10}
+\end{proof}
+
+一个 \textbf{无穷小加厚} \(Y\subseteq Y'\) 是指 \(Y\) 是另一个概形 \(Y'\) 的闭子概形，且定义 \(Y\) 在 \(Y'\) 中的理想层 \(\mathcal{I}\) 是幂零的。
+
+\begin{proposition}[无穷小提升性质]\label{A13}
+    设 \(X\) 是 \(k\) 上的非奇异仿射有限型概形，设 \(f: Y \to X\) 是来自 \(k\) 上仿射概形 \(Y\) 的态射，并设 \(Y \subseteq Y'\) 是 \(Y\) 的一个无穷小加厚。那么态射 \(f\) 可以提升为态射 \(g: Y' \to X\) 使得 \(g|_{Y} = f\)。
+\end{proposition}
+
+\begin{proof}
+    首先注意到 \(Y'\) 也是仿射的~\cite[\uppercase\expandafter{\romannumeral3}, Ex. 3.1]{Har77}，因此我们可以将问题转化为代数形式。设 \(f:A\to B\) 是对应于 \(f:Y\to X\) 的 \(k\) 上的环同态，其中 \(B = B^{\prime} / I\) 且 \(I^{n} = 0\) 对某个 \(n\)。我们希望找到一个提升 \(f\) 的同态 \(g:A\to B^{\prime}\)。
+
+    考虑序列 \(B^{\prime} = B^{\prime} / I^{n}\to B^{\prime} / I^{n-1}\to \dots \to B^{\prime} / I^{2}\to B^{\prime} / I\)，只需逐次提升。因此不妨设 \(I^{2} = 0\)。
+
+    由于 \(X\) 在 \(k\) 上是有限型的，可写 \(A = k[x_{1},\ldots ,x_{n}] / J\)。考虑 \(k[x_{1},\ldots ,x_{n}]\to A\to B\) 的任意提升 \(h:k[x_{1},\ldots ,x_{n}]\to B^{\prime}\)。则 \(h\) 诱导出映射 \(J\to I\)，由于 \(I^{2} = 0\)，进而诱导出 \(\overline{h}:J / J^{2}\to I\)。
+
+    嵌入 \(X\hookrightarrow \mathbb{A}_{k}^{n}\) 由 \(P = k[x_{1},\ldots ,x_{n}]\to A\) 给出。由于 \(X\) 是光滑的，我们得到正合列\[
+        0\longrightarrow J / J^{2}\longrightarrow \varOmega_{P / k}^{1}\otimes_{P}A\longrightarrow \varOmega_{A / k}^{1}\longrightarrow 0.
+    \]注意这些模对应于 \(X\) 上的局部自由层，因此是投射 \(A\)-模。通过映射 \(h\)、\(f\)，我们得到 \(P\) 在 \(B'\) 上的模结构，以及 \(A\) 在 \(B\)、\(I\) 上的模结构。取 \(\mathrm{Hom}_{A}(-, I)\) 将给出另一个正合列\[
+        0\longrightarrow \mathrm{Hom}_{A}(\varOmega_{A / k}^{1},I)\longrightarrow \mathrm{Hom}_{P}(\varOmega_{P / k}^{1},I)\longrightarrow \mathrm{Hom}_{A}(J / J^{2},I)\longrightarrow 0.
+    \]设 \(\theta \in \mathrm{Hom}_{P}(\varOmega_{P / k}^{1},I) = \mathrm{Der}_{k}(P,I)\) 是这样一个元素，其像为 \(\overline{h}\in \mathrm{Hom}_{A}(J / J^{2},I)\)。我们断言 \(h^{\prime}:= h - \theta :P\to B^{\prime}\) 是一个提升 \(f\) 的环同态，且 \(h^{\prime}(J) = 0\)。第一个断言由下面的引理保证。
+
+\begin{lemma}\label{A14}
+    设 \(B^{\prime}\to B\) 是 \(k\)-代数的满同态，其核 \(I\) 满足 \(I^{2}=0\)。设 \(R\to B\) 是 \(k\)-代数同态。
+    \begin{enumerate}[(1)]
+        \item 如果 \(f,g: R \to B'\) 是映射 \(R \to B\) 到 \(B'\) 的两个提升，那么 \(\theta = g - f\) 是 \(R\) 到 \(I\) 的 \(k\)-导子。
+        \item 反过来，如果 \(f: R \to B'\) 是一个提升，且 \(\theta: R \to I\) 是一个导子，那么 \(g = f + \theta\) 是另一个提升给定映射 \(R \to B\) 的 \(R\) 到 \(B'\) 的同态。
+    \end{enumerate}
+    换言之，如果非空，则提升 \(R \to B\) 到 \(k\)-代数同态 \(R \to B^{\prime}\) 的集合是 \(\mathrm{Der}_{k}(R,I) = \mathrm{Hom}_{R}(\varOmega_{R / k},I)\) 作用下的主齐性空间。
+\end{lemma}
+
+\begin{proof}
+    \textit{(1)} 设 \(f,g:R\rightarrow B'\)，并令 \(\theta=g-f\)。作为 \(k\)-线性映射，\(\theta\) 与投影 \(B'\rightarrow B\) 的复合为零，故 \(\theta\) 将 \(R\) 映到 \(I\)。设 \(x,y\in R\)。那么\begin{align*}
+        \theta(xy)&=g(xy)-f(xy)\\
+        &=g(x)g(y)-f(x)f(y)\\
+        &=g(x)(g(y)-f(y))+f(y)(g(x)-f(x))\\
+        &=g(x)\theta(y)+f(y)\theta(x)\\
+        &=x\theta(y)+y\theta(x),
+    \end{align*}最后一步是因为 \(g(x)\) 和 \(f(y)\) 在 \(I\) 中的作用恰如 \(x,y\)。因此 \(\theta\) 是 \(R\) 到 \(I\) 的 \(k\)-导子。
+
+    \textit{(2)} 反之，给定 \(f\) 和如上所述的 \(\theta\)，令 \(g=f+\theta\)。则\begin{align*}
+        g(xy)&=f(xy)+\theta(xy)\\
+        &=f(x)f(y)+x\theta(y)+y\theta(x)\\
+        &=(f(x)+\theta(x))(f(y)+\theta(y))\\
+        &=g(x)g(y),
+    \end{align*}这里注意到 \(\theta(x)\theta(y)=0\)，因为 \(I^2=0\)。因此 \(g\) 是 \(R\rightarrow B'\) 的同态，且提升 \(R\) 到 \(B\)。
+\end{proof}
+
+    由于 \(h^{\prime}(J)\subseteq I\)，我们有 \(h^{\prime}(J^{2})\subseteq I^{2} = 0\)。于是 \(h^{\prime}\) 下降到 \(P / J^{2}\to B^{\prime}\)，又由 \(\theta\) 的选取知 \(h^{\prime}|_{J / J^{2}} = h - h = 0\)。因此 \(h^{\prime}\) 下降到所需同态 \(g:A\to B^{\prime}\) 并提升 \(f\)。
+\end{proof}
+
+接下来，我们研究非奇异性和 \(T^{i}\) 函子之间的关系。
+
+\begin{theorem}\label{A17}
+    设 \(X = \mathrm{Spec}\,  B\) 是代数闭域 \(k\) 上的仿射概形。则 \(X\) 非奇异当且仅当对所有 \(M\in \mathsf{Mod}_{B}\) 都有 \(T^{1}(B / k,M) = 0\)。并且若 \(X\) 非奇异，则对所有 \(M\) 有 \(T^{2}(B / k,M) = 0\)。
+\end{theorem}
+
+\begin{proof}
+    将 \(B\) 表示为 \(k\) 上多项式环 \(A = k[x_{1},\ldots ,x_{n}]\) 的商。则 \(X\) 非奇异当且仅当余正规列\begin{equation}\label{eq12}
+        0\longrightarrow I / I^{2}\longrightarrow \varOmega_{A / k}\otimes_{A}B\longrightarrow \varOmega_{B / k}\longrightarrow 0
+    \end{equation}正合，且 \(\varOmega_{B / k}\) 局部自由，即为投射 \(B\)-模。由于 \(\varOmega_{A / k}\) 是自由 \(A\)-模，我们得出 \(X\) 非奇异当且仅当 (\ref{eq12}) 是分裂正合的。由 (\ref{A9}) 中的四项正合列\[
+        0\longrightarrow T^{0}(B / k,M)\longrightarrow \mathrm{Hom}(\varOmega_{A / k},M)\longrightarrow \mathrm{Hom}(I / I^{2},M)\longrightarrow T^{1}(B / k,M)\longrightarrow 0,
+    \]可知对所有 \(M\in \mathsf{Mod}_{B}\) 有 \(T^{1}(B / k,M) = 0\) 当且仅当映射\[
+        \mathrm{Hom}(\varOmega_{A / k},M)\longrightarrow \mathrm{Hom}(I / I^{2},M)
+    \]对所有 \(M\) 满射，这又等价于分裂正合性（取 \(M = I / I^{2}\) 即可）。
+
+    又由 (\ref{A9}) 有 \(T^{2}(B / k,M) = T^{2}(B / A,M)\)。因 \(X\) 光滑，在点 \(x\in X\) 处的局部化理想 \(I_{x}\) 在正则局部环 \(A_{x}\) 中由正则序列生成。据 (\ref{A8}) 知，对所有 \(M\in \mathsf{Mod}_{B_{x}}\) 有 \(T^{2}(B_{x} / A_{x},M) = 0\)。再由 (\ref{A11})，对所有 \(M\in \mathsf{Mod}_{B}\) 有 \(T^{2}(B / A,M) = 0\)。
+\end{proof}
+
+\begin{theorem}\label{A18}
+    Noether 概形之间的有限型态射 \(f:X\to Y\) 是光滑的当且仅当它平坦，且对所有凝聚层 \(\mathcal{F}\in \mathsf{Coh}(X)\) 有 \(\mathcal{T}^{1}(X / Y,\mathcal{F}) = 0\)。另外，若 \(f\) 光滑，则对所有 \(\mathcal{F}\) 有 \(\mathcal{T}^{2}(X / Y,\mathcal{F}) = 0\)。
+\end{theorem}
+
+\begin{proof}
+    问题是局部的，故不妨设 \(X = \mathrm{Spec}\,  B\) 和 \(Y = \mathrm{Spec}\,  A\) 是仿射的，且 \(f\) 由环同态 \(A\to B\) 给出。
+
+    首先假设 \(B\) 在 \(A\) 上平坦，且对所有 \(M\in \mathsf{Mod}_{B}\) 有 \(T^{1}(B / A,M) = 0\)。设 \(y\in Y\) 对应于 \(\mathfrak{p}\in \mathrm{Spec}\,  A\)，并令 \(k = k(y)\) 为其剩余域。令 \(A^{\prime} = A / \mathfrak{p}\) 且 \(B^{\prime} = B\otimes_{A}A^{\prime} = B / \mathfrak{p}B\)；则对任何 \(M\in \mathsf{Mod}_{B^{\prime}}\)，由 (\ref{A12}) 可得 \(T^{1}(B^{\prime} / A^{\prime},M) = T^{1}(B / A,M) = 0\)。写 \(B^{\prime} = A^{\prime}[x_{1},\ldots ,x_{n}] / I\)；则 \(T^{1}(B^{\prime} / A^{\prime},I / I^{2}) = 0\)。
+
+    现在考虑从 \(A^{\prime}\) 到 \(\overline{k} = \overline{\mathrm{Frac}(A^{\prime})}\) 的平坦基变换。由 (\ref{A12}) 有\[
+        T^{1}(B^{\prime}\otimes_{A^{\prime}}\overline{k} /\overline{k},(I / I^{2})\otimes \overline{k}) = 0.
+    \]由于 \(\overline{k}\) 在 \(A^{\prime}\) 上平坦，有 \(B^{\prime}\otimes \overline{k} = \overline{k}[x_{1},\ldots ,x_{n}] / \overline{I}\) 及 \((I / I^{2})\otimes \overline{k} = \overline{I} / \overline{I}^{2}\)，其中 \(\overline{I} = I\otimes \overline{k}\)。于是 (\ref{A17}) 的证明表明 \(\mathrm{Spec}\,  B^{\prime}\otimes \overline{k}\) 在 \(\overline{k}\) 上是非奇异的。因此 \(f\) 的几何纤维非奇异，从而 \(f\) 光滑。
+
+    反之，假设 \(B\) 在 \(A\) 上光滑。我们断言对所有 \(B\) 的极大理想 \(\mathfrak{m}\) 都有 \(T^{1}(B / A,B / \mathfrak{m}) = 0\)。令 \(\mathfrak{m}\) 对应于 \(x\in \mathrm{Spec}\,  B\)，设 \(f(x) = y\)，并令 \(k = k(y)\)。对 \(B / \mathfrak{m}\in \mathsf{Mod}_{B\otimes_{A}k}\) 应用基变换，得\[
+        T^{1}(B / A,B / \mathfrak{m})\otimes_{k}\overline{k} = T^{1}(B\otimes_{A}k / k,B / \mathfrak{m})\otimes_{k}\overline{k} = T^{1}(B \otimes_{A}\overline{k} /\overline{k},(B / \mathfrak{m})\otimes_{k}\overline{k}) = 0
+    \]因为几何纤维非奇异。由于 \(k\to \overline{k}\) 忠实平坦，我们推得 \(T^{1}(B / A,B / \mathfrak{m}) = 0\)。
+\end{proof}
+
+\subsection{概形的形变与障碍理论}
+
+设 \(k\) 是一个固定的代数闭基域，并设 \(\mathsf{C}\) 是剩余域为 \(k\) 的局部 Artin \(k\)-代数的范畴。令 \(X_0\) 是 \(k\) 上的概形，并取 \(C\in\mathsf{C}\)。
+
+\(X_0\) 在 \(C\) 上的一个 \textbf{形变} 是一个对 \((X,i)\)，其中 \(X\) 是 \(C\) 上的平坦概形，而 \(i:X_0\rightarrow X\) 是一个闭浸入，使得诱导映射 \(i\otimes k:X_0\rightarrow X\otimes_C k\) 是同构。
+
+设 \(X_0\hookrightarrow X\) 是 \(X_0\) 在 \(C\in \mathsf{C}\) 上的一个形变。假设 \(C'\) 是另一个剩余域为 \(k\) 的 Artin \(k\)-代数，并配有满射 \(C'\rightarrow C\)，其核为 \(J\)，且 \(J\) 被 \(\mathfrak{m}_{C'}\) 零化。
+
+\(X\) 到 \(C'\) 上的一个 \textbf{扩张} 是指 \(X_0\) 在 \(C'\) 上的一个形变 \(X'\)，以及一个闭浸入 \(X\hookrightarrow X'\)，诱导出同构 \(X\stackrel{\sim}{\longrightarrow}X'\times_{C'}C\)。两个这样的扩张 \(X'\) 与 \(X''\) 称为 \textbf{等价}，如果存在一个形变的同构 \(X'\stackrel{\sim}{\longrightarrow}X''\)，与 \(X\) 分别到 \(X'\) 和 \(X''\) 的闭浸入相容。令 \(\mathrm{Def}(X/C,C')\) 表示 \(X'\) 到 \(C'\) 上的这类扩张的等价类集合。特别地，定义 \(X_0\) 在 \(C\) 上的两个形变等价，如果它们在 \(\mathrm{Def}(X_0/k,C)\) 中属于同一个类。
+
+\begin{theorem}\label{B2}
+    在上述情形下，附加如下结构：设 \(Y_0\subseteq X_0\) 和 \(Y\subseteq X\) 是闭子概形，使得在等同 \(X_0\stackrel{\sim}{\longrightarrow}X\times_C k\) 下 \(Y_0=Y\times_C k\)。固定一个 \(X\) 到 \(C'\) 上的扩张 \(X'\)。一个 \(Y\) 在 \(X'\) 中到 \(C'\) 上的 \textbf{（嵌入）扩张} 是指一个闭子概形 \(Y'\subseteq X'\)，它在 \(C'\) 上平坦，且满足 \(Y'\times_{C'}C=Y\)。则这样的 \(Y\) 在 \(X'\) 中到 \(C'\) 上的扩张的集合形成一个 \(H^0(Y_0,\mathcal{N}_{Y_0/X_0}\otimes_k J)\)-伪挠子。
+\end{theorem}
+
+\begin{proof}
+    首先考虑仿射情形 \(X=\mathrm{Spec}\, B\)，\(X'=\mathrm{Spec}\, B'\)，\(Y=\mathrm{Spec}\, A\)，且 \(A=B/I\)。假设 \(Y'=\mathrm{Spec}\, A'\) 由 \(A'=B'/I'\) 给出。将短正合列\[
+        0\longrightarrow I'\longrightarrow B'\longrightarrow A'\longrightarrow 0
+    \]与序列 \(0\rightarrow J\rightarrow C'\rightarrow C\rightarrow 0\) 做张量积，得到图表% https://quiver.taskfirst.cn/#q=WzAsMjEsWzEsMCwiMCJdLFsyLDAsIjAiXSxbMywwLCIwIl0sWzQsMSwiMCJdLFs0LDIsIjAiXSxbNCwzLCIwIl0sWzEsNCwiMCJdLFsyLDQsIjAiXSxbMyw0LCIwIl0sWzAsMSwiMCJdLFswLDIsIjAiXSxbMCwzLCIwIl0sWzEsMSwiSlxcb3RpbWVzX0NJIl0sWzIsMSwiSSciXSxbMywxLCJJIl0sWzEsMiwiSlxcb3RpbWVzX0NCIl0sWzIsMiwiQiciXSxbMywyLCJCIl0sWzEsMywiSlxcb3RpbWVzX0NBIl0sWzIsMywiQSciXSxbMywzLCJBIl0sWzksMTJdLFsxMiwxM10sWzEzLDE0XSxbMTQsM10sWzEwLDE1XSxbMTUsMTZdLFsxNiwxN10sWzE3LDRdLFswLDEyXSxbMSwxM10sWzIsMTRdLFsxMiwxNV0sWzEzLDE2XSxbMTQsMTddLFsxMSwxOF0sWzE4LDE5XSxbMTksMjBdLFsyMCw1XSxbMTUsMThdLFsxOCw2XSxbMTksN10sWzE2LDE5XSxbMTcsMjBdLFsyMCw4XV0=
+    \[\begin{tikzcd}
+        & 0 & 0 & 0 & \\
+        0 & {J\otimes_CI} & {I'} & I & 0 \\
+        0 & {J\otimes_CB} & {B'} & B & 0 \\
+        0 & {J\otimes_CA} & {A'} & A & 0 \\
+        & 0 & 0 & 0
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-4, to=2-4]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+        \arrow[from=2-2, to=3-2]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=2-3, to=3-3]
+        \arrow[from=2-4, to=2-5]
+        \arrow[from=2-4, to=3-4]
+        \arrow[from=3-1, to=3-2]
+        \arrow[from=3-2, to=3-3]
+        \arrow[from=3-2, to=4-2]
+        \arrow[from=3-3, to=3-4]
+        \arrow[from=3-3, to=4-3]
+        \arrow[from=3-4, to=3-5]
+        \arrow[from=3-4, to=4-4]
+        \arrow[from=4-1, to=4-2]
+        \arrow[from=4-2, to=4-3]
+        \arrow[from=4-2, to=5-2]
+        \arrow[from=4-3, to=4-4]
+        \arrow[from=4-3, to=5-3]
+        \arrow[from=4-4, to=4-5]
+        \arrow[from=4-4, to=5-4]
+    \end{tikzcd}\]由 (\ref{wto})，下两行的正合性分别等价于 \(B'\) 和 \(A'\) 在 \(C\) 上的平坦性。第一列的正合性则由 \(A\) 在 \(C\) 上的平坦性推出。现在我们需要分类填充此图的可能 \(A'\)（或 \(I'\)）。
+
+    假设 \(I'\) 和 \(I''\) 是填充此图的两个选择。给定 \(x\in I\)，将其提升为 \(x'\in I'\) 和 \(x''\in I''\)。则 \(x''-x'\in B'\) 映到 \(B\) 中为零，故 \(x''-x'\in J\otimes_C B\)。记其在 \(J\otimes_C A\) 中的像为 \(\varphi(x)\)。注意 \(x'\) 和 \(x''\) 的选择可能相差 \(J\otimes_C I\) 中的元素，而后者在 \(J\otimes_C A\) 中的像为零。因此 \(\varphi\) 是良定义的加性映射。事实上，它是一个 \(B\)-线性同态 \(\varphi\in \mathrm{Hom}_B(I,J\otimes_C A)\)。
+    
+    反之，给定 \(I'\) 和 \(\varphi\in \mathrm{Hom}_B(I,J\otimes_C A)\)，我们可以如下定义另一个求解扩张问题的理想 \(I''\)：\(I''\) 是 \(B'\) 中那些像在 \(B\) 中为某个 \(x\in I\) 的元素 \(x''\) 的集合，并且对于 \(x\) 的任何提升 \(x'\in I'\)，像 \(x''-x\) 在 \(J\otimes_C A\) 中等同于 \(\varphi(x)\)。
+
+    若 \(I'\)、\(I''\)、\(I'''\) 是三个解，且 \(\varphi_1\) 由 \(I'\)、\(I''\) 如上定义，\(\varphi_2\) 由 \(I''\)、\(I'''\) 定义，\(\varphi_3\) 由 \(I'\)、\(I'''\) 定义，则 \(\varphi_3=\varphi_1+\varphi_2\)。因此我们得出结论：\begin{align*}
+        \mathrm{Hom}_B(I,J\otimes_C A)\times\{\text{\(Y\) 在 \(X'\) 中到 \(C'\) 上的形变}\}& \longrightarrow\{\text{\(Y\) 在 \(X'\) 中到 \(C'\) 上的形变}\}\\
+        (I',\varphi)& \longmapsto I''
+    \end{align*}是一个真传递群作用。由于我们不能保证存在性，这只是一个伪挠子。此时，\[
+        \mathrm{Hom}_B(I,J\otimes_C A)=\mathrm{Hom}_B(I,J\otimes_k A_0).
+    \]因为 \(J\) 是 \(k\)-向量空间，这一项化为\[
+        \mathrm{Hom}_{B_0}(I_0,J\otimes_k A_0)=\mathrm{Hom}_{A_0}(I_0\otimes_{B_0}A_0,A_0\otimes_k J)=H^0(Y_0,\mathcal{N}_{Y_0/X_0}\otimes_k J).
+    \]在一般情形，群作用 \(H^0(Y_0,\mathcal{N}_{Y_0/X_0}\otimes_k J)\) 在 \(Y'\) 的集合上可以局部定义并具有函子性。因此我们可以将其粘合为整体作用。
+\end{proof}
+
+现在回到概形的形变（而非闭子概形）。首先考虑仿射概形情形。给定一个有限生成 \(k\)-代数 \(B_0\)，以及 \(B_0\) 在 \(C\) 上的一个形变 \(B\)。我们希望描述集合 \(\mathrm{Def}(B/C,C'):=\mathrm{Def}(\mathrm{Spec}\, B/C,C')\)。
+
+\begin{theorem}\label{B3}
+    如开头所述的情形：\begin{enumerate}[(1)]
+        \item 存在一个元素 \(\delta\in T^2(B_0/k,B_0\otimes J)\)，称为 \textbf{障碍}，其满足 \(\delta=0\) 当且仅当 \(B\) 的扩张 \(B'\) 存在。
+        \item 如果扩张存在，则 \(\mathrm{Def}(B/C,C')\) 构成一个 \(T^1(B_0/k,B_0\otimes J)\)-挠子。
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    取一个表示 \(R=C[x_1,\dots,x_n]\rightarrow B\)，核为 \(I=(f_1,\dots,f_r)\)。定义态射 \(F:=R^r\rightarrow I\) 为 \(e_i\mapsto f_i\)，并记其核为 \(Q\)。将每个 \(f_i\) 提升为 \(R':=C'[x_1,\dots,x_n]\) 中的元素 \(f'_i\)，并定义 \(I'=(f'_1,\dots,f'_r)\)，\(B'=R'/I'\)，\(F'=R'^r\)。现在考虑\begin{align*}
+        0\longrightarrow I'\longrightarrow R'\longrightarrow B'\longrightarrow 0 \qquad 0\longrightarrow Q'\longrightarrow & F'\longrightarrow I'\longrightarrow 0.\\
+        & e'_i\longmapsto f'_i
+    \end{align*}与 \(C\) 在 \(C'\) 上做张量积，得\[
+        B'\otimes_{C'}C\cong\mathrm{coker}(I'\otimes_{C'}C\rightarrow R'\otimes_{C'}C)=B.
+    \]再与 \(0\rightarrow J\rightarrow C'\rightarrow C\rightarrow 0\) 在 \(C'\) 上做张量积，得到图表% https://quiver.taskfirst.cn/#q=WzAsMjEsWzAsMiwiMCJdLFsxLDIsIkZcXG90aW1lc19DIEoiXSxbMiwwLCIwIl0sWzMsMCwiMCJdLFsyLDEsIlEnIl0sWzMsMSwiUSJdLFsyLDIsIkYnIl0sWzMsMiwiRiJdLFs0LDIsIjAiXSxbNCwzLCIwIl0sWzQsNCwiMCJdLFszLDUsIjAiXSxbMiw1LCIwIl0sWzEsNSwiMCJdLFswLDMsIjAiXSxbMSwzLCJSXzBcXG90aW1lc19rIEoiXSxbMSw0LCJCXzBcXG90aW1lc19rIEoiXSxbMiw0LCJCJyJdLFszLDQsIkIiXSxbMywzLCJSIl0sWzIsMywiUiciXSxbMiw0XSxbMyw1XSxbNCw2XSxbNSw3XSxbNyw4XSxbNiw3XSxbMSw2XSxbMCwxXSxbMTQsMTVdLFsxNSwyMF0sWzE2LDE3XSxbMTcsMThdLFsxOCwxMF0sWzE5LDldLFsyMCwxOV0sWzYsMjAsImYnIl0sWzcsMTksImYiXSxbMSwxNV0sWzE1LDE2XSxbMTYsMTNdLFsyMCwxN10sWzE3LDEyXSxbMTksMThdLFsxOCwxMV1d
+    \[\begin{tikzcd}
+        && 0 & 0 & \\
+        && {Q'} & Q \\
+        0 & {F\otimes_C J} & {F'} & F & 0 \\
+        0 & {R_0\otimes_k J} & {R'} & R & 0 \\
+        & {B_0\otimes_k J} & {B'} & B & 0 \\
+        & 0 & 0 & 0
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=1-4, to=2-4]
+        \arrow[from=2-3, to=3-3]
+        \arrow[from=2-4, to=3-4]
+        \arrow[from=3-1, to=3-2]
+        \arrow[from=3-2, to=3-3]
+        \arrow[from=3-2, to=4-2]
+        \arrow[from=3-3, to=3-4]
+        \arrow["{f'}", from=3-3, to=4-3]
+        \arrow[from=3-4, to=3-5]
+        \arrow["f", from=3-4, to=4-4]
+        \arrow[from=4-1, to=4-2]
+        \arrow[from=4-2, to=4-3]
+        \arrow[from=4-2, to=5-2]
+        \arrow[from=4-3, to=4-4]
+        \arrow[from=4-3, to=5-3]
+        \arrow[from=4-4, to=4-5]
+        \arrow[from=4-4, to=5-4]
+        \arrow[from=5-2, to=5-3]
+        \arrow[from=5-2, to=6-2]
+        \arrow[from=5-3, to=5-4]
+        \arrow[from=5-3, to=6-3]
+        \arrow[from=5-4, to=5-5]
+        \arrow[from=5-4, to=6-4]
+    \end{tikzcd}\]其中我们用到了 \(-\otimes_{C'}J=-\otimes_{C'}k\otimes_{k}J\) 以及 \(R_0=k[x_1,\dots,x_n]\)。根据蛇引理，存在一个依赖于 \(f\) 的提升 \(f'\) 的映射 \(\delta_0:Q\rightarrow B_0\otimes_k J\)。由 (\ref{wto})，\(B'\) 在 \(C'\) 上平坦当且仅当 \(\delta_0=0\)。
+
+    回想在余切复形的定义中，\(F_0\) 中的任意元素形如 \(f_j e_i-f_i e_j\in F\)，并可提升为 \(f_j' e_i'-f_i'e_j'\in Q'\)。因此映射 \(\delta_0\) 穿过 \(\delta_1:Q/F_0\rightarrow B_0\otimes_k J\)。根据 \(T^i\) 函子的定义和基变换 (\ref{A12})，我们得到\begin{align*}
+        \mathrm{coker}(\mathrm{Hom}(F/IF,B_0\otimes_k J)&\longrightarrow \mathrm{Hom}(Q/F_0,B_0\times_k J))=T^2(B/C,B_0\otimes_k J)=T^2(B_0/k,B_0\otimes_k J)\\
+        \bar{\delta}_1 &\longmapsto\delta.
+    \end{align*}这里 \(\delta\in T^2(B_0/k,B_0\otimes_k J)\)。
+
+    我们断言 \(\delta\) 与所有选择无关。如果我们对 \(f_i'\) 做不同的提升 \(f_i''\)，那么 \(f_i'-f_i''\) 定义了从 \(F'\) 到 \(R_0\otimes_k J\) 的映射，进而定义从 \(F/IF\) 到 \(B_0\otimes_k J\) 的映射，而它们在 \(T^2\) 中变为零。假设我们选择了不同的多项式环 \(R^*\rightarrow B\)。如 (\ref{A1}) 的证明那样，可归结为 \(R^*=R[y_1,\dots,y_s]\) 且 \(y_i\mapsto 0\in B\) 的情形。此时 \(\delta_0^*(y_i)=0\) 意味着 \(\delta=\delta^*\) 在 \(T^2(B_0/k,B_0\otimes_k J)\) 中。
+
+    如果扩张 \(B'/C'\) 存在，取一个在 \(C'\) 上满射到 \(B'\) 的多项式环 \(R'\)。考虑\begin{equation}\label{sgh}
+        0\longrightarrow I'\longrightarrow R'\longrightarrow B'\longrightarrow 0 \qquad 0\longrightarrow Q'\longrightarrow F'\longrightarrow I'\longrightarrow 0.
+    \end{equation}因为 \(B'\) 和 \(R'\) 在 \(C'\) 上平坦，\(I'\) 也在 \(C'\) 上平坦。令 \(R=R'\otimes_{C'}C\)，\(I=I'\otimes_{C'}C\)，\(Q=Q'\otimes_{C'}C\)。那么 (\ref{sgh})\(\otimes_{C'}C\) 将给出计算 \(B\) 在 \(C\) 上的余切复形所需的表示。由于 \(Q'\rightarrow Q\) 是满射，可得 \(\delta_0=0\)，因此 \(\delta=0\)。
+
+    反之，假设 \(\delta=0\)。我们断言，通过适当选取提升 \(f_i'\)，诱导映射 \(\delta_0:Q\rightarrow B_0\otimes_k J\) 为零。由假设，映射 \(\delta_1\in\mathrm{Hom}(Q/F_0,B_0\otimes_k J)\) 可提升为映射 \(\gamma:F/IF\rightarrow B_0\otimes_k J\)，并定义出 \(F\rightarrow B_0\otimes_k J\)。因 \(F\) 自由，可提升为 \(F\rightarrow R_0\otimes_k J\)。将 \(e_i\) 的像记为 \(g_i\in R_0\otimes_k J\)。现取 \(f_i''=f'_i-g_i\)，则新的 \(\delta_0\) 为零，从而新的 \(B'\) 在 \(C'\) 上平坦。这就完成了 \textit{(1)} 的证明。
+
+    假设存在一个这样的扩张 \(B_1'\)。按惯例取表示 \(0\rightarrow I_0\rightarrow R_0\rightarrow B_0\rightarrow 0\)。将满射 \(R_0\rightarrow B_0\) 提升为映射 \(R\rightarrow B\)，并提升为映射 \(R'\rightarrow B_1'\)，且与 \(B_1'\rightarrow B\rightarrow B_0\) 相容。由 Nakayama 引理，\(R\rightarrow B\) 和 \(R'\rightarrow B_1'\) 都是满射。
+
+    对于 \(B\) 的任何其他扩张 \(B_2'\)，映射 \(R\rightarrow B\) 可提升为 \(R'\rightarrow B_2'\)。因此，每个抽象形变也是一个嵌入形变 \(X\hookrightarrow\mathbb{A}^n_k\)。由 (\ref{B2})，嵌入形变是一个 \(\mathrm{Hom}_B(I/I^2,B\otimes_C J)\)-挠子。假设两个嵌入形变 \(B_2'\) 和 \(B_3'\) 作为 \(B\) 的抽象扩张等价。选取一个作为 \(B\) 在 \(C'\) 上的扩张的同构 \(B_2'\cong B_3'\)。于是我们得到两个映射 \(R'\rightarrow B_2'\)，它们可视为 \(R'\rightarrow R\rightarrow B\) 的提升。根据 (\ref{A14})，这两个映射的差是一个从 \(R'\) 到 \(B_2'\otimes_{C'}J\cong B\otimes_C J\) 的 \(C'\)-导子，可视为\[
+        \mathrm{Hom}_{R'}(\varOmega_{R'/C'},B\otimes_C J)=\mathrm{Hom}_R(\varOmega_{R'/C'}\otimes_{C'}C,B\otimes_C J)=\mathrm{Hom}_R(\varOmega_{R/C},B\otimes_C J)
+    \]中的元素。利用正合列 (\ref{A9})\[
+        \mathrm{Hom}_R(\varOmega_{R/C},B\otimes_C J)\longrightarrow \mathrm{Hom}(I/I^2,B\otimes_C J)\longrightarrow T^1(B/C,B\otimes_C J)\longrightarrow 0,
+    \]我们观察到嵌入的歧义恰好被导子的像所抵消。于是我们得出结论：\(\mathrm{Def}(X/C,C')\) 是 \(T^1(B/C,B_0\otimes_k J)=T^1(B_0/k,B_0\otimes_k J)\) 作用下的挠子（由 (\ref{A12})）。
+\end{proof}
+
+\begin{remark}\label{B4}
+    给定 \(B\) 到 \(C'\) 上的扩张 \(B'\)，\(B'\) 作为 \(B\) 在 \(C\) 上的扩张的自同构群自然同构于群 \(T^0(B_0/k,J\otimes_k B_0)\)。事实上，在 (\ref{A14}) 中取 \(k=C'\) 和 \(R=B'\)，可得同构\begin{align*}
+        \mathrm{Der}_{C'}(B',J\otimes_{C'}B')&\stackrel{\sim}{\longrightarrow}\mathrm{Aut}(B'/B)=\mathrm{Der}_{C'}(B',B)\\
+        \theta&\longmapsto \mathrm{id}_{B'}+\theta
+    \end{align*}其中 \(\theta_1+\theta_2\mapsto (\mathrm{id}_{B'}+\theta_1)(\mathrm{id}_{B'}+\theta_2)=\mathrm{id}_{B'}+\theta_1+\theta_2\)，因为 \(J\otimes_{C'}B'\) 是平方为零的理想。而且我们有\begin{align*}
+        \mathrm{Der}_{C'}(B',J\otimes_{C'}B')&=\mathrm{Hom}_{B'}(\varOmega_{B'/C'},J\otimes_{C'}B')=\mathrm{Hom}_{B_0}(\varOmega_{B'/C'}\otimes_{B'}B_0,J\otimes_k B_0)\\
+        &=\mathrm{Hom}_{B_0}(\varOmega_{B_0/k},J\otimes_k B_0)=T^0(B_0/k,B_0\otimes_k J).
+    \end{align*}
+\end{remark}
+
+对于一般情形，我们回忆记号 \(\mathcal{T}^i_{X_0}=\mathcal{T}^i(X_0/k,\mathcal{O}_{X_0})\)。
+
+\begin{lemma}[平坦性的局部判别法]\label{wto}
+    设 \(A'\rightarrow A\) 是 Noether 环的满同态，其核 \(J\) 满足 \(J^2=0\)。则一个 \(A'\)-模 \(M'\) 在 \(A'\) 上平坦当且仅当\begin{enumerate}[(1)]
+        \item \(M=M'\otimes_{A'}A\) 在 \(A\) 上平坦，
+        \item 自然映射 \(M\otimes_A J\rightarrow M'\) 是单射。
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    由于 \(J^2=0\)，我们可以将 \(J\) 视为 \(A\)-模，并将 \(M'\otimes_{A'}J\) 与 \(M\otimes_A J\) 等同。
+
+    若 \(M'\) 在 \(A'\) 上平坦，则 \textit{(1)} 由基扩张得到，\textit{(2)} 由将 \(M'\) 与正合列\[
+        0\longrightarrow J\longrightarrow A'\longrightarrow A\longrightarrow 0
+    \]做张量积得到。
+
+    反之，假设 \(M'\) 满足 \textit{(1)} 和 \textit{(2)}。只需证明对每个 \(\mathfrak{p}'\subseteq A'\) 有 \(\mathrm{Tor}^{A'}_1(M',A'/\mathfrak{p}')=0\)。由于 \(J\) 幂零，它包含在 \(\mathfrak{p}'\) 内。令 \(\mathfrak{p}=\mathfrak{p}'/J\in \mathrm{Spec}\, A\)，则有下述图表% https://quiver.taskfirst.cn/#q=WzAsMTYsWzAsMSwiMCJdLFswLDIsIjAiXSxbNCwxLCIwIl0sWzQsMiwiMCJdLFsyLDQsIjAiXSxbMyw0LCIwIl0sWzIsMCwiMCJdLFszLDAsIjAiXSxbMSwxLCJKIl0sWzEsMiwiSiJdLFsyLDEsIlxcbWF0aGZyYWt7cH0nIl0sWzMsMSwiXFxtYXRoZnJha3twfSJdLFsyLDIsIkEnIl0sWzMsMiwiQSJdLFsyLDMsIkEnL1xcbWF0aGZyYWt7cH0nIl0sWzMsMywiQS9cXG1hdGhmcmFre3B9Il0sWzAsOF0sWzgsOSwiIiwxLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSw5XSxbOSwxMl0sWzEyLDEzXSxbMTMsM10sWzEyLDE0XSxbMTMsMTVdLFsxMCwxMl0sWzYsMTBdLFs3LDExXSxbMTEsMTNdLFsxNSw1XSxbMTQsNF0sWzgsMTBdLFsxMCwxMV0sWzExLDJdXQ==
+    \[\begin{tikzcd}
+        && 0 & 0 & \\
+        0 & J & {\mathfrak{p}'} & {\mathfrak{p}} & 0 \\
+        0 & J & {A'} & A & 0 \\
+        && {A'/\mathfrak{p}'} & {A/\mathfrak{p}} \\
+        && 0 & 0
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-4, to=2-4]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+        \arrow[equals, from=2-2, to=3-2]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=2-3, to=3-3]
+        \arrow[from=2-4, to=2-5]
+        \arrow[from=2-4, to=3-4]
+        \arrow[from=3-1, to=3-2]
+        \arrow[from=3-2, to=3-3]
+        \arrow[from=3-3, to=3-4]
+        \arrow[from=3-3, to=4-3]
+        \arrow[from=3-4, to=3-5]
+        \arrow[from=3-4, to=4-4]
+        \arrow[from=4-3, to=5-3]
+        \arrow[from=4-4, to=5-4]
+    \end{tikzcd}\]与 \(M'\) 做张量积，可得% https://quiver.taskfirst.cn/#q=WzAsMTYsWzEsMSwiMCJdLFsyLDEsIjAiXSxbMywyLCIwIl0sWzMsMywiMCJdLFsxLDUsIjAiXSxbMiw1LCIwIl0sWzEsMiwiXFxidWxsZXQiXSxbMiwyLCJcXGJ1bGxldCJdLFsyLDMsIk0iXSxbMiw0LCJNIl0sWzEsNCwiTSciXSxbMSwzLCJNJyJdLFswLDMsIk1cXG90aW1lc19BIEoiXSxbMCwyLCJNXFxvdGltZXNfQSBKIl0sWzEsMCwiMCJdLFsyLDAsIjAiXSxbMTMsMTIsIiIsMSx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEyLDExXSxbMTEsOF0sWzgsM10sWzgsOV0sWzksNV0sWzExLDEwXSxbMTAsNF0sWzE0LDBdLFsxNSwxXSxbMCw2XSxbMSw3XSxbMCwxXSxbNiw3XSxbNywyXSxbMTMsNl0sWzYsMTFdLFs3LDhdXQ==
+    \[\begin{tikzcd}
+        & 0 & 0 & \\
+        & \mathrm{Tor}^{A'}_1(M',A'/\mathfrak{p}') & \mathrm{Tor}^{A}_1(M,A/\mathfrak{p}) \\
+        {M\otimes_A J} & M'\otimes_{A'}\mathfrak{p}' & M\otimes_A\mathfrak{p} & 0 \\
+        {M\otimes_A J} & {M'} & M & 0 \\
+        & {M'\otimes_{A'}A'/\mathfrak{p}'} & M\otimes_{A}A/\mathfrak{p} \\
+        & 0 & 0
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=2-2, to=2-3]
+        \arrow[from=2-2, to=3-2]
+        \arrow[from=2-3, to=3-3]
+        \arrow[from=3-1, to=3-2]
+        \arrow[equals, from=3-1, to=4-1]
+        \arrow[from=3-2, to=3-3]
+        \arrow[from=3-2, to=4-2]
+        \arrow[from=3-3, to=3-4]
+        \arrow[from=3-3, to=4-3]
+        \arrow[from=4-1, to=4-2]
+        \arrow[from=4-2, to=4-3]
+        \arrow[from=4-2, to=5-2]
+        \arrow[from=4-3, to=4-4]
+        \arrow[from=4-3, to=5-3]
+        \arrow[from=5-2, to=6-2]
+        \arrow[from=5-3, to=6-3]
+    \end{tikzcd}\]由 \textit{(2)}，第二个（从而也是第一个）水平序列在左边正合。由蛇引理，\(\mathrm{Tor}^{A'}_1(M',A'/\mathfrak{p}') \cong \mathrm{Tor}^{A}_1(M,A/\mathfrak{p})\)，由 \textit{(1)} 后一项为零。
+\end{proof}
+
+\begin{theorem}\label{B5}
+    如开头所述的情形：\begin{enumerate}[(1)]
+        \item 对于 \(X\) 到 \(C'\) 上的扩张 \(X'\) 的存在性，存在三个相继的障碍：\begin{itemize}
+            \item \(\delta_1\in H^0(X_0,\mathcal{T}^2_{X_0}\otimes J)\) 对应局部扩张是否存在。
+            \item \(\delta_2\in H^1(X_0,\mathcal{T}^1_{X_0}\otimes J)\) 对应局部扩张的同构类的相容性。
+            \item \(\delta_3\in H^2(X_0,\mathcal{T}^0_{X_0}\otimes J)\) 对应粘合的障碍。
+        \end{itemize}
+        \item 固定 \(X\) 到 \(C'\) 上的一个扩张 \(X'_1\)，存在正合列\[
+            0\longrightarrow H^1(X_0,\mathcal{T}^0_{X_0}\otimes J)\longrightarrow \mathrm{Def}(X/C,C')\longrightarrow H^0(X_0,\mathcal{T}^1_{X_0}\otimes J)\longrightarrow H^2(X_0,\mathcal{T}^0_{X_0}\otimes J).
+        \]
+        \item \(X'_1\) 作为 \(X\) 在 \(C'\) 上的扩张的自同构群自然同构于群 \(H^0(X_0,\mathcal{T}_{X_0}\otimes J)\)。
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    对每个仿射开子概形 \(U_i\subseteq X\)，由 (\ref{B3}\textit{(1)}) 知存在一个障碍落在 \(H^0(U_i,\mathcal{T}^2_{U_i}\otimes J)\) 中，决定 \(U_i\) 到 \(C'\) 上的扩张 \(U'_i\) 是否存在。由于 (\ref{B3}\textit{(1)}) 中障碍的定义与局部化相容，我们可以把这些数据粘合成一个整体障碍 \(\delta_1\in H^0(X_0,\mathcal{T}^2_{X_0}\otimes J)\)。
+
+    若 \(\delta_1=0\)，则对每个 \(U_i\)，存在 \(U_i\) 在 \(C'\) 上的扩张 \(U'_i\)。对每个 \(U_{ij}=U_i\cap U_j\)，我们有两个形变 \(U'_i|_{U_{ij}}\) 和 \(U'_j|_{U_{ij}}\)。由 (\ref{B3}\textit{(2)})，它们的差给出 \(H^0(U_{ij},\mathcal{T}^1\otimes J)\) 中的一个元素。这三个差在 \(U_{ijk}\) 上为零，因此我们得到第二个障碍 \(\delta_2\in H^1(X_0,\mathcal{T}_{X_0}^1\otimes J)\)。
+
+    若 \(\delta_2=0\)，则对每个 \(i,j\) 存在同构 \(\varphi_{ij}:U'_i|_{U_{ij}}\stackrel{\sim}{\longrightarrow}U'_j|_{U_{ij}}\)，作为 \(U_{ij}\) 在 \(C'\) 上的扩张。那么 \(\varphi_{ij}\circ\varphi_{jk}\circ\varphi_{ki}|_{U_{ijk}}\) 给出 \(U'_i|_{U_{ijk}}\) 的一个自同构。由 (\ref{B4})，这给出 \(H^0(U_{ijk},\mathcal{T}^0\otimes J)\) 中的一个元素，进而粘合成第三个障碍 \(\delta_3\in H^2(X_0,\mathcal{T}^0_{X_0}\otimes J)\)。
+
+    若 \(\delta_3=0\)，则我们可以通过粘合引理将扩张 \(U'_i\) 粘合成一个整体扩张 \(X'\)。
+
+    关于 \textit{(2)}，固定 \(X\) 在 \(C'\) 上的一个扩张 \(X'_1\)。若 \(X'_2\) 是另一个扩张，则由 (\ref{B3})，它们在每个仿射开子概形 \(U_i\) 上的差给出 \(H^0(U_i,\mathcal{T}^1_{X_0}\otimes J)\) 中的一个元素。这些元素粘合成 \(H^0(X_0,\mathcal{T}^1_{X_0}\otimes J)\) 的一个整体元素。反过来，\(H^0(X_0,\mathcal{T}^1_{X_0}\otimes J)\) 中的一个整体元素会给出 \(U_i\) 的扩张，它们在交集 \(U_{ij}\) 上是同构的，但将这些扩张粘合成一个整体扩张可能存在落在 \(H^2(X_0,\mathcal{T}^0_{X_0}\otimes J)\) 中的障碍。
+
+    假设两个扩张 \(X'_2\) 和 \(X'_3\) 在 \(H^0(X_0,\mathcal{T}^1_{X_0}\otimes J)\) 中给出相同的元素。则存在同构 \(\phi_i:X'_2|_{U_i}\stackrel{\sim}{\longrightarrow}X'_3|_{U_i}\) 作为 \(U_i\) 的扩张。那么 \(\psi_{ij}:=\varphi_j^{-1}\circ\varphi_i\) 是 \(X'_2|_{U_{ij}}\) 的自同构，它定义了 \(H^0(U_{ij},\mathcal{T}^0_{X_0}\otimes J)\) 中的一个元素。这些元素在 \(U_{ijk}\) 上一致，从而给出 \(H^1(X_0,\mathcal{T}^0_{X_0}\otimes J)\) 中的一个元素。此元素的消没等价于存在作为 \(U_i\) 扩张的自同构 \(\theta_i:X'_2|_{U_i}\rightarrow X'_2|_{U_i}\) 使得 \(\psi_{ij}=\theta_j^{-1}\circ\theta_i\)。此时 \(\varphi_i\circ\theta_i\) 粘合成 \(X_2'\) 与 \(X_3'\) 之间作为 \(X\) 的扩张的同构。于是我们得到了 \(\mathrm{Def}(X/C,C')\) 的所需正合列。
+
+    关于 \textit{(3)}，\(X'_1|_{\mathrm{Spec}\, B}\) 的自同构群自然同构于\[
+        T^0(B_0/k,B_0\otimes J)=\mathrm{Hom}_k(\varOmega_{B_0/k},B_0\otimes J)=T_{B_0/k}\otimes J=(\mathcal{T}^0_{X_0}\otimes J)(\mathrm{Spec}\, B).
+    \]因此通过粘合，\(X'_1\) 的自同构群自然同构于 \(H^0(X_0,\mathcal{T}^0_{X_0}\otimes J)\)。
+\end{proof}
+
+\begin{remark}\label{B6}
+    假设 \(\mathfrak{m}_{C'}J=0\) 对于今后的讨论来说过于苛刻。事实上，在多数情形下我们只假设 \(J^2=0\)。上述定理的陈述可以相应地修正如下：\begin{enumerate}[(1)]
+        \item 在 (\ref{B2}) 的证明中，我们证明了 \(Y\) 在 \(X'\) 中到 \(C'\) 上的嵌入扩张构成一个\[
+            \mathrm{Hom}_B(I,J\otimes_C A)=\mathrm{Hom}_A(I/I^2,J\otimes_C A)=H^0(\mathrm{Spec}\, A,\mathcal{N}_{Y/X}\otimes f^*\tilde{J})
+        \]伪挠子，其中 \(f:Y\rightarrow \mathrm{Spec}\, C\) 是结构映射。
+        \item 在 (\ref{B3}) 的证明中，障碍落在\[
+            T^2(B/C,B_0\otimes_k J)=T^2(B/C,B\otimes_C J)=H^0(\mathrm{Spec}\, B,\mathcal{T}^2(\mathrm{Spec}\, B/\mathrm{Spec}\, C,f^*\tilde{J}))
+        \]中，并且我们证明了 \(\mathrm{Def}(B/C,C')\) 构成一个\[
+            T^1(B/C,B\otimes_C J)=H^0(\mathrm{Spec}\, B,\mathcal{T}^1(\mathrm{Spec}\, B/\mathrm{Spec}\, C,f^*\tilde{J}))
+        \]伪挠子，其中 \(f:\mathrm{Spec}\, B\rightarrow \mathrm{Spec}\, C\) 是结构映射。
+        \item 最后，(\ref{B5}) 可以重新表述为，将每个形如 \(H^q(X_0,\mathcal{T}^p_{X_0}\otimes J)\) 的上同调群替换为\[
+            H^q(X,\mathcal{T}^p(X/\mathrm{Spec}\, C,f^*\tilde{J})),
+        \]其中 \(f:X\rightarrow \mathrm{Spec}\, C\) 是结构映射。或者更简洁地，记作 \(H^q(X,\mathcal{T}^p(X/C,f^*\tilde{J}))\)。
+    \end{enumerate}
+\end{remark}
+
+\begin{corollary}\label{B7}
+    如果 \(X_0\) 是非奇异的，那么\begin{itemize}
+        \item 对于 \(X\) 到 \(C'\) 上的扩张 \(X'\) 的存在性，仅有一个障碍落在 \(H^2(X_0,\mathcal{T}_{X_0}\otimes J)\) 中。
+        \item 如果这样的扩张存在，则它们的等价类构成一个 \(H^1(X_0,\mathcal{T}_{X_0}\otimes J)\)-挠子。
+    \end{itemize}
+\end{corollary}
+
+\begin{proof}
+    由 (\ref{A17})，层 \(\mathcal{T}^1_{X_0}\) 和 \(\mathcal{T}^2_{X_0}\) 为零。于是断言由 (\ref{B5}) 即得。
+\end{proof}
+
+\subsection{Artin环的函子}
+
+现在我们来形式化研究一个固定对象局部形变的想法。
+
+仍设 \(k\) 是代数闭基域，并设 \(\mathsf{C}\) 是剩余域为 \(k\) 的局部 Artin \(k\)-代数的范畴。设 \(R\) 是完备 \(k\)-代数，并对每个 \(A\in \mathsf{C}\)，令 \(h_{R}(A)\) 为 \(k\)-代数同态 \(\mathrm{Hom}(R,A)\) 的集合。对 \(\mathsf{C}\) 中的任何态射 \(A\rightarrow B\)，我们得到集合间的映射 \(h_R (A)\rightarrow h_R (B)\)，因此 \(h_R\) 是从 \(\mathsf{C}\) 到 \(\mathsf{Set}\) 的一个协变函子。
+
+\begin{definition}
+    一个协变函子 \(F:\mathsf{C}\rightarrow \mathsf{Set}\) 如果（自然地）同构于某个完备局部 \(k\)-代数 \(R\) 所对应的形如 \(h_R\) 的函子，则称 \(F\) 是 \textbf{pro-可表示的}。
+\end{definition}
+
+为了解释 \(h_R\) 与 \(F\) 之间同构的本质，让我们更一般地考虑从 \(h_R\) 到 \(F\) 的任何函子态射 \(\varphi:h_R \rightarrow F\)，其中 \(R\) 是带有极大理想 \(\mathfrak{m}\) 的完备局部 \(k\)-代数。特别地，对每个 \(n\)，这将给出一个映射 \(\varphi_n:\mathrm{Hom}(R,R/\mathfrak{m}^n)\rightarrow F(R/\mathfrak{m}^n)\)，并且商映射 \(R \to R/\mathfrak{m}^n\) 的像给出一个元素 \(\xi_n\in F(R/\mathfrak{m}^n)\)。这些元素 \(\xi_n\) 是相容的，意指自然映射 \(R/\mathfrak{m}^{n+1}\rightarrow R/\mathfrak{m}^{n}\) 诱导出集合映射 \(F(R/\mathfrak{m}^{n+1})\rightarrow F(R/\mathfrak{m}^{n})\)，并将 \(\xi_{n+1}\) 映为 \(\xi_n\)。因此，收集 \(\{\xi_n\}\) 定义了 \(\underleftarrow{\lim}\ F(R/\mathfrak{m}^n)\) 中的一个元素 \(\xi\)。我们将这样的收集 \(\xi=\{\xi_n\}\) 称为 \(F\) 在环 \(R\) 上的一个 \textbf{形式族}。
+
+这里引入由剩余域为 \(k\) 的完备局部 \(k\)-代数构成的范畴 \(\hat{\mathsf{C}}\) 是方便的。范畴 \(\hat{\mathsf{C}}\) 包含 \(\mathsf{C}\)，并且我们可以将 \(\mathsf{C}\) 上的任何函子 \(F\) 延拓为从 \(\hat{\mathsf{C}}\) 到 \(\mathsf{Set}\) 的函子 \(\hat{F}\)，其定义为对任意 \(R\in \hat{\mathsf{C}}\)，令 \(\hat{F}(R)=\underleftarrow{\lim}\ F(R/\mathfrak{m}^n)\)。在此记号下，\(\hat{F}(R)\) 就是 \(F\) 在 \(R\) 上的形式族的集合。
+
+反过来，\(\hat{F}(R)\) 中的一个形式族 \(\xi=\{\xi_n\}\) 定义一个函子态射 \(\varphi:h_R\rightarrow F\) 如下。对任意 \(A\in \mathsf{C}\) 和任意同态 \(f:R\rightarrow A\)，由于 \(A\) 是 Artin 的，\(f\) 必穿过某个 \(R/\mathfrak{m}^n\)，即存在分解 \(f=g\pi\)，其中 \(\pi: R\rightarrow R/\mathfrak{m}^n\)，\(g:R/\mathfrak{m}^n\rightarrow A\)。然后令 \(\varphi(f)\) 为 \(\xi_n\) 在映射 \(F(g):F(R/\mathfrak{m}^n)\rightarrow F(A)\) 下的像。容易验证这些构造是良定义的且互逆，于是我们有：
+
+\begin{proposition}
+    如果 \(F\) 是从 \(\mathsf{C}\) 到 \(\mathsf{Set}\) 的函子，且 \(R\) 是剩余域为 \(k\) 的完备局部 \(k\)-代数，则形式族的集合 \(\hat{F}(R)\)（即 \(\{\xi_n\mid \xi_n \in F(R/\mathfrak{m}^n)\}\)）与从 \(h_R\) 到 \(F\) 的函子态射的集合之间存在自然的一一对应。
+\end{proposition}
+
+因此，如果 \(F\) 是 pro-可表示的，则对某个 \(R\) 存在同构 \(\xi:h_R \rightarrow F\)，我们可以将 \(\xi\) 视为 \(\hat{F}(R)\) 中的一个元素。我们称对 \((R,\xi)\) \textbf{pro-表示}了函子 \(F\)。容易验证，如果 \(F\) 是 pro-可表示的，那么对 \((R,\xi)\) 在差一个同构的意义下是唯一的。
+
+在许多感兴趣的情形，我们考虑的函子并非 pro-可表示的，所以我们定义具有一个通用族或极小通用族的较弱概念。
+
+\begin{definition}
+    设 \(F:\mathsf{C}\rightarrow \mathsf{Set}\) 是一个函子。一个对 \((R,\xi)\)，其中 \(R\in \hat{\mathsf{C}}\)，\(\xi\in \hat{F}(R)\)，称为 \(F\) 的一个 \textbf{通用族}，如果关联的映射 \(h_R \rightarrow F\) 是强满的。这里我们说函子态射 \(G\rightarrow F\) 是 \textbf{强满的}，如果对每个 \(A\in\mathsf{C}\)，映射 \(G(A)\rightarrow F(A)\) 是满射，并且进一步，对 \(\mathsf{C}\) 中的每个满射 \(B\rightarrow A\)，映射 \(G(B)\rightarrow G(A)\times_{F(A)}F(B)\) 也是满射。在我们的情形，这意味着给定一个诱导出 \(\eta\in F(A)\) 的映射 \(R\rightarrow A\)，以及一个映射到 \(\eta\) 的 \(\theta\in F(B)\)，则可以将映射 \(R\rightarrow A\) 提升为诱导出 \(\theta\) 的映射 \(R\rightarrow B\)。
+
+    此外，如果映射 \(h_R(D) \rightarrow F(D)\) 是双射，其中 \(D=k[t]/t^2\) 是双数环，则称 \((R,\xi)\) 是一个 \textbf{极小通用族}，或称该函子具有 \textbf{pro-可表示壳} \((R,\xi)\)。我们称 \((R,\xi)\) 是一个 \textbf{万有族} 如果它 pro-表示了函子 \(F\)。
+\end{definition}
+
+下面的命题解释了这些术语的意义。
+
+\begin{proposition}
+    设 \((R,\xi)\) 是函子 \(F\) 的一个形式族。
+    \begin{enumerate}[(1)]
+        \item 如果 \((R,\xi)\) 是通用族，则对任何其他形式族 \((S,\eta)\)，存在环同态 \(f:R\rightarrow S\) 使得诱导映射 \(\hat{F}(R)\rightarrow\hat{F}(S)\) 将 \(\xi\) 映为 \(\eta\)。
+        \item 如果 \((R,\xi)\) 是极小通用族，则对任何 \((S,\eta)\)，(a) 中的映射 \(f:R\rightarrow S\) 诱导出唯一的同态 \(R/\mathfrak{m}_R^2\rightarrow S/\mathfrak{m}_S^2\)。
+        \item 如果 \((R,\xi)\) 是万有族，则对任何 (a) 中的 \((S,\eta)\)，相应的映射 \(f:R\rightarrow S\) 是唯一的。
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \textit{(1)} 设 \((R,\xi)\) 是通用族，\((S,\eta)\) 是任意形式族。那么由定义我们有强满函子态射 \(\varphi:h_R \rightarrow F\)，由 \(\xi\) 确定。对每个 \(n\)，我们有元素 \(\eta_n\in F(S/\mathfrak{m}^n_S)\)。由于 \(\varphi\) 是满射，可将其提升为 \(\theta_n\in h_R (S/\mathfrak{m}_S^n)\)，即同态 \(\theta_n:R\rightarrow S/\mathfrak{m}^n_S\) 使得诱导映射 \(F(R/\mathfrak{m}^n_R)\rightarrow F(S/\mathfrak{m}^n_S)\) 将 \(\xi_n\) 映为 \(\eta_n\)。此外，由于 \(\varphi\) 的强满性，从 \(\theta_1\) 出发，我们可以相继提升并得到一个相容族 \(\{\theta_n\}\)，即每个 \(\theta_n\) 由 \(\theta_{n+1}\) 与自然映射 \(S/\mathfrak{m}^{n+1}_S\rightarrow S/\mathfrak{m}^n_S\) 复合得到。于是映射 \(\theta_n\) 确定同态 \(R\rightarrow \underleftarrow{\lim}S/\mathfrak{m}^n_S = S\)（因 \(S\) 是完备局部环）。此映射 \(f:R\rightarrow S\) 由构造诱导出将 \(\xi\) 映为 \(\eta\) 的映射 \(\hat{F}(R)\rightarrow \hat{F}(S)\)。
+
+    \textit{(2)} 若 \((R,\xi)\) 是极小通用族，为证明诱导的映射 \(\bar{f}:R/\mathfrak{m}^2_R\rightarrow S/\mathfrak{m}^2_S\) 的唯一性，只需证明对任意映射 \(S/\mathfrak{m}^2_S\rightarrow D=k[t]/t^2\)，诱导的映射 \(R/\mathfrak{m}^2_R\rightarrow D\) 是唯一的。但由定义 \(h_R(D)\rightarrow F(D)\) 是双射，这立即成立。
+
+    \textit{(3)} 若 \((R,\xi)\) 是万有族，则 \(h_R\rightarrow F\) 是同构，因此 \(\eta\) 确定唯一的态射 \(h_S\rightarrow h_R\)，从而确定唯一的 \(f:R\rightarrow S\)。
+\end{proof}
+
+\subsection{Schlessinger判别法}
+
+在本节中我们将证明 Schlessinger 定理，它给出了一个 Artin 环函子具有通用族、极小通用族或 pro-可表示性的判别准则。
+
+我们保持上一小节的记号：\(k\) 是代数闭域，\(\mathsf{C}\) 是局部 Artin \(k\)-代数的范畴，\(F\) 是到 \(\mathsf{Set}\) 的协变函子。注意范畴 \(\mathsf{C}\) 具有纤维积。如果 \(A'\rightarrow A\) 和 \(A''\rightarrow A\) 是 \(\mathsf{C}\) 中的态射，则取 \(A'\times_A A''\) 为集合论纤维积 \(\{(a',a'')\mid a'\ \text{和}\ a''\ \text{在}\ A\ \text{中拥有相同的像}\}\)。环运算自然延拓，给出 \(\mathsf{C}\) 中的另一个对象。
+
+引入记号 \(t_F\) 表示 \(F(D)\)，其中 \(D\) 是双数环，这被称为 \(F\) 的 \textbf{切空间}。类似地 \(t_R\) 表示函子 \(h_R\) 的切空间，它就是 \(\mathrm{Hom}_k (R,D)\)，且等于 \(\mathfrak{m}_R/\mathfrak{m}_R^2\) 的对偶向量空间。
+
+\(\mathsf{C}\) 中的 \textbf{小扩张} 是指一个满射 \(A'\rightarrow A\)，其核 \(I\) 是一维 \(k\)-向量空间。
+
+\begin{proposition}\label{schne}
+    如果 \(F\) 具有一个通用族，则：
+    \begin{enumerate}[(1)]
+        \item \(F(k)\) 仅有一个元素。
+        \item 对 \(\mathsf{C}\) 中的任何态射 \(A'\rightarrow A\) 和 \(A''\rightarrow A\)，自然映射\[
+            F(A'\times_A A'')\rightarrow F(A')\times_{F(A)}F(A'')
+        \]是满射。
+        
+        此外，如果 \(F\) 还具有极小通用族，则：
+        \item 对任意 \(A\in \mathsf{C}\)，考虑映射 \(A\rightarrow k\) 和 \(D\rightarrow k\)，上述 \textit{(b)} 中的映射\[
+            F(A\times_k D)\rightarrow F(A)\times_{F(k)}F(D)
+        \]是双射。\label{hhh}
+        \item \(F(D)=t_F\) 具有有限维 \(k\)-向量空间的自然结构。
+        \item 对任意小扩张 \(p:A'\rightarrow A\) 和任意元素 \(\eta\in F(A)\)，向量空间 \(t_F\) 在集合 \(p^{-1}(\eta)\)（假如非空）上有一个传递的群作用。\label{ovo}
+        
+        最后，如果 \(F\) 是 pro-可表示的，则：
+        \item \textit{(b)} 中的映射全是双射，且只要 \(p^{-1}(\eta)\) 非空，\textit{(e)} 中的群作用就是双射。
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \textit{(1)} 因为 \(\mathrm{Hom}(R,k)\rightarrow F(k)\) 是满射，而 \(\mathrm{Hom}(R,k)\) 仅有一个元素，故 \(F(k)\) 亦然。
+
+    \textit{(2)} 给定元素 \(\eta'\in F(A')\) 和 \(\eta''\in F(A'')\) 映到 \(F(A)\) 中的同一个元素 \(\eta\)，由通用族的强满性质，存在相容的 \(R\) 到 \(A'\)、\(A\) 和 \(A''\) 的同态诱导出这些元素。于是有唯一的 \(R\) 到积 \(A'\times_{A}A''\) 的映射，诱导出给定的 \(R\) 到 \(A'\) 和 \(A''\) 的映射。这进而定义了 \(F(A'\times_{A}A'')\) 中的一个元素，它限制到 \(\eta'\) 和 \(\eta''\) 正如所求。
+
+    \textit{(3)} 假设我们已有 \(\eta\in F(A)\) 和 \(\xi\in F(D)\)。由 \textit{(2)} 知存在 \(F(A\times_k D)\) 中位于对 \((\eta,\xi)\) 之上的元素。设 \(\theta_1\) 和 \(\theta_2\) 是两个这样的元素。选取一个诱导出 \(\eta\) 的同态 \(u:R\rightarrow A\)。由强满性可将 \(u\) 提升为 \(v_1\) 和 \(v_2:R\rightarrow A[t]/t^2\)，分别诱导出 \(\theta_1\) 和 \(\theta_2\)。由于 \(\theta_1\) 和 \(\theta_2\) 都在 \(\xi\) 之上，所以 \(v_1\) 和 \(v_2\) 到 \(D\) 的投影都诱导出 \(\xi\)。由极小通用族的假设，\(t_R\rightarrow t_F\) 是双射，因此这些限制是相等的。又因为 \(v_1\) 和 \(v_2\) 还诱导出相同的映射 \(u:R\rightarrow A\)，我们得到 \(v_1=v_2\)，从而 \(\theta_1=\theta_2\)。
+
+    \textit{(4)} 由极小通用族，\(t_R\rightarrow t_F\) 是双射，因此我们可以将 \(t_R\) 上的向量空间结构搬运到 \(t_F\) 上。但这个结构也可以固有地恢复，仅使用 \(F\) 的函子性质以及上面的 \textit{(3)} （参见~\ref{vcst}）。
+
+    \textit{(5)} 设 \(A'\rightarrow A\) 是小扩张，核 \(I\cong k\)。注意 \(A'\times_A A'\cong A'\times_k k[I]\)，通过发送 \((x,y)\mapsto (x,x_0 +y-x)\)，其中 \(x_0\in k\) 是 \(x\) 模 \(\mathfrak{m}\) 的剩余。考虑 \textit{(2)} 中的满射\[
+        F(A'\times_A A')\rightarrow F(A')\times_{F(A)}F(A')
+    \]利用上述同构和 \textit{(3)}，我们可以将左边重新解释为 \(F(A'\times_k k[I])\cong F(A')\times t_F\)，并得到一个满射\[
+        F(A')\times t_F \rightarrow F(A')\times_{F(A)}F(A')
+    \]它在第一个因子上是同构。若取 \(\eta\in F(A)\) 并固定 \(\eta'\in p^{-1}(\eta)\)，则得到满射\[
+        \{\eta'\}\times t_F\rightarrow \{\eta'\}\times p^{-1}(\eta),
+    \]这就给出了 \(t_F\) 在 \(p^{-1}(\eta)\) 上的传递群作用。
+
+    \textit{(6)} 如果 \(F\) 是 pro-可表示的，则 \textit{(2)} 的证明表明这些映射都是双射。从而 \textit{(5)} 中的群作用也是双射。
+\end{proof}
+
+\begin{example}\label{vcst}
+    设 \(F:\mathsf{C}\rightarrow\mathsf{Set}\) 是一个满足 (\ref{schne}) 中性质 \textit{(1)} 和 \textit{(3)} 的函子。则 \(t_F=F(D)\) 具有如下自然 \(k\)-向量空间结构。对每个 \(\lambda\in k\)，环同态 \(\lambda:D\rightarrow D,\ t\mapsto\lambda t\) 诱导出映射 \(\lambda_*:t_F\rightarrow t_F\)。取 \(D\) 的两个副本，记为 \(D_1=k[t_1]/t_1^2\) 和 \(D_2=k[t_2]/t_2^2\)，考虑环同态 \(D_1 \times_k D_2\rightarrow D,\ t_i\mapsto t,\ i=1,2\)。它诱导出映射 \(F(D_1\times_k D_2)\rightarrow F(D)\)。利用 \textit{(1)} 和 \textit{(3)}，这给出映射 \(\mu:t_F\times t_F\rightarrow t_F\)。那么分别以 \(\lambda_*\) 和 \(\mu\) 作为标量乘法和加法就使 \(t_F\) 成为 \(k\)-向量空间。
+\end{example}
+
+\begin{lemma}[Chevalley 定理]\label{cheth}
+    设 \((A,\mathfrak{m})\) 是完备局部环。设 \(\{\mathfrak{a}_n\}\) 是一个下降的理想序列，且 \(\cap\mathfrak{a}_n=(0)\)。则对每个 \(s\)，存在 \(n(s)\) 使得当 \(n\geq n(s)\) 时 \(\mathfrak{a}_n\subseteq \mathfrak{m}^s\)。
+\end{lemma}
+
+\begin{proof}
+    \cite[Vol. \uppercase\expandafter{\romannumeral2}, \uppercase\expandafter{\romannumeral5}\uppercase\expandafter{\romannumeral3}, Thm. 13, p.270]{Zariski}.
+\end{proof}
+
+\begin{theorem}[Schlessinger 判别法]\label{jkl}
+    函子 \(F:\mathsf{C}\rightarrow\mathsf{Set}\) 具有极小通用族当且仅当：
+    \begin{enumerate}[]
+        \item \( (H_0) \) \( F(k) \) 仅有一个元素。
+        \item \( (H_1) \) 对每个小扩张 \( A''\rightarrow A \)，映射 \( F(A'\times_A A'')\rightarrow F(A')\times_{F(A)}F(A'') \) 是满射。
+        \item \( (H_2) \) 当 \( A''=D \) 且 \( A=k \) 时，\( H_1 \) 中的映射是双射。
+        \item \( (H_3) \) \( t_F \) 是有限维 \(k\)-向量空间。
+        
+        此外，\( F \) 是 pro-可表示的当且仅当额外满足：
+        \item \( (H_4) \) 对每个小扩张 \( p:A''\rightarrow A \) 和每个使得 \(p^{-1}(\eta)\) 非空的 \(\eta\in F(A)\)，\(t_F\) 在 \(p^{-1}(\eta)\) 上的群作用是双射。
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    必要性已证。
+    现在设 \(F\) 是满足条件 \(H_0,H_1,H_2,H_3\) 的函子。首先我们将构造一个环 \(R\) 和一个态射 \(h_R\rightarrow F\)。然后我们将证明它具有极小通用族的性质。
+
+    我们将把 \(R\) 和映射 \(h_R\rightarrow F\) 定义为环 \(R_q\) 和元素 \(\xi_q\in F(R_q)\) 的逆向极限，它们通过归纳方式对 \(q \geq 0\) 构造。取 \(R_0=k\)。注意 \(t_F\) 上的向量空间结构已由条件 \(H_0,H_1,H_2\) 确定（\ref{vcst}），因此 \(H_3\) 中说它是有限维的才有意义。设 \(x_1,\dots,x_r\) 是对偶空间 \(t_F^*\) 的一组基，令 \(S\) 为形式幂级数环 \(k[[x_1,\dots,x_r]]\)，其极大理想为 \(\mathfrak{m}\)，并取 \(R_1=S/\mathfrak{m}^2\)。则依构造有 \(t_{R_1}\cong t_F\)。此外，通过迭代条件 \(H_2\)，可得 \(F(R_1)=F(k[x_1]\times\cdots\times k[x_r])\cong t_F\otimes_k t_F^*\)。此处的自然元素给出 \(\xi_1\in F(R_1)\)，诱导出同构 \(t_{R_1}\cong t_F\)。
+
+    现在假设我们已经构造了相容序列 \((R_i,\xi_i)\) 对 \(i=1,\dots,q\)，其中 \(\xi_i\in F(R_i)\)，\(R_i=S/J_i\)，且 \(\mathfrak{m}^{i+1}\subseteq J_i \subseteq J_{i-1}\)，并对每个 \(i\) 自然映射 \(R_i\rightarrow R_{i-1}\) 将 \(\xi_i\) 映为 \(\xi_{i-1}\)。为构造 \(R_{q+1}\)，我们查看 \(S\) 中满足 \(\mathfrak{m}J_q \subseteq J\subseteq J_q\) 的理想 \(J\)，并取 \(J_{q+1}\) 为使得 \(\xi_q\in F(R_q)\) 可提升为 \(\xi'\in F(S/J)\) 的极小这样的理想 \(J\)。为表明存在这样的极小理想，只需证明若 \(J\) 和 \(K\) 是两个这样的理想，则它们的交 \(J\cap K\) 也是。通过扩大 \(J\) 或 \(K\)，不妨设 \(J+K=J_q\)。此时 \(S/(J\cap K)=(S/J)\times_{(S/J_q)}(S/K)\)。由于 \(\xi_q\) 可提升到 \(S/J\) 和 \(S/K\) 之上，条件 \(H_1\) 确保可以提升到 \(S/J\cap K\) 之上。然后我们取 \(R_{q+1}=S/J_{q+1}\)，并取 \(\xi_{q+1}\) 为 \(\xi_q\) 的任意提升，其存在性由构造保证。
+
+    如此我们得到环的投射系统 \(R_q\) 和相容元素 \(\xi_q\in F(R_q)\)。令 \(J=\cap J_q\) 并取 \(R\) 为 \(S/J\)。则 \(R\) 是完备局部环，且 \(R_q=R/\bar{J_q}\)，其中 \(\bar{J_q}=J_q/J\)。由于对每个 \(q\) 有 \(J_q\supseteq \mathfrak{m}^{q+1}\)，并且反过来对每个 \(s\) 某个 \(\bar{J}_q\subseteq \mathfrak{m}_R^s\)（\ref{cheth}），从而推出理想 \(\bar{J}_q\) 构成 \(R\) 的 \(\mathfrak{m}_R\)-进拓扑的基。因此 \(R=\underleftarrow{\lim}\, R_q\)，我们定义 \(\xi=\underleftarrow{\lim}\, \xi_q\in \hat{F}(R)\)。这就给出了所需的映射 \(h_R\rightarrow F\)。
+
+    我断言 \((R,\xi)\) 是 \(F\) 的极小通用族。因为按构造有 \(t_R \cong t_F\)，我们只需证明对任何满射 \(A'\rightarrow A\) 及任何限制到 \(\eta\in F(A)\) 的 \(\eta'\in F(A')\)，以及任何诱导出 \(\eta\) 的映射 \(R\rightarrow A\)，存在提升到诱导出 \(\eta'\) 的映射 \(R\rightarrow A'\)。因为任何满射可分解为小扩张的复合，只需对小扩张 \(A'\rightarrow A\) 的情形证明。
+
+    设 \(u:R\rightarrow A\) 诱导出 \(\eta\)。只需证明 \(u\) 可提升为某个映射 \(v: R\rightarrow A'\)。因为这样 \(v\) 将诱导出一个位于 \(\eta\) 之上的元素 \(\eta''\in F(A')\)。由于~\ref{ovo}（其证明仅用到我们的 \(H_2\) 条件下的~\ref{hhh}）存在 \(t_F\) 中的元素通过群作用将 \(\eta''\) 送到 \(\eta'\)。同样的 \(t_F=t_R\) 作用在限制到 \(u\) 的映射 \(v:R\rightarrow A'\) 的集合上，因此我们可以调整 \(v\) 为同态 \(v':R\rightarrow A'\) 以诱导出 \(\eta'\)。
+
+    因此只需证明对小扩张 \(A'\rightarrow A\)，给定的映射 \(u:R\rightarrow A\) 可提升为映射 \(v:R\rightarrow A'\)。由于 \(A\) 是 Artin 环，\(u\) 穿过某个 \(R_q\)。另一方面，\(R\) 是幂级数环 \(S\) 的商，映射 \(u\) 可提升为 \(S\) 到 \(A'\) 的映射。于是我们得到交换图
+    % https://quiver.taskfirst.cn/#q=WzAsNixbMCwwLCJTIl0sWzEsMCwiUl9xXFx0aW1lc19BIEEnIl0sWzIsMCwiQSciXSxbMCwxLCJSIl0sWzEsMSwiUl9xIl0sWzIsMSwiQSJdLFswLDEsInciXSxbMSwyXSxbMiw1LCJwIl0sWzQsNV0sWzAsM10sWzMsNF0sWzEsNCwicCciXV0=
+    \[\begin{tikzcd}
+        S & {R_q\times_A A'} & {A'} \\
+        R & {R_q} & A
+        \arrow["w", from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow[from=1-2, to=1-3]
+        \arrow["{p'}", from=1-2, to=2-2]
+        \arrow["p", from=1-3, to=2-3]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+    \end{tikzcd}\]
+    注意 \(p':R_q\times_A A'\rightarrow R_q\) 也是小扩张。若此映射有截面 \(s:R_q\rightarrow R_q\times_A A'\)，则利用 \(s\) 和第二投影我们得到提升 \(u\) 的映射 \(R_q\rightarrow A'\)，从而得证。
+
+    若 \(p'\) 无截面，则我断言映射 \(w\) 是满射。事实上，若 \(w\) 不满，则 \(\mathrm{Im}\, w\) 是一个满射到 \(R_q\) 的子环。\(\mathrm{Im}\, w\rightarrow R_q\) 的核必严格包含在 \(I=\ker p'\) 中，而 \(I\) 是一维向量空间，故此核为零，从而 \(\mathrm{Im}\, w\rightarrow R_q\) 是同构，这就给出一个截面。矛盾！
+
+    因此 \(w\) 是满射。令 \(J=\ker w\)。则由于 \(S\) 通过 \(w\) 映到 \(R_q\)，有 \(J\subseteq J_q\)。另一方面，因为 \(p'\) 是小扩张，有 \(J\supseteq \mathfrak{m}J_q\)。同时 \(\xi_q\in F(R_q)\)，且存在 \(\eta'\in F(A')\) 位于 \(\eta\in F(A)\) 之上，由 \(H_1\) 知，存在 \(\xi'\in F(R_q\times_A A')\) 同时位于二者之上。由于 \(R_q\times_A A'=S/J\)，这个理想 \(J\) 满足构造中所要求的条件。因此 \(J\supseteq J_{q+1}\)，从而 \(w\) 穿过 \(R_{q+1}\)。这就给出了 \(R\) 到 \(A'\) 的所需提升，并完成了 \((R,\xi)\) 是 \(F\) 的极小通用族的证明。
+
+    最后，假设 \(F\) 额外满足 \(H_4\)。要证 \(h_R(A)\rightarrow F(A)\) 对所有 \(A\) 是双射，只需归纳地证明（从 \(A=k\) 开始）对任何小扩张 \(p:A'\rightarrow A\)，有 \(\mathrm{Hom}(R,A')\rightarrow \mathrm{Hom}(R,A)\times_{F(A)}F(A')\) 是双射。于是固定 \(u\in \mathrm{Hom}(R,A)\) 及对应的 \(\eta\in F(A)\)。如果不存在位于 \(u\) 之上的 \(R\) 到 \(A'\) 的映射，则也不存在位于 \(\eta\) 之上的 \(\eta'\in F(A')\)，此时无需证明。另一方面，若 \(p^{-1}(\eta)\) 非空，则 \(t_F\) 在 \(p^{-1}(\eta)\) 上的作用由 \(H_4\) 为双射，同时由于 \(h_R\) 是 pro-可表示的且由极小通用族有 \(t_R\cong t_F\)，\(t_R\) 在位于 \(u\) 之上的同态集合上的作用也是双射，故我们的映射如愿是双射。
+\end{proof}
+
+\subsection{形变函子}
+
+现在我们讨论概形的形变函子的 pro-可表示性或极小通用族的存在性问题。
+
+设 \(X_0\) 是 \(k\) 上的概形，\(A\) 是剩余域为 \(k\) 的 Artin 环。定义如下的 \textbf{形变函子}：
+\[
+    F(A):=\mathrm{Def}(X_0/k,A)
+\]
+
+\begin{theorem}\label{yui}
+    设 \(X_0\) 是 \(k\) 上的概形。则函子 \(F\) 在下列任一假设下具有极小通用族：
+    \begin{enumerate}[(1)]
+        \item \(X_0\) 是仿射的，具有孤立奇点且为有限型。
+        \item \(X_0\) 是射影的。
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    我们验证 Schlessinger 判别法 (\ref{jkl}) 的条件。
+
+    (\(H_0\)) \(F(k)\) 由单个对象 \((X_0,\mathrm{id})\) 组成。如果 \(\sigma\) 是 \(X_0\) 的自同构，则对象 \((X_0,\sigma)\) 通过映射 \(\sigma: X_0\rightarrow X_0\) 同构于 \((X_0,\mathrm{id})\)。
+
+    (\(H_1\)) 假设给定了小扩张 \(A''\rightarrow A\) 和任意映射 \(A'\rightarrow A\)，并假设给定了对象 \(X'\in F(A')\)，\(X''\in F(A'')\)，它们限制到 \(X\in F(A)\)。则 \(X'\otimes_{A'}A\cong X\)，该同构与从 \(X_0\) 出发的映射相容，因此我们可以选取一个诱导此同构的闭浸入 \(X\hookrightarrow X'\)。类似地选取 \(X\hookrightarrow X''\)。然后我们通过环层的纤维积定义 \(X^*\)：\(\mathcal{O}_{X^*}=\mathcal{O}_{X'}\times_{\mathcal{O}_X}\mathcal{O}_{X''}\)，则 \(X^*\) 将成为 \(F(A^*)\) 中的对象，并还原到 \(X'\) 和 \(X''\)，其中 \(A^* =A'\times_A A''\)。
+
+    (\(H_2\)) 假设在 \(H_1\) 的情形中 \(A=k\)（这等价于 \(A''\cong k[t]\)），并设 \(X^*\) 按 \(H_1\) 构造。若 \(W\) 是 \(F(A^*)\) 中分别限制到 \(X'\) 和 \(X''\) 的另一个对象，则可选取浸入 \(X'\hookleftarrow W\) 和 \(X''\hookrightarrow W\) 诱导这些同构。因为这些映射都与从 \(X_0\) 出发的浸入相容，且此时 \(X=X_0\)，它们与已选定的映射 \(X\hookrightarrow X'\) 和 \(X\hookrightarrow X''\) 一致。现在由环的纤维积的万有性质，存在与上述映射相容的映射 \(X^*\rightarrow W\)。因为 \(X^*\) 和 \(W\) 都在 \(A^*\) 上平坦，且该映射限制到 \(X_0\) 上成为同构，我们发现 \(X^*\) 同构于 \(W\)，因而它们作为 \(F(A^*)\) 的元素相等。
+
+    (\(H_3\)) 这里是证明中唯一需要假设 \textit{(1)} 或 \textit{(2)} 的地方。
+    
+    \quad \textit{(1)} 令 \(X_0=\mathrm{Spec}\, B\)。则由 (\ref{B3}) 有 \(t_F = T_{B/k}^1\)。此模支撑在 \(X_0\) 的有限个奇点处 (\ref{A17})，故具有有限长度 (\ref{A10})，即 \(t_F\) 是有限维向量空间。
+
+    \quad \textit{(2)} 对一般 \(X_0\)，切空间 \(t_F\) 对应双数环 \(D\) 上的形变。由于有正合列 (\ref{B5}\textit{(2)})\[
+        0\longrightarrow H^1(X_0,\mathcal{T}_{X_0})\longrightarrow \mathrm{Def}(X_0/k,D)\longrightarrow H^0(X_0,\mathcal{T}_{X_0}^1)\longrightarrow\cdots,
+    \]我们看到若 \(X_0\) 是射影的，则外侧两个群都是有限维向量空间，因此 \(\mathrm{Def}(X_0/k,D)\) 也是。
+
+    于是条件 \((H_0)\)--\((H_3)\) 满足，\(F\) 具有极小通用族。
+\end{proof}
+
+接下来，我们考虑使得函子 \(F\) 确实 pro-可表示的条件。
+
+\begin{theorem}\label{ert}
+    设 \(X_0/k\) 给定且满足 (\ref{yui}) 的假设。则 \(X_0\) 的形变函子 \(F\) 是 pro-可表示的当且仅当对每个小扩张 \(A'\rightarrow A\)，以及每个限制到 \(A\) 上的形变 \(X\) 的 \(A'\) 上的形变 \(X'\)，自然映射 \(\mathrm{Aut}(X'/X_0)\rightarrow \mathrm{Aut}(X/X_0)\)（限制到 \(X_0\) 上的恒等自同构的那些自同构）是满射。
+\end{theorem}
+
+\begin{proof}
+    假设对每个位于 \(X\) 之上的 \(X'\)，\(\mathrm{Aut}(X'/X_0)\rightarrow \mathrm{Aut}(X/X_0)\) 是满射。我们需要验证 (\ref{jkl}) 的条件 \((H_4)\)。设 \(X'_1 ,X'_2\) 是 \(F(A')\) 中诱导出 \(F(A)\) 中同一元素 \(X\) 的元素。如果选取诱导同构 \(X'_1\otimes_{A'}A\cong X\) 和 \(X'_2\otimes_{A'}A\cong X\) 的映射 \(X\hookrightarrow X'_1\) 和 \(X\hookrightarrow X'_2\)，并且 \(X'_1\) 和 \(X'_2\) 作为 \(X_0\) 上的形变是同构的，那么我断言作为 \(X\) 到 \(A'\) 上的扩张，包含 \(X\hookrightarrow X'_1\) 和 \(X\hookrightarrow X'_2\) 是同构的。
+
+    事实上，设 \(u':X'_1\rightarrow X'_2\) 是 \(X_0\) 上的同构。则 \(u=u'\otimes_{A'}A\) 是 \(X\) 在 \(X_0\) 上的自同构。由假设这提升为 \(X'_1\) 的自同构 \(\sigma\)。那么 \(v=u\circ \sigma^{-1}:X'_1\rightarrow X'_2\) 是在 \(X\) 上诱导恒等的同构，因此 \(X'_1\) 和 \(X'_2\) 作为 \(X\) 在 \(A'\) 上的扩张等价。
+
+    现在由 (\ref{B5}\textit{(2)})，\(\mathrm{Def}(X/A,A')\) 是 \(t_F\) 作用下的主齐性空间（\(D\rightarrow k\) 也是小扩张），因此 Schlessinger 判别法的条件 \((H_4)\) 满足，\(F\) 是 pro-可表示的。
+
+    反之，假设 \(F\) 是 pro-可表示的，令 \(X'\in F(A')\) 限制到 \(X\in F(A)\)，并选取一个诱导同构 \(X\stackrel{\sim}{\longrightarrow}X'\otimes_{A'}A\) 的映射 \(u:X\hookrightarrow X'\)。设 \(\sigma\in \mathrm{Aut}(X/X_0)\)。则 \(u'=u\circ \sigma:X\hookrightarrow X'\) 给出 \(\mathrm{Def}(X/A,A')\) 的另一个元素，于是由 (\ref{B5}\textit{(2)})，\(u\) 与 \(u'\) 相差一个 \(t_F\) 的元素。但 \(u\) 和 \(u'\) 定义了 \(F(A')\) 中相同的元素 \(X'\)（位于 \(X\) 之上），故由条件 \((H_4)\)，这个 \(t_F\) 的元素必须为零。因此 \(u\) 和 \(u'\) 作为 \(\mathrm{Def}(X/A,A')\) 的元素相等；换言之，存在 \(X_0\) 上的同构 \(\tau:X'\rightarrow X'\) 使得 \(u'=\tau\circ u\)。限制到 \(X\) 上得到 \(\sigma=\tau|_X\)。于是 \(\tau\in \mathrm{Aut}(X'/X_0)\) 提升了 \(\sigma\)，从而映射是满射。
+\end{proof}
+
+\begin{corollary}\label{rty}
+    设 \(X_0/k\) 是射影概形，且 \(H^0(X_0,\mathcal{T}_{X_0})=0\)。则 \(X_0/k\) 的形变函子是 pro-可表示的。
+\end{corollary}
+
+\begin{proof}
+    我们将通过对 \(A\) 的长度归纳证明，对 \(X_0\) 在 \(A\) 上的任何形变 \(X\)，有 \(\mathrm{Aut}(X/X_0)=\{\mathrm{id}\}\)。这样显然满足 (\ref{ert}) 的条件。
+
+    归纳起步时注意 \(\mathrm{Aut}(X_0/X_0)=\{\mathrm{id}\}\)。归纳假设对 \(A\) 上的形变 \(X\) 有 \(\mathrm{Aut}(X/X_0)=\{\mathrm{id}\}\)。考虑小扩张 \(A'\rightarrow A\) 及任意限制到 \(X\) 的 \(X'\in F(A')\)。选取诱导同构 \(X\stackrel{\sim}{\rightarrow}X'\otimes_{A'}A\) 的映射 \(X\hookrightarrow X'\)。\(X'\) 的任何自同构在 \(X\) 上的限制根据归纳假设是恒等自同构，因此它是形变 \(X\hookrightarrow X'\) 的自同构。由于这些自同构由 \(H^0(X_0,\mathcal{T}_{X_0})=0\)（\ref{B5}\textit{(3)}）分类，这个自同构必为恒等。
+\end{proof}
+
+\begin{example}
+    设 \(X_0\) 是代数闭域 \(k\) 上的非奇异射影曲线。若亏格为零，则 \(X_0=\mathbb{P}^1_k\)。此时 \(H^0(X_0,\mathcal{T}_{X_0})\) 维数为 3，但仍可证明 \(X_0/k\) 的形变函子是 pro-可表示的。因此 (\ref{rty}) 的条件对于函子 pro-可表示并不是必要的。
+\end{example}
+
+\subsection{Ran-Kawamata $T^1$ 提升}
+
+\begin{definition}\label{ccc}
+    函子 \(F:\mathsf{C}\rightarrow\mathsf{Set}\) 的一个 \textbf{障碍理论} 是指一个 \(k\)-向量空间 \(V\)，以及对每个满足 \(\mathfrak{m}_{C'}J=0\) 的正合列 \(0\rightarrow J\rightarrow C'\rightarrow C\rightarrow 0\) 和每个 \(u\in F(C)\)，元素 \(\varphi(u,C')\in V\otimes_k J\)，满足：\begin{itemize}
+        \item \(\varphi(u,C')=0\) 当且仅当 \(u\in\mathrm{Im}\, F(C'\rightarrow C)\)。
+        \item \(\varphi\) 是函子性的，意即若% https://quiver.taskfirst.cn/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIkpfMSJdLFsyLDAsIkMnXzEiXSxbMywwLCJDXzEiXSxbNCwwLCIwIl0sWzAsMSwiMCJdLFsxLDEsIkpfMiJdLFsyLDEsIkNfMiciXSxbMywxLCJDXzIiXSxbNCwxLCIwIl0sWzAsMV0sWzEsMl0sWzIsM10sWzMsNF0sWzUsNl0sWzYsN10sWzcsOF0sWzgsOV0sWzEsNl0sWzIsN10sWzMsOF1d
+    \[\begin{tikzcd}
+        0 & {J_1} & {C'_1} & {C_1} & 0 \\
+        0 & {J_2} & {C_2'} & {C_2} & 0
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-4, to=1-5]
+        \arrow[from=1-4, to=2-4]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=2-4, to=2-5]
+    \end{tikzcd}\]是交换图且 \(\mathfrak{m}_{C'_i}J_i=0\)，则我们有下面的交换图% https://quiver.taskfirst.cn/#q=WzAsNixbMCwwLCJGKEMnXzEpIl0sWzEsMCwiRihDXzEpIl0sWzIsMCwiVlxcb3RpbWVzX2tKXzEiXSxbMCwxLCJGKEMnXzIpIl0sWzEsMSwiRihDXzIpIl0sWzIsMSwiVlxcb3RpbWVzX2tKXzIiXSxbMCwzXSxbMCwxXSxbMSwyXSxbMiw1XSxbMSw0XSxbNCw1XSxbMyw0XV0=
+    \[\begin{tikzcd}
+        {F(C'_1)} & {F(C_1)} & {V\otimes_kJ_1} \\
+        {F(C'_2)} & {F(C_2)} & {V\otimes_kJ_2}.
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-2, to=2-3]
+    \end{tikzcd}\]
+    \end{itemize}
+\end{definition}
+
+\begin{corollary}\label{B8}
+    光滑概形 \(X\) 在 \(k\) 上的形变函子具有障碍理论。
+\end{corollary}
+
+\begin{proof}
+    由 (\ref{B7}) 并取 \(V=H^2(X,\mathcal{T}_X)\) 即得。
+\end{proof}
+
+现在设 \(k\) 是特征为零的代数闭域，\(F:\mathsf{C}\rightarrow\mathsf{Set}\) 仍是一个形变函子。我们也假设障碍可由 \(k\)-向量空间 \(T^2\) 计算（\ref{ccc}）。
+
+对 \(n\in \mathbb{Z}_{\geq 0}\)，令\[
+    A_n=k[t]/(t^{n+1}),\ B_n=A_n\otimes A_1=k[x,y]/(x^{n+1},y^2),\ C_n=k[x,y]/(x^{n+1},x^n y,y^2).
+\]我们有自然同态 \(\alpha_n:A_{n+1}\rightarrow A_n\)、\(\beta_n:B_n\rightarrow A_n\) 和 \(\gamma_n:B_n\rightarrow C_n\)。
+
+对 \(X_n\in F(A_n)\)，记\[
+    T^1(X_n/A_n)=\{Y_n\in F(B_n)\mid F(\beta_n)(Y_n)=X_n\}.
+\]
+
+\begin{theorem}[\cite{Kawamata92}]
+    假设 \(F\) 由 \((R,\xi)\) pro-可表示，并且以下 \(T^1\) 提升性质成立：对任意正整数 \(n\) 和任意 \(X_{n+1}\in F(A_{n+1})\)，自然同态\[
+        T^1(\alpha_n):T^1(X_{n+1}/A_{n+1})\rightarrow T^1(X_n/A_n)
+    \]对 \(X_n=F(\alpha_n)(X_{n+1})\) 是满射。则 \(F\) 是无障碍的。
+\end{theorem}
+
+\begin{proof}
+    只需证明对所有 \(n\)，\(F(\alpha_n)\) 是满射。事实上，根据 Schlessinger 判别法的证明，我们有 \(R=k[[x_1,\dots,x_r]]/J\)，其中 \(J\subseteq\mathfrak{m}^2_R\) 且 \(r=\dim t_F\)。由于 \(J\subseteq\mathfrak{m}^2_R\)，可以对任何 \(a_i\in k\) 通过 \(x_i\mapsto a_i t\) 定义同态 \(g_2:R\rightarrow A_1\)。因为 \(F(\alpha_n)\) 对所有 \(n\) 是满射，通过归纳对所有 \(n\geq 3\) 存在提升 \(g_n:R\rightarrow A_n\) 使得 \(g_n\) 限制到 \(g_{n-1}\)。这定义出一个同态 \(g:R\rightarrow k[[t]]\)，由 \(x_i\mapsto a_i t\)。假设 \(J\) 包含非零幂级数 \(f=f_d+f_{d+1}+\cdots\)，其中 \(f_n\) 是 \(n\) 次齐次多项式，\(f_d\neq 0\) 且 \(d\neq 0\)。选取 \(a_i\) 使得 \(f_d(a_1,\dots,a_r)\neq 0\)，则\[
+        g(f)=t^d f_d(a_1,\dots,a_r)+t^{d+1}f_{d+1}(a_1,\dots,a_r)+\cdots\neq 0
+    \]导出矛盾。因此 \(R=k[[x_1,\dots,x_r]]\) 是 \(k\) 上的幂级数环，\(F=h_R\) 显然是无障碍的（对 \(\mathsf{C}\) 中任何映射的提升）。
+
+    考虑下面的交换图% https://quiver.taskfirst.cn/#q=WzAsNixbMCwwLCJEKEFfe24rMX0pIl0sWzAsMSwiRChCX24pIl0sWzEsMSwiRChDX24pIl0sWzEsMCwiRChBX24pIl0sWzIsMCwiVF4yXFxvdGltZXModF57bisxfSkiXSxbMiwxLCJUXjJcXG90aW1lcyh4Xm55KSJdLFswLDMsIkQoXFxhbHBoYV9uKSJdLFszLDQsIlxcZGVsdGFfMSJdLFsyLDUsIlxcZGVsdGFfMiJdLFswLDEsIkQoXFx2YXJlcHNpbG9uX24pIl0sWzEsMiwiRChcXGdhbW1hX24pIl0sWzMsMiwiRChcXHZhcmVwc2lsb24nX24pIl0sWzQsNSwiXFx2YXJwaGkiXV0=
+    \[\begin{tikzcd}
+        {F(A_{n+1})} & {F(A_n)} & {T^2\otimes(t^{n+1})} \\
+        {F(B_n)} & {F(C_n)} & {T^2\otimes(x^ny)}
+        \arrow["{F(\alpha_n)}", from=1-1, to=1-2]
+        \arrow["{F(\varepsilon_n)}", from=1-1, to=2-1]
+        \arrow["{\delta_1}", from=1-2, to=1-3]
+        \arrow["{F(\varepsilon'_n)}", from=1-2, to=2-2]
+        \arrow["\varphi", from=1-3, to=2-3]
+        \arrow["{F(\gamma_n)}", from=2-1, to=2-2]
+        \arrow["{\delta_2}", from=2-2, to=2-3]
+    \end{tikzcd}\]其中 \(\varepsilon_n(t)=x+y\) 且 \(\varepsilon'_n(t)=x+y\)。根据 \(T^2\) 的定义，我们有 \[ \mathrm{Im}\, F(\alpha_n)=\{X_n\in F(A_n)\mid\delta_1(X_n)=0\},\ \mathrm{Im}\, F(\gamma_n)=\{Y_n\in F(C_n)\mid\delta_2(Y_n)=0\}. \]注意 \(\varphi\) 是同构，因为 \(\varphi:t^{n+1}\mapsto(n+1)x^n y\) 且 \(\mathrm{char}\, k=0\)。因此，要证明 \(F(\alpha_n)\) 是满射，只需证 \(F(\gamma_n)\) 是满射。
+
+    由下面的图表% https://quiver.taskfirst.cn/#q=WzAsNSxbMSwwLCJCX24iXSxbMCwxLCJCX3tuLTF9XFx0aW1lc197QV97bi0xfX1BX249Q19uIl0sWzIsMSwiQV9uIl0sWzAsMywiQl97bi0xfSJdLFsyLDMsIkFfe24tMX0iXSxbMCwxLCJcXGdhbW1hX24iLDJdLFswLDIsIlxcYmV0YV9uIl0sWzAsM10sWzEsM10sWzMsNCwiXFxiZXRhX3tuLTF9IiwyXSxbMiw0LCJcXGFscGhhX3tuLTF9Il1d
+    \[\begin{tikzcd}
+        & {B_n} & \\
+        {B_{n-1}\times_{A_{n-1}}A_n=C_n} && {A_n} \\
+        \\
+        {B_{n-1}} && {A_{n-1}}
+        \arrow["{\gamma_n}"', from=1-2, to=2-1]
+        \arrow["{\beta_n}", from=1-2, to=2-3]
+        \arrow[from=1-2, to=4-1]
+        \arrow[from=2-1, to=4-1]
+        \arrow["{\alpha_{n-1}}", from=2-3, to=4-3]
+        \arrow["{\beta_{n-1}}"', from=4-1, to=4-3]
+    \end{tikzcd}\]以及 \(F\) 的 pro-可表示性，我们有\[
+        F(B_n)\stackrel{F(\gamma_n)}{\longrightarrow}F(C_n)\cong F(B_{n-1})\times_{F(A_{n-1})}F(A_n).
+    \]由 \(T^1\) 提升性质，对任何 \(Z_n\in F(C_n)\)，存在 \(Y_n\in F(B_n)\)，使得其在 \(F(B_{n-1})\) 和 \(F(A_n)\) 中的像分别与 \(Z_n\) 的像一致。因此 \(F(\gamma_n)(Y_n)=Z_n\)。
+\end{proof}
+
+\begin{remark}\label{qqq}
+    在~\cite{Kawamata97} 中，Kawamata 将 \(T^1\) 空间的定义替换为 \(T^1(X_n/A_n):=\mathrm{Def}(X_n/A_n,B_n)\)。采用这个新定义后，上述定理在 \(F\) 不假定 pro-可表示的情况下也成立。
+
+    如上述论证，只需证明映射 \(F(\gamma_n):F(B_n)\rightarrow F(C_n)\) 是满射。对 \(Z_n\in F(C_n)\)，令\[
+        Y_{n-1}=Z_n\times_{C_n}B_{n-1},\ X_n=Z_n\times_{C_n}A_n,\ X_{n-1}=Z_n\times_{C_n}A_{n-1}.
+    \]由 \(T^1\) 提升性质，设 \([Y_n]\) 为 \(\mathrm{Def}(X_n/A_n,B_n)\) 中映到 \([Y_{n-1}]\in\mathrm{Def}(X_{n-1}/A_{n-1},B_{n-1})\) 的等价类。则存在同构 \(\sigma:Y_{n-1}\rightarrow Y_{n}\times_{B_{n}}B_{n-1}\) 与 \(X_{n-1}\) 的闭浸入相容，并且我们得到图表% https://quiver.taskfirst.cn/#q=WzAsNyxbMCwxLCJYX3tuLTF9Il0sWzEsMCwiWV97bi0xfSJdLFsxLDEsIlpfbiJdLFsxLDIsIlhfbiJdLFsyLDAsIllfblxcdGltZXNfe0Jfbn1CX3tuLTF9Il0sWzIsMSwiWV9uXFx0aW1lc197Ql9ufUNfbiJdLFszLDEsIllfbiJdLFswLDFdLFsxLDQsIlxcc2lnbWEiXSxbMSwyXSxbMCwzXSxbMCw0XSxbMywyXSxbMyw1XSxbMyw2XSxbNSw2XSxbNCw1XSxbNCw2XSxbNSwyLCI/IiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+    \[\begin{tikzcd}
+        & {Y_{n-1}} & {Y_n\times_{B_n}B_{n-1}} & \\
+        {X_{n-1}} & {Z_n} & {Y_n\times_{B_n}C_n} & {Y_n} \\
+        & {X_n}
+        \arrow["\sigma", from=1-2, to=1-3]
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-3, to=2-4]
+        \arrow[from=2-1, to=1-2]
+        \arrow[from=2-1, to=1-3]
+        \arrow[from=2-1, to=3-2]
+        \arrow[dashed, from=2-3, to=2-2]
+        \arrow[from=2-3, to=2-4]
+        \arrow[from=3-2, to=2-2]
+        \arrow[from=3-2, to=2-3]
+        \arrow[from=3-2, to=2-4]
+    \end{tikzcd}\]由 (\ref{tuo})，存在同构 \(Y_n\times_{B_n}C_n\stackrel{\sim}{\longrightarrow}Z_n\) 与 \(X_{n}\) 的闭浸入相容。这表明 \(F(\gamma_n)(Y_n)=Z_n\)。
+\end{remark}
+
+\begin{example}\label{iop}
+    假设 \(X_n\) 是 \(X\) 在 \(A_n\) 上的光滑形变。由 (\ref{B6})，形变空间可通过以下正合列计算\[
+        0\longrightarrow H^1(X_n,\mathcal{T}^0(X_n/A_n,f^*\tilde{J}))\longrightarrow\mathrm{Def}(X_n/A_n,B_n)\longrightarrow H^0(X_n,\mathcal{T}^1(X_n/A_n,f^*\tilde{J})),
+    \]其中 \(f:X_n\rightarrow A_n\) 是结构态射且 \(J=\ker\beta_n\)。由于 \(\ker\beta_n\) 是自由 \(A_n\)-模且 \(X_n\) 在 \(A_n\) 上光滑，由 (\ref{A18}) 得\[
+        \mathcal{T}^i(X_n/A_n,f^*\tilde{J})=\mathcal{T}^i_{X_n/A_n}=\begin{cases}
+            \mathcal{T}_{X_n/A_n}&\quad i=0,\\
+            0&\quad i=1.
+        \end{cases}
+    \]于是我们得出 \(\mathrm{Def}(X_n/A_n,B_n)=H^1(X_n,\mathcal{T}_{X_n/A_n})\)。
+\end{example}
+
+\begin{lemma}\label{ghu}
+    设 \(A\) 是环，\(J\) 是 \(A\) 中的幂零理想，且 \(u:M\rightarrow N\) 是 \(A\)-模的同态，其中 \(N\) 在 \(A\) 上平坦。若 \(\bar{u}:M/JM\rightarrow N/JN\) 是同构，则 \(u\) 是同构。
+\end{lemma}
+
+\begin{proof}
+    设 \(K=\mathrm{coker}\, u\)。将正合列\[
+        M\rightarrow N\rightarrow K\rightarrow 0
+    \]与 \(A/J\) 做张量积，得 \(K/JK=0\)。因为 \(J\) 幂零，故 \(K=0\)。若 \(K'=\ker u\)，则由 \(N\) 的平坦性得到正合列\[
+        0\rightarrow K'/JK'\rightarrow M/JM\rightarrow N/JN\rightarrow 0,
+    \]因此 \(K'=0\)。
+\end{proof}
+
+\begin{lemma}\label{fff}
+    考虑相容的环与模同态的交换图% https://quiver.taskfirst.cn/#q=WzAsOCxbNCwxLCJNIl0sWzQsMywiQSJdLFszLDIsIkFfMiJdLFszLDAsIk1fMiJdLFswLDAsIk4iXSxbMCwyLCJCIl0sWzEsMywiQV8xIl0sWzEsMSwiTV8xIl0sWzMsMCwidV8yIl0sWzAsMSwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDIsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNCw3LCJwXzEiLDJdLFs3LDAsInVfMSJdLFs0LDMsInBfMiJdLFs0LDUsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNyw2LCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsMl0sWzIsMV0sWzYsMV0sWzUsNl1d
+    \[\begin{tikzcd}
+        N &&& {M_2} & \\
+        & {M_1} &&& M \\
+        B &&& {A_2} \\
+        & {A_1} &&& A
+        \arrow["{p_2}", from=1-1, to=1-4]
+        \arrow["{p_1}"', from=1-1, to=2-2]
+        \arrow[no head, from=1-1, to=3-1]
+        \arrow["{u_2}", from=1-4, to=2-5]
+        \arrow[no head, from=1-4, to=3-4]
+        \arrow["{u_1}", from=2-2, to=2-5]
+        \arrow[no head, from=2-2, to=4-2]
+        \arrow[no head, from=2-5, to=4-5]
+        \arrow[from=3-1, to=3-4]
+        \arrow[from=3-1, to=4-2]
+        \arrow[from=3-4, to=4-5]
+        \arrow[from=4-2, to=4-5]
+    \end{tikzcd}\]其中 \(B=A_1\times_A A_2\)，\(N=M_1\times_M M_2\)，且 \(M_i\) 是平坦 \(A_i\)-模，\(i=1,2\)。假设 \(A_1\) 是 Artin 环，且\begin{enumerate}[(1)]
+        \item \(A_2/J\stackrel{\sim}{\longrightarrow}A\)，其中 \(J\) 是 \(A_2\) 中的幂零理想。
+        \item \(u_i\) 诱导出 \(M_i\otimes_{A_i}A\stackrel{\sim}{\longrightarrow}M\)。
+    \end{enumerate}
+    则 \(N\) 在 \(B\) 上平坦，且 \(p_i\) 诱导出 \(N\otimes_B A_i\stackrel{\sim}{\longrightarrow}M_i\)。
+\end{lemma}
+
+\begin{proof}
+    设 \(\{x_{1,i}\}_{i\in I}\subseteq M_1\) 使得 \(\{\bar{x}_{1,i}\}_{i\in I}\) 构成 \(M_1/\mathfrak{m}_{A_1}M_1\) 的一组基。则由 (\ref{ghu}) 知 \(\bigoplus_{i\in I}A_1 \rightarrow M_1\)（由 \(e_i\mapsto x_{1,i}\) 定义）是同构。因此 \(M_1\) 是以 \(\{x_{1,i}\}_{i\in I}\) 为基的自由 \(A_1\)-模。由 \textit{(2)}，\(M\) 是以 \(\{u_1(x_{1,i})\}_{i\in I}\) 为基的自由模。选取 \(x_{2,i}\in M_2\) 使得 \(u_2(x_{2,i})=u_1(x_{1,i})\)。则 \(A_2\)-模同态 \(\sum A_2 x_{2,i}\rightarrow M_2\) 模理想 \(J\) 后是同构。再由 (\ref{ghu})，\(M_2\) 是以 \(\{x_{2,i}\}_{i\in I}\) 为基的自由模，并且显然 \(N\) 是以 \(\{x_{1,i}\times x_{2,i}\}_{i\in I}\) 为基的自由 \(B\)-模。于是投影 \(p_i\) 诱导出同构 \(N\otimes_{B}A_i\stackrel{\sim}{\longrightarrow}M_i\)。
+\end{proof}
+
+\begin{lemma}\label{tuo}
+    沿用 (\ref{fff}) 中的记号。设 \(L\) 是满足下列交换图的 \(B\)-模% https://quiver.taskfirst.cn/#q=WzAsNCxbMCwwLCJMIl0sWzEsMCwiTV8yIl0sWzAsMSwiTV8xIl0sWzEsMSwiTSJdLFswLDEsInFfMiJdLFswLDIsInFfMSIsMl0sWzIsMywidV8xIiwyXSxbMSwzLCJ1XzIiXV0=
+    \[\begin{tikzcd}
+        L & {M_2} \\
+        {M_1} & M
+        \arrow["{q_2}", from=1-1, to=1-2]
+        \arrow["{q_1}"', from=1-1, to=2-1]
+        \arrow["{u_2}", from=1-2, to=2-2]
+        \arrow["{u_1}", from=2-1, to=2-2]
+    \end{tikzcd}\]其中 \(q_1\) 诱导出 \(L\otimes_B A_1\stackrel{\sim}{\longrightarrow}M_1\)。则典范态射 \(q_1\times q_2:L\rightarrow N=M_1\times_M M_2\) 是同构。
+\end{lemma}
+
+\begin{proof}
+    对态射 \(u=q_1\times q_2\) 应用 (\ref{ghu})。注意 \(B/(0\times J)\stackrel{\sim}{\longrightarrow}A_1\)。
+\end{proof}
+
+\subsection{光滑Calabi-Yau簇的形变}
+
+在证明 Calabi-Yau 簇形变的无障碍性之前，我们需要下面这个关键技术。
+
+\begin{theorem}\label{kkk}
+    设 \(f:X\rightarrow S=\mathrm{Spec}\, A_n\) 是射影光滑态射，其中 \(A_n=\mathbb{C} [t]/(t^{n+1})\)。则 \(H^q(X,\varOmega^p_{X/S})\) 是自由 \(A_n\)-模。
+\end{theorem}
+
+\begin{proof}
+    令 \(A=A_n\)。考虑 \(\varOmega^{\bullet,\mathrm{an}}_{X/S}\) 的 \(\mathfrak{m}_A\)-进滤过\[
+        \varOmega^{\bullet,\mathrm{an}}_{X/S}\supseteq\mathfrak{m}_A\varOmega^{\bullet,\mathrm{an}}_{X/S}\supseteq\mathfrak{m}_A^2\varOmega^{\bullet,\mathrm{an}}_{X/S}\supseteq\cdots\supseteq\mathfrak{m}_A^N\varOmega^{\bullet,\mathrm{an}}_{X/S}=0,
+    \]它是双正则的，并记伴随的分次对象为\[
+        \mathrm{gr}\, \varOmega^{\bullet,\mathrm{an}}_{X/S}=\bigoplus \mathrm{gr}_i\varOmega^{\bullet,\mathrm{an}}_{X/S},
+    \]其中 \(\mathrm{gr}_i\varOmega^{\bullet,\mathrm{an}}_{X/S}:=\mathfrak{m}_A^i\varOmega^{\bullet,\mathrm{an}}_{X/S}\Big/\mathfrak{m}_A^{i+1}\varOmega^{\bullet,\mathrm{an}}_{X/S}\)。注意\[
+        \mathrm{gr}_0\varOmega^{\bullet,\mathrm{an}}_{X/S}=\varOmega^{\bullet,\mathrm{an}}_{X/S}\Big/\mathfrak{m}_A\varOmega^{\bullet,\mathrm{an}}_{X/S}=\varOmega^{\bullet,\mathrm{an}}_{X_0/\mathbb{C} }
+    \]给出常数层 \(\mathbb{C}\) 的零调分解，其中 \(X_0\) 是 \(\mathrm{Spec}\, \mathbb{C} \hookrightarrow \mathrm{Spec}\, A\) 的光滑纤维。那么\[
+        \mathrm{gr}_{\mathfrak{m}_A}A\otimes_{\mathbb{C} }\mathrm{gr}_0\varOmega^{\bullet,\mathrm{an}}_{X/S}=\bigoplus_{n\geq 0}\mathfrak{m}^n_A/\mathfrak{m}^{n+1}_A\otimes_{A/\mathfrak{m}_A}\varOmega^{\bullet,\mathrm{an}}_{X/S}\Big/\mathfrak{m}_A \varOmega^{\bullet,\mathrm{an}}_{X/S}=\bigoplus_{n\geq 0}\mathfrak{m}_A^n\varOmega^{\bullet,\mathrm{an}}_{X/S}\Big/\mathfrak{m}_A^{n+1}\varOmega^{\bullet,\mathrm{an}}_{X/S}=\mathrm{gr}_{\mathfrak{m}_A}\varOmega^{\bullet,\mathrm{an}}_{X/S}
+    \]分解了 \(\mathrm{gr}_{\mathfrak{m}_A}A\)，因此 \(\varOmega^{\bullet,\mathrm{an}}_{X/S}\) 给出常数层 \(A\) 的零调分解。由于 \(X\) 是紧的，根据 GAGA 原理我们有\[
+        \mathsf{R}^n\Gamma(X,\varOmega^{\bullet}_{X/S})\cong \mathsf{R}^n\Gamma(X^{\mathrm{an}},\varOmega^{\bullet,\mathrm{an}}_{X/S})=H^n(X^{\mathrm{an}},A)=H^n(X^{\mathrm{an}},\mathbb{C} )\otimes_{\mathbb{C} }A,
+    \]从而\begin{equation}\label{gio}
+        \mathrm{length}_{A}\mathsf{R}^n\Gamma(X,\varOmega^{\bullet}_{X/S})=\mathrm{length}_A(A)\cdot\dim_{\mathbb{C} }H^n(X^{\mathrm{an}},\mathbb{C} ).
+    \end{equation}
+    \begin{lemma}\label{vvv}
+        设 \(Y=\mathrm{Spec}\, A\) 是 Noether 仿射概形，\(f:X\rightarrow Y\) 是紧态射。对任何在 \(Y\) 上平坦的复形 \(\mathscr{F}^{\bullet}\in \mathsf{D}^{+}(\mathrm{Coh}(X))\)，存在一个复形 \(\mathscr{L}^{\bullet}\in\mathsf{D}^{+}(\mathrm{Coh}(Y))\)，其项 \(\mathscr{L}^i\) 形如 \(\mathcal{O}^{m_i}_Y\)，以及一个函子性拟同构\[
+            f_*(\mathscr{F}^{\bullet}\otimes_{\mathcal{O}_X} f^*\mathscr{G})\longrightarrow\mathscr{L}^{\bullet}\otimes_{\mathcal{O}_Y}\mathscr{G}
+        \]对任意 \(\mathscr{G}\in\mathrm{Qcoh}(Y)\)。此外，对任意基变换图表% https://quiver.taskfirst.cn/#q=WzAsNCxbMCwwLCJYJyJdLFsxLDAsIlgiXSxbMCwxLCJZJyJdLFsxLDEsIlkiXSxbMCwxLCJ1JyJdLFswLDIsImYnIl0sWzEsMywiZiJdLFsyLDMsInUiXV0=
+        \[\begin{tikzcd}
+            {X'} & X \\
+            {Y'} & Y
+            \arrow["{u'}", from=1-1, to=1-2]
+            \arrow["{f'}", from=1-1, to=2-1]
+            \arrow["f", from=1-2, to=2-2]
+            \arrow["u", from=2-1, to=2-2]
+        \end{tikzcd}\]存在自然拟同构\[
+            f'_*(u'^*\mathscr{F}^{\bullet}\otimes_{\mathcal{O}_{X'}}f'^*\mathscr{G}')\longrightarrow u^*\mathscr{L}^{\bullet}\otimes_{\mathcal{O}_{Y'}}\mathscr{G}'
+        \]对任意 \(\mathscr{G}'\in \mathrm{Qcoh}(Y')\)。
+    \end{lemma}
+    
+    \begin{proof}
+        \cite[Prop 6.10.5]{EGA3_2}
+    \end{proof}
+    
+    由于 \(f\) 光滑，层 \(\varOmega_{X/S}\) 在 \(X\) 上局部自由。将 (\ref{vvv}) 应用于对 \((\mathscr{F}^{\bullet},\mathscr{G})=(\varOmega^{p}_{X/S},\mathcal{O}_Y)\)（此处我们认为 \(\varOmega^p_{X/S}\) 是集中在 0 次的一个复形）以及基变换态射 \(u:\mathrm{Spec}\, \mathbb{C} \rightarrow\mathrm{Spec}\, A\)，我们得到\[
+        \mathsf{R}f_*\varOmega^{p}_{X/S}\cong \mathscr{L}^{\bullet},\ \mathsf{R}f'_*\varOmega^{p}_{X_0/\mathrm{Spec}\, \mathbb{C} }\cong\mathsf{R}f_*'(u'^*\varOmega^{p}_{X/S})\cong u^*\mathscr{L}^{\bullet}.
+    \]因此\[
+        H^q(X,\varOmega^p_{X/S})=H^0(\mathrm{Spec}\, A,\mathsf{R}^q f_*\varOmega^p_{X/S})=\Gamma(\mathrm{Spec}\, A,H^q(\mathscr{L}^{\bullet}))
+    \]是有限生成 \(A\)-模，并且有基变换的自然同构\[
+        H^q(X,\varOmega^p_{X/S})\otimes_A \mathbb{C} \cong\Gamma(\mathrm{Spec}\, \mathbb{C} ,H^q(u^*\mathscr{L}^{\bullet}))=H^q(X_0,\varOmega^p_{X_0}).
+    \]
+    
+    \begin{lemma}
+        设 \((A,\mathfrak{m}_A)\) 是以 \(k\) 为剩余域的 Noether 局部环。对任何有限生成 \(A\)-模 \(M\)，有不等式\[
+            \mathrm{length}_A(M)\leq\mathrm{length}_A(A)\cdot\dim_k(M\otimes_A k).
+        \]等式成立当且仅当 \(M\) 是自由 \(A\)-模。
+    \end{lemma}
+
+    \begin{proof}
+        设 \(d=\dim_k(M\otimes_A k)\)。由 Nakayama 引理，存在满射 \(f:A^d\twoheadrightarrow M\)。则\[
+            \mathrm{length}_A(M)=d\cdot\mathrm{length}_A(A)+\mathrm{length}_A(\ker f)
+        \]且 \(\mathrm{length}_A(\ker f)=0\) 当且仅当 \(\ker f=0\)。
+    \end{proof}
+
+    由上面的引理，我们有\begin{equation}\label{giu}
+        \mathrm{length}_A H^q(X,\varOmega^p_{X/S})\leq\mathrm{length}_A(A)\cdot\dim H^q(X_0,\varOmega^p_{X_0})
+    \end{equation}
+    且等式成立当且仅当 \(H^q(X,\varOmega^p_{X/S})\) 是自由 \(A\)-模。考虑 Hodge 到 de Rham 谱序列\[
+        E^{p,q}_1=H^q(X,\varOmega^p_{X/S})\Longrightarrow \mathsf{R}^{p+q}\Gamma(\varOmega^{\bullet}_{X/S}).
+    \]由于 \(E^{p,q}_{\infty}\) 是 \(E^{p,q}_1\) 的子商，我们导出\begin{equation}\label{giy}
+        \mathrm{length}_A\mathsf{R}^n\Gamma(\varOmega^{\bullet}_{X/S})=\sum_{p+q=n}\mathrm{length}_A E^{p,q}_{\infty}\leq \sum_{p+q=n}\mathrm{length}_A H^q(X,\varOmega^p_{X/S}).
+    \end{equation}
+    最后，结合 (\ref{gio})、(\ref{giu}) 和 (\ref{giy})，我们得到\begin{equation}
+        \begin{aligned}\label{rrr}
+            \mathrm{length}_A(A)\cdot\dim_{\mathbb{C} }H^n(X^{\mathrm{an}},\mathbb{C} )&=\mathrm{length}_A\mathsf{R}^n\Gamma(\varOmega^{\bullet}_{X/S})\\ &\leq\sum_{p+q=n}\mathrm{length}_A H^q(X,\varOmega^{p}_{X/S})\\ &\leq\mathrm{length}_A(A)\sum_{p+q=}\dim H^q(X_0,\varOmega^p_{X_0}).
+        \end{aligned}
+    \end{equation}
+    由解析情形下的 Hodge 分解（\(X_0\) 是射影的，故 \(X_0^{\mathrm{an}}\) 是 Kähler）及 GAGA 原理，我们有\[
+        H^n(X^{\mathrm{an}},\mathbb{C} )=H^n(X_0^{\mathrm{an}},\mathbb{C} )\cong\bigoplus_{p+q=n}H^q(X_0^{\mathrm{an}},\varOmega^{p,\mathrm{an}}_{X_0})\cong\bigoplus_{p+q=n}H^q(X_0,\varOmega^{p}_{X_0}),
+    \]因此 (\ref{rrr}) 中等号处处成立。由此推出每个\[
+        H^q(X,\varOmega^p_{X/S})
+    \]都是自由 \(A\)-模。
+\end{proof}
+
+\begin{theorem}
+    设 \(X\) 是 \(\mathbb{C}\) 上的光滑射影簇。如果 \(\omega_X\cong\mathcal{O}_X\)，则 \(X\) 的平坦形变（参见 \ref{B8}）是无障碍的。
+\end{theorem}
+
+\begin{proof}
+    由 (\ref{qqq})，只需证明对所有正整数 \(n\) 和满足 \(X_n=F(\alpha_n)(X_{n+1})\) 的 \(X_n\)，映射\[
+        \mathrm{Def}(X_{n+1}/A_{n+1},B_{n+1})\longrightarrow\mathrm{Def}(X_n/A_n,B_n)
+    \]是满射。由 (\ref{iop})，问题转化为证明\begin{equation}\label{afg}
+        H^1(X_{n+1},\mathcal{T}_{X_{n+1}/A_{n+1}})\longrightarrow H^1(X_n,\mathcal{T}_{X_n/A_n})
+    \end{equation}是满射。
+
+    设 \(f:X_n\rightarrow \mathrm{Spec}\, A_n\) 是 \(X\) 在 \(A_n\) 上的射影形变。由 (\ref{kkk}) 知\[
+        H^q(X_n,\varOmega^p_{X_n/A_n})
+    \]是秩为 \(h^{p,q}_n\) 的自由 \(A_n\)-模。由上同调与基变换，我们有同构\[
+        H^q(X_n,\varOmega^p_{X_n/A_n})\otimes_{A_n}k\stackrel{\sim}{\longrightarrow}H^q(X_0,\varOmega^p_X),
+    \]因此 \(h^{p,q}_n=h^{p,q}(X)\) 与 \(n\) 无关。特别地，\[
+        H^0(X,\omega_X)=k\Longrightarrow H^0(X_n,\omega_{X_n/A_n})=A_n.
+    \]取一个非平凡截面 \(s:\mathcal{O}_{X_n}\rightarrow\omega_{X_n/A_n}\)，则 \(s\otimes_{X_n}X\) 在 \(X\) 上是同构。因为 \(\omega_{X_n/A_n}\) 在 \(\mathrm{Spec}\, A_n\) 上平坦，由 (\ref{ghu}) 知 \(s\) 是同构。由完美配对\[
+        \varOmega^1_{X_n/A_n}\otimes\varOmega^{d-1}_{X_n/A_n}\longrightarrow\omega_{X_n/A_n}\cong\mathcal{O}_{X_n},
+    \]我们有 \(\mathcal{T}_{X_n/A_n}\cong\varOmega^{d-1}_{X_n/A_n}\)。现在可将 (\ref{afg}) 改写为\[
+        A^{h^{d-1,1}}_{n+1}\longrightarrow A^{h^{d-1,1}}_n,
+    \]这显然是满射，这正是我们需要的。
+\end{proof}
+
+\section{具有普通双重点的三维 Calabi-Yau 簇}
+
+我们总结关于具有普通双重点 (ODP) 的三维 Calabi-Yau 簇形变理论的经典结果。
+特别地，我们陈述 Friedman 的光滑化判据以及后来由 Kawamata、Ran 和 Tian 给出的推广，后者表明一旦存在 Kähler 解消，形变就是无障碍的。
+
+\subsection{约定}
+设 \(X_0\) 是三维射影簇，满足 \(\omega_{X_0}\cong\mathcal{O}_{X_0}\) 且仅有普通双重点作为奇点。
+一个 \emph{小解消} 是一个紧双有理态射 \(f\colon X\to X_0\)，使得 \(X\) 光滑，且例外集为有限多条有理曲线 \(C_1,\dots,C_r\cong\mathbb{P}^1\)，其法丛为 \(\mathcal{O}_{C_i}(-1)\oplus\mathcal{O}_{C_i}(-1)\)。
+我们用 \([C_i]\) 记 \(C_i\) 在 \(H_2(X,\mathbb{C})\) 中的同调类，或其对偶在 \(H^4(X,\mathbb{C})\) 中的类。
+称簇 \(X_0\) 是 \emph{可光滑化的}，如果它可以作为一个平坦族 \(X\to\Delta\) 的中心纤维出现，且总空间光滑，附近纤维 \(X_t\) 光滑（此处 \(\Delta\) 是一个小圆盘）。
+
+\subsection{Friedman 定理}
+第一个关于光滑化的精确判据由 Friedman~\cite{Friedman1986} 给出。
+
+\begin{theorem}[Friedman, 1986]
+设 \(X_0\) 如上，且 \(f\colon X\to X_0\) 是一个小解消。
+那么 \(X_0\) 是可光滑化的（并且事实上小解消可以形变为同构），如果以下两个条件成立：
+\begin{enumerate}
+    \item 类 \([C_1],\dots,[C_r]\) 生成上同调群 \(H^2(X,\Omega_X^2)\)。
+    \item 在 \(H^4(X,\mathbb{C})\) 中存在关系 \(\sum_{i=1}^r a_i[C_i]=0\)，且所有系数 \(a_i\neq 0\)。
+\end{enumerate}
+\end{theorem}
+
+\subsection{无障碍性及 Kawamata-Ran-Tian 定理}
+随后，Y.\ Kawamata、Z.\ Ran 和 G.\ Tian~\cite{Kawamata,Ran,Tian} 独立地证明了，只要存在一个 Kähler 解消，第一个生成性条件就是多余的。
+关键点在于将光滑 Calabi-Yau 流形的 Bogomolov-Tian-Todorov 无障碍性定理推广到奇异 Calabi-Yau 簇上。
+
+\begin{theorem}[Kawamata, Ran, Tian]
+设 \(X_0\) 是三维簇，满足 \(\omega_{X_0}\cong\mathcal{O}_{X_0}\) 且仅有普通双重点。
+假设存在一个解消 \(p\colon X'\to X_0\) 使得 \(X'\) 是紧 Kähler 流形。
+则通用形变空间 \(\operatorname{Def}(X_0)\) 是光滑的，即 \(X_0\) 的形变是无障碍的。
+特别地，Friedman 定理中要求例外曲线生成 \(H^2(\Omega_X^2)\) 的条件可以去掉。
+\end{theorem}
+
+\subsection{证明概要}
+
+\subsubsection{Friedman 的光滑化判据}
+
+\begin{enumerate}
+    \item \textbf{小解消的形变。}
+    设 \(f\colon X\to X_0\) 是以 \(C_i\) 为例外曲线的小解消。
+    如果与之相伴的无穷小形变使得法丛序列的映射导致这些曲线被阻碍形变，那么 \(X\) 的一个形变就能同时吹缩掉所有 \(C_i\)。
+    更确切地说，\(\operatorname{Ext}^1\) 和 \(\operatorname{Ext}^2\) 的局部到整体正合列联系了 \(X\) 的一阶形变与沿每个 \(C_i\) 的形式完备化的一阶形变。
+    条件~\emph{(a)}（生成 \(H^2(\Omega_X^2)\)）保证了自然映射 \(\operatorname{Ext}^1(\Omega_X^1,\mathcal{O}_X)\to \bigoplus_i \operatorname{Ext}^1(\mathcal{O}_{C_i},\mathcal{O}_{C_i}(-1)^{\oplus 2})\) 是满射，因此我们可以将双重点的局部光滑化提升为一个整体形变。
+    
+    \item \textbf{同时收缩与 \([C_i]\) 间的关系。}
+    为了在一个族中同时收缩所有 \(C_i\)，例外集必须在同调中变为平凡。
+    在一个形变中收缩一条曲线的障碍正是它的基本类；包含 \(X\) 作为纤维并且使这些曲线消失的一个三维簇族，对应于一阶形变 \(\nu\in H^1(X,\Theta_X)\)，使得它在每个 \(C_i\) 上的限制为零。
+    这正好等价于在 \(H^4(X,\mathbb{C})\) 中存在关系 \(\sum a_i[C_i]=0\)，且每个 \(a_i\neq 0\)。
+    系数 \(a_i\) 决定了每个奇点的光滑化“速度”。
+    
+    \item \textbf{结论。}
+    一旦有了这样一个一阶形变，由无障碍性（在~\ref{wri} 中证明）可以保证它能够被提升为 \(X_0\) 的一个真正的光滑化。
+    Kawamata-Ran-Tian 的工作表明，当存在 Kähler 解消时，那个额外的生成性条件是自动满足的，从而完善了整个图景。
+\end{enumerate}
+
+\subsubsection{ODP Calabi-Yau 三维簇的无障碍性}\label{wri}
+
+\begin{enumerate}
+    \item \textbf{形变函子与切-障碍理论。}
+    由于 \(X_0\) 是局部完全交（ODP），其形变理论由余切复形 \(\mathbb{L}_{X_0}\) 控制。
+    切空间为 \(\operatorname{Ext}^1(\Omega_{X_0}^1,\mathcal{O}_{X_0})\)，障碍位于 \(\operatorname{Ext}^2(\Omega_{X_0}^1,\mathcal{O}_{X_0})\) 中。
+    \(\operatorname{Def}(X_0)\) 的光滑性一旦 \(\operatorname{Ext}^2(\Omega_{X_0}^1,\mathcal{O}_{X_0})=0\) 便成立。
+    
+    \item \textbf{与 Kähler 解消的比较。}
+    设 \(p\colon X'\to X_0\) 是一个 Kähler 解消（不必是小解消）。
+    微分层 \(\Omega_{X_0}^1\) 处于一个正合三角形中，该三角形将它和 \(p_*\Omega_{X'}^1\) 以及一个支撑在奇点上的层联系起来。
+    通过局部计算可以证明形变函子之间的连通性，即靠近中心纤维处有 \(\operatorname{Def}(X_0)\cong \operatorname{Def}(X')\)。
+    因此只需对光滑 Kähler 三维簇 \(X'\) 证明 \(\operatorname{Ext}^2(\Omega_{X'}^1,\mathcal{O}_{X'}) =0\) 即可。
+
+    \item \textbf{Hodge 理论与 Bogomolov--Tian--Todorov 论证。}
+    在光滑紧 Kähler 流形 \(X'\) 上，我们拥有 Hodge 分解和 Serre 对偶。
+    因为 \(p\) 只收缩有理曲线，所以仍有 \(\omega_{X'}\cong\mathcal{O}_{X'}\)。
+    Calabi-Yau 流形的经典无障碍性证明（归功于 Bogomolov、Tian、Todorov）利用了收缩映射
+    \[
+        H^2(X',\Theta_{X'})\times H^1(X',\Theta_{X'})\to H^3(X',\Theta_{X'})
+    \]
+    该映射由杯积与迹映射 \(\Theta_{X'}\otimes\Omega_{X'}^p\to \Omega_{X'}^{p-1}\) 的复合给出。
+    在 Calabi-Yau 条件 \(\omega_{X'}\cong\mathcal{O}_{X'}\) 下，Serre 对偶将障碍空间 \(\operatorname{Ext}^2(\Omega_{X'}^1,\mathcal{O}_{X'})\cong H^2(X',\Theta_{X'})\) 等同于 \(H^1(X',\Omega_{X'}^2)\) 的对偶。
+    通过对周期映射的局部 Torelli 定理的巧妙运用，可以证明前述乘法映射为零，因而障碍消失。
+    这一论证适用于此时的情形，并给出 \(\operatorname{Ext}^2(\Omega_{X_0}^1,\mathcal{O}_{X_0})=0\)。
+\end{enumerate}
+
+\section{结论}
+
+本文从复几何与代数两个视角梳理了 Calabi–Yau 簇的形变理论。
+在光滑的紧 Kähler Calabi–Yau 流形上，利用全纯体积形式诱导的同构 \(\eta\) 和 Tian–Todorov 引理，
+可以将 Maurer–Cartan 方程转化为递推的 \(\bar\partial\)‑方程，并通过 \(\partial\bar\partial\)‑引理消除所有高阶障碍，
+从而证明形变空间是光滑的，即著名的 Bogomolov–Tian–Todorov 无障碍定理。
+
+在代数方面，通过引入余切复形和 \(T^i\) 函子，我们建立了任意概形的形变障碍理论。
+Schlessinger 判别法则明确了形变函子何时具有极小通用族或 pro‑可表示性。
+对光滑代数簇，障碍仅由 \(H^2(\mathcal T_X)\) 给出，这与复几何的结果一致。
+Ran–Kawamata 的 \(T^1\) 提升技巧进一步揭示，只要一阶形变在幂级数环的厚化下总可提升，
+则整个形变空间就是形式光滑的；对于典范丛平凡的光滑射影簇，这一技巧给出了纯代数的无障碍性证明。
+
+当簇存在奇点时，情形更为复杂。本文聚焦于只有普通双重点的三维 Calabi‑Yau 簇。
+Friedman 较早地给出了用小解消的例外曲线类给出的光滑化判据：例外曲线类在 \(H^4(X,\mathbb C)\) 中的某种正线性关系是光滑化存在的充要条件，而额外要求它们生成 \(H^2(\Omega_X^2)\) 则是为了压制障碍。
+后来的工作表明，上述生成条件并不必要：一旦存在一个 Kähler 解消，奇点形变就是无障碍的，
+于是仅凭例外曲线类的正线性关系即可保证光滑化。这一结果深刻揭示了奇点解消的几何与形变理论的相互作用。
+
+整体上，Calabi–Yau 簇的无障碍性是形变理论中最优美的现象之一，它与 Hodge 理论、镜像对称以及模空间的构造紧密相连。对于更一般的奇点或更高维数，形变障碍的消没机制仍然是活跃的研究课题。
+
+
+\newpage
+
+\bibliographystyle{unsrt}
+\bibliography{reference}
+
+\end{document}
